@@ -1,4 +1,6 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
-class Intake {
+import dev.nextftc.core.subsystems.Subsystem
+
+object Intake: Subsystem {
 }
