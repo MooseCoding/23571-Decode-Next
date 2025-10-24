@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.next
 
-import com.bylazar.panels.Panels
 import com.bylazar.telemetry.PanelsTelemetry
 import com.bylazar.telemetry.JoinedTelemetry
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp

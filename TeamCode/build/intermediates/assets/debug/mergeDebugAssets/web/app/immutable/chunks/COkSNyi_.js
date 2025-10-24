@@ -1,1 +1,0 @@
-import"./Bzak7iHL.js";import{f as p,t as s,b as i}from"./CPE_FGaW.js";import{s as e}from"./Dqm9uXNb.js";import{p as o}from"./Bc_pzR6B.js";import"./FLvVBS-5.js";var l=p('<div class="panels-code svelte-1kb1vd0"></div>');function u(r,t){let d=o(t,"code",3,""),m=o(t,"language",3,"");var a=l();s(()=>{e(a,"data-code",d()),e(a,"data-language",m())}),i(r,a)}export{u as C};
