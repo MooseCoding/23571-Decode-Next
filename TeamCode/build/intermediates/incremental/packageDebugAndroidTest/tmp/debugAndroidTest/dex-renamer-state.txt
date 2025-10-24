@@ -1,0 +1,4 @@
+#Fri Oct 24 10:18:04 EDT 2025
+base.0=/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/dex/debugAndroidTest/mergeProjectDexDebugAndroidTest/0/classes.dex
+path.0=0/classes.dex
+renamed.0=classes.dex

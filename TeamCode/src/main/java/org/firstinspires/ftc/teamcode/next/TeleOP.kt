@@ -27,7 +27,7 @@ class TeleOP: NextFTCOpMode() {
         // Gear Controls
         Gamepads.gamepad1.rightBumper whenBecomesTrue  Outtake.spinGearRight whenBecomesFalse Outtake.stopGear
         Gamepads.gamepad1.leftBumper whenBecomesTrue  Outtake.spinGearLeft whenBecomesFalse Outtake.stopGear
-    
+
         // Flywheel Outtake Controls
         Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Outtake.flywheelIn whenBecomesFalse Outtake.flywheelOff
 

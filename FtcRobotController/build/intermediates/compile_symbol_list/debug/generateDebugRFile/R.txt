@@ -3114,7 +3114,6 @@ int drawable ic_warning 0x0
 int drawable icon_menu 0x0
 int drawable icon_robotcontroller 0x0
 int drawable indeterminate_static 0x0
-int drawable intothedeep_background 0x0
 int drawable m3_avd_hide_password 0x0
 int drawable m3_avd_show_password 0x0
 int drawable m3_bottom_sheet_drag_handle 0x0
@@ -6662,7 +6661,7 @@ int styleable CollapsingToolbarLayout_Layout_layout_collapseMode 0
 int styleable CollapsingToolbarLayout_Layout_layout_collapseParallaxMultiplier 1
 int[] styleable ColorListPreference { 0x0 }
 int styleable ColorListPreference_colors 0
-int[] styleable ColorStateListItem { 0x0, 0x101031f, 0x10101a5, 0x0, 0x0 }
+int[] styleable ColorStateListItem { 0x0, 0x101031f, 0x10101a5, 0x1010647, 0x0 }
 int styleable ColorStateListItem_alpha 0
 int styleable ColorStateListItem_android_alpha 1
 int styleable ColorStateListItem_android_color 2

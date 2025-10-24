@@ -17,9 +17,9 @@ import kotlin.time.Duration.Companion.seconds
 
 @Configurable
 object Outtake: Subsystem {
-    private val gear = CRServoEx("gearServo")
-    private val f1 = MotorEx("flywheel1")
-    private val f2 = MotorEx("flywheel2").reversed()
+    private val gear = CRServoEx("gS")
+    private val f1 = MotorEx("f1M")
+    private val f2 = MotorEx("f2M").reversed()
 
     @JvmField
     var f1P = 0.0

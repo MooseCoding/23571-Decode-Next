@@ -3115,7 +3115,6 @@ drawable ic_warning
 drawable icon_menu
 drawable icon_robotcontroller
 drawable indeterminate_static
-drawable intothedeep_background
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
 drawable m3_bottom_sheet_drag_handle

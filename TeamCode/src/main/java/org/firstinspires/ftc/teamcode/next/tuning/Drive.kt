@@ -9,7 +9,6 @@ import dev.nextftc.ftc.components.BulkReadComponent
 import dev.nextftc.hardware.driving.MecanumDriverControlled
 import dev.nextftc.hardware.impl.MotorEx
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
-import org.firstinspires.ftc.teamcode.next.subsystems.Robot
 
 @TeleOp(name="Tuning for Drivetrain")
 class Drive: NextFTCOpMode() {
