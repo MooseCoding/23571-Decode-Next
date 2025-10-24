@@ -8,22 +8,27 @@ import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
-import dev.nextftc.hardware.driving.Drivetrain
+import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 
 @TeleOp
 class TeleOP: NextFTCOpMode() {
-    val tele = JoinedTelemetry(PanelsTelemetry.ftcTelemetry, telemetry)
+    var tele = JoinedTelemetry(PanelsTelemetry.ftcTelemetry, telemetry)
+
     init {
         addComponents(
-            SubsystemComponent(Intake, Outtake, Drivetrain),
+            SubsystemComponent(Intake, Outtake, DriveTrain),
             BulkReadComponent,
             BindingsComponent,
         )
     }
 
     override fun onStartButtonPressed() {
+        // Flap Controls
+        Gamepads.gamepad1.dpadUp whenBecomesTrue Outtake.FlapDown
+        Gamepads.gamepad1.dpadDown whenBecomesTrue Outtake.FlapUp
+
         // Gear Controls
         Gamepads.gamepad1.rightBumper whenBecomesTrue  Outtake.spinGearRight whenBecomesFalse Outtake.stopGear
         Gamepads.gamepad1.leftBumper whenBecomesTrue  Outtake.spinGearLeft whenBecomesFalse Outtake.stopGear

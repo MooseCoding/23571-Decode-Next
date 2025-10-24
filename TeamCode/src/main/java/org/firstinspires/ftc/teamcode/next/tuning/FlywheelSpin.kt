@@ -14,7 +14,6 @@ import com.qualcomm.robotcore.hardware.Servo
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.hardware.driving.MecanumDriverControlled
 import dev.nextftc.hardware.impl.MotorEx
-import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 
 @TeleOp
 @Configurable
@@ -106,7 +105,6 @@ class FlywheelSpin(): OpMode() {
         f2M.power = flywheel_power
         gS.power = g_servo
         fS.position= flap_pos
-
 
         telemetry.run {
             addData("f1V", f1M.velocity)

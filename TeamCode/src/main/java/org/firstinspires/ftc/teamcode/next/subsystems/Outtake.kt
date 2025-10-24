@@ -12,6 +12,7 @@ import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.hardware.controllable.RunToVelocity
 import dev.nextftc.hardware.impl.CRServoEx
 import dev.nextftc.hardware.impl.MotorEx
+import dev.nextftc.hardware.impl.ServoEx
 import dev.nextftc.hardware.powerable.SetPower
 import kotlin.time.Duration.Companion.seconds
 
@@ -20,6 +21,7 @@ object Outtake: Subsystem {
     private val gear = CRServoEx("gS")
     private val f1 = MotorEx("f1M")
     private val f2 = MotorEx("f2M").reversed()
+    private val fS = ServoEx("flap")
 
     @JvmField
     var f1P = 0.0
@@ -27,6 +29,8 @@ object Outtake: Subsystem {
     var f2P = 0.0
     @JvmField
     var gP = 0.0
+    @JvmField
+    var fP = 0.0
 
     @JvmField
     var velocityTrue: Boolean = false
@@ -48,7 +52,6 @@ object Outtake: Subsystem {
     val flywheelIn: Command = RunToVelocity(controller, targetInVelo).requires(this).named("FlywheelIn")
     val flywheelBack: Command = RunToVelocity(controller, targetBackVelo).requires(this).named("FlywheelIn")
 
-
     override fun periodic() {
         if (velocityTrue) {
             f1.power=controller.calculate(f1.state)
@@ -59,6 +62,7 @@ object Outtake: Subsystem {
             f2.power = f2P
         }
         gear.power = gP
+        fS.position = fP
     }
 
     val runOuttake = SequentialGroup(
@@ -92,5 +96,18 @@ object Outtake: Subsystem {
 
     val stopGear = InstantCommand {
         gP = 0.0
+    }
+
+    val FlapDown = InstantCommand {
+        fP += 0.1
+    }
+
+    val FlapUp = InstantCommand {
+        fP -= 0.1
+    }
+
+    val pushBackOuttake = InstantCommand {
+        f1P = -0.1
+        f2P = f1P
     }
 }

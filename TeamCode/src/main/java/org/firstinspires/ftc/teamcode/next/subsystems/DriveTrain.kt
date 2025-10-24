@@ -18,7 +18,7 @@ object DriveTrain: Subsystem {
             fR,
             bL,
             bR,
-            -Gamepads.gamepad1.leftStickY,
+            Gamepads.gamepad1.leftStickY,
             Gamepads.gamepad1.leftStickX,
             Gamepads.gamepad1.rightStickX
         )
