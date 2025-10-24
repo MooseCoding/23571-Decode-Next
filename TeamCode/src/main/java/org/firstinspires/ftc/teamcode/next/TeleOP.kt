@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.next
 
 import com.bylazar.telemetry.PanelsTelemetry
 import com.bylazar.telemetry.JoinedTelemetry
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
@@ -13,6 +14,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 
 @TeleOp
+@Disabled
 class TeleOP: NextFTCOpMode() {
     val tele = JoinedTelemetry(PanelsTelemetry.ftcTelemetry, telemetry)
     init {
