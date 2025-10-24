@@ -3,12 +3,21 @@ package org.firstinspires.ftc.teamcode.next.subsystems
 import com.bylazar.configurables.annotations.Configurable
 import dev.nextftc.control.builder.controlSystem
 import dev.nextftc.core.commands.Command
+import dev.nextftc.core.commands.delays.Delay
+import dev.nextftc.core.commands.delays.WaitUntil
+import dev.nextftc.core.commands.groups.SequentialGroup
+import dev.nextftc.core.commands.utility.InstantCommand
+import dev.nextftc.core.commands.utility.LambdaCommand
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.hardware.controllable.RunToVelocity
+import dev.nextftc.hardware.impl.CRServoEx
 import dev.nextftc.hardware.impl.MotorEx
+import dev.nextftc.hardware.powerable.SetPower
+import kotlin.time.Duration.Companion.seconds
 
 @Configurable
 object Outtake: Subsystem {
+    private val gear = CRServoEx("gearServo")
     private val f1 = MotorEx("flywheel1")
     private val f2 = MotorEx("flywheel2").reversed()
 
@@ -16,36 +25,72 @@ object Outtake: Subsystem {
     var f1P = 0.0
     @JvmField
     var f2P = 0.0
+    @JvmField
+    var gP = 0.0
 
-    /*private var velocityTrue: Boolean = false
+    @JvmField
+    var velocityTrue: Boolean = false
 
     private val controller = controlSystem {
-        posPid(0.0,0.0,0.0)
+        velPid(0.0,0.0,0.0)
+        basicFF(0.0,0.0,0.0)
     }
 
-    val flywheelSpinToVelocity: Command = RunToVelocity(controller, 0.0).requires(this)
+    @JvmField
+    var targetOnVelo = 0.0
+    @JvmField
+    var targetInVelo = 0.0
+    @JvmField
+    var targetBackVelo = 0.0
 
-    fun calculatePower() {
+    val flywheelOn: Command = RunToVelocity(controller, targetOnVelo).requires(this).named("FlywheelOn")
+    val flywheelOff: Command = RunToVelocity(controller, 0.0).requires(this).named("FlywheelOff")
+    val flywheelIn: Command = RunToVelocity(controller, targetInVelo).requires(this).named("FlywheelIn")
+    val flywheelBack: Command = RunToVelocity(controller, targetBackVelo).requires(this).named("FlywheelIn")
+
+
+    override fun periodic() {
         if (velocityTrue) {
-
+            f1.power=controller.calculate(f1.state)
+            f2.power=controller.calculate(f2.state)
         }
         else {
-            f1P =
+            f1.power = f1P
+            f2.power = f2P
         }
-    }
-     */
-    override fun periodic() {
-        f1.power=f1P
-        f2.power=f2P
+        gear.power = gP
     }
 
-    fun runMotors() {
-        f1P = 0.5 // Some constant
-        f2P = 0.5 // Some other constant
+    val runOuttake = SequentialGroup(
+        InstantCommand {
+            f1P = 1.0 // Some constant
+            f2P = f1P
+        }
+    )
+
+    val stopOuttake = SequentialGroup(
+        InstantCommand {
+            f1P = 0.0
+            f2P = f1P
+        }
+    )
+
+    val intakeBall = SequentialGroup(
+        flywheelIn,
+        Delay(3.seconds),
+        flywheelBack,
+        Delay(3.seconds)
+    )
+
+    val spinGearLeft = InstantCommand {
+        gP = -0.8 // Some Constant
     }
 
-    fun intakeBall() {
-
+    val spinGearRight = InstantCommand {
+        gP = 0.8 // Some Constant
     }
 
+    val stopGear = InstantCommand {
+        gP = 0.0
+    }
 }
