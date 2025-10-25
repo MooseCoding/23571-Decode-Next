@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
+import com.acmerobotics.dashboard.config.Config
 import com.bylazar.configurables.annotations.Configurable
 import dev.nextftc.control.builder.controlSystem
 import dev.nextftc.core.commands.Command
@@ -87,11 +88,11 @@ object Outtake: Subsystem {
     )
 
     val spinGearLeft = InstantCommand {
-        gP = -0.8 // Some Constant
+        gP = -0.5 // Some Constant
     }
 
     val spinGearRight = InstantCommand {
-        gP = 0.8 // Some Constant
+        gP = 0.5 // Some Constant
     }
 
     val stopGear = InstantCommand {
@@ -99,15 +100,15 @@ object Outtake: Subsystem {
     }
 
     val FlapDown = InstantCommand {
-        fP += 0.1
+        fP += 0.05
     }
 
     val FlapUp = InstantCommand {
-        fP -= 0.1
+        fP -= 0.05
     }
 
     val pushBackOuttake = InstantCommand {
-        f1P = -0.1
+        f1P = -0.2
         f2P = f1P
     }
 }

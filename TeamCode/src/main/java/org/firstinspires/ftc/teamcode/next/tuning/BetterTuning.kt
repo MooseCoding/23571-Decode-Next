@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.next.tuning
 
+import com.acmerobotics.dashboard.FtcDashboard
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry
 import com.bylazar.telemetry.JoinedTelemetry
 import com.bylazar.telemetry.PanelsTelemetry
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
@@ -15,6 +17,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 @TeleOp
 class BetterTuning(): NextFTCOpMode() {
     var tele = JoinedTelemetry(PanelsTelemetry.ftcTelemetry, telemetry)
+    var teleM = FtcDashboard.getInstance().telemetry
 
     init {
         addComponents(
@@ -26,6 +29,14 @@ class BetterTuning(): NextFTCOpMode() {
 
     override fun onStartButtonPressed() {
         tele.run {
+            addData("f1P", Outtake.f1P)
+            addData("f2P", Outtake.f2P)
+            addData("flap pos", Outtake.fP)
+            addData("gear pos", Outtake.gP)
+            addData("iP", Intake.iP)
+            update()
+        }
+        teleM.run {
             addData("f1P", Outtake.f1P)
             addData("f2P", Outtake.f2P)
             addData("flap pos", Outtake.fP)

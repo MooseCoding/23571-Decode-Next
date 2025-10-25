@@ -3,24 +3,24 @@
 3    package="com.qualcomm.ftcrobotcontroller.test" >
 4
 5    <uses-sdk
-5-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1547803018551643075.xml:5:5-74
+5-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest895547238934720852.xml:5:5-74
 6        android:minSdkVersion="24"
-6-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1547803018551643075.xml:5:15-41
+6-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest895547238934720852.xml:5:15-41
 7        android:targetSdkVersion="28" />
-7-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1547803018551643075.xml:5:42-71
+7-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest895547238934720852.xml:5:42-71
 8
 9    <instrumentation
-9-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1547803018551643075.xml:11:5-15:86
+9-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest895547238934720852.xml:11:5-15:86
 10        android:name="android.test.InstrumentationTestRunner"
-10-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1547803018551643075.xml:11:22-75
+10-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest895547238934720852.xml:11:22-75
 11        android:functionalTest="false"
-11-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1547803018551643075.xml:14:22-52
+11-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest895547238934720852.xml:14:22-52
 12        android:handleProfiling="false"
-12-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1547803018551643075.xml:13:22-53
+12-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest895547238934720852.xml:13:22-53
 13        android:label="Tests for com.qualcomm.ftcrobotcontroller.test"
-13-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1547803018551643075.xml:15:22-84
+13-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest895547238934720852.xml:15:22-84
 14        android:targetPackage="com.qualcomm.ftcrobotcontroller.test" />
-14-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1547803018551643075.xml:12:22-82
+14-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest895547238934720852.xml:12:22-82
 15
 16    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 16-->[:FtcRobotController] /home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:5-81
@@ -189,7 +189,7 @@
 104-->[androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/451ce5c404033b972933d685d5d5a165/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
 105
 106    <application
-106-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1547803018551643075.xml:7:5-9:19
+106-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest895547238934720852.xml:7:5-9:19
 107        android:name="org.firstinspires.ftc.robotcore.internal.system.RobotApplication"
 107-->[org.firstinspires.ftc:RobotCore:11.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/99c1b166c60b222b493dbb0946827002/transformed/RobotCore-11.0.0/AndroidManifest.xml:85:18-97
 108        android:allowBackup="true"
@@ -209,8 +209,8 @@
 116        android:usesCleartextTraffic="true" >
 116-->[:FtcRobotController] /home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:18:9-44
 117        <uses-library android:name="android.test.runner" />
-117-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1547803018551643075.xml:8:9-60
-117-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1547803018551643075.xml:8:23-57
+117-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest895547238934720852.xml:8:9-60
+117-->/home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest895547238934720852.xml:8:23-57
 118        <!-- Indicates to the ControlHubUpdater what the latest version of the Control Hub is that this app supports -->
 119        <meta-data
 119-->[:FtcRobotController] /home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:21:9-23:33

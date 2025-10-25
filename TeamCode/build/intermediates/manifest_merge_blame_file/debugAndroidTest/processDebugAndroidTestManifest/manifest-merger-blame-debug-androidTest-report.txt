@@ -3,32 +3,32 @@
 3    package="com.qualcomm.ftcrobotcontroller.test" >
 4
 5    <uses-sdk
-5-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4586006373406473629.xml:5:5-74
+5-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest17316503154470038429.xml:5:5-74
 6        android:minSdkVersion="24"
-6-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4586006373406473629.xml:5:15-41
+6-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest17316503154470038429.xml:5:15-41
 7        android:targetSdkVersion="28" />
-7-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4586006373406473629.xml:5:42-71
+7-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest17316503154470038429.xml:5:42-71
 8
 9    <instrumentation
-9-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4586006373406473629.xml:11:5-15:81
+9-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest17316503154470038429.xml:11:5-15:81
 10        android:name="android.test.InstrumentationTestRunner"
-10-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4586006373406473629.xml:11:22-75
+10-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest17316503154470038429.xml:11:22-75
 11        android:functionalTest="false"
-11-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4586006373406473629.xml:14:22-52
+11-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest17316503154470038429.xml:14:22-52
 12        android:handleProfiling="false"
-12-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4586006373406473629.xml:13:22-53
+12-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest17316503154470038429.xml:13:22-53
 13        android:label="Tests for com.qualcomm.ftcrobotcontroller"
-13-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4586006373406473629.xml:15:22-79
+13-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest17316503154470038429.xml:15:22-79
 14        android:targetPackage="com.qualcomm.ftcrobotcontroller" />
-14-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4586006373406473629.xml:12:22-77
+14-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest17316503154470038429.xml:12:22-77
 15
 16    <application
-16-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4586006373406473629.xml:7:5-9:19
+16-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest17316503154470038429.xml:7:5-9:19
 17        android:debuggable="true"
 18        android:extractNativeLibs="true" >
 19        <uses-library android:name="android.test.runner" />
-19-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4586006373406473629.xml:8:9-60
-19-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest4586006373406473629.xml:8:23-57
+19-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest17316503154470038429.xml:8:9-60
+19-->/home/moosecoding/projects/23571-Decode-Next/TeamCode/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest17316503154470038429.xml:8:23-57
 20    </application>
 21
 22</manifest>

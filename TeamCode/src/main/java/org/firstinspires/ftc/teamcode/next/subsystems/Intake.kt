@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
+import com.acmerobotics.dashboard.config.Config
 import com.bylazar.configurables.annotations.Configurable
 import dev.nextftc.control.builder.controlSystem
 import dev.nextftc.core.commands.Command
@@ -9,6 +10,7 @@ import dev.nextftc.hardware.controllable.RunToVelocity
 import dev.nextftc.hardware.impl.MotorEx
 
 @Configurable
+@Config
 object Intake: Subsystem {
     private val iM = MotorEx("iM")
 
