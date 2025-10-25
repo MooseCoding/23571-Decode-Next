@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.next.tuning
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorEx
 
 @TeleOp
+@Disabled
 class FS(): OpMode() {
     private lateinit var f1M: DcMotorEx
     private lateinit var f2M:DcMotorEx

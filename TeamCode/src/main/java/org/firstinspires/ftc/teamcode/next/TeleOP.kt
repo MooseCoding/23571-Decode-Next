@@ -3,11 +3,13 @@ package org.firstinspires.ftc.teamcode.next
 import com.bylazar.telemetry.PanelsTelemetry
 import com.bylazar.telemetry.JoinedTelemetry
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
+import dev.nextftc.core.commands.groups.ParallelGroup
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
+import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
@@ -34,10 +36,17 @@ class TeleOP: NextFTCOpMode() {
         Gamepads.gamepad1.leftBumper whenBecomesTrue  Outtake.spinGearLeft whenBecomesFalse Outtake.stopGear
 
         // Flywheel Outtake Controls
-        Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Outtake.flywheelIn whenBecomesFalse Outtake.flywheelOff
+        Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Outtake.runOuttake whenBecomesFalse Outtake.stopOuttake
+        Gamepads.gamepad1.b whenBecomesTrue ParallelGroup(Outtake.reverseOuttake, Intake.reverseIntake) whenBecomesFalse ParallelGroup(Outtake.stopOuttake, Intake.stopIntake)
 
-        // Intake Controls
-        Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.intakeOn whenBecomesFalse Intake.intakeOff
-        Gamepads.gamepad1.y whenBecomesTrue Outtake.intakeBall
+        // Intake Controls.
+        Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake whenBecomesFalse Intake.stopIntake
+    }
+
+    override fun onUpdate() {
+        tele.run {
+            addData("fS pos",Outtake.fP)
+            update()
+        }
     }
 }

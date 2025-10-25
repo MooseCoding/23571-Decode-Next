@@ -18,11 +18,12 @@ import dev.nextftc.hardware.powerable.SetPower
 import kotlin.time.Duration.Companion.seconds
 
 @Configurable
+@Config
 object Outtake: Subsystem {
-    private val gear = CRServoEx("gS")
-    private val f1 = MotorEx("f1M")
-    private val f2 = MotorEx("f2M").reversed()
-    private val fS = ServoEx("flap")
+     val gear = CRServoEx("gS")
+     val f1 = MotorEx("f1M")
+     val f2 = MotorEx("f2M").reversed()
+     val fS = ServoEx("flap")
 
     @JvmField
     var f1P = 0.0
@@ -36,9 +37,27 @@ object Outtake: Subsystem {
     @JvmField
     var velocityTrue: Boolean = false
 
-    private val controller = controlSystem {
-        velPid(0.0,0.0,0.0)
-        basicFF(0.0,0.0,0.0)
+    @JvmField
+    var kP: Double = 0.0
+
+    @JvmField
+    var kI = 0.0
+
+    @JvmField
+    var kD = 0.0
+
+    @JvmField
+    var kV = 0.0
+
+    @JvmField
+    var kA = 0.0
+
+    @JvmField
+    var kS = 0.0
+
+    var controller = controlSystem {
+        velPid(kP,kI,kD)
+        basicFF(kV,kA,kS)
     }
 
     @JvmField
@@ -47,16 +66,20 @@ object Outtake: Subsystem {
     var targetInVelo = 0.0
     @JvmField
     var targetBackVelo = 0.0
+    @JvmField
+    var targetVelo = 0.0
 
     val flywheelOn: Command = RunToVelocity(controller, targetOnVelo).requires(this).named("FlywheelOn")
     val flywheelOff: Command = RunToVelocity(controller, 0.0).requires(this).named("FlywheelOff")
     val flywheelIn: Command = RunToVelocity(controller, targetInVelo).requires(this).named("FlywheelIn")
     val flywheelBack: Command = RunToVelocity(controller, targetBackVelo).requires(this).named("FlywheelIn")
 
+    val flywheelTarget: Command = RunToVelocity(controller, targetVelo).requires(this).named("target")
+
     override fun periodic() {
         if (velocityTrue) {
             f1.power=controller.calculate(f1.state)
-            f2.power=controller.calculate(f2.state)
+            f2.power=f1.power
         }
         else {
             f1.power = f1P
@@ -64,11 +87,15 @@ object Outtake: Subsystem {
         }
         gear.power = gP
         fS.position = fP
+        controller = controlSystem {
+            velPid(kP,kI,kD)
+            basicFF(kV,kA,kS)
+        }
     }
 
     val runOuttake = SequentialGroup(
         InstantCommand {
-            f1P = 1.0 // Some constant
+            f1P = 0.4 // Some constant For Power
             f2P = f1P
         }
     )
@@ -100,11 +127,16 @@ object Outtake: Subsystem {
     }
 
     val FlapDown = InstantCommand {
-        fP += 0.05
+        fP += 0.01
     }
 
     val FlapUp = InstantCommand {
-        fP -= 0.05
+        fP -= 0.01
+    }
+
+    val reverseOuttake = InstantCommand {
+        f1P = -0.4
+        f2P = f1P
     }
 
     val pushBackOuttake = InstantCommand {

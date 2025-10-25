@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.next.tuning
 
 import com.bylazar.configurables.annotations.Configurable
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotor
@@ -8,6 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx
 
 @TeleOp
 @Configurable
+@Disabled
 class FlywheelSpinNext(): OpMode() {
     companion object {
         @JvmField

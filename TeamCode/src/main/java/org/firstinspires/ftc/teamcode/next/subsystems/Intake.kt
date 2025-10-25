@@ -44,6 +44,10 @@ object Intake: Subsystem {
         iP = 1.0 // Some constant
     }
 
+    val reverseIntake = InstantCommand {
+        iP = -1.0
+    }
+
     val stopIntake = InstantCommand {
         iP = 0.0
     }

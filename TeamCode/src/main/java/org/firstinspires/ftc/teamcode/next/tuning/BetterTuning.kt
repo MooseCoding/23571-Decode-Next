@@ -4,6 +4,7 @@ import com.acmerobotics.dashboard.FtcDashboard
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry
 import com.bylazar.telemetry.JoinedTelemetry
 import com.bylazar.telemetry.PanelsTelemetry
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
@@ -31,6 +32,8 @@ class BetterTuning(): NextFTCOpMode() {
         tele.run {
             addData("f1P", Outtake.f1P)
             addData("f2P", Outtake.f2P)
+            addData("f1V", Outtake.f1.velocity)
+            addData("f2V", Outtake.f2.velocity)
             addData("flap pos", Outtake.fP)
             addData("gear pos", Outtake.gP)
             addData("iP", Intake.iP)
@@ -39,6 +42,8 @@ class BetterTuning(): NextFTCOpMode() {
         teleM.run {
             addData("f1P", Outtake.f1P)
             addData("f2P", Outtake.f2P)
+            addData("f1V", Outtake.f1.velocity)
+            addData("f2V", Outtake.f2.velocity)
             addData("flap pos", Outtake.fP)
             addData("gear pos", Outtake.gP)
             addData("iP", Intake.iP)

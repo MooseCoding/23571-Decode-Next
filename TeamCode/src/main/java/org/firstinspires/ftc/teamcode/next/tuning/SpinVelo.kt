@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.next.tuning
 
 import com.bylazar.configurables.annotations.Configurable
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.CRServo
@@ -11,6 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo
 
 @TeleOp
 @Configurable
+@Disabled
 class SpinVelo(): OpMode() {
     private lateinit var f1M: DcMotorEx
     private lateinit var f2M:DcMotorEx
