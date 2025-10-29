@@ -36,11 +36,13 @@ class TeleOP: NextFTCOpMode() {
         Gamepads.gamepad1.leftBumper whenBecomesTrue  Outtake.spinGearLeft whenBecomesFalse Outtake.stopGear
 
         // Flywheel Outtake Controls
-        Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Outtake.runOuttake whenBecomesFalse Outtake.stopOuttake
-        Gamepads.gamepad1.b whenBecomesTrue ParallelGroup(Outtake.reverseOuttake, Intake.reverseIntake) whenBecomesFalse ParallelGroup(Outtake.stopOuttake, Intake.stopIntake)
+        Gamepads.gamepad1.x whenBecomesTrue Outtake.flywheelOn
+        Gamepads.gamepad1.y whenBecomesTrue Outtake.flywheelOff
+        Gamepads.gamepad1.b whenBecomesTrue Outtake.flywheelBack
 
-        // Intake Controls.
-        Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake whenBecomesFalse Intake.stopIntake
+        // Intake Controls
+        Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake whenBecomesFalse Intake.stopIntake
+        Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake whenBecomesFalse Intake.stopIntake
     }
 
     override fun onUpdate() {

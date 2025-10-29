@@ -7,10 +7,10 @@ import dev.nextftc.hardware.driving.MecanumDriverControlled
 import dev.nextftc.hardware.impl.MotorEx
 
 object DriveTrain: Subsystem {
-     val fL = MotorEx("frontLeft").reversed()
-     val fR = MotorEx("frontRight")
-     val bL = MotorEx("backLeft").reversed()
-     val bR = MotorEx("backRight")
+     val fL = MotorEx("frontLeft")
+     val fR = MotorEx("frontRight").reversed()
+     val bL = MotorEx("backLeft")
+     val bR = MotorEx("backRight").reversed()
 
     override val defaultCommand: Command
         get() = MecanumDriverControlled(
@@ -19,7 +19,7 @@ object DriveTrain: Subsystem {
             bL,
             bR,
             Gamepads.gamepad1.leftStickY.map {it * 0.7},
-            Gamepads.gamepad1.leftStickX.map {it * 0.7},
-            Gamepads.gamepad1.rightStickX.map {it * 0.7}
+            -Gamepads.gamepad1.leftStickX.map {it * 0.7},
+            -Gamepads.gamepad1.rightStickX.map {it * 0.7}
         )
 }
