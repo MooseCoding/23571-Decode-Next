@@ -47,7 +47,6 @@ class TeleOP: NextFTCOpMode() {
 
     override fun onUpdate() {
         tele.run {
-            addData("fS pos",Outtake.fP)
             update()
         }
     }

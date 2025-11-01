@@ -21,7 +21,7 @@ class IntakeTuning(): NextFTCOpMode() {
 
     init {
         addComponents(
-            SubsystemComponent(Intake, Outtake),
+            SubsystemComponent(Intake),
             BulkReadComponent,
             BindingsComponent,
         )

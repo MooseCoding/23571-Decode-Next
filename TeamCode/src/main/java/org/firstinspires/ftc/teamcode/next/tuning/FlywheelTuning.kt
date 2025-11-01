@@ -16,7 +16,7 @@ class FlywheelTuning(): NextFTCOpMode() {
 
     init {
         addComponents(
-            SubsystemComponent(Intake, Outtake),
+            SubsystemComponent(Outtake),
             BulkReadComponent,
             BindingsComponent,
         )
@@ -34,7 +34,6 @@ class FlywheelTuning(): NextFTCOpMode() {
             addData("controller", Outtake.controller)
             addData("controller value", Outtake.controller.calculate(Outtake.f1.state))
             addData("targetV", Outtake.targetVelo)
-            addData("flap pos", Outtake.fP)
             addData("gear pos", Outtake.gP)
             addData("iP", Intake.iP)
             update()
