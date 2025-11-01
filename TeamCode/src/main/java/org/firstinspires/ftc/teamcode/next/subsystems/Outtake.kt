@@ -42,15 +42,17 @@ object Outtake: Subsystem {
          feedbackFactory = { ActiveOpMode.hardwareMap.analogInput.get("gSA") },
          servoFactory = { ActiveOpMode.hardwareMap.crservo.get("gS") }
      )
+
+    // val gS = CRServoEx("gS")
      val f1 = MotorEx("f1M")
      val f2 = MotorEx("f2M").reversed()
      val hS = ServoEx("flap")
 
     // Constants
     @JvmField
-    var targetOnVelo = 800.0
+    var targetOnVelo = 950.0
     @JvmField
-    var targetBackVelo = -400.0
+    var targetBackVelo = 400.0
     @JvmField
     var pid = PIDCoefficients(0.0033,0.0,0.0)
     @JvmField
@@ -80,6 +82,10 @@ object Outtake: Subsystem {
             f2.power = f1.power
             controller.goal = KineticState(0.0, targetVelo)
         }
+
+        gS.power= gP
+
+        hS.position = hP
         
         aimbot()
     }
@@ -111,21 +117,27 @@ object Outtake: Subsystem {
 
     // Commands
     val spinGearLeft = InstantCommand {
-        gP = -0.5 // Some Constant
+        gP = 0.7 // Some Constant
     }
     val spinGearRight = InstantCommand {
-        gP = 0.5 // Some Constant
+        gP = -0.7 // Some Constant
+    }
+    val gearAlittleLeft = InstantCommand {
+        gP = -0.2
+    }
+    val gearAlittleRight = InstantCommand {
+        gP = -0.2
     }
     val stopGear = InstantCommand {
         gP = 0.0
     }
     val FlapDown = InstantCommand {
-        hP += 0.01
+        hP += 0.05
     }
     val FlapUp = InstantCommand {
-        hP -= 0.01
+        hP -= 0.05
     }
     val flywheelOff:InstantCommand = InstantCommand { velocityTrue = false; targetVelo = 0.0; f1.power=0.0; f2.power=0.0}
-    val flywheelBack: InstantCommand = InstantCommand { velocityTrue=true; targetVelo= targetBackVelo }
+    val flywheelBack: InstantCommand = InstantCommand { velocityTrue=false; f1.power=-0.2; f2.power=-0.2 }
     val flywheelOn: InstantCommand = InstantCommand { velocityTrue=true; targetVelo= targetOnVelo }
 }

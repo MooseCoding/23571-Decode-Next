@@ -34,6 +34,9 @@ class TeleOP: NextFTCOpMode() {
         // Gear Controls
         Gamepads.gamepad1.rightBumper whenBecomesTrue  Outtake.spinGearRight whenBecomesFalse Outtake.stopGear
         Gamepads.gamepad1.leftBumper whenBecomesTrue  Outtake.spinGearLeft whenBecomesFalse Outtake.stopGear
+        Gamepads.gamepad1.dpadLeft whenBecomesTrue  Outtake.gearAlittleLeft whenBecomesFalse Outtake.stopGear
+        Gamepads.gamepad1.dpadLeft whenBecomesTrue  Outtake.gearAlittleRight whenBecomesFalse Outtake.stopGear
+
 
         // Flywheel Outtake Controls
         Gamepads.gamepad1.x whenBecomesTrue Outtake.flywheelOn
@@ -43,10 +46,18 @@ class TeleOP: NextFTCOpMode() {
         // Intake Controls
         Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake whenBecomesFalse Intake.stopIntake
         Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake whenBecomesFalse Intake.stopIntake
+
+        // Gamepad 2 Controls
+        Gamepads.gamepad2.y whenBecomesTrue { Outtake.targetOnVelo = 1200.0 }
+        Gamepads.gamepad2.x whenBecomesTrue { Outtake.targetOnVelo = 950.0 }
+        Gamepads.gamepad2.a whenBecomesTrue { Outtake.targetOnVelo = 800.0 }
+        Gamepads.gamepad2.b whenBecomesTrue { Outtake.targetOnVelo = 750.0 }
     }
 
     override fun onUpdate() {
         tele.run {
+            addData("HP", Outtake.hP)
+            addData("Power", Outtake.targetVelo)
             update()
         }
     }
