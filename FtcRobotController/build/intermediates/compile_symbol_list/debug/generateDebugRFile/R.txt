@@ -1340,7 +1340,6 @@ int color background_material_light 0x0
 int color background_orange 0x0
 int color background_very_light_grey 0x0
 int color background_white 0x0
-int color black 0x0
 int color border_orange 0x0
 int color bright_blue 0x0
 int color bright_foreground_disabled_material_dark 0x0
@@ -2123,9 +2122,6 @@ int color primary_text_default_material_dark 0x0
 int color primary_text_default_material_light 0x0
 int color primary_text_disabled_material_dark 0x0
 int color primary_text_disabled_material_light 0x0
-int color purple_200 0x0
-int color purple_500 0x0
-int color purple_700 0x0
 int color ripple_material_dark 0x0
 int color ripple_material_light 0x0
 int color secondary_text_default_material_dark 0x0
@@ -2138,8 +2134,6 @@ int color switch_thumb_material_dark 0x0
 int color switch_thumb_material_light 0x0
 int color switch_thumb_normal_material_dark 0x0
 int color switch_thumb_normal_material_light 0x0
-int color teal_200 0x0
-int color teal_700 0x0
 int color text_error 0x0
 int color text_okay 0x0
 int color text_warning 0x0
@@ -2158,7 +2152,6 @@ int color very_very_dark_orange 0x0
 int color very_very_dark_purple 0x0
 int color very_very_dark_red 0x0
 int color very_very_dark_teal 0x0
-int color white 0x0
 int color zxing_custom_possible_result_points 0x0
 int color zxing_custom_result_view 0x0
 int color zxing_custom_viewfinder_laser 0x0
@@ -5703,7 +5696,6 @@ int style ThemeOverlay_MaterialComponents_TimePicker_Display_TextInputEditText 0
 int style ThemeOverlay_MaterialComponents_Toolbar_Popup_Primary 0x0
 int style ThemeOverlay_MaterialComponents_Toolbar_Primary 0x0
 int style ThemeOverlay_MaterialComponents_Toolbar_Surface 0x0
-int style Theme_App 0x0
 int style Theme_AppCompat 0x0
 int style Theme_AppCompat_CompactMenu 0x0
 int style Theme_AppCompat_DayNight 0x0

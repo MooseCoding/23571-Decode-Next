@@ -1341,7 +1341,6 @@ color background_material_light
 color background_orange
 color background_very_light_grey
 color background_white
-color black
 color border_orange
 color bright_blue
 color bright_foreground_disabled_material_dark
@@ -2124,9 +2123,6 @@ color primary_text_default_material_dark
 color primary_text_default_material_light
 color primary_text_disabled_material_dark
 color primary_text_disabled_material_light
-color purple_200
-color purple_500
-color purple_700
 color ripple_material_dark
 color ripple_material_light
 color secondary_text_default_material_dark
@@ -2139,8 +2135,6 @@ color switch_thumb_material_dark
 color switch_thumb_material_light
 color switch_thumb_normal_material_dark
 color switch_thumb_normal_material_light
-color teal_200
-color teal_700
 color text_error
 color text_okay
 color text_warning
@@ -2159,7 +2153,6 @@ color very_very_dark_orange
 color very_very_dark_purple
 color very_very_dark_red
 color very_very_dark_teal
-color white
 color zxing_custom_possible_result_points
 color zxing_custom_result_view
 color zxing_custom_viewfinder_laser
@@ -5704,7 +5697,6 @@ style ThemeOverlay_MaterialComponents_TimePicker_Display_TextInputEditText
 style ThemeOverlay_MaterialComponents_Toolbar_Popup_Primary
 style ThemeOverlay_MaterialComponents_Toolbar_Primary
 style ThemeOverlay_MaterialComponents_Toolbar_Surface
-style Theme_App
 style Theme_AppCompat
 style Theme_AppCompat_CompactMenu
 style Theme_AppCompat_DayNight
