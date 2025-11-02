@@ -32,32 +32,27 @@ class TeleOP: NextFTCOpMode() {
         Gamepads.gamepad2.dpadDown whenBecomesTrue Outtake.FlapUp
 
         // Gear Controls
-        Gamepads.gamepad1.rightBumper whenBecomesTrue  Outtake.spinGearRight whenBecomesFalse Outtake.stopGear
-        Gamepads.gamepad1.leftBumper whenBecomesTrue  Outtake.spinGearLeft whenBecomesFalse Outtake.stopGear
-        Gamepads.gamepad1.dpadLeft whenBecomesTrue  Outtake.gearAlittleLeft whenBecomesFalse Outtake.stopGear
-        Gamepads.gamepad1.dpadLeft whenBecomesTrue  Outtake.gearAlittleRight whenBecomesFalse Outtake.stopGear
+        Gamepads.gamepad2.rightBumper whenBecomesTrue  Outtake.spinGearRight whenBecomesFalse Outtake.stopGear
+        Gamepads.gamepad2.leftBumper whenBecomesTrue  Outtake.spinGearLeft whenBecomesFalse Outtake.stopGear
+        Gamepads.gamepad2.dpadLeft whenBecomesTrue  Outtake.gearAlittleLeft whenBecomesFalse Outtake.stopGear
+        Gamepads.gamepad2.dpadLeft whenBecomesTrue  Outtake.gearAlittleRight whenBecomesFalse Outtake.stopGear
 
 
         // Flywheel Outtake Controls
-        Gamepads.gamepad1.x whenBecomesTrue Outtake.flywheelOn
-        Gamepads.gamepad1.y whenBecomesTrue Outtake.flywheelOff
-        Gamepads.gamepad1.b whenBecomesTrue Outtake.flywheelBack
+        Gamepads.gamepad2.a whenBecomesTrue Outtake.flywheelOn
+        Gamepads.gamepad2.b whenBecomesTrue Outtake.flywheelOff
+        Gamepads.gamepad2.x whenBecomesTrue Outtake.flywheelBack
 
         // Intake Controls
         Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake whenBecomesFalse Intake.stopIntake
         Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake whenBecomesFalse Intake.stopIntake
-
-        // Gamepad 2 Controls
-        Gamepads.gamepad2.y whenBecomesTrue { Outtake.targetOnVelo = 1200.0 }
-        Gamepads.gamepad2.x whenBecomesTrue { Outtake.targetOnVelo = 950.0 }
-        Gamepads.gamepad2.a whenBecomesTrue { Outtake.targetOnVelo = 800.0 }
-        Gamepads.gamepad2.b whenBecomesTrue { Outtake.targetOnVelo = 750.0 }
     }
 
     override fun onUpdate() {
         tele.run {
             addData("Hood Position: ", Outtake.hP)
             addData("Power: ", Outtake.targetVelo)
+            addData("Distance in Tiles: ", Outtake.manualAim/12)
             update()
         }
     }
