@@ -75,6 +75,8 @@ object Outtake: Subsystem {
     var turrentAngle = 0.0 // Turrent Angle relative Pedro Pathing's starting orientation
     @JvmField
     var hoodPos = 0.0 // Hood position is some function of angle
+    @JvmField
+    var manualAim = 12
 
     override fun periodic() {
         if (velocityTrue) {
@@ -86,36 +88,52 @@ object Outtake: Subsystem {
         gS.power= gP
 
         hS.position = hP
-        
-        aimbot()
-    }
-    
-    fun aimbot() {
-        // Find phi
 
-        // X,Y, height coordinate of the hoop needs to be hardcoded, and the turretHeight
-        // Note x & y are in units and height and turret height will be in inches
-
-        /*var xcord = 0.0
-        var ycord = 0.0
-        var height = 0.0 // Units initally
-        var turretHeight = 0.0 // Inches
-        val conversion = 10.0 // Inches per unit
-
-        var phi = atan2((ycord-DriveTrain.follower.pose.y),(xcord-DriveTrain.follower.pose.x))
-        var deltaPhi = atan2(sin(phi-DriveTrain.follower.heading), cos(phi-DriveTrain.follower.heading))
-        deltaPhi = atan2(sin(deltaPhi - turrentAngle), cos(deltaPhi - turrentAngle))
-        */
-        // Find theta (MAYBE I THINK I CAN JUST HARD CODE IN POSITION)
-        /*var dist = sqrt((xcord-DriveTrain.follower.pose.x).pow(2) + (ycord-DriveTrain.follower.pose.y).pow(2))
-        var theta = atan2(dist*conversion,height*conversion-turretHeight)
-        */
-
-        // Move aimbot
-
+        aimDistance()
     }
 
     // Commands
+    fun aimDistance() {
+        when(manualAim){
+            12 -> targetVelo = 835.0 // 0.81
+            24 -> targetVelo = 862.0 // 0.93
+            36 -> targetVelo = 844.0 // 0.71
+            48 -> targetVelo = 848.0 // 0.51
+            60 -> targetVelo = 908.0 // 0.51
+            72 -> targetVelo = 1025.0 // 0.73
+            84 -> targetVelo = 1165.0 // 1
+            96 -> targetVelo = 1260.0 // 1
+            108 -> targetVelo = 0.0 // 0.0 Broken
+            120 -> targetVelo = 0.0 // 0.0 Broken
+            134 -> targetVelo = 0.0 // 0.0 Broken
+            146 -> targetVelo = 0.0 // 0.0 Broken
+            else -> targetVelo = 0.0 // 1.0
+        }
+        when(manualAim){
+            12 -> hP = 0.81 // 0.81
+            24 -> hP = 0.93 // 0.93
+            36 -> hP = 0.71 // 0.71
+            48 -> hP = 0.51 // 0.51
+            60 -> hP = 0.51 // 0.51
+            72 -> hP = 0.73 // 0.73
+            84 -> hP = 1.0 // 1
+            96 -> hP = 1.0 // 1
+            108 -> hP = 1.0 // Broken
+            120 -> hP = 1.0 // Broken
+            134 -> hP = 1.0 // Broken
+            146 -> hP = 1.0 // Broken
+            else -> hP = 1.0 // 1.0
+        }
+        if(manualAim > 146){
+            manualAim = 146
+        }else if (manualAim < 12){
+            manualAim = 12
+        }
+
+        if(manualAim % 12 != 0){
+            manualAim -= manualAim % 12
+        }
+    }
     val spinGearLeft = InstantCommand {
         gP = 0.7 // Some Constant
     }

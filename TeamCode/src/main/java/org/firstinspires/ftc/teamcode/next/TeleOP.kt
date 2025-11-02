@@ -28,8 +28,8 @@ class TeleOP: NextFTCOpMode() {
 
     override fun onStartButtonPressed() {
         // Flap Controls
-        Gamepads.gamepad1.dpadUp whenBecomesTrue Outtake.FlapDown
-        Gamepads.gamepad1.dpadDown whenBecomesTrue Outtake.FlapUp
+        Gamepads.gamepad2.dpadUp whenBecomesTrue Outtake.FlapDown
+        Gamepads.gamepad2.dpadDown whenBecomesTrue Outtake.FlapUp
 
         // Gear Controls
         Gamepads.gamepad1.rightBumper whenBecomesTrue  Outtake.spinGearRight whenBecomesFalse Outtake.stopGear
@@ -56,8 +56,8 @@ class TeleOP: NextFTCOpMode() {
 
     override fun onUpdate() {
         tele.run {
-            addData("HP", Outtake.hP)
-            addData("Power", Outtake.targetVelo)
+            addData("Hood Position: ", Outtake.hP)
+            addData("Power: ", Outtake.targetVelo)
             update()
         }
     }

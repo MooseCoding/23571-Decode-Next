@@ -25,7 +25,7 @@ object DriveTrain: Subsystem {
      val bR = MotorEx("backRight").reversed()
 
     @JvmField
-    var sensistivity = 0.1
+    var sensistivity = 0.5
 
     override val defaultCommand: Command
         get() = MecanumDriverControlled(
