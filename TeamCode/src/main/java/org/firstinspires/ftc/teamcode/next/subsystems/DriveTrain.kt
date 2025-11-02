@@ -10,6 +10,8 @@ import com.pedropathing.ftc.localization.localizers.PinpointLocalizer
 import com.pedropathing.geometry.Pose
 import com.pedropathing.localization.Localizer
 import dev.nextftc.core.commands.Command
+import dev.nextftc.core.commands.utility.InstantCommand
+import dev.nextftc.core.commands.utility.LambdaCommand
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.ftc.Gamepads
@@ -24,8 +26,12 @@ object DriveTrain: Subsystem {
      val bL = MotorEx("backLeft")
      val bR = MotorEx("backRight").reversed()
 
+   // val follower:Follower = Constants.createFollower(ActiveOpMode.hardwareMap)
+
+
     @JvmField
-    var sensistivity = 0.1
+    var sensistivity = 0.6
+
 
     override val defaultCommand: Command
         get() = MecanumDriverControlled(
@@ -38,12 +44,13 @@ object DriveTrain: Subsystem {
             -Gamepads.gamepad1.rightStickX.map {it * sensistivity}
         )
 
-
-    /*override fun initialize() {
-        follower.startTeleopDrive()
+    override fun initialize() {
+        // follower.setStartingPose(Pose(0.0, 0.0, Math.PI)) // Set starting Pose
     }
 
     override fun periodic() {
-        follower.update()
-    }*/
+       //  follower.update()
+    }
+
+    // val StartTeleOPDrive = InstantCommand { follower.startTeleopDrive() }
 }

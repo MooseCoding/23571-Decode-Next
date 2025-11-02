@@ -36,6 +36,7 @@ class FlywheelTuning(): NextFTCOpMode() {
             addData("targetV", Outtake.targetVelo)
             addData("gear pos", Outtake.gP)
             addData("iP", Intake.iP)
+            addData("gear power", Outtake.gS.power)
             update()
         }
     }

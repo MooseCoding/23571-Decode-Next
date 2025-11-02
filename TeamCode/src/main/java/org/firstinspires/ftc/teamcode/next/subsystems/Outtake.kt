@@ -28,6 +28,8 @@ import java.time.Instant
 import kotlin.time.Duration.Companion.seconds
 import  dev.nextftc.ftc.ActiveOpMode;
 import org.firstinspires.ftc.robotcore.internal.hardware.android.GpioPin.Active
+import org.firstinspires.ftc.teamcode.helpers.getIndex
+import org.firstinspires.ftc.teamcode.next.subsystems.data.Aimbot
 import kotlin.math.atan
 import kotlin.math.atan2
 import kotlin.math.cos
@@ -53,13 +55,18 @@ object Outtake: Subsystem {
     var targetOnVelo = 950.0
     @JvmField
     var targetBackVelo = 400.0
-    @JvmField
+
     var pid = PIDCoefficients(0.0033,0.0,0.0)
-    @JvmField
     var ff = BasicFeedforwardParameters(1.66667E-4, 0.0, 0.003)
     var controller = controlSystem {
         velPid(pid)
         basicFF(ff)
+    }
+
+    @JvmField
+    var gPid = PIDCoefficients(0.0,0.0,0.0)
+    var gController = controlSystem {
+        posPid(gPid)
     }
 
     // Changing Vars
@@ -75,6 +82,17 @@ object Outtake: Subsystem {
     var turrentAngle = 0.0 // Turrent Angle relative Pedro Pathing's starting orientation
     @JvmField
     var hoodPos = 0.0 // Hood position is some function of angle
+    @JvmField
+    var currentX = 0.0
+    @JvmField
+    var currentY = 0.0
+    @JvmField
+    var currentHeading = 0.0
+
+    var xcord = 12.80
+    var ycord = 138.35
+    var height = 36.0 // Units initally
+    var turretHeight = 0.0 // Inches
 
     override fun periodic() {
         if (velocityTrue) {
@@ -83,9 +101,9 @@ object Outtake: Subsystem {
             controller.goal = KineticState(0.0, targetVelo)
         }
 
-        gS.power= gP
-
-        hS.position = hP
+        gS.power= gController.calculate(gS.state)
+        turrentAngle=gS.currentPosition
+        hS.position=-hP
         
         aimbot()
     }
@@ -96,23 +114,25 @@ object Outtake: Subsystem {
         // X,Y, height coordinate of the hoop needs to be hardcoded, and the turretHeight
         // Note x & y are in units and height and turret height will be in inches
 
-        /*var xcord = 0.0
-        var ycord = 0.0
-        var height = 0.0 // Units initally
-        var turretHeight = 0.0 // Inches
-        val conversion = 10.0 // Inches per unit
+        // currentX = DriveTrain.follower.pose.x
+        // currentY = DriveTrain.follower.pose.y
+        // currentHeading = DriveTrain.follower.pose.heading
 
-        var phi = atan2((ycord-DriveTrain.follower.pose.y),(xcord-DriveTrain.follower.pose.x))
-        var deltaPhi = atan2(sin(phi-DriveTrain.follower.heading), cos(phi-DriveTrain.follower.heading))
+        var phi = atan2((ycord-currentY),(xcord-currentX))
+        var deltaPhi = atan2(sin(phi-currentHeading), cos(phi-currentHeading))
         deltaPhi = atan2(sin(deltaPhi - turrentAngle), cos(deltaPhi - turrentAngle))
-        */
+
+        // spinGearToPosition(gS.currentPosition + deltaPhi)
+
+
         // Find theta (MAYBE I THINK I CAN JUST HARD CODE IN POSITION)
-        /*var dist = sqrt((xcord-DriveTrain.follower.pose.x).pow(2) + (ycord-DriveTrain.follower.pose.y).pow(2))
-        var theta = atan2(dist*conversion,height*conversion-turretHeight)
-        */
+        var dist = sqrt((xcord- currentX).pow(2) + (ycord- currentY).pow(2))
 
-        // Move aimbot
+        // Find hP, and Power to run at using our lookup table
+        val other = Aimbot.points.get(getIndex(dist))
 
+        hP = other.get(0)
+        targetOnVelo = other.get(1)
     }
 
     // Commands

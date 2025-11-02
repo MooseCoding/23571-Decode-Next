@@ -13,6 +13,10 @@ import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
+import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.currentX
+import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.currentY
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 @TeleOp
 class TeleOP: NextFTCOpMode() {
@@ -57,7 +61,11 @@ class TeleOP: NextFTCOpMode() {
     override fun onUpdate() {
         tele.run {
             addData("HP", Outtake.hP)
+            addData("gS", Outtake.gS.state)
             addData("Power", Outtake.targetVelo)
+            addData("current pose x", Outtake.currentX)
+            addData("current pose y", Outtake.currentY)
+            addData("outtake", sqrt((Outtake.xcord- currentX).pow(2) + (Outtake.ycord- currentY).pow(2)))
             update()
         }
     }
