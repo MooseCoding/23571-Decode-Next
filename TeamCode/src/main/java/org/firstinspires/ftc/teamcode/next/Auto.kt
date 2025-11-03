@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.next
 
+import com.bylazar.telemetry.JoinedTelemetry
+import com.bylazar.telemetry.PanelsTelemetry
 import com.pedropathing.geometry.BezierCurve
 import com.pedropathing.geometry.BezierLine
 import com.pedropathing.geometry.Pose
@@ -13,13 +15,14 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 
 @Autonomous
 class Auto() : NextFTCOpMode() {
+    val telem = JoinedTelemetry(telemetry, PanelsTelemetry.ftcTelemetry)
     val fL = MotorEx("frontLeft").reversed()
     val fR = MotorEx("frontRight")
     val bL = MotorEx("backLeft").reversed()
     val bR = MotorEx("backRight")
     val follower = Constants.createFollower(hardwareMap)
 
-    var builder: PathBuilder = PathBuilder()
+    var builder: PathBuilder = PathBuilder(follower)
 
     var line1: PathChain = builder
         .addPath(
@@ -89,7 +92,11 @@ class Auto() : NextFTCOpMode() {
         .setTangentHeadingInterpolation()
         .build()
 
-    override fun onStartButtonPressed() {
+    override fun onInit() {
+        super.onInit()
+    }
+
+    override fun onUpdate() {
 
     }
 }

@@ -37,6 +37,12 @@ class FlywheelTuning(): NextFTCOpMode() {
             addData("gear pos", Outtake.gP)
             addData("iP", Intake.iP)
             addData("gear power", Outtake.gS.power)
+            addData("g pos", Outtake.gS.currentPosition)
+            addData("currentAngle", Outtake.totalAngle)
+            addData("prev angle", Outtake.prevAngle)
+            addData("total angle", Outtake.totalAngle)
+            addData("d heading", Outtake.dHeading)
+            addData("turret angle", Outtake.getTurretAngle())
             update()
         }
     }

@@ -60,6 +60,7 @@ class TeleOP: NextFTCOpMode() {
 
     override fun onUpdate() {
         tele.run {
+
             addData("HP", Outtake.hP)
             addData("gS", Outtake.gS.state)
             addData("Power", Outtake.targetVelo)

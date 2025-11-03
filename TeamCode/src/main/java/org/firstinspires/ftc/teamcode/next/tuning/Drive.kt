@@ -7,6 +7,7 @@ import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
+import dev.nextftc.hardware.driving.Drivetrain
 import dev.nextftc.hardware.driving.MecanumDriverControlled
 import dev.nextftc.hardware.impl.MotorEx
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
