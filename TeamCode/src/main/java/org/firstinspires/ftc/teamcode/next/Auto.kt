@@ -21,6 +21,9 @@ class Auto() : NextFTCOpMode() {
     val bL = MotorEx("backLeft").reversed()
     val bR = MotorEx("backRight")
     val follower = Constants.createFollower(hardwareMap)
+    private var pathTimer: Timer? = null
+    private var opmodeTimer: Timer? = null
+    private var pathState = 0
 
     var builder: PathBuilder = PathBuilder(follower)
 
@@ -92,6 +95,47 @@ class Auto() : NextFTCOpMode() {
         .setTangentHeadingInterpolation()
         .build()
 
+    fun turn(radians:Double) {
+        var temp: Pose = Pose(follower.pose.x, follower.pose.y, radians)
+        follower.holdPoint(temp)
+    }
+
+    fun turnFrom(radians:Double) {
+        var originalHeading: Double = follower.pose.heading + radians
+        var temp: Pose = Pose(follower.pose.x, follower.pose.y, follower.pose.heading + radians)
+        follower.holdPoint(temp)
+    }
+
+    fun setPathState(pState: Int) {
+        pathState = pState
+        pathTimer!!.resetTimer()
+    }
+
+    lateinit var target: Pose
+    var x:Boolean = false
+    var y:Boolean = false
+
+    var i:Boolean = false
+
+    fun autonomousPathUpdate() {
+        when (pathState) {
+            0 -> {
+                Mercurial.runCatching {
+                    OuttakeClaw.pitchUp().schedule()
+                }
+                follower.followPath(path.getPath(0), true)
+                setPathState(1)
+            }
+
+            1 -> {
+                if(!i) {
+                    turnFrom(Math.PI)
+                i = true
+                }
+            }
+        }
+    }
+
     override fun onInit() {
         super.onInit()
     }
@@ -99,4 +143,6 @@ class Auto() : NextFTCOpMode() {
     override fun onUpdate() {
 
     }
+
+    
 }
