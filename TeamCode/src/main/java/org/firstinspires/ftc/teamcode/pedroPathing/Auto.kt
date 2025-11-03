@@ -9,8 +9,11 @@ import com.pedropathing.geometry.Pose
 import com.pedropathing.paths.PathBuilder
 import com.pedropathing.util.Timer
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
+import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.hardware.impl.MotorEx
+import org.firstinspires.ftc.teamcode.next.subsystems.Intake
+import kotlin.time.Duration.Companion.seconds
 
 
 @Autonomous
@@ -24,10 +27,7 @@ class Auto() : NextFTCOpMode() {
     private var pathTimer: Timer? = null
     private var opmodeTimer: Timer? = null
     private var pathState = 0
-    var startingPose = Pose() // Starting pose
-    var targetX: Double = 0.0 // TargetX Pose
-
-    var builder: PathBuilder = PathBuilder(follower)
+    var startingPose = Pose() // Starting pose, change to depend on the drivetrain
 
     var Path1 = follower // Move to Shooting Position with Preloads
         .pathBuilder()
@@ -129,53 +129,35 @@ class Auto() : NextFTCOpMode() {
         .setTangentHeadingInterpolation()
         .build()
 
-
-    fun turn(radians:Double) {
-        var temp: Pose = Pose(follower.pose.x, follower.pose.y, radians)
-        follower.holdPoint(temp)
-    }
-
-    fun turnFrom(radians:Double) {
-        var originalHeading: Double = follower.pose.heading + radians
-        var temp: Pose = Pose(follower.pose.x, follower.pose.y, follower.pose.heading + radians)
-        follower.holdPoint(temp)
-    }
-
     fun setPathState(pState: Int) {
         pathState = pState
         pathTimer!!.resetTimer()
     }
 
-    lateinit var target: Pose
-    var x:Boolean = false
-    var y:Boolean = false
-
-    var i:Boolean = false
+    private val pathSequence = listOf(
+        {follower.followPath(Path1); Delay(3.seconds).schedule()}, // Move to Shooting Position with Preloads while shooting the preloads
+        {follower.followPath(Path2)}, // Head to pickup 2 Purple Balls from line closest to classifier
+        {follower.followPath(Path3); Intake.runIntake.schedule()},  // Forwards to intake the 2 purple balls
+        {follower.followPath(Path4); Intake.stopIntake.schedule()}, // Head back to inside the loading zone
+        {follower.followPath(Path5)},// Head to grab 1 green and then 1 purple ball on the furthest line
+        {follower.followPath(Path6); Intake.runIntake.schedule()}, // Forwards to intake the 1 Green then 1 Purple
+        {follower.followPath(Path7); Intake.stopIntake.schedule()}, // Drive backwards to the tip of the far shooting zone
+        {follower.followPath(Path8)}, // Head to pickup 1 Purple then 1 Green Ball
+        {follower.followPath(Path9); Intake.runIntake.schedule()}, // Forwards to intake 1 purple then 1 green ball
+        {follower.followPath(Path10); Intake.stopIntake.schedule()}, // Move backwards to the tip of the closer shooting zone
+        {follower.followPath(Path11)} // Move out of the shooting zone
+    )
 
     private fun autonomousPathUpdate() {
-        when (pathState) {
-            0 -> {
+        if (pathState !in pathSequence.indices) {
+            return
+        }
 
-            }
+        val currentAction = pathSequence[pathState]
 
-            1 -> {
-                if(!i) {
-                    turnFrom(Math.PI)
-                i = true
-                }
-            }
-            2 -> {
-
-            }
-            3 -> {
-
-            }
-            4 -> {
-
-            }
-            5 -> {
-
-            }
+        if(!follower.isBusy) {
+            currentAction()
+            setPathState(pathState+1)
         }
     }
 
@@ -203,8 +185,7 @@ class Auto() : NextFTCOpMode() {
             addData("Follower Heading", follower.pose.heading)
             addLine()
             addData("Path State", pathState)
-            addData("Path timer", pathTimer!!.elapsedTimeSeconds)
-            addData("Target X", targetX)
+            addData("Path Timer", pathTimer!!.elapsedTimeSeconds)
         }
     }
 

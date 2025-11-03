@@ -135,7 +135,7 @@ object Outtake: Subsystem {
                  Intake.runIntake,
                  Delay(0.5.seconds),
                  Intake.stopIntake
-             )
+             ) 
         }
     }
 
