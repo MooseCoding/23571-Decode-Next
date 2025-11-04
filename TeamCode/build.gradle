@@ -15,18 +15,21 @@
 apply from: '../build.common.gradle'
 apply from: '../build.dependencies.gradle'
 apply plugin: 'org.jetbrains.kotlin.android'
+// apply plugin: 'dev.frozenmilk.sinister.sloth.load'
 
-buildscript {
+/*buildscript {
     repositories {
         mavenCentral()
         maven {
             url "https://repo.dairy.foundation/releases"
         }
-
+    }
+    dependencies {
+        classpath "dev.frozenmilk:Load:0.2.4"
     }
 
 }
-
+*/
 
 repositories {
     maven {

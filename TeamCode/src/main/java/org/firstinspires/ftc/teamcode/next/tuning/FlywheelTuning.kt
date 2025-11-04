@@ -27,13 +27,14 @@ class FlywheelTuning(): NextFTCOpMode() {
 
     override fun onUpdate() {
         tele.run {
+            addData("current X", Outtake.currentX)
             addData("f1P", Outtake.f1.power)
             addData("f1V", Outtake.f1.velocity)
             addData("f2V", Outtake.f2.velocity)
             addData("kinetic state", Outtake.f1.state)
             addData("controller", Outtake.controller)
             addData("controller value", Outtake.controller.calculate(Outtake.f1.state))
-            addData("targetV", Outtake.targetVelo)
+            addData("targetV", Outtake.targetOnVelo)
             addData("gear pos", Outtake.gP)
             addData("iP", Intake.iP)
             addData("gear power", Outtake.gS.power)
@@ -43,6 +44,8 @@ class FlywheelTuning(): NextFTCOpMode() {
             addData("total angle", Outtake.totalAngle)
             addData("d heading", Outtake.dHeading)
             addData("turret angle", Outtake.getTurretAngle())
+            addData("Dist", Outtake.dist)
+            addData("flap pos", Outtake.hP)
             update()
         }
     }

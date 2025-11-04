@@ -90,9 +90,6 @@ object Outtake: Subsystem {
     var turrentAngle = 0.0 // Turrent Angle relative Pedro Pathing's starting orientation
 
     @JvmField
-    var hoodPos = 0.0 // Hood position is some function of angle
-
-    @JvmField
     var currentX = 0.0
 
     @JvmField
@@ -106,6 +103,7 @@ object Outtake: Subsystem {
     var dHeading = 0.0
     var totalAngle = 0.0
     var gearRatio = 3.47
+    var dist = 0.0
 
     var xcord = 12.80
     var ycord = 138.35
@@ -121,7 +119,7 @@ object Outtake: Subsystem {
 
         gS.power = gController.calculate(gS.state)
         turrentAngle = gS.currentPosition
-        hS.position = -hP
+        hS.position = 1-hP
 
         calculateCurrentServoAngle()
 
@@ -142,13 +140,13 @@ object Outtake: Subsystem {
         var deltaHeading = normalize_angle(mu - currentHeading)
 
         // Find theta (MAYBE I THINK I CAN JUST HARD CODE IN POSITION).
-        var dist = sqrt((xcord - currentX).pow(2) + (ycord - currentY).pow(2))
+        dist = sqrt((xcord - currentX).pow(2) + (ycord - currentY).pow(2))
 
         // Find hP, and Power to run at using our lookup table
-        val other = Aimbot.points.get(getIndex(dist))
+        val other = Aimbot.points[getIndex(dist)]
 
-        hP = other.get(0)
-        targetOnVelo = other.get(1)
+        hP = other[0]
+        targetOnVelo = other[1]
     }
 
     // Commands
@@ -180,11 +178,8 @@ object Outtake: Subsystem {
     val flywheelOn: InstantCommand =
         InstantCommand { velocityTrue = true; targetVelo = targetOnVelo }
 
-    fun spinGear(deltaHeading: Double) { // 0 is defined as Hood is PI/2 Radians (in PP angle)
-    }
-
     fun calculateCurrentServoAngle() {
-        var cA = gS.currentPosition / 3.3 * 2 * PI
+        var cA = gS.currentPosition
         dHeading = cA - prevAngle
 
         if (dHeading > PI) dHeading -= 2 * PI
