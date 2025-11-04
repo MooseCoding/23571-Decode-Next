@@ -98,6 +98,12 @@ object Outtake: Subsystem {
     @JvmField
     var currentHeading = 0.0
 
+    // Handling auto shooting and stuff
+    @JvmField 
+    var auto = true
+    @JvmFIeld
+    var autoShoot = true 
+
     var prevAngle = 0.0
     var turretHeading = 0.0
     var dHeading = 0.0
@@ -118,13 +124,17 @@ object Outtake: Subsystem {
         }
 
         gS.power = gController.calculate(gS.state)
-        turrentAngle = gS.currentPosition
+        turrentAngle = getTurretAngle()
         hS.position = 1-hP
 
         calculateCurrentServoAngle()
 
-        aimbot()
-        //betterAimbot()
+        if (auto) {
+            aimbot() 
+        }
+        if (autoShoot) {
+            betterAimbot()
+        }
     }
 
     fun betterAimbot() {
@@ -138,17 +148,13 @@ object Outtake: Subsystem {
     }
 
     fun aimbot() {
-        // Find phi
-
-        // X,Y, height coordinate of the hoop needs to be hardcoded, and the turretHeight
-        // Note x & y are in units and height and turret height will be in inches
-
         // currentX = DriveTrain.follower.pose.x
         // currentY = DriveTrain.follower.pose.y
         // currentHeading = DriveTrain.follower.pose.heading
 
         var mu = normalize_angle(atan2(ycord - currentY, xcord - currentX))
         var deltaHeading = normalize_angle(mu - currentHeading)
+        gController.goal = KineticState(turretAngle + deltaHeading, 0)
 
         // Find theta (MAYBE I THINK I CAN JUST HARD CODE IN POSITION).
         dist = sqrt((xcord - currentX).pow(2) + (ycord - currentY).pow(2))
