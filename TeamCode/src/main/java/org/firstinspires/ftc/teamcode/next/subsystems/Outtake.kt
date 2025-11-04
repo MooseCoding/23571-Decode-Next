@@ -124,6 +124,17 @@ object Outtake: Subsystem {
         calculateCurrentServoAngle()
 
         aimbot()
+        //betterAimbot()
+    }
+
+    fun betterAimbot() {
+        if (DriveTrain.canShoot()) {
+             SequentialGroup(
+                 Intake.runIntake,
+                 Delay(0.5.seconds),
+                 Intake.stopIntake
+             ) 
+        }
     }
 
     fun aimbot() {
