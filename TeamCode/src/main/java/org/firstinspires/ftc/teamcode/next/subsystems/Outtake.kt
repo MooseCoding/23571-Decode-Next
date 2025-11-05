@@ -99,6 +99,11 @@ object Outtake: Subsystem {
     var currentY = 0.0
 
     @JvmField
+    var f = 100.0
+    @JvmField
+    var h = 0.006
+
+    @JvmField
     var currentHeading = 0.0
 
     // Handling auto shooting and stuff
@@ -163,8 +168,8 @@ object Outtake: Subsystem {
         // Find hP, and Power to run at using our lookup table
         val other = Aimbot.points[getIndex(dist)]
 
-        hP = other[0]
-        targetOnVelo = other[1]
+        hP = other[0] + h
+        targetOnVelo = other[1] + f
     }
 
     // Commands
@@ -197,20 +202,22 @@ object Outtake: Subsystem {
     val flywheelOn: InstantCommand =
         InstantCommand { velocityTrue = true; targetVelo = targetOnVelo }
 
-    fun calculateAngle():Double {
-        var cA = gS.currentPosition
-        dHeading = cA - prevAngle
+    fun calculateAngle(): Double {
+        val cA = gS.currentPosition
+        var dHeading = cA - prevAngle
 
         if (dHeading > PI) dHeading -= 2 * PI
         else if (dHeading < -PI) dHeading += 2 * PI
 
         totalAngle += dHeading
-        totalAngle = ((totalAngle % (2 * PI)) + (2 * PI)) % (2 * PI) // <-- keeps it in [0, 2π)
+        totalAngle = ((totalAngle % (2 * PI)) + (2 * PI)) % (2 * PI)  // keep in [0, 2π)
 
         prevAngle = cA
 
-        var angle = (totalAngle/gearRatio) % (2*PI)
-        if (angle < 0) angle+=2* PI
+        var angle = (totalAngle / gearRatio) % (2 * PI)
+        if (angle < 0) angle += 2 * PI
+
         return angle
     }
+
 }

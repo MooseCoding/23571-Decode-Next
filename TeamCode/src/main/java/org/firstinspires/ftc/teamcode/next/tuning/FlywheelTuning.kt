@@ -5,6 +5,7 @@ import com.bylazar.telemetry.PanelsTelemetry
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
+import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
@@ -23,6 +24,8 @@ class FlywheelTuning(): NextFTCOpMode() {
     }
 
     override fun onStartButtonPressed() {
+        Gamepads.gamepad1.x whenBecomesTrue Outtake.flywheelOn
+        Gamepads.gamepad1.y whenBecomesTrue Outtake.flywheelOff
     }
 
     override fun onUpdate() {
@@ -39,7 +42,7 @@ class FlywheelTuning(): NextFTCOpMode() {
             addData("iP", Intake.iP)
             addData("gear power", Outtake.gS.power)
             addData("g pos", Outtake.gS.currentPosition)
-            addData("currentAngle", Outtake.totalAngle)
+            addData("currentAngle", Outtake.turrentAngle)
             addData("prev angle", Outtake.prevAngle)
             addData("total angle", Outtake.totalAngle)
             addData("d heading", Outtake.dHeading)
