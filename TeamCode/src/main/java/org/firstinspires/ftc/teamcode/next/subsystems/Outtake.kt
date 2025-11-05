@@ -27,6 +27,7 @@ import dev.nextftc.hardware.powerable.SetPower
 import java.time.Instant
 import kotlin.time.Duration.Companion.seconds
 import  dev.nextftc.ftc.ActiveOpMode;
+import dev.nextftc.hardware.impl.FeedbackServoEx
 import org.firstinspires.ftc.robotcore.internal.hardware.android.GpioPin.Active
 import org.firstinspires.ftc.teamcode.helpers.getIndex
 import org.firstinspires.ftc.teamcode.helpers.normalize_angle
@@ -47,6 +48,8 @@ object Outtake: Subsystem {
         feedbackFactory = { ActiveOpMode.hardwareMap.analogInput.get("gSA") },
         servoFactory = { ActiveOpMode.hardwareMap.crservo.get("gS") }
     )
+
+    val servo = FeedbackServoEx("analog", "servo");
 
     // val gS = CRServoEx("gS")
     val f1 = MotorEx("f1M")
