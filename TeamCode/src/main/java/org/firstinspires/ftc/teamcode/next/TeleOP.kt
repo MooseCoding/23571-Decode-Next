@@ -35,13 +35,17 @@ class TeleOP: NextFTCOpMode() {
         Gamepads.gamepad2.rightBumper whenBecomesTrue  Outtake.spinGearRight whenBecomesFalse Outtake.stopGear
         Gamepads.gamepad2.leftBumper whenBecomesTrue  Outtake.spinGearLeft whenBecomesFalse Outtake.stopGear
         Gamepads.gamepad2.dpadLeft whenBecomesTrue  Outtake.gearAlittleLeft whenBecomesFalse Outtake.stopGear
-        Gamepads.gamepad2.dpadLeft whenBecomesTrue  Outtake.gearAlittleRight whenBecomesFalse Outtake.stopGear
+        Gamepads.gamepad2.dpadRight whenBecomesTrue  Outtake.gearAlittleRight whenBecomesFalse Outtake.stopGear
 
 
         // Flywheel Outtake Controls
         Gamepads.gamepad2.a whenBecomesTrue Outtake.flywheelOn
         Gamepads.gamepad2.b whenBecomesTrue Outtake.flywheelOff
         Gamepads.gamepad2.x whenBecomesTrue Outtake.flywheelBack
+
+        // Aim Controls
+        Gamepads.gamepad2.rightTrigger.greaterThan(0.3) whenBecomesTrue Outtake.aimUp
+        Gamepads.gamepad2.leftTrigger.greaterThan(0.3) whenBecomesTrue Outtake.aimDown
 
         // Intake Controls
         Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake whenBecomesFalse Intake.stopIntake
@@ -52,7 +56,7 @@ class TeleOP: NextFTCOpMode() {
         tele.run {
             addData("Hood Position: ", Outtake.hP)
             addData("Power: ", Outtake.targetVelo)
-            addData("Distance in Tiles: ", Outtake.manualAim/12)
+            addData("Distance in Tiles: ", Outtake.manualAim/24.0)
             update()
         }
     }

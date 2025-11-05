@@ -89,7 +89,7 @@ object Outtake: Subsystem {
 
         hS.position = hP
 
-        aimDistance()
+       // aimDistance()
     }
 
     // Commands
@@ -154,6 +154,12 @@ object Outtake: Subsystem {
     }
     val FlapUp = InstantCommand {
         hP -= 0.05
+    }
+    val aimUp = InstantCommand {
+        manualAim += 12
+    }
+    val aimDown = InstantCommand{
+        manualAim -= 12
     }
     val flywheelOff:InstantCommand = InstantCommand { velocityTrue = false; targetVelo = 0.0; f1.power=0.0; f2.power=0.0}
     val flywheelBack: InstantCommand = InstantCommand { velocityTrue=false; f1.power=-0.2; f2.power=-0.2 }
