@@ -89,7 +89,7 @@ object Outtake: Subsystem {
 
         hS.position = hP
 
-       // aimDistance()
+       aimDistance()
     }
 
     // Commands
@@ -103,11 +103,11 @@ object Outtake: Subsystem {
             72 -> targetVelo = 1025.0 // 0.73
             84 -> targetVelo = 1165.0 // 1
             96 -> targetVelo = 1260.0 // 1
-            108 -> targetVelo = 0.0 // 0.0 Broken
-            120 -> targetVelo = 0.0 // 0.0 Broken
-            134 -> targetVelo = 0.0 // 0.0 Broken
-            146 -> targetVelo = 0.0 // 0.0 Broken
-            else -> targetVelo = 0.0 // 1.0
+            108 -> targetVelo = 1100.0 // 0.42 Broken
+            120 -> targetVelo = 1112.0 // 0.44 Broken
+            132 -> targetVelo = 1150.0 // 0.43 Broken
+            144 -> targetVelo = 1172.0 // 0.44 Broken
+            else -> targetVelo = 0.0 // 0.0
         }
         when(manualAim){
             12 -> hP = 0.81 // 0.81
@@ -118,11 +118,11 @@ object Outtake: Subsystem {
             72 -> hP = 0.73 // 0.73
             84 -> hP = 1.0 // 1
             96 -> hP = 1.0 // 1
-            108 -> hP = 1.0 // Broken
-            120 -> hP = 1.0 // Broken
-            134 -> hP = 1.0 // Broken
-            146 -> hP = 1.0 // Broken
-            else -> hP = 1.0 // 1.0
+            108 -> hP = 0.42 // Broken
+            120 -> hP = 0.43 // Broken
+            134 -> hP = 0.44 // Broken
+            146 -> hP = 0.45 // Broken
+            else -> hP = 0.0 // 0.0
         }
         if(manualAim > 146){
             manualAim = 146
@@ -162,6 +162,6 @@ object Outtake: Subsystem {
         manualAim -= 12
     }
     val flywheelOff:InstantCommand = InstantCommand { velocityTrue = false; targetVelo = 0.0; f1.power=0.0; f2.power=0.0}
-    val flywheelBack: InstantCommand = InstantCommand { velocityTrue=false; f1.power=-0.2; f2.power=-0.2 }
+    val flywheelBack: InstantCommand = InstantCommand { velocityTrue=false; f1.power=-1.0; f2.power=-1.0 }
     val flywheelOn: InstantCommand = InstantCommand { velocityTrue=true; targetVelo= targetOnVelo }
 }
