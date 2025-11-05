@@ -10,14 +10,30 @@ import com.pedropathing.paths.PathBuilder
 import com.pedropathing.util.Timer
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import dev.nextftc.core.commands.delays.Delay
+import dev.nextftc.core.commands.groups.SequentialGroup
+import dev.nextftc.core.components.BindingsComponent
+import dev.nextftc.core.components.SubsystemComponent
+import dev.nextftc.extensions.pedro.FollowPath
+import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.ftc.NextFTCOpMode
+import dev.nextftc.ftc.components.BulkReadComponent
 import dev.nextftc.hardware.impl.MotorEx
+import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
+import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 import kotlin.time.Duration.Companion.seconds
 
 
 @Autonomous
 class Auto() : NextFTCOpMode() {
+    init {
+        addComponents(
+            SubsystemComponent(Intake, Outtake, DriveTrain),
+            BulkReadComponent,
+            BindingsComponent,
+            PedroComponent(Constants::createFollower)
+        )
+    }
     val telem = JoinedTelemetry(telemetry, PanelsTelemetry.ftcTelemetry)
     val fL = MotorEx("frontLeft").reversed()
     val fR = MotorEx("frontRight")
@@ -135,17 +151,17 @@ class Auto() : NextFTCOpMode() {
     }
 
     private val pathSequence = listOf(
-        {follower.followPath(Path1); Delay(3.seconds).schedule()}, // Move to Shooting Position with Preloads while shooting the preloads
-        {follower.followPath(Path2)}, // Head to pickup 2 Purple Balls from line closest to classifier
-        {follower.followPath(Path3); Intake.runIntake.schedule()},  // Forwards to intake the 2 purple balls
-        {follower.followPath(Path4); Intake.stopIntake.schedule()}, // Head back to inside the loading zone
-        {follower.followPath(Path5)},// Head to grab 1 green and then 1 purple ball on the furthest line
-        {follower.followPath(Path6); Intake.runIntake.schedule()}, // Forwards to intake the 1 Green then 1 Purple
-        {follower.followPath(Path7); Intake.stopIntake.schedule()}, // Drive backwards to the tip of the far shooting zone
-        {follower.followPath(Path8)}, // Head to pickup 1 Purple then 1 Green Ball
-        {follower.followPath(Path9); Intake.runIntake.schedule()}, // Forwards to intake 1 purple then 1 green ball
-        {follower.followPath(Path10); Intake.stopIntake.schedule()}, // Move backwards to the tip of the closer shooting zone
-        {follower.followPath(Path11)} // Move out of the shooting zone
+        {FollowPath(Path1); }, // Move to Shooting Position with Preloads while shooting the preloads
+        { FollowPath(Path2) }, // Head to pickup 2 Purple Balls from line closest to classifier
+        {FollowPath(Path3); Intake.runIntake.schedule()},  // Forwards to intake the 2 purple balls
+        {FollowPath(Path4); Intake.stopIntake.schedule()}, // Head back to inside the loading zone
+        {FollowPath(Path5)},// Head to grab 1 green and then 1 purple ball on the furthest line
+        {FollowPath(Path6); Intake.runIntake.schedule()}, // Forwards to intake the 1 Green then 1 Purple
+        {FollowPath(Path7); Intake.stopIntake.schedule()}, // Drive backwards to the tip of the far shooting zone
+        {FollowPath(Path8)}, // Head to pickup 1 Purple then 1 Green Ball
+        {FollowPath(Path9); Intake.runIntake.schedule()}, // Forwards to intake 1 purple then 1 green ball
+        {FollowPath(Path10); Intake.stopIntake.schedule()}, // Move backwards to the tip of the closer shooting zone
+        {FollowPath(Path11)} // Move out of the shooting zone
     )
 
     private fun autonomousPathUpdate() {

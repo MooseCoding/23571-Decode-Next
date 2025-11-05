@@ -18,6 +18,7 @@ import dev.nextftc.ftc.Gamepads
 import dev.nextftc.hardware.driving.MecanumDriverControlled
 import dev.nextftc.hardware.impl.MotorEx
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
+import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower;
 
 @Configurable
 object DriveTrain: Subsystem {
@@ -26,12 +27,11 @@ object DriveTrain: Subsystem {
      val bL = MotorEx("backLeft")
      val bR = MotorEx("backRight").reversed()
 
-   // val follower:Follower = Constants.createFollower(ActiveOpMode.hardwareMap)
-
 
     @JvmField
     var sensistivity = 0.6
 
+    var currentPose = Pose(0.0,0.0,0.0)
 
     override val defaultCommand: Command
         get() = MecanumDriverControlled(
@@ -45,11 +45,12 @@ object DriveTrain: Subsystem {
         )
 
     override fun initialize() {
-        // follower.setStartingPose(Pose(0.0, 0.0, Math.PI)) // Set starting Pos
+        follower.setStartingPose(Pose(0.0, 0.0, Math.PI)) // Set starting Pos
     }
 
     override fun periodic() {
         //  follower.update()
+        // currentPose = follower.currentPose
     }
 
     // val StartTeleOPDrive = InstantCommand { follower.startTeleopDrive() }
@@ -109,5 +110,8 @@ object DriveTrain: Subsystem {
     
         return (inUpper || inLower) && !inObstacle
     }
-     
+
+    fun relocalizeWithLimelight() {
+
+    }
 }

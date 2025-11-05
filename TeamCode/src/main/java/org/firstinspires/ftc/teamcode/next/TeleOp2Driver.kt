@@ -36,7 +36,7 @@ class TeleOp2Driver: NextFTCOpMode() {
         Gamepads.gamepad1.dpadDown whenBecomesTrue Outtake.FlapUp
 
         // Gear Controls
-        Gamepads.gamepad1.rightBumper whenBecomesTrue { if(auto != true) Outtake.spinGearRight } whenBecomesFalse { if(auto != true) Outtake.stopGear }
+        Gamepads.gamepad1.rightBumper whenBecomesTrue { if(!Outtake.auto) Outtake.spinGearRight } whenBecomesFalse { if(!Outtake.auto) Outtake.stopGear }
         Gamepads.gamepad1.leftBumper whenBecomesTrue  Outtake.spinGearLeft whenBecomesFalse Outtake.stopGear
         Gamepads.gamepad1.dpadLeft whenBecomesTrue  Outtake.gearAlittleLeft whenBecomesFalse Outtake.stopGear
         Gamepads.gamepad1.dpadLeft whenBecomesTrue  Outtake.gearAlittleRight whenBecomesFalse Outtake.stopGear

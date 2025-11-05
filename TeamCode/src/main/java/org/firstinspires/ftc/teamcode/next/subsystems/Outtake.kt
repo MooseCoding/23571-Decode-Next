@@ -104,7 +104,7 @@ object Outtake: Subsystem {
     // Handling auto shooting and stuff
     @JvmField 
     var auto = true
-    @JvmFIeld
+    @JvmField
     var autoShoot = true 
 
     var prevAngle = 0.0
@@ -127,10 +127,8 @@ object Outtake: Subsystem {
         }
 
         gS.power = gController.calculate(gS.state)
-        turrentAngle = getTurretAngle()
+        turrentAngle = calculateAngle()
         hS.position = 1-hP
-
-        calculateCurrentServoAngle()
 
         if (auto) {
             aimbot() 
@@ -157,7 +155,7 @@ object Outtake: Subsystem {
 
         var mu = normalize_angle(atan2(ycord - currentY, xcord - currentX))
         var deltaHeading = normalize_angle(mu - currentHeading)
-        gController.goal = KineticState(turretAngle + deltaHeading, 0)
+        gController.goal = KineticState(turretHeading + deltaHeading, 0.0)
 
         // Find theta (MAYBE I THINK I CAN JUST HARD CODE IN POSITION).
         dist = sqrt((xcord - currentX).pow(2) + (ycord - currentY).pow(2))
@@ -191,6 +189,7 @@ object Outtake: Subsystem {
     val FlapUp = InstantCommand {
         hP -= 0.05
     }
+
     val flywheelOff: InstantCommand =
         InstantCommand { velocityTrue = false; targetVelo = 0.0; f1.power = 0.0; f2.power = 0.0 }
     val flywheelBack: InstantCommand =
@@ -198,7 +197,7 @@ object Outtake: Subsystem {
     val flywheelOn: InstantCommand =
         InstantCommand { velocityTrue = true; targetVelo = targetOnVelo }
 
-    fun calculateCurrentServoAngle() {
+    fun calculateAngle():Double {
         var cA = gS.currentPosition
         dHeading = cA - prevAngle
 
@@ -206,10 +205,10 @@ object Outtake: Subsystem {
         else if (dHeading < -PI) dHeading += 2 * PI
 
         totalAngle += dHeading
-        prevAngle = cA
-    }
+        totalAngle = ((totalAngle % (2 * PI)) + (2 * PI)) % (2 * PI) // <-- keeps it in [0, 2π)
 
-    fun getTurretAngle():Double {
+        prevAngle = cA
+
         var angle = (totalAngle/gearRatio) % (2*PI)
         if (angle < 0) angle+=2* PI
         return angle
