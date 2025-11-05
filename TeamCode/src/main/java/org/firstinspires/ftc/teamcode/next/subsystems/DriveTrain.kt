@@ -45,7 +45,7 @@ object DriveTrain: Subsystem {
         )
 
     override fun initialize() {
-        follower.setStartingPose(Pose(0.0, 0.0, Math.PI)) // Set starting Pos
+        // follower.setStartingPose(Pose(0.0, 0.0, Math.PI)) // Set starting Pos
     }
 
     override fun periodic() {
