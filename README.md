@@ -8,7 +8,7 @@ bro this is **the entire nervous system** of our robot.
 somewhere in here lies 2000 lines of code that decide whether we
 🏎️ move, 🚫 crash, or 💀 explode mid-auton.
 
-it’s java. it’s android. it’s pain. it’s art.
+it’s kotlin. it’s android. it’s pain. it’s art. it's a piece of .. 
 
 ---
 
@@ -17,13 +17,13 @@ it’s java. it’s android. it’s pain. it’s art.
 ```
 TeamCode/
  ├─ org/firstinspires/ftc/teamcode/next/
- │   ├─ subsystems/     ← where we pretend we know OOP
- │   ├─ opmodes/        ← where the chaos is born
+ │   ├─ subsystems/     ← where we pretend we know OOP like Java
+ │   ├─ opmodes/        ← where the chaos is born and nothing works
  │   └─ utilities/      ← duct tape, but with methods
 ```
 
-`FtcRobotController/` → the ritual grounds where gradle errors spawn
-`build.gradle` → your daily reminder that dependencies are a myth
+`FtcRobotController/` → the ritual grounds where gradle errors spawn and we don't touch them
+`build.gradle` → your daily reminder that dependencies are a myth 
 
 ---
 
@@ -52,11 +52,11 @@ TeamCode/
 
 ## 🛠️ how to use (for legal reasons)
 
-* `@Config` things until it moves
-* spam `telemetry.addData()` until the driver station looks like Times Square
+* `@Configurable` things until it moves
+* spam `telemetry.addData()` until the driver station looks like Times Square and ts increases loop times by 67%
 * if it doesn’t turn right: it’s inverted.
-* if it doesn’t turn left: it’s also inverted.
-* if it moves backwards: congrats, that’s progress.
+* if it doesn’t turn left: it’s also inverted. 
+* if it moves backwards: congrats, that’s progress, now invert it.
 
 ---
 
@@ -66,8 +66,9 @@ TeamCode/
 >
 > “ftc dashboard said nah.”
 >
-> “auton worked perfectly yesterday” — someone, every event
-
+> “auton worked perfectly yesterday” — me
+>
+> "CLANKER"
 ---
 
 ## 📸 proof it works
