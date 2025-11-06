@@ -17,7 +17,7 @@ class FlywheelTuning(): NextFTCOpMode() {
 
     init {
         addComponents(
-            SubsystemComponent(Outtake),
+            SubsystemComponent(Intake, Outtake),
             BulkReadComponent,
             BindingsComponent,
         )
@@ -26,6 +26,7 @@ class FlywheelTuning(): NextFTCOpMode() {
     override fun onStartButtonPressed() {
         Gamepads.gamepad1.x whenBecomesTrue Outtake.flywheelOn
         Gamepads.gamepad1.y whenBecomesTrue Outtake.flywheelOff
+        Gamepads.gamepad1.cross whenBecomesTrue Outtake.outtakeBalls
     }
 
     override fun onUpdate() {
@@ -47,8 +48,10 @@ class FlywheelTuning(): NextFTCOpMode() {
             addData("total angle", Outtake.totalAngle)
             addData("d heading", Outtake.dHeading)
             addData("outtake turret", Outtake.turretHeading)
+            addData("goal", Outtake.gController.goal)
             addData("Dist", Outtake.dist)
             addData("flap pos", Outtake.hP)
+            addData("test", "true")
             update()
         }
     }

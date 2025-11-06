@@ -15,6 +15,7 @@ import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.extensions.pedro.FollowPath
 import dev.nextftc.extensions.pedro.PedroComponent
+import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import dev.nextftc.hardware.impl.MotorEx
@@ -35,11 +36,6 @@ class Auto() : NextFTCOpMode() {
         )
     }
     val telem = JoinedTelemetry(telemetry, PanelsTelemetry.ftcTelemetry)
-    val fL = MotorEx("frontLeft").reversed()
-    val fR = MotorEx("frontRight")
-    val bL = MotorEx("backLeft").reversed()
-    val bR = MotorEx("backRight")
-    val follower = Constants.createFollower(hardwareMap)
     private var pathTimer: Timer? = null
     private var opmodeTimer: Timer? = null
     private var pathState = 0
@@ -145,37 +141,19 @@ class Auto() : NextFTCOpMode() {
         .setTangentHeadingInterpolation()
         .build()
 
-    fun setPathState(pState: Int) {
-        pathState = pState
-        pathTimer!!.resetTimer()
-    }
-
-    private val pathSequence = listOf(
-        {FollowPath(Path1); }, // Move to Shooting Position with Preloads while shooting the preloads
-        { FollowPath(Path2) }, // Head to pickup 2 Purple Balls from line closest to classifier
-        {FollowPath(Path3); Intake.runIntake.schedule()},  // Forwards to intake the 2 purple balls
-        {FollowPath(Path4); Intake.stopIntake.schedule()}, // Head back to inside the loading zone
-        {FollowPath(Path5)},// Head to grab 1 green and then 1 purple ball on the furthest line
-        {FollowPath(Path6); Intake.runIntake.schedule()}, // Forwards to intake the 1 Green then 1 Purple
-        {FollowPath(Path7); Intake.stopIntake.schedule()}, // Drive backwards to the tip of the far shooting zone
-        {FollowPath(Path8)}, // Head to pickup 1 Purple then 1 Green Ball
-        {FollowPath(Path9); Intake.runIntake.schedule()}, // Forwards to intake 1 purple then 1 green ball
-        {FollowPath(Path10); Intake.stopIntake.schedule()}, // Move backwards to the tip of the closer shooting zone
-        {FollowPath(Path11)} // Move out of the shooting zone
+    private val pathSequence = SequentialGroup(
+        FollowPath(Path1), // Move to Shooting Position with Preloads while shooting the preloads
+        FollowPath(Path2), // Head to pickup 2 Purple Balls from line closest to classifier
+        SequentialGroup(FollowPath(Path3), Intake.runIntake),  // Forwards to intake the 2 purple balls
+        SequentialGroup(FollowPath(Path4), Intake.stopIntake), // Head back to inside the loading zone
+        FollowPath(Path5),// Head to grab 1 green and then 1 purple ball on the furthest line
+        SequentialGroup(FollowPath(Path6), Intake.runIntake), // Forwards to intake the 1 Green then 1 Purple
+        SequentialGroup(FollowPath(Path7), Intake.stopIntake), // Drive backwards to the tip of the far shooting zone
+        SequentialGroup(FollowPath(Path8)), // Head to pickup 1 Purple then 1 Green Ball
+        SequentialGroup(FollowPath(Path9), Intake.runIntake), // Forwards to intake 1 purple then 1 green ball
+        SequentialGroup(FollowPath(Path10), Intake.stopIntake), // Move backwards to the tip of the closer shooting zone
+        SequentialGroup(FollowPath(Path11)) // Move out of the shooting zone
     )
-
-    private fun autonomousPathUpdate() {
-        if (pathState !in pathSequence.indices) {
-            return
-        }
-
-        val currentAction = pathSequence[pathState]
-
-        if(!follower.isBusy) {
-            currentAction()
-            setPathState(pathState+1)
-        }
-    }
 
     override fun onInit() {
         pathTimer = Timer()
@@ -188,12 +166,11 @@ class Auto() : NextFTCOpMode() {
     }
 
     override fun onStartButtonPressed() {
-
+        pathSequence.schedule()
     }
 
     override fun onUpdate() {
         follower.update()
-        autonomousPathUpdate()
 
         telemetry.run {
             addData("Follower X", follower.pose.x)

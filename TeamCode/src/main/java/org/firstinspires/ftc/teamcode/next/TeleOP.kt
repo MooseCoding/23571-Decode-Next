@@ -25,30 +25,39 @@ class TeleOP: NextFTCOpMode() {
     }
 
     override fun onStartButtonPressed() {
-        // Flap Controls
-        Gamepads.gamepad1.dpadUp whenBecomesTrue Outtake.FlapDown
-        Gamepads.gamepad1.dpadDown whenBecomesTrue Outtake.FlapUp
-
-        // Gear Controls
-        Gamepads.gamepad1.rightBumper whenBecomesTrue  Outtake.spinGearRight whenBecomesFalse Outtake.stopGear
-        Gamepads.gamepad1.leftBumper whenBecomesTrue  Outtake.spinGearLeft whenBecomesFalse Outtake.stopGear
-
-        // Aimbot Controls
-        Gamepads.gamepad1.dpadLeft whenBecomesTrue { Outtake.auto = !Outtake.auto }
-        Gamepads.gamepad1.dpadRight whenBecomesTrue { Outtake.autoShoot = !Outtake.autoShoot }
-
-        // Flywheel Outtake Controls
-        Gamepads.gamepad1.x whenBecomesTrue Outtake.flywheelOn
-        Gamepads.gamepad1.y whenBecomesTrue Outtake.flywheelOff
-        Gamepads.gamepad1.b whenBecomesTrue Outtake.flywheelBack whenBecomesFalse Outtake.flywheelOff
-
         // Intake Controls
         Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake whenBecomesFalse Intake.stopIntake
         Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake whenBecomesFalse Intake.stopIntake
+
+        // Gamepad 2
+        Gamepads.gamepad2.rightTrigger.greaterThan(0.3) whenBecomesTrue Outtake.aimUp
+        Gamepads.gamepad2.leftTrigger.greaterThan(0.3) whenBecomesTrue Outtake.aimDown
+
+        // Flywheel Controls
+        Gamepads.gamepad2.a whenBecomesTrue Outtake.flywheelOn
+        Gamepads.gamepad2.b whenBecomesTrue Outtake.flywheelOff
+        Gamepads.gamepad2.x whenBecomesTrue Outtake.flywheelBack
+
+        // Gear Controls
+        Gamepads.gamepad2.rightBumper whenBecomesTrue  Outtake.spinGearRight whenBecomesFalse Outtake.stopGear
+        Gamepads.gamepad2.leftBumper whenBecomesTrue  Outtake.spinGearLeft whenBecomesFalse Outtake.stopGear
+        Gamepads.gamepad2.dpadLeft whenBecomesTrue  Outtake.gearAlittleLeft whenBecomesFalse Outtake.stopGear
+        Gamepads.gamepad2.dpadRight whenBecomesTrue  Outtake.gearAlittleRight whenBecomesFalse Outtake.stopGear
+
+        // Flap Controls
+        Gamepads.gamepad2.dpadUp whenBecomesTrue Outtake.FlapDown
+        Gamepads.gamepad2.dpadDown whenBecomesTrue Outtake.FlapUp
+
+        // Aimbot Controls
+        Gamepads.gamepad2.leftStickButton whenBecomesTrue { Outtake.auto = !Outtake.auto }
+        Gamepads.gamepad2.rightStickButton whenBecomesTrue { Outtake.autoShoot = !Outtake.autoShoot }
     }
 
     override fun onUpdate() {
         tele.run {
+            addData("Hood Position: ", Outtake.hP)
+            addData("Power: ", Outtake.targetVelo)
+            addData("Distance in Tiles: ", Outtake.manualAim/24.0)
             update()
         }
     }
