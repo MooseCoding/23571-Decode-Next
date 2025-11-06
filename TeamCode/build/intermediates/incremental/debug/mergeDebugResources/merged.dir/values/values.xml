@@ -719,6 +719,7 @@
     <color name="dark_purple">#21014b</color>
     <color name="dark_red">#4e0106</color>
     <color name="dark_teal">#01384b</color>
+    <color name="dashboardColor">#2962ff</color>
     <color name="design_bottom_navigation_shadow_color">#14000000</color>
     <color name="design_dark_default_color_background">#121212</color>
     <color name="design_dark_default_color_error">#CF6679</color>
