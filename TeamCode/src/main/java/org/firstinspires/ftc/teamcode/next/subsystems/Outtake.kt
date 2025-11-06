@@ -32,6 +32,8 @@ import org.firstinspires.ftc.robotcore.internal.hardware.android.GpioPin.Active
 import org.firstinspires.ftc.teamcode.helpers.getIndex
 import org.firstinspires.ftc.teamcode.helpers.normalize_angle
 import org.firstinspires.ftc.teamcode.next.subsystems.data.Aimbot
+import org.firstinspires.ftc.teamcode.next.subsystems.data.Alliance
+import org.firstinspires.ftc.teamcode.next.tuning.Drive
 import kotlin.math.PI
 import kotlin.math.absoluteValue
 import kotlin.math.atan
@@ -131,6 +133,17 @@ object Outtake: Subsystem {
     var ycord = 138.35
     var height = 36.0 // Units initally
     var turretHeight = 0.0 // Inches
+
+    override fun initialize() {
+        if (DriveTrain.alliance == Alliance.BLUE) {
+            xcord = 12.80
+            ycord = 138.35
+        }
+        else {
+            xcord = 144-12.80
+            ycord = 138.35
+        }
+    }
 
     override fun periodic() {
         if (velocityTrue) {

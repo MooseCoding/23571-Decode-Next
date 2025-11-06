@@ -19,6 +19,7 @@ import dev.nextftc.hardware.driving.MecanumDriverControlled
 import dev.nextftc.hardware.impl.MotorEx
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower;
+import org.firstinspires.ftc.teamcode.next.subsystems.data.Alliance
 
 @Configurable
 object DriveTrain: Subsystem {
@@ -26,6 +27,9 @@ object DriveTrain: Subsystem {
      val fR = MotorEx("frontRight").reversed()
      val bL = MotorEx("backLeft")
      val bR = MotorEx("backRight").reversed()
+
+    @JvmField
+    var alliance = Alliance.RED
 
 
     @JvmField
