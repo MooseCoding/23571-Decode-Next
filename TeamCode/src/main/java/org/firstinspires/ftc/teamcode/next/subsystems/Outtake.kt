@@ -234,7 +234,20 @@ object Outtake: Subsystem {
     val flywheelOn: InstantCommand =
         InstantCommand { velocityTrue = true; targetVelo = targetOnVelo }
 
-    val outtakeBalls = SequentialGroup(Intake.reverseIntake, Delay(0.1.seconds), Intake.stopIntake, Outtake.flywheelBack, Delay(0.4.seconds), Outtake.flywheelOff)
+    val outtakeBalls = SequentialGroup(
+        Intake.reverseIntake,
+        Delay(0.2.seconds),
+        Outtake.flywheelBack,
+        Delay(0.1.seconds),
+        Intake.stopIntake,
+        Delay(0.2.seconds),
+        Outtake.flywheelOff,
+        Outtake.flywheelOn,
+        Intake.runIntake,
+        Delay(1.seconds),
+        Intake.stopIntake,
+        Outtake.flywheelOff
+    )
 
 
     fun calculateAngle(): Double {

@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode.helpers
 
-import kotlin.math.atan2
-import kotlin.math.cos
-import kotlin.math.sin
+import java.lang.Math.atan2
+import java.lang.Math.cos
+import java.lang.Math.sin
 
 fun normalize_angle(theta:Double): Double {
     return atan2(sin(theta), cos(theta))

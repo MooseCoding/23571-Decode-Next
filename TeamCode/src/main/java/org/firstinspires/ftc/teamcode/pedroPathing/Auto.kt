@@ -142,7 +142,7 @@ class Auto() : NextFTCOpMode() {
         .build()
 
     private val pathSequence = SequentialGroup(
-        FollowPath(Path1), // Move to Shooting Position with Preloads while shooting the preloads
+        SequentialGroup(FollowPath(Path1), Outtake.outtakeBalls), // Move to Shooting Position with Preloads while shooting the preloads
         FollowPath(Path2), // Head to pickup 2 Purple Balls from line closest to classifier
         SequentialGroup(FollowPath(Path3), Intake.runIntake),  // Forwards to intake the 2 purple balls
         SequentialGroup(FollowPath(Path4), Intake.stopIntake), // Head back to inside the loading zone

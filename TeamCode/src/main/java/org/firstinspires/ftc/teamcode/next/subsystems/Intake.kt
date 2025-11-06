@@ -17,6 +17,7 @@ object Intake: Subsystem {
 
     @JvmField
     var iP = 0.0
+
     override fun periodic() {
             iM.power = iP
     }
