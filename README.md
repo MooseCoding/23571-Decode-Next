@@ -1,10 +1,6 @@
----
 
 # 🧠💥 23571-DECODE-NEXT
 
-> *“if it works, don’t touch it. if it doesn’t, still don’t touch it. just rerun gradle.”*
-
----
 
 ## 🚀 what even is this
 
