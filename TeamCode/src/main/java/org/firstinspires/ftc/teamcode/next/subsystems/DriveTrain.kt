@@ -23,10 +23,10 @@ import org.firstinspires.ftc.teamcode.next.subsystems.data.Alliance
 
 @Configurable
 object DriveTrain: Subsystem {
-     val fL = MotorEx("frontLeft")
-     val fR = MotorEx("frontRight").reversed()
-     val bL = MotorEx("backLeft")
-     val bR = MotorEx("backRight").reversed()
+     val fL = MotorEx("frontLeft").reversed()
+     val fR = MotorEx("frontRight")
+     val bL = MotorEx("backLeft").reversed()
+     val bR = MotorEx("backRight")
 
     @JvmField
     var alliance = Alliance.RED
@@ -43,21 +43,10 @@ object DriveTrain: Subsystem {
             fR,
             bL,
             bR,
-            Gamepads.gamepad1.leftStickY.map {it * sensistivity},
-            -Gamepads.gamepad1.leftStickX.map {it * sensistivity},
-            -Gamepads.gamepad1.rightStickX.map {it * sensistivity}
+            -Gamepads.gamepad1.leftStickY.map {it * sensistivity},
+            Gamepads.gamepad1.leftStickX.map {it * sensistivity},
+            Gamepads.gamepad1.rightStickX.map {it * sensistivity}
         )
-
-    override fun initialize() {
-        // follower.setStartingPose(Pose(0.0, 0.0, Math.PI)) // Set starting Pos
-    }
-
-    override fun periodic() {
-        //  follower.update()
-        // currentPose = follower.currentPose
-    }
-
-    // val StartTeleOPDrive = InstantCommand { follower.startTeleopDrive() }
 
     // Stuff to determine autoshoot
     data class Point(val x:Double, val y:Double)

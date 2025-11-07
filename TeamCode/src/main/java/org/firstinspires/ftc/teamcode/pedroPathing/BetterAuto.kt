@@ -49,6 +49,18 @@ class BetterAuto: NextFTCOpMode() {
     }
 
     public override fun onStartButtonPressed() {
-
+        SequentialGroup(
+            p.ShootStart,
+            p.StartToRow1,
+            p.Row1Intake,
+            p.Row1ToShoot,
+            p.ShootToRow2,
+            p.Row2Intake,
+            p.Row2ToShoot,
+            p.ShootToRow3,
+            p.Row3Intake,
+            p.Row3ToShoot,
+            p.ToPark,
+        ).schedule()
     }
 }

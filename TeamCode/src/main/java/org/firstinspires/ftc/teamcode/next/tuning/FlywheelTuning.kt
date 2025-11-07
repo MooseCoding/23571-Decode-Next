@@ -5,11 +5,13 @@ import com.bylazar.telemetry.PanelsTelemetry
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
+import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
+import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 
 @TeleOp
 class FlywheelTuning(): NextFTCOpMode() {
@@ -18,6 +20,7 @@ class FlywheelTuning(): NextFTCOpMode() {
     init {
         addComponents(
             SubsystemComponent(Intake, Outtake),
+            (PedroComponent(Constants::createFollower)),
             BulkReadComponent,
             BindingsComponent,
         )
@@ -27,11 +30,17 @@ class FlywheelTuning(): NextFTCOpMode() {
         Gamepads.gamepad1.x whenBecomesTrue Outtake.flywheelOn
         Gamepads.gamepad1.y whenBecomesTrue Outtake.flywheelOff
         Gamepads.gamepad1.cross whenBecomesTrue Outtake.outtakeBalls
+        Gamepads.gamepad1.dpadUp whenBecomesTrue Outtake.zeroMotor
+        Gamepads.gamepad2.rightBumper whenBecomesTrue  Outtake.spinGearRight whenBecomesFalse Outtake.stopGear
+        Gamepads.gamepad2.leftBumper whenBecomesTrue  Outtake.spinGearLeft whenBecomesFalse Outtake.stopGear
     }
 
     override fun onUpdate() {
         tele.run {
             addData("current X", Outtake.currentX)
+            addData("current y", Outtake.currentY)
+            addData("current H", Outtake.currentHeading)
+
             addData("f1P", Outtake.f1.power)
             addData("f1V", Outtake.f1.velocity)
             addData("f2V", Outtake.f2.velocity)
@@ -41,8 +50,9 @@ class FlywheelTuning(): NextFTCOpMode() {
             addData("targetV", Outtake.targetOnVelo)
             addData("gear pos", Outtake.gP)
             addData("iP", Intake.iP)
-            addData("gear power", Outtake.gS.power)
-            addData("g pos", Outtake.gS.currentPosition)
+            addData("spin power", Outtake.spin.power)
+            addData("spin velo", Outtake.spin.velocity)
+            addData("spijn pos", Outtake.spin.currentPosition)
             addData("currentAngle", Outtake.turrentAngle)
             addData("prev angle", Outtake.prevAngle)
             addData("total angle", Outtake.totalAngle)

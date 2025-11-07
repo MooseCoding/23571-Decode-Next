@@ -41,7 +41,9 @@ public class Far12(f: Follower, a: Alliance) {
         }
     }
 
-    var ShootStart = SequentialGroup(Outtake.outtakeBalls) // Move to Shooting Position with Preloads while shooting the preloads
+    var ShootStart = SequentialGroup(
+        Outtake.outtakeBalls
+    ) // Move to Shooting Position with Preloads while shooting the preloads
     var StartToRow1 = SequentialGroup(
         Intake.runIntake,
         FollowPath(f.pathBuilder()
