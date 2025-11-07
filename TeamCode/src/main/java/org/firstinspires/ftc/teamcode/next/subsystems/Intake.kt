@@ -10,6 +10,10 @@ import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.hardware.controllable.RunToVelocity
 import dev.nextftc.hardware.impl.MotorEx
 import com.bylazar.configurables.annotations.Configurable
+import dev.nextftc.core.commands.delays.Delay
+import dev.nextftc.core.commands.groups.SequentialGroup
+import java.time.Instant
+import kotlin.time.Duration.Companion.seconds
 
 @Configurable
 object Intake: Subsystem {
@@ -17,6 +21,9 @@ object Intake: Subsystem {
 
     @JvmField
     var iP = 0.0
+
+    @JvmField
+    var outTime = 0.0
 
     override fun periodic() {
             iM.power = iP
@@ -30,7 +37,24 @@ object Intake: Subsystem {
         iP = -1.0
     }
 
+    val reverseIntakeSlow = InstantCommand {
+        iP = -0.5
+    }
+
+    val reverseIntakeVerySlow = InstantCommand {
+        iP = -0.2
+    }
+
+
     val stopIntake = InstantCommand {
         iP = 0.0
     }
+
+    val backOutWith2 = SequentialGroup(
+        Intake.reverseIntakeSlow,
+        Outtake.flywheelBackSlow,
+        Delay(0.98.seconds),
+        Intake.stopIntake,
+        Outtake.flywheelOff
+    )
 }
