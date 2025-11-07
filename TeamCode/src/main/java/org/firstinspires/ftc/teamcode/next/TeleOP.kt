@@ -55,9 +55,12 @@ class TeleOP: NextFTCOpMode() {
 
     override fun onUpdate() {
         tele.run {
-            addData("Hood Position: ", Outtake.hP)
-            addData("Power: ", Outtake.targetVelo)
-            addData("Distance in Tiles: ", Outtake.manualAim/24.0)
+            addData("Hood Position ", Outtake.hP)
+            addData("Power ", Outtake.targetVelo)
+            addData("Distance in Tiles ", Outtake.manualAim/24.0)
+            addData("Manual Mode ", Outtake.manualOn)
+            addData("Auto Aim", Outtake.auto)
+            addData("Auto Shoot", Outtake.autoShoot)
             update()
         }
     }

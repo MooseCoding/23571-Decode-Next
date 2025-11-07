@@ -57,4 +57,19 @@ object Intake: Subsystem {
         Intake.stopIntake,
         Outtake.flywheelOff
     )
+
+    val initBalls = SequentialGroup(
+        Intake.reverseIntake,
+        Delay(0.2.seconds),
+        Outtake.flywheelBack,
+        Delay(0.1.seconds),
+        Intake.stopIntake,
+        Delay(0.2.seconds),
+        Outtake.flywheelOff,
+        Outtake.flywheelOn,
+        Intake.runIntake,
+        Delay(1.seconds),
+        Intake.stopIntake,
+        Outtake.flywheelOff
+    )
 }
