@@ -34,6 +34,66 @@ object Outtake: Subsystem {
     val f2 = MotorEx("f2M").reversed()
     val hS = ServoEx("flap")
 
+    var gearRatio = 3.47
+
+    // Spin motor
+    /*
+    val spin = MotorEx("spin")
+
+    @JvmField
+    var sP = PIDCoefficients(0.0,0.0,0.0)
+    var sC = controlSystem {
+        posPid(sP)
+    }
+
+    //Find radians per tick
+    @JvmField
+    var ppr = 781.5
+    
+    var rpt = 2*PI/(4*ppr*gearRatio)
+
+
+    @JvmField
+    var yaw = 0.0
+
+    periodic {
+        yaw = normalizeAngle(spin.currentPosition*rpt)
+        spin.power = sC.calculate(spin.state) 
+    }
+
+    fun goToYaw(y:Double) {
+        sC.goal = y
+    }
+
+    --------Baron's Code------------
+
+    
+    public static double normalizeAngle(double angleRadians) {
+        double angle = angleRadians % (Math.PI * 2D);
+        if (angle <= -Math.PI) angle += Math.PI * 2D;
+        if (angle > Math.PI) angle -= Math.PI * 2D;
+        return angle;
+    }
+
+
+    public double getYaw() {
+        return normalizeAngle(getTurret() * rpt);
+    }
+
+    public void setYaw(double radians) {
+        radians = normalizeAngle(radians);
+        setTurretTarget(radians/rpt);
+    }
+
+    public void addYaw(double radians) {
+        setYaw(getYaw() + radians);
+    }
+
+    public double getTurret() {
+        return m.getCurrentPosition();
+    }
+    */
+
     // Constants
     @JvmField
     var targetOnVelo = 950.0
@@ -106,7 +166,6 @@ object Outtake: Subsystem {
     var turretHeading = 0.0
     var dHeading = 0.0
     var totalAngle = 0.0
-    var gearRatio = 3.47
     var dist = 0.0
 
     var xcord = 12.80
