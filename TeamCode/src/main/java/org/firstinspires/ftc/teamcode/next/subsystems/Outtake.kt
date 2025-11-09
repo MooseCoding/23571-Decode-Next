@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
 import com.bylazar.configurables.annotations.Configurable
+import com.qualcomm.robotcore.hardware.DcMotor
 import dev.nextftc.control.KineticState
 import dev.nextftc.control.builder.controlSystem
 import dev.nextftc.control.feedback.PIDCoefficients
@@ -18,6 +19,7 @@ import dev.nextftc.hardware.impl.ServoEx
 import org.firstinspires.ftc.teamcode.helpers.getIndex
 import org.firstinspires.ftc.teamcode.next.subsystems.data.Aimbot
 import org.firstinspires.ftc.teamcode.next.subsystems.data.Alliance
+import org.firstinspires.ftc.teamcode.next.tuning.Drive
 import kotlin.math.*
 import kotlin.time.Duration.Companion.seconds
 
@@ -42,7 +44,7 @@ object Outtake: Subsystem {
     val spin = MotorEx("spin")
 
     @JvmField
-    var sP = PIDCoefficients(0.0,0.0,0.0)
+    var sP = PIDCoefficients(0.8,0.0,0.0)
     var sC = controlSystem {
         posPid(sP)
     }
@@ -51,7 +53,7 @@ object Outtake: Subsystem {
     @JvmField
     var ppr = 537.7
     
-    var rpt = 2*PI/(4*ppr*gearRatio)
+    var rpt = 2*PI/(ppr*gearRatio)
 
 
     @JvmField
@@ -110,7 +112,10 @@ object Outtake: Subsystem {
 
     // Constants
     @JvmField
-    var targetOnVelo = 950.0
+    var targetOnVelo = 835.0
+
+    @JvmField
+    var crap = 0.0
 
     @JvmField
     var targetBackVelo = 400.0
@@ -122,12 +127,6 @@ object Outtake: Subsystem {
         basicFF(ff)
     }
 
-    @JvmField
-    var gPid = PIDCoefficients(0.0, 0.0, 0.0)
-    var gController = controlSystem { // Controller goal will alwyas be in Turret Rads
-        posPid(gPid)
-    }
-
     // Changing Vars
     @JvmField
     var targetVelo = 0.0
@@ -136,7 +135,7 @@ object Outtake: Subsystem {
     var gP = 0.0 // Gear Power
 
     @JvmField
-    var hP = 0.0 // Hood Position
+    var hP = 0.81 // Hood Position
 
     @JvmField
     var velocityTrue = true // Use the VPID
@@ -156,19 +155,21 @@ object Outtake: Subsystem {
     @JvmField
     var f = 100.0
     @JvmField
-    var h = 0.006
+    var h = 0.01
 
     @JvmField
     var currentHeading = 0.0
 
     @JvmField
-    var turretOffset = 0.0
+    var canSpin= true
 
     // Handling auto shooting and stuff
     @JvmField 
-    var auto = true
+    var auto = false
     @JvmField
-    var autoShoot = true
+    var autoShoot = false
+    @JvmField
+    var autoTurret = true
 
     @JvmField
     var manualOn = false
@@ -182,26 +183,24 @@ object Outtake: Subsystem {
     var totalAngle = 0.0
     var dist = 0.0
 
-    var xcord = 12.80
-    var ycord = 138.35
-    var height = 36.0 // Units initally
-    var turretHeight = 0.0 // Inches
+    var xcord = 6.0
+    var ycord = 144-8.0
 
     override fun initialize() {
         if (DriveTrain.alliance == Alliance.BLUE) {
-            xcord = 12.80
-            ycord = 138.35
+            xcord = 6.0
+            ycord = 144-8.0
         }
         else {
-            xcord = 144-12.80
-            ycord = 138.35
+            xcord = 144-6.0
+            ycord = 144-8.0
         }
     }
 
     override fun periodic() {
-        //currentX = follower.pose.x
-        //currentY = follower.pose.y
-        //currentHeading = follower.pose.heading
+        currentX = follower.pose.x
+        currentY = follower.pose.y
+        currentHeading = follower.pose.heading
 
         if (velocityTrue) {
             f1.power = controller.calculate(f1.state)
@@ -209,26 +208,11 @@ object Outtake: Subsystem {
             controller.goal = KineticState(0.0, targetVelo)
         }
 
-        turrentAngle = getYaw()
-
         if (manualOn) {
             aimDistance()
             spin.power = gP
             hS.position = hP
         }
-        else {
-            if (auto) {
-                aimbot()
-                yaw = normalizeAngle(spin.currentPosition*rpt)
-                spin.power = sC.calculate(spin.state)
-            }
-
-            if (autoShoot) {
-                betterAimbot()
-            }
-        }
-
-
     }
 
     fun betterAimbot() {
@@ -238,22 +222,8 @@ object Outtake: Subsystem {
     }
 
     fun aimbot() {
-        // currentX = DriveTrain.follower.pose.x
-        // currentY = DriveTrain.follower.pose.y
-        // currentHeading = DriveTrain.follower.pose.heading
-
-        var mu = atan2(ycord - currentY, xcord - currentX)
-        var deltaHeading = mu - currentHeading
-        var targetHeading = turretHeading + deltaHeading
-
-        // Normalize only the final heading to [-π, π)
-        targetHeading = ((targetHeading + PI) % (2 * PI)) - PI
-        sC.goal = KineticState(targetHeading, 0.0)
-
-        // Find theta (MAYBE I THINK I CAN JUST HARD CODE IN POSITION).
         dist = sqrt((xcord - currentX).pow(2) + (ycord - currentY).pow(2))
 
-        // Find hP, and Power to run at using our lookup table
         val other = Aimbot.points[getIndex(dist)]
 
         hP = other[0] + h
@@ -261,6 +231,15 @@ object Outtake: Subsystem {
 
         hS.position = 1-hP
 
+    }
+
+    fun aimTurret() {
+        var mu = atan2(ycord - currentY, xcord - currentX)
+        var deltaHeading = normalizeAngle(mu - currentHeading)
+
+        val clampedHeading = deltaHeading.coerceIn(-PI/2, PI/2)
+
+        sC.goal = KineticState(clampedHeading, 0.0)
     }
 
     // Commands
@@ -286,9 +265,9 @@ object Outtake: Subsystem {
         hP -= 0.05
     }
     val zeroMotor = InstantCommand {
-        spin.zeroed()
+        spin.motor.mode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
+        spin.motor.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
     }
-
     val aimUp = InstantCommand {
         manualAim += 12
     }
@@ -296,10 +275,8 @@ object Outtake: Subsystem {
         manualAim -= 12
     }
 
-
-
     val flywheelOff: InstantCommand =
-        InstantCommand { velocityTrue = false; targetVelo = 0.0; f1.power = 0.0; f2.power = 0.0 }
+        InstantCommand { velocityTrue = true; targetVelo = 0.0;}
     val flywheelBack: InstantCommand =
         InstantCommand { velocityTrue = false; f1.power = -1.0; f2.power = -1.0 }
     val flywheelOn: InstantCommand =
@@ -317,41 +294,38 @@ object Outtake: Subsystem {
         Outtake.flywheelOff,
     )
 
-    fun turretFromServo(a: Double): Double {
-        return a / gearRatio
-    }
-
-
 
     fun aimDistance() {
-        when(manualAim){
-            12 -> targetVelo = 835.0 // 0.81
-            24 -> targetVelo = 862.0 // 0.93
-            36 -> targetVelo = 844.0 // 0.71
-            48 -> targetVelo = 848.0 // 0.51
-            60 -> targetVelo = 908.0 // 0.51
-            72 -> targetVelo = 1025.0 // 0.73
-            84 -> targetVelo = 1165.0 // 1
-            96 -> targetVelo = 1260.0 // 1
-            108 -> targetVelo = 1100.0 // 0.42 Broken
-            120 -> targetVelo = 1112.0 // 0.44 Broken
-            132 -> targetVelo = 1150.0 // 0.43 Broken
-            144 -> targetVelo = 1172.0 // 0.44 Broken
-            else -> targetVelo = 0.0 // 0.0
+        if(canSpin) {
+            when(manualAim){
+                12 -> targetVelo = 835.0 // 0.81
+                24 -> targetVelo = 862.0 // 0.93
+                36 -> targetVelo = 844.0 // 0.71
+                48 -> targetVelo = 848.0 // 0.6
+                60 -> targetVelo = 908.0 // 0.62
+                72 -> targetVelo = 1025.0 // 0.73
+                84 -> targetVelo = 1165.0 // 0.7
+                96 -> targetVelo = 1230.0 // 0.7
+                108 -> targetVelo = 1070.0 // 0.42
+                120 -> targetVelo = 1112.0 // 0.44
+                132 -> targetVelo = 1150.0 // 0.43
+                144 -> targetVelo = 1250.0 // 0.44
+                else -> targetVelo = 0.0 // 0.0
+            }
         }
         when(manualAim){
             12 -> hP = 0.81 // 0.81
             24 -> hP = 0.93 // 0.93
             36 -> hP = 0.71 // 0.71
-            48 -> hP = 0.51 // 0.51
-            60 -> hP = 0.51 // 0.51
-            72 -> hP = 0.73 // 0.73
-            84 -> hP = 1.0 // 1
-            96 -> hP = 1.0 // 1
-            108 -> hP = 0.42 // Broken
-            120 -> hP = 0.43 // Broken
-            134 -> hP = 0.44 // Broken
-            146 -> hP = 0.45 // Broken
+            48 -> hP = 0.6 // 0.6
+            60 -> hP = 0.62 // 0.62
+            72 -> hP = 0.65 // 0.65
+            84 -> hP = 0.7 // 0.7
+            96 -> hP = 0.7 // 0.7
+            108 -> hP = 0.42 // 0.42
+            120 -> hP = 0.43 // 0.43
+            134 -> hP = 0.44 // 0.44
+            146 -> hP = 0.45 // 0.45
             else -> hP = 0.0 // 0.0
         }
         if(manualAim > 146){

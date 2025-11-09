@@ -23,9 +23,9 @@ import org.firstinspires.ftc.teamcode.next.subsystems.data.Alliance
 
 @Configurable
 object DriveTrain: Subsystem {
-     val fL = MotorEx("frontLeft").reversed()
+     val fL = MotorEx("frontLeft")
      val fR = MotorEx("frontRight")
-     val bL = MotorEx("backLeft").reversed()
+     val bL = MotorEx("backLeft")
      val bR = MotorEx("backRight")
 
     @JvmField
@@ -34,8 +34,6 @@ object DriveTrain: Subsystem {
 
     @JvmField
     var sensistivity = 0.6
-
-    var currentPose = Pose(0.0,0.0,0.0)
 
     override val defaultCommand: Command
         get() = MecanumDriverControlled(
@@ -47,64 +45,4 @@ object DriveTrain: Subsystem {
             Gamepads.gamepad1.leftStickX.map {it * sensistivity},
             Gamepads.gamepad1.rightStickX.map {it * sensistivity}
         )
-
-    // Stuff to determine autoshoot
-    data class Point(val x:Double, val y:Double)
-    
-    fun pointInTriangle(p: Point, a: Point, b: Point, c: Point): Boolean {
-        val det = (b.y - c.y) * (a.x - c.x) + (c.x - b.x) * (a.y - c.y)
-        if (kotlin.math.abs(det) < 1e-6) return false
-    
-        val u = ((b.y - c.y) * (p.x - c.x) + (c.x - b.x) * (p.y - c.y)) / det
-        val v = ((c.y - a.y) * (p.x - c.x) + (a.x - c.x) * (p.y - c.y)) / det
-        val w = 1 - u - v
-    
-        return u >= 0 && v >= 0 && w >= 0
-    }
-    
-    fun canShoot(): Boolean {
-        val x = 0.0 // Replace with follower.pose.x
-        val y = 0.0 // Replace with follower.pose.y
-        
-        val obstacle = listOf(
-            Point(0.0, 115.0),
-            Point(25.0, 144.0),
-            Point(0.0, 141.0)
-        )
-    
-        val upper = listOf(
-            Point(0.0, 115.0),
-            Point(25.0, 144.0),
-            Point(72.0, 72.0)
-        )
-    
-        val lower = listOf(
-            Point(48.0, 0.0),
-            Point(72.0, 24.0),
-            Point(72.0, 0.0)
-        )
-    
-        val hw = 13.0 / 2.0
-        val hl = 13.0 / 2.0
-        val corners = listOf(
-            Point(x - hw, y - hl),
-            Point(x + hw, y - hl),
-            Point(x + hw, y + hl),
-            Point(x - hw, y + hl)
-        )
-    
-        fun overlaps(tri: List<Point>): Boolean {
-            return corners.any { pointInTriangle(it, tri[0], tri[1], tri[2]) }
-        }
-    
-        val inUpper = overlaps(upper)
-        val inLower = overlaps(lower)
-        val inObstacle = overlaps(obstacle)
-    
-        return (inUpper || inLower) && !inObstacle
-    }
-
-    fun relocalizeWithLimelight() {
-
-    }
 }

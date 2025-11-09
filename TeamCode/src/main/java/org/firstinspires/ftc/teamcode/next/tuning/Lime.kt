@@ -4,10 +4,12 @@ import com.qualcomm.hardware.limelightvision.LLFieldMap.Fiducial
 import com.qualcomm.hardware.limelightvision.LLResult
 import com.qualcomm.hardware.limelightvision.LLResultTypes.FiducialResult
 import com.qualcomm.hardware.limelightvision.Limelight3A
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 
 @TeleOp
+@Disabled
 class Lime: OpMode() {
     lateinit var ll:Limelight3A
 

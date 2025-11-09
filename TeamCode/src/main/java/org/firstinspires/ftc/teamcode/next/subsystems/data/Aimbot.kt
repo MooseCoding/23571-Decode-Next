@@ -399,6 +399,21 @@ class Aimbot {
             doubleArrayOf(0.628, 1479.479),
             doubleArrayOf(0.636, 1481.982),
             doubleArrayOf(0.652, 1484.484),
-        )
+            doubleArrayOf(0.652, 1484.484),
+            doubleArrayOf(0.652, 1484.484),
+            doubleArrayOf(0.652, 1484.484),
+            doubleArrayOf(0.652, 1484.484),
+            doubleArrayOf(0.652, 1484.484),
+            doubleArrayOf(0.652, 1484.484),
+            doubleArrayOf(0.652, 1484.484),
+            doubleArrayOf(0.652, 1484.484),
+            doubleArrayOf(0.652, 1484.484),
+            doubleArrayOf(0.652, 1484.484),
+            doubleArrayOf(0.652, 1484.484),
+            doubleArrayOf(0.652, 1484.484),
+            doubleArrayOf(0.652, 1484.484),
+            doubleArrayOf(0.652, 1484.484),
+
+            )
     }
 }

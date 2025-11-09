@@ -13,7 +13,7 @@ import dev.nextftc.hardware.impl.MotorEx
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import java.time.Instant
 
-@TeleOp(name="Tuning for Drivetrain")
+@TeleOp(name="Drive ONLY")
 class Drive: NextFTCOpMode() {
     init {
         addComponents(
