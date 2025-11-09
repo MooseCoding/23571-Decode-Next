@@ -1,45 +1,25 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
 import com.bylazar.configurables.annotations.Configurable
-import com.pedropathing.follower.Follower
-import com.pedropathing.geometry.Pose
-import com.qualcomm.robotcore.hardware.AnalogInput
-import com.qualcomm.robotcore.hardware.AnalogInputController
 import dev.nextftc.control.KineticState
 import dev.nextftc.control.builder.controlSystem
 import dev.nextftc.control.feedback.PIDCoefficients
-import dev.nextftc.control.feedforward.BasicFeedforward
 import dev.nextftc.control.feedforward.BasicFeedforwardParameters
-import dev.nextftc.control.feedforward.FeedforwardElement
-import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.delays.Delay
-import dev.nextftc.core.commands.delays.WaitUntil
 import dev.nextftc.core.commands.groups.SequentialGroup
 import dev.nextftc.core.commands.utility.InstantCommand
-import dev.nextftc.core.commands.utility.LambdaCommand
 import dev.nextftc.core.subsystems.Subsystem
-import dev.nextftc.hardware.controllable.RunToVelocity
-import dev.nextftc.hardware.impl.CRServoEx
+import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
+import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.FeedbackCRServoEx
+import dev.nextftc.hardware.impl.FeedbackServoEx
 import dev.nextftc.hardware.impl.MotorEx
 import dev.nextftc.hardware.impl.ServoEx
-import dev.nextftc.hardware.powerable.SetPower
-import java.time.Instant
-import kotlin.time.Duration.Companion.seconds
-import  dev.nextftc.ftc.ActiveOpMode;
-import dev.nextftc.hardware.impl.FeedbackServoEx
-import org.firstinspires.ftc.robotcore.internal.hardware.android.GpioPin.Active
 import org.firstinspires.ftc.teamcode.helpers.getIndex
-import org.firstinspires.ftc.teamcode.helpers.normalize_angle
 import org.firstinspires.ftc.teamcode.next.subsystems.data.Aimbot
-import kotlin.math.PI
-import kotlin.math.absoluteValue
-import kotlin.math.atan
-import kotlin.math.atan2
-import kotlin.math.cos
-import kotlin.math.pow
-import kotlin.math.sin
-import kotlin.math.sqrt
+import org.firstinspires.ftc.teamcode.next.subsystems.data.Alliance
+import kotlin.math.*
+import kotlin.time.Duration.Companion.seconds
 
 @Configurable
 object Outtake: Subsystem {
@@ -54,6 +34,79 @@ object Outtake: Subsystem {
     val f1 = MotorEx("f1M")
     val f2 = MotorEx("f2M").reversed()
     val hS = ServoEx("flap")
+
+    var gearRatio = 3.47
+
+    // Spin motor
+
+    val spin = MotorEx("spin")
+
+    @JvmField
+    var sP = PIDCoefficients(0.0,0.0,0.0)
+    var sC = controlSystem {
+        posPid(sP)
+    }
+
+    //Find radians per tick
+    @JvmField
+    var ppr = 537.7
+    
+    var rpt = 2*PI/(4*ppr*gearRatio)
+
+
+    @JvmField
+    var yaw = 0.0
+
+
+    fun goToYaw(y:Double) {
+        sC.goal = KineticState(y, 0.0)
+    }
+
+    fun getYaw(): Double {
+        return normalizeAngle(spin.currentPosition * rpt)
+    }
+
+
+    fun normalizeAngle(angleRadians: Double): Double {
+        var angle = angleRadians % (2.0 * PI)
+        if (angle <= -PI) {
+            angle += 2.0 * PI
+        }
+        if (angle > PI) {
+            angle -= 2.0 * PI
+        }
+        return angle
+    }
+
+    /*
+   --------Baron's Code------------
+
+
+   public static double normalizeAngle(double angleRadians) {
+       double angle = angleRadians % (Math.PI * 2D);
+       if (angle <= -Math.PI) angle += Math.PI * 2D;
+       if (angle > Math.PI) angle -= Math.PI * 2D;
+       return angle;
+   }
+
+
+   public double getYaw() {
+       return normalizeAngle(getTurret() * rpt);
+   }
+
+   public void setYaw(double radians) {
+       radians = normalizeAngle(radians);
+       setTurretTarget(radians/rpt);
+   }
+
+   public void addYaw(double radians) {
+       setYaw(getYaw() + radians);
+   }
+
+   public double getTurret() {
+       return m.getCurrentPosition();
+   }
+   */
 
     // Constants
     @JvmField
@@ -108,6 +161,9 @@ object Outtake: Subsystem {
     @JvmField
     var currentHeading = 0.0
 
+    @JvmField
+    var turretOffset = 0.0
+
     // Handling auto shooting and stuff
     @JvmField 
     var auto = true
@@ -124,7 +180,6 @@ object Outtake: Subsystem {
     var turretHeading = 0.0
     var dHeading = 0.0
     var totalAngle = 0.0
-    var gearRatio = 3.47
     var dist = 0.0
 
     var xcord = 12.80
@@ -132,35 +187,53 @@ object Outtake: Subsystem {
     var height = 36.0 // Units initally
     var turretHeight = 0.0 // Inches
 
+    override fun initialize() {
+        if (DriveTrain.alliance == Alliance.BLUE) {
+            xcord = 12.80
+            ycord = 138.35
+        }
+        else {
+            xcord = 144-12.80
+            ycord = 138.35
+        }
+    }
+
     override fun periodic() {
+        //currentX = follower.pose.x
+        //currentY = follower.pose.y
+        //currentHeading = follower.pose.heading
+
         if (velocityTrue) {
             f1.power = controller.calculate(f1.state)
             f2.power = f1.power
             controller.goal = KineticState(0.0, targetVelo)
         }
 
-        turrentAngle = calculateAngle()
+        turrentAngle = getYaw()
 
         if (manualOn) {
             aimDistance()
+            spin.power = gP
+            hS.position = hP
         }
         else {
             if (auto) {
                 aimbot()
+                yaw = normalizeAngle(spin.currentPosition*rpt)
+                spin.power = sC.calculate(spin.state)
             }
+
             if (autoShoot) {
                 betterAimbot()
             }
         }
+
+
     }
 
     fun betterAimbot() {
         if (DriveTrain.canShoot()) {
-             SequentialGroup(
-                 Intake.runIntake,
-                 Delay(0.5.seconds),
-                 Intake.stopIntake
-             ) 
+             outtakeBalls.schedule()
         }
     }
 
@@ -169,17 +242,13 @@ object Outtake: Subsystem {
         // currentY = DriveTrain.follower.pose.y
         // currentHeading = DriveTrain.follower.pose.heading
 
-        var mu = normalize_angle(atan2(ycord - currentY, xcord - currentX))
-        var deltaHeading = normalize_angle(mu - currentHeading)
-        targetHeading = turretHeading + deltaHeading
+        var mu = atan2(ycord - currentY, xcord - currentX)
+        var deltaHeading = mu - currentHeading
+        var targetHeading = turretHeading + deltaHeading
 
-        targetHeading %= 2* PI
-
-        if(targetHeading<0) {
-            targetHeading+=2*PI
-        }
-
-        gController.goal = KineticState(targetHeading, 0.0)
+        // Normalize only the final heading to [-π, π)
+        targetHeading = ((targetHeading + PI) % (2 * PI)) - PI
+        sC.goal = KineticState(targetHeading, 0.0)
 
         // Find theta (MAYBE I THINK I CAN JUST HARD CODE IN POSITION).
         dist = sqrt((xcord - currentX).pow(2) + (ycord - currentY).pow(2))
@@ -192,21 +261,20 @@ object Outtake: Subsystem {
 
         hS.position = 1-hP
 
-        gS.power = gController.calculate(KineticState(turretFromServo(gS.state.position), 0.0))
     }
 
     // Commands
     val spinGearLeft = InstantCommand {
-        gP = 0.7 // Some Constant
+        gP = 0.6 // Some Constant
     }
     val spinGearRight = InstantCommand {
-        gP = -0.7 // Some Constant
+        gP = -0.6// Some Constant
     }
     val gearAlittleLeft = InstantCommand {
         gP = -0.2
     }
     val gearAlittleRight = InstantCommand {
-        gP = -0.2
+        gP = 0.2
     }
     val stopGear = InstantCommand {
         gP = 0.0
@@ -216,6 +284,9 @@ object Outtake: Subsystem {
     }
     val FlapUp = InstantCommand {
         hP -= 0.05
+    }
+    val zeroMotor = InstantCommand {
+        spin.zeroed()
     }
 
     val aimUp = InstantCommand {
@@ -233,41 +304,24 @@ object Outtake: Subsystem {
         InstantCommand { velocityTrue = false; f1.power = -1.0; f2.power = -1.0 }
     val flywheelOn: InstantCommand =
         InstantCommand { velocityTrue = true; targetVelo = targetOnVelo }
+    val flywheelBackSlow: InstantCommand =
+        InstantCommand { velocityTrue = false; f1.power = -0.5; f2.power=-0.5}
 
-    val outtakeBalls = SequentialGroup(Intake.reverseIntake, Delay(0.1.seconds), Intake.stopIntake, Outtake.flywheelBack, Delay(0.4.seconds), Outtake.flywheelOff)
 
 
-    fun calculateAngle(): Double {
-        val cA = gS.currentPosition // current servo angle in radians
-        var dHeading = cA - prevAngle
+    val outtakeBalls = SequentialGroup(
+        Outtake.flywheelOn,
+        Delay(0.1.seconds),
+        Intake.runIntake,
+        Delay(0.5.seconds),
+        Outtake.flywheelOff,
+    )
 
-        // Handle wraparound across ±π
-        if (dHeading > PI) dHeading -= 2 * PI
-        else if (dHeading < -PI) dHeading += 2 * PI
-
-        // Ignore micro noise below 0.05 degrees
-        if (dHeading.absoluteValue < (0.05 / 360.0) * 2 * PI) {
-            dHeading = 0.0
-        }
-
-        // Accumulate rotation
-        totalAngle += dHeading
-        prevAngle = cA
-
-        // Normalize accumulated angle to [0, 2π)
-        totalAngle %= (2 * PI)
-        if (totalAngle < 0) totalAngle += 2 * PI
-
-        // Return turret’s physical angle (convert if servo is mapped differently)
-        return turretFromServo(totalAngle)
+    fun turretFromServo(a: Double): Double {
+        return a / gearRatio
     }
 
 
-    fun turretFromServo(totalAngle: Double): Double {
-        var angle = (totalAngle / gearRatio)
-        if (angle < 0) angle += 2 * PI
-        return angle
-    }
 
     fun aimDistance() {
         when(manualAim){
