@@ -215,12 +215,6 @@ object Outtake: Subsystem {
         }
     }
 
-    fun betterAimbot() {
-        if (DriveTrain.canShoot()) {
-             outtakeBalls.schedule()
-        }
-    }
-
     fun aimbot() {
         dist = sqrt((xcord - currentX).pow(2) + (ycord - currentY).pow(2))
 
