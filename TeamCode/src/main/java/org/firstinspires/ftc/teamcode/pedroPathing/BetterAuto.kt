@@ -69,6 +69,7 @@ class BetterAuto: NextFTCOpMode() {
 
     public override fun onStartButtonPressed() {
         SequentialGroup(
+            /*
             InstantCommand{ Outtake.velocityTrue=true;Outtake.targetVelo = 1350.0; Outtake.hP = 0.0; Outtake.hS.position = 0.0},
             Delay(0.5.seconds),
             Intake.runIntake,
@@ -105,8 +106,8 @@ class BetterAuto: NextFTCOpMode() {
                 fR.power = 0.0
                 bL.power = 0.0
                 bR.power = 0.0
-            }
-            /*p.StartToRow1,
+            }*/
+            p.StartToRow1,
            p.Row1Intake,
            p.Row1ToShoot,
            p.ShootToRow2,
@@ -115,7 +116,7 @@ class BetterAuto: NextFTCOpMode() {
            p.ShootToRow3,
            p.Row3Intake,
            p.Row3ToShoot,
-           p.ToPark,*/
+           p.ToPark,
         ).schedule()
     }
 

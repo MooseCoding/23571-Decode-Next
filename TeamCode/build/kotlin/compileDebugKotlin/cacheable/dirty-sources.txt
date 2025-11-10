@@ -1,4 +1,5 @@
 /home/moosecoding/projects/23571-Decode-Next/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/next/subsystems/Outtake.kt
+/home/moosecoding/projects/23571-Decode-Next/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/pedroPathing/BetterAuto.kt
 /home/moosecoding/projects/23571-Decode-Next/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/next/tuning/Lime.kt
 /home/moosecoding/projects/23571-Decode-Next/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/next/tuning/Drive.kt
 /home/moosecoding/projects/23571-Decode-Next/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/next/subsystems/data/Alliance.kt

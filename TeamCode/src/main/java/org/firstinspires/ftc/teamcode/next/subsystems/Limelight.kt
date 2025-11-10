@@ -6,6 +6,7 @@ import com.qualcomm.hardware.limelightvision.LLResult
 import com.qualcomm.hardware.limelightvision.Limelight3A
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.Subsystem
+import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import dev.nextftc.ftc.ActiveOpMode
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D
 import org.firstinspires.ftc.teamcode.next.subsystems.data.Motif
@@ -52,7 +53,7 @@ object Limelight: Subsystem {
 
     fun megaTag(): Pose? {
         var lR = ll.latestResult
-        val yaw = DriveTrain.currentPose.heading
+        val yaw = follower.pose.heading
         ll.updateRobotOrientation(yaw)
         if (lR != null && lR.isValid) {
             val botpose_mt2 = lR.botpose_MT2
