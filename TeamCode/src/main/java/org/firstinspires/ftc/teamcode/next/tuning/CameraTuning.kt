@@ -49,8 +49,15 @@ class CameraTuning: NextFTCOpMode() {
     }
 
     override fun onUpdate() {
-        tele.run {
+        if(proc.foundArtifacts != null) {
+            for (a in proc.foundArtifacts!!) {
+                telemetry.addData("center", a.center)
+                telemetry.addData("colour", a.color)
+            }
+        }
 
+        tele.run {
+            update()
         }
     }
 }

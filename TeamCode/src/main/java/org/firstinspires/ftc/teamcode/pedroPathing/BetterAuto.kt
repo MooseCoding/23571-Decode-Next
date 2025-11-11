@@ -73,7 +73,7 @@ class BetterAuto: NextFTCOpMode() {
     public override fun onStartButtonPressed() {
         val p: Far12 = Far12(DriveTrain.alliance)
         SequentialGroup(
-            p.StartToPark,
+            p.ShootStart,
             /*
             InstantCommand{ Outtake.velocityTrue=true;Outtake.targetVelo = 1350.0; Outtake.hP = 0.0; Outtake.hS.position = 0.0},
             Delay(0.5.seconds),

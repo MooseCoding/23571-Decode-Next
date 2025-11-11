@@ -12,6 +12,7 @@ import dev.nextftc.hardware.impl.MotorEx
 import com.bylazar.configurables.annotations.Configurable
 import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.groups.SequentialGroup
+import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import java.time.Instant
 import kotlin.time.Duration.Companion.seconds
 
@@ -49,4 +50,12 @@ object Intake: Subsystem {
     val stopIntake = InstantCommand {
         iP = 0.0
     }
+
+    val backOutWith2 = SequentialGroup(
+        Intake.reverseIntakeSlow,
+        Flywheels.backOut,
+        Delay(0.98.seconds),
+        Intake.stopIntake,
+        Flywheels.spin
+    )
 }

@@ -4,8 +4,11 @@ import dev.nextftc.control.KineticState
 import dev.nextftc.control.builder.controlSystem
 import dev.nextftc.control.feedback.PIDCoefficients
 import dev.nextftc.control.feedforward.BasicFeedforwardParameters
+import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.Subsystem
+import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.MotorEx
+import java.time.Instant
 
 object Flywheels: Subsystem {
     private val f1 = MotorEx("f1M")
@@ -20,13 +23,44 @@ object Flywheels: Subsystem {
 
     @JvmField var targetVelocity = 0.0
 
+    @JvmField var flywheelsOn = false
+
     override fun periodic() {
         f1.power = flywheelController.calculate(f1.state)
         f2.power = f1.power
-        flywheelController.goal = KineticState(0.0, targetVelocity)
+        if (flywheelsOn) {
+            flywheelController.goal = KineticState(0.0, targetVelocity)
+        }
+        else {
+            flywheelController.goal = KineticState(0.0, 0.0)
+        }
+
+        ActiveOpMode.telemetry.run {
+            addData("targetVelo", targetVelocity)
+            addData("flywheel goal", flywheelController.goal)
+        }
     }
 
     fun updatePid(velocity:Double) {
         targetVelocity = velocity
+    }
+
+    val spin = InstantCommand {
+        flywheelsOn = true
+    }
+
+    val stop = InstantCommand {
+        flywheelsOn = false
+    }
+
+    val backOut = InstantCommand {
+        stop.schedule()
+        f1.power = -0.5
+        f2.power = f1.power
+    }
+
+    val stopPower = InstantCommand {
+        f1.power = 0.0
+        f2.power = 0.0
     }
 }

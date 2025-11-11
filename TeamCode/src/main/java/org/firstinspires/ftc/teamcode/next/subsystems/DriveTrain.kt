@@ -9,6 +9,7 @@ import dev.nextftc.ftc.Gamepads
 import dev.nextftc.hardware.driving.MecanumDriverControlled
 import dev.nextftc.hardware.impl.MotorEx
 import org.firstinspires.ftc.teamcode.next.subsystems.data.Alliance
+import org.firstinspires.ftc.teamcode.pedroPathing.Far12
 
 @Configurable
 object DriveTrain: Subsystem {
@@ -38,6 +39,10 @@ object DriveTrain: Subsystem {
         currentX = follower.pose.x
         currentY = follower.pose.y
         currentHeading = follower.heading 
+    }
+
+    override fun initialize() {
+        follower.setStartingPose(Far12.start)
     }
 
     fun PoseInTriangle(p: Pose, a: Pose, b: Pose, c: Pose): Boolean {

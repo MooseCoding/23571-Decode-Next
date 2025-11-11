@@ -29,7 +29,7 @@ class BackOut(): NextFTCOpMode() {
     }
 
     override fun onStartButtonPressed() {
-        Gamepads.gamepad1.triangle whenBecomesTrue Intake.backOutWith2
+        // Gamepads.gamepad1.triangle whenBecomesTrue Intake.backOutWith2
     }
 
     override fun onUpdate() {

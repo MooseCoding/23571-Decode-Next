@@ -12,6 +12,8 @@ import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.NewOuttake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
+import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
+import org.firstinspires.ftc.teamcode.next.tuning.Drive
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 
 @TeleOp
@@ -20,10 +22,25 @@ class TurretAimTuning: NextFTCOpMode() {
 
     init {
         addComponents(
-            SubsystemComponent(NewOuttake, DriveTrain),
             PedroComponent(Constants::createFollower),
+            SubsystemComponent(NewOuttake, DriveTrain),
             BulkReadComponent,
             BindingsComponent,
         )
+    }
+
+    override fun onInit() {
+
+    }
+
+    override fun onUpdate() {
+        telemetry.run {
+            addData("x", DriveTrain.currentX)
+            addData("y", DriveTrain.currentY)
+            addData("heading", DriveTrain.currentHeading)
+            addData("current yaw", Turret.getYaw())
+            addData("goal", Turret.turretController.goal)
+            update()
+        }
     }
 }

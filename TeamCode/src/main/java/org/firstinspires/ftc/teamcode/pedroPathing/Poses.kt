@@ -27,7 +27,7 @@ public class Far12(a: Alliance) {
         var row3 = Pose(110.0, 83.5, 0.0) // Row closest to the classifier
         var row3End = Pose(129.0, 83.5, 0.0)
         var shootFar = Pose(84.5, 14.0, PI/2)
-        var park = Pose(84.5,20.0,PI/2)
+        var park = Pose(84.5,40.0,PI/2)
         var target = Pose()
     }
 

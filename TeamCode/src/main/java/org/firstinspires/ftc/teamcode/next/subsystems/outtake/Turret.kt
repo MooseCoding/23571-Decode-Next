@@ -22,10 +22,8 @@ object Turret: Subsystem {
 
     @JvmField var autoTurret = true
 
-
-
-    @JvmField var turretPID = PIDCoefficients(0.8,0.0,0.0)
-    private var turretController = controlSystem {
+    @JvmField var turretPID = PIDCoefficients(0.85,0.0,0.01)
+    var turretController = controlSystem {
         posPid(turretPID)
     }
 
@@ -44,6 +42,7 @@ object Turret: Subsystem {
         val deltaHeading = normalizeAngle(mu - currentHeading)
         val clampedHeading = deltaHeading.coerceIn(-PI, PI)
         turretController.goal = KineticState(clampedHeading, 0.0)
+        turret.power = turretController.calculate(KineticState(getYaw(), 0.0))
     }
 
     fun goToYaw(yaw:Double) { // Go to a specific position
