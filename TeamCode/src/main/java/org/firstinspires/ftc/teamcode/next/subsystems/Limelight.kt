@@ -31,16 +31,17 @@ object Limelight: Subsystem {
         ll.start()
     }
 
-    val motif = InstantCommand {
+    fun motif(): Motif? {
         val fR = ll.latestResult.fiducialResults
         if(fR.isNotEmpty()) {
             val f = fR[0]
-            m = when(f.fiducialId) {
+            return when(f.fiducialId) {
                 21 -> Motif.GPP
                 22 -> Motif.PGP
                 else -> Motif.PPG
             }
         }
+        return null
     }
 
     fun grabResultData(): LLResult? {
@@ -52,16 +53,13 @@ object Limelight: Subsystem {
     }
 
     fun megaTag(): Pose? {
-        var lR = ll.latestResult
-        val yaw = follower.pose.heading
-        ll.updateRobotOrientation(yaw)
-        if (lR != null && lR.isValid) {
-            val botpose_mt2 = lR.botpose_MT2
+        var lR = grabResultData() ?: return null // Return null if the tag is null
+        val botpose_mt = lR.botpose
 
-            if (botpose_mt2 != null) {
-                return Pose(botpose_mt2.position.x, botpose_mt2.position.y, yaw)
-            }
+        if (botpose_mt != null) {
+            return Pose(botpose_mt.position.x, botpose_mt.position.y)
         }
+
         return null
     }
 }
