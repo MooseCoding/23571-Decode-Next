@@ -12,10 +12,11 @@ import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import org.firstinspires.ftc.teamcode.helpers.getIndex
 import org.firstinspires.ftc.teamcode.next.subsystems.data.Aimbot
 import kotlin.math.PI
+import kotlin.math.atan2
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-class NewOuttake: Subsystem {
+object NewOuttake: Subsystem {
     // Hardware init
     val hoodServo = ServoEx("flap")
     // val spindexer = MotorEx("spindexer")
@@ -40,14 +41,14 @@ class NewOuttake: Subsystem {
     }
 
     var ppr = 537.7 // The resolution of our motor encoder on the goBilda site
-    var rpt = 2* PI /(Outtake.ppr * Outtake.gearRatio) // The amount of radians per turn of the motor
+    var rpt = 2* PI /(ppr * gearRatio) // The amount of radians per turn of the motor
 
     fun goToYaw(y:Double) { // Go to a specific position
         turretController.goal = KineticState(y, 0.0)
     }
 
     fun getYaw(): Double { // Get the current yaw of the turret from [-pi, pi]
-        return normalizeAngle(turret.currentPosition * Outtake.rpt)
+        return normalizeAngle(turret.currentPosition * rpt)
     }
 
 
@@ -101,7 +102,7 @@ class NewOuttake: Subsystem {
 
 
         if(fullManual) {
-           // Add in the manual control
+           manualAim()
         }
         else {
             if (autoShoot) {
@@ -113,13 +114,24 @@ class NewOuttake: Subsystem {
         }
     }
 
+    // Manual Crap
+    fun manualAim() {
+
+    }
+
     // Auto Turret
     fun autoTurret() {
-        val dist = sqrt((currentX - Outtake.currentX).pow(2) + (currentY - Outtake.currentY).pow(2))
+        val dist = sqrt((currentX - currentX).pow(2) + (currentY - currentY).pow(2))
         val other = Aimbot.points[getIndex(dist)]
         val hoodPosition = other[0] + 0.01
         targetVelocity = other[1] + 100
         hoodServo.position = 1-hoodPosition
+        val mu = atan2(goalY - currentY, goalX - currentX)
+        val deltaHeading = normalizeAngle(mu - currentHeading)
+
+        val clampedHeading = deltaHeading.coerceIn(-PI/2, PI/2)
+
+        turretController.goal = KineticState(clampedHeading, 0.0)
     }
 
      // Auto Shoot
@@ -129,7 +141,7 @@ class NewOuttake: Subsystem {
         }
     }
 
-     data class Point(val x:Double, val y:Double)
+    data class Point(val x:Double, val y:Double)
 
     fun pointInTriangle(p: Point, a: Point, b: Point, c: Point): Boolean {
         val det = (b.y - c.y) * (a.x - c.x) + (c.x - b.x) * (a.y - c.y)

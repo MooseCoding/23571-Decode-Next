@@ -11,6 +11,7 @@ import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.extensions.pedro.FollowPath
 import dev.nextftc.extensions.pedro.PedroComponent
+import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
@@ -41,6 +42,8 @@ class BetterAuto: NextFTCOpMode() {
         )
     }
 
+    lateinit var poses: Far12
+
     public override fun onWaitForStart() {
         Gamepads.gamepad1.a whenBecomesTrue { alliance = Alliance.RED }
         Gamepads.gamepad1.b whenBecomesTrue  { alliance = Alliance.BLUE }
@@ -56,7 +59,7 @@ class BetterAuto: NextFTCOpMode() {
     var bL = MotorEx("backLeft")
 
     public override fun onInit() {
-
+        follower.setStartingPose(Far12.start)
         Outtake.canSpin = false
         Outtake.manualOn = false
     }
@@ -68,7 +71,9 @@ class BetterAuto: NextFTCOpMode() {
     }
 
     public override fun onStartButtonPressed() {
+        val p: Far12 = Far12(DriveTrain.alliance)
         SequentialGroup(
+            p.StartToPark,
             /*
             InstantCommand{ Outtake.velocityTrue=true;Outtake.targetVelo = 1350.0; Outtake.hP = 0.0; Outtake.hS.position = 0.0},
             Delay(0.5.seconds),
@@ -107,7 +112,7 @@ class BetterAuto: NextFTCOpMode() {
                 bL.power = 0.0
                 bR.power = 0.0
             }*/
-            p.StartToRow1,
+            /*p.StartToRow1,
            p.Row1Intake,
            p.Row1ToShoot,
            p.ShootToRow2,
@@ -116,7 +121,7 @@ class BetterAuto: NextFTCOpMode() {
            p.ShootToRow3,
            p.Row3Intake,
            p.Row3ToShoot,
-           p.ToPark,
+           p.ToPark,*/
         ).schedule()
     }
 
@@ -126,6 +131,10 @@ class BetterAuto: NextFTCOpMode() {
             addData("hP", Outtake.hS.position)
             addData("fylwheel velo", Outtake.targetOnVelo)
             addData("crap", Outtake.crap)
+            addData("follower X", follower.pose.x)
+            addData("follower Y", follower.pose.y)
+            addData("follower heading", follower.heading)
+
             update()
         }
     }

@@ -1369,6 +1369,7 @@ int color dark_orange 0x0
 int color dark_purple 0x0
 int color dark_red 0x0
 int color dark_teal 0x0
+int color dashboardColor 0x0
 int color design_bottom_navigation_shadow_color 0x0
 int color design_box_stroke_color 0x0
 int color design_dark_default_color_background 0x0
@@ -3107,6 +3108,7 @@ int drawable ic_warning 0x0
 int drawable icon_menu 0x0
 int drawable icon_robotcontroller 0x0
 int drawable indeterminate_static 0x0
+int drawable intothedeep_background 0x0
 int drawable m3_avd_hide_password 0x0
 int drawable m3_avd_show_password 0x0
 int drawable m3_bottom_sheet_drag_handle 0x0
