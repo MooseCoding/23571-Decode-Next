@@ -42,7 +42,12 @@ object DriveTrain: Subsystem {
     }
 
     override fun initialize() {
-        follower.setStartingPose(Far12.start)
+        if (alliance == Alliance.RED) {
+					follower.setStartingPose(Far12.start)
+				}
+				else {
+					follower.setStartingPose(Far12.start.mirror()) 
+				}
     }
 
     fun PoseInTriangle(p: Pose, a: Pose, b: Pose, c: Pose): Boolean {
