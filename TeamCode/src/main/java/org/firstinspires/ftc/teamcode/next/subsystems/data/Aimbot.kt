@@ -1,7 +1,27 @@
 package org.firstinspires.ftc.teamcode.next.subsystems.data
 
+import com.qualcomm.robotcore.hardware.Blinker.Step
+
 class Aimbot {
     companion object {
+        fun lerp(t:Double, low: DoubleArray, high: DoubleArray):DoubleArray {
+            val hood = low[0] + t*(high[0] - low[0])
+            val flywheel = low[1]+t*(high[1]-low[1])
+            return doubleArrayOf(hood, flywheel)
+        }
+
+        fun getValues(distance:Double, step: Double = 0.5): DoubleArray {
+            val high: Int = Math.ceil(distance / step).toInt()
+            val low: Int = Math.floor(distance / step).toInt()
+
+            val safeLow = low.coerceIn(0,points.size-1)
+            val safeHigh = high.coerceIn(0, points.size-1)
+
+            val t = (distance-safeLow*step)/step
+
+            return lerp(t, points[safeLow], points[safeHigh])
+        }
+
         val points: Array<DoubleArray> = arrayOf(
             doubleArrayOf(0.039, 750.000),
             doubleArrayOf(0.041, 750.000),

@@ -25,7 +25,6 @@ class BetterTeleOP: NextFTCOpMode() {
     init {
         addComponents(
             PedroComponent(Constants::createFollower),
-
             SubsystemComponent(NewOuttake, Intake, DriveTrain),
             BulkReadComponent,
             BindingsComponent,
@@ -40,6 +39,6 @@ class BetterTeleOP: NextFTCOpMode() {
     }
 
     override fun onUpdate() {
-        telemetry.update()
+        tele.update()
     }
 }

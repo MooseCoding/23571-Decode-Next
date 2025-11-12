@@ -1,9 +1,14 @@
 package org.firstinspires.ftc.teamcode.next.subsystems.outtake
 
+import com.acmerobotics.dashboard.FtcDashboard
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry
+import com.bylazar.telemetry.JoinedTelemetry
+import com.bylazar.telemetry.PanelsTelemetry
 import dev.nextftc.control.KineticState
 import dev.nextftc.control.builder.controlSystem
 import dev.nextftc.control.feedback.PIDCoefficients
 import dev.nextftc.core.subsystems.Subsystem
+import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.MotorEx
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.currentHeading
@@ -17,12 +22,13 @@ import kotlin.math.PI
 import kotlin.math.atan2
 
 object Turret: Subsystem {
+    private val tele = MultipleTelemetry(FtcDashboard.getInstance().telemetry,ActiveOpMode.telemetry)
     private val turret = MotorEx("turret")
     private val gearRatio = 3.47
 
     @JvmField var autoTurret = true
 
-    @JvmField var turretPID = PIDCoefficients(0.85,0.0,0.01)
+    @JvmField var turretPID = PIDCoefficients(2.0,0.0,0.2)
     var turretController = controlSystem {
         posPid(turretPID)
     }
@@ -34,6 +40,12 @@ object Turret: Subsystem {
     override fun periodic() {
         if(autoTurret) {
             autoAim()
+        }
+
+        tele.run {
+            addData("goal", turretController.goal.position)
+            addData("turret Pos", getYaw())
+            update()
         }
     }
 
