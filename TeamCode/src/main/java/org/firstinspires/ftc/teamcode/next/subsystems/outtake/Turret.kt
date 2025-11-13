@@ -16,11 +16,12 @@ import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.currentX
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.currentY
 import org.firstinspires.ftc.teamcode.next.subsystems.NewOuttake.goalX
 import org.firstinspires.ftc.teamcode.next.subsystems.NewOuttake.goalY
-
+import com.bylazar.configurables.annotations.Configurable
 import org.firstinspires.ftc.teamcode.next.subsystems.data.Alliance
 import kotlin.math.PI
 import kotlin.math.atan2
 
+@Configurable 
 object Turret: Subsystem {
     private val tele = MultipleTelemetry(FtcDashboard.getInstance().telemetry,ActiveOpMode.telemetry)
     private val turret = MotorEx("turret")
