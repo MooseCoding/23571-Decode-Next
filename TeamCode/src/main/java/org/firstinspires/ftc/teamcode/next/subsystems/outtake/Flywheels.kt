@@ -9,7 +9,9 @@ import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.MotorEx
 import java.time.Instant
+import com.bylazar.configurables.annotations.Configurable
 
+@Configurable
 object Flywheels: Subsystem {
     private val f1 = MotorEx("f1M")
     private val f2 = MotorEx("f2M").reversed()
