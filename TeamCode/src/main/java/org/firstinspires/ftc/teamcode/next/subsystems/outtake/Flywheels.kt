@@ -58,4 +58,9 @@ object Flywheels: Subsystem {
         f1.power = -0.5
         f2.power = f1.power
     }
+
+    val stopPower = InstantCommand {
+        f1.power = 0.0
+        f2.power = 0.0
+    }
 }
