@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.next
 
+import ArtifactPipeline
 import android.util.Size
 import com.bylazar.telemetry.JoinedTelemetry
 import com.bylazar.telemetry.PanelsTelemetry
@@ -15,7 +16,6 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.NewOuttake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
-import org.firstinspires.ftc.teamcode.util.ArtifactCirclePipeline
 import org.firstinspires.ftc.vision.VisionPortal
 
 @TeleOp
@@ -31,17 +31,10 @@ class CameraTuning: NextFTCOpMode() {
     }
 
     lateinit var vP: VisionPortal
-    val proc: ArtifactCirclePipeline = ArtifactCirclePipeline()
+    val proc: ArtifactPipeline = ArtifactPipeline()
 
     override fun onInit() {
-        vP = VisionPortal.Builder()
-            .setCamera(hardwareMap.get(WebcamName::class.java, "cam1"))
-            .addProcessor(proc)
-            .setCameraResolution(Size(640,480))
-            .enableLiveView(true)
-            .setAutoStopLiveView(true)
-            .setStreamFormat(VisionPortal.StreamFormat.YUY2)
-            .build()
+
     }
 
     override fun onStartButtonPressed() {

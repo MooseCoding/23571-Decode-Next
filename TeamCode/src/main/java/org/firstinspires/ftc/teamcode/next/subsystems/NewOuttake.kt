@@ -8,12 +8,11 @@ import org.firstinspires.ftc.teamcode.next.subsystems.data.Aimbot
 import org.firstinspires.ftc.teamcode.next.subsystems.data.Alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
-import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Spindexer
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-object NewOuttake: SubsystemGroup(Flywheels, Hood, Spindexer, Turret) {
+object NewOuttake: SubsystemGroup(Flywheels, Hood, Turret) {
     @JvmField var fullManual = false
     @JvmField var autoShoot = false
 

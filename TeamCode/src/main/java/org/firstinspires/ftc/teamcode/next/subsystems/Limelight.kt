@@ -4,11 +4,8 @@ import com.bylazar.configurables.annotations.Configurable
 import com.pedropathing.geometry.Pose
 import com.qualcomm.hardware.limelightvision.LLResult
 import com.qualcomm.hardware.limelightvision.Limelight3A
-import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.Subsystem
-import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import dev.nextftc.ftc.ActiveOpMode
-import org.firstinspires.ftc.robotcore.external.navigation.Pose3D
 import org.firstinspires.ftc.teamcode.next.subsystems.data.Motif
 
 @Configurable
@@ -54,10 +51,10 @@ object Limelight: Subsystem {
 
     fun megaTag(): Pose? {
         var lR = grabResultData() ?: return null // Return null if the tag is null
-        val botpose_mt = lR.botpose
+        val botpose_mt2 = lR.botpose_MT2
 
-        if (botpose_mt != null) {
-            return Pose(botpose_mt.position.x, botpose_mt.position.y)
+        if (botpose_mt2 != null) {
+            return Pose(botpose_mt2.position.x, botpose_mt2.position.y)
         }
 
         return null
