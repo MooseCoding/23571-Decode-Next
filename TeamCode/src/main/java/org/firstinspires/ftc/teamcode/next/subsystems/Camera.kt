@@ -25,6 +25,7 @@ object Camera: Subsystem {
     lateinit var vP: VisionPortal
     val pipeline: ArtifactPipeline = ArtifactPipeline()
     var artifacts: Array<Artifact?> = arrayOf(null, null, null)
+    var incoming:Artifact? = null
 
     override fun initialize() {
         vP = VisionPortal.Builder()
@@ -38,6 +39,6 @@ object Camera: Subsystem {
     }
 
     override fun periodic() {
-        
+
     }
 }
