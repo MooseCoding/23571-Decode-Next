@@ -28,7 +28,7 @@ object Flywheels: Subsystem {
 		var motorRpm: Double = 0.0
 
     override fun periodic() {
-				motorRpm = f1.velocity * 60.0/28.0
+			motorRpm = f1.velocity * 60.0/28.0
 
         f1.power = flywheelController.calculate(f1.state)
         f2.power = f1.power
@@ -41,6 +41,8 @@ object Flywheels: Subsystem {
 
         ActiveOpMode.telemetry.run {
             addData("targetVelo", targetVelocity)
+					addData("Current RPM", motorRpm)
+					addData("RPM target", targetVelocity*60.0/28.0)
             addData("flywheel goal", flywheelController.goal)
         }
     }
