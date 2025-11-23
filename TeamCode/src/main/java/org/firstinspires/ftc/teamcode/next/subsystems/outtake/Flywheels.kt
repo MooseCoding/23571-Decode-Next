@@ -25,7 +25,11 @@ object Flywheels: Subsystem {
 
     @JvmField var flywheelsOn = false
 
+		var motorRpm: Double = 0.0
+
     override fun periodic() {
+				motorRpm = f1.velocity * 60.0/28.0
+
         f1.power = flywheelController.calculate(f1.state)
         f2.power = f1.power
         if (flywheelsOn) {
