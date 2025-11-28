@@ -10,7 +10,6 @@ import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.groups.SequentialGroup
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.Subsystem
-import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.FeedbackCRServoEx
 import dev.nextftc.hardware.impl.FeedbackServoEx
@@ -161,7 +160,7 @@ object Outtake: Subsystem {
     var currentHeading = 0.0
 
     @JvmField
-    var canSpin= true
+    var canSpin=true
 
     // Handling auto shooting and stuff
     @JvmField 
@@ -169,10 +168,10 @@ object Outtake: Subsystem {
     @JvmField
     var autoShoot = false
     @JvmField
-    var autoTurret = true
+    var autoTurret = false
 
     @JvmField
-    var manualOn = false
+    var manualOn = true
 
     @JvmField
     var targetHeading: Double = 0.0
@@ -198,10 +197,6 @@ object Outtake: Subsystem {
     }
 
     override fun periodic() {
-        currentX = follower.pose.x
-        currentY = follower.pose.y
-        currentHeading = follower.pose.heading
-
         if (velocityTrue) {
             f1.power = controller.calculate(f1.state)
             f2.power = f1.power
@@ -213,18 +208,6 @@ object Outtake: Subsystem {
             spin.power = gP
             hS.position = hP
         }
-    }
-
-    fun aimbot() {
-        dist = sqrt((xcord - currentX).pow(2) + (ycord - currentY).pow(2))
-
-        val other = Aimbot.points[getIndex(dist)]
-
-        hP = other[0] + h
-        targetOnVelo = other[1] + f
-
-        hS.position = 1-hP
-
     }
 
     fun aimTurret() {

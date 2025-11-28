@@ -25,8 +25,8 @@ class TeleOP: NextFTCOpMode() {
 
     init {
         addComponents(
-            SubsystemComponent(Intake, Outtake, DriveTrain),
             PedroComponent(Constants::createFollower),
+            SubsystemComponent(Intake, Outtake, DriveTrain),
             BulkReadComponent,
             BindingsComponent,
         )
@@ -37,9 +37,6 @@ class TeleOP: NextFTCOpMode() {
             Alliance.RED -> follower.setStartingPose(Far12.park)
             Alliance.BLUE -> follower.setStartingPose(Far12.park.mirror())
         }
-        Outtake.manualOn = true
-        Outtake.canSpin = true
-        Outtake.autoTurret = false
     }
 
     override fun onStartButtonPressed() {
@@ -67,9 +64,6 @@ class TeleOP: NextFTCOpMode() {
         Gamepads.gamepad2.dpadDown whenBecomesTrue Outtake.FlapUp
 
         // Aimbot Controls
-        Gamepads.gamepad2.leftStickButton whenBecomesTrue  { Outtake.auto = !Outtake.auto }
-        Gamepads.gamepad2.rightStickButton whenBecomesTrue  { Outtake.autoTurret = !Outtake.autoTurret }
-        Gamepads.gamepad2.y whenBecomesTrue {Outtake.manualOn = !Outtake.manualOn; Outtake.spin.power = Gamepads.gamepad2.rightTrigger.get()}
     }
 
     override fun onUpdate() {

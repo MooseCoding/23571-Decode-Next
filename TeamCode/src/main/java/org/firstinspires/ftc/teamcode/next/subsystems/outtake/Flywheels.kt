@@ -8,7 +8,6 @@ import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.MotorEx
-import java.time.Instant
 
 object Flywheels: Subsystem {
     private val f1 = MotorEx("f1M")
@@ -25,10 +24,10 @@ object Flywheels: Subsystem {
 
     @JvmField var flywheelsOn = false
 
-		var motorRpm: Double = 0.0
+    var motorRpm: Double = 0.0
 
     override fun periodic() {
-			motorRpm = f1.velocity * 60.0/28.0
+        motorRpm = f1.velocity * 60.0/28.0
 
         f1.power = flywheelController.calculate(f1.state)
         f2.power = f1.power
@@ -41,8 +40,8 @@ object Flywheels: Subsystem {
 
         ActiveOpMode.telemetry.run {
             addData("targetVelo", targetVelocity)
-					addData("Current RPM", motorRpm)
-					addData("RPM target", targetVelocity*60.0/28.0)
+            addData("Current RPM", motorRpm)
+            addData("RPM target", targetVelocity*60.0/28.0)
             addData("flywheel goal", flywheelController.goal)
         }
     }
@@ -63,10 +62,5 @@ object Flywheels: Subsystem {
         stop.schedule()
         f1.power = -0.5
         f2.power = f1.power
-    }
-
-    val stopPower = InstantCommand {
-        f1.power = 0.0
-        f2.power = 0.0
     }
 }

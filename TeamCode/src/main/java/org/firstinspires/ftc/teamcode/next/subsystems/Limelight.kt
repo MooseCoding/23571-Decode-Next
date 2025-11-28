@@ -29,9 +29,9 @@ object Limelight: Subsystem {
     }
 
     fun motif(): Motif? {
-        val fR = ll.latestResult.fiducialResults
-        if(fR.isNotEmpty()) {
-            val f = fR[0]
+        val fR = grabResultData()
+        if(fR != null) {
+            val f = fR.fiducialResults[0]
             return when(f.fiducialId) {
                 21 -> Motif.GPP
                 22 -> Motif.PGP

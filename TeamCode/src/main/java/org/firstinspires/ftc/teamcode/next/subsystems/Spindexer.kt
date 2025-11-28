@@ -1,5 +1,10 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
+import dev.nextftc.control.ControlSystem
+import dev.nextftc.control.KineticState
+import dev.nextftc.control.builder.controlSystem
+import dev.nextftc.control.feedback.FeedbackElement
+import dev.nextftc.control.feedback.PIDCoefficients
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.utility.InstantCommand
@@ -11,6 +16,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.data.Motif
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import org.firstinspires.ftc.teamcode.util.Camera.incoming
+import kotlin.math.PI
 import kotlin.time.Duration.Companion.seconds
 
 object Spindexer: Subsystem {
@@ -18,12 +24,21 @@ object Spindexer: Subsystem {
     var motifMode:Boolean = false // Determine if the spindexer should sort for a motif
     var currentMotifShot:Array<Artifact?> = arrayOf(null, null, null)
     var ballsHeld:Array<Artifact?> = arrayOf(null, null, null) // First position is intake, third is turret/transfer, second is the other
+    val pos: Array<Double> = arrayOf(0.0, 0.0, 0.0)
+
+    var currentAngle: Double = 0.0
+    var prevAngle: Double = 0.0
 
     val servo:CRFServo = CRFServo(
         "ANALOG",
         "SERVO",
         0.01
     )
+
+    @JvmField val servoCoeffs: PIDCoefficients = PIDCoefficients(0.0,0.0,0.0)
+    val servoPID: ControlSystem = controlSystem {
+        servoCoeffs
+    }
 
     init {
         ballsHeld = arrayOf(Artifact.GREEN, Artifact.PURPLE, Artifact.PURPLE)
@@ -34,6 +49,8 @@ object Spindexer: Subsystem {
     }
 
     override fun periodic() {
+        currentAngle()
+
         if (ActiveOpMode.opModeInInit) {
             targetMotif = Limelight.motif()
         }
@@ -48,6 +65,21 @@ object Spindexer: Subsystem {
         }
     }
 
+    fun currentAngle() {
+        val pos = servo.currentPosition
+        var delta = pos - prevAngle
+
+        if (delta > Math.PI) {
+            delta-=2* PI
+        }
+        else if (delta < -Math.PI) {
+            delta+=2* PI
+        }
+
+        currentAngle += delta
+        prevAngle = pos
+    }
+
     val addIncomingBall = LambdaCommand()
         .setStart {
 
@@ -55,13 +87,13 @@ object Spindexer: Subsystem {
     .setUpdate {
         // If shooter slot (2) is empty always put ball there
         if (ballsHeld[2] == null) {
-            spin(2)
+            spin(2).schedule()
             ballsHeld[2] = incoming
         }
 
         // Otherwise try position 1
         if (ballsHeld[1] == null) {
-            spin(1)
+            spin(1).schedule()
             ballsHeld[1] = incoming
         }
 
@@ -138,21 +170,21 @@ object Spindexer: Subsystem {
         }
     }
 
-    val spin = LambdaCommand()
-        .setStart {
-
-        }
-        .setUpdate {
-
-        }
-        .setIsDone {
-            true
-        }
-        .setStop {
-
-        }
-        .named("Spin")
-        .addRequirements(Spindexer)
+    fun spin(target:Int): Command {
+        return LambdaCommand()
+            .setStart {
+                servoPID.goal = KineticState(pos[target], 0.0)
+            }
+            .setUpdate {
+                servo.power = servoPID.calculate(KineticState(currentAngle, 0.0))
+                currentAngle()
+            }
+            .setIsDone {
+                currentAngle == Pos[target]
+            }
+            .named("Spin")
+            .addRequirements(Spindexer)
+    }
 
     val shoot = LambdaCommand()
         .setStart {

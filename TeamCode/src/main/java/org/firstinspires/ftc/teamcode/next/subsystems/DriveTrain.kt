@@ -38,7 +38,7 @@ object DriveTrain: Subsystem {
     override fun periodic() {
         currentX = follower.pose.x
         currentY = follower.pose.y
-        currentHeading = follower.heading 
+        currentHeading = follower.heading
     }
 
     override fun initialize() {
