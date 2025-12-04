@@ -45,7 +45,6 @@ object Turret: Subsystem {
         tele.run {
             addData("goal", turretController.goal.position)
             addData("turret Pos", getYaw())
-            update()
         }
     }
 
