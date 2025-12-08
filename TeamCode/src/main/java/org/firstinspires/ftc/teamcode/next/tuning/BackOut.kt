@@ -15,6 +15,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 
+@Disabled
 @TeleOp
 class BackOut(): NextFTCOpMode() {
     var tele = JoinedTelemetry(PanelsTelemetry.ftcTelemetry, telemetry)
@@ -28,7 +29,7 @@ class BackOut(): NextFTCOpMode() {
     }
 
     override fun onStartButtonPressed() {
-        Gamepads.gamepad1.triangle whenBecomesTrue Intake.backOutWith2
+        // Gamepads.gamepad1.triangle whenBecomesTrue Intake.backOutWith2
     }
 
     override fun onUpdate() {

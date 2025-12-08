@@ -1,11 +1,15 @@
 package org.firstinspires.ftc.teamcode.next.tuning
 
+import com.bylazar.configurables.annotations.Configurable
 import com.bylazar.telemetry.JoinedTelemetry
 import com.bylazar.telemetry.PanelsTelemetry
+import com.pedropathing.geometry.Pose
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.extensions.pedro.PedroComponent
+import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
@@ -13,6 +17,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 
+@Disabled
 @TeleOp
 class FlywheelTuning(): NextFTCOpMode() {
     var tele = JoinedTelemetry(PanelsTelemetry.ftcTelemetry, telemetry)
@@ -24,6 +29,12 @@ class FlywheelTuning(): NextFTCOpMode() {
             BulkReadComponent,
             BindingsComponent,
         )
+
+
+    }
+
+    override fun onInit() {
+        follower.setStartingPose(Pose(144-36.0, 6.5, Math.PI/2))
     }
 
     override fun onStartButtonPressed() {
@@ -40,7 +51,6 @@ class FlywheelTuning(): NextFTCOpMode() {
             addData("current X", Outtake.currentX)
             addData("current y", Outtake.currentY)
             addData("current H", Outtake.currentHeading)
-
             addData("f1P", Outtake.f1.power)
             addData("f1V", Outtake.f1.velocity)
             addData("f2V", Outtake.f2.velocity)
@@ -58,7 +68,10 @@ class FlywheelTuning(): NextFTCOpMode() {
             addData("total angle", Outtake.totalAngle)
             addData("d heading", Outtake.dHeading)
             addData("outtake turret", Outtake.turretHeading)
-            addData("goal", Outtake.gController.goal)
+            addData("target", Outtake.targetHeading)
+            addData("target x", Outtake.xcord)
+            addData("target y", Outtake.ycord)
+            addData("goal", Outtake.sC.goal)
             addData("Dist", Outtake.dist)
             addData("flap pos", Outtake.hP)
             addData("test", "true")

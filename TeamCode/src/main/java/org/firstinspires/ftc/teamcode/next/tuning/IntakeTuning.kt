@@ -28,6 +28,8 @@ class IntakeTuning(): NextFTCOpMode() {
     }
 
     override fun onStartButtonPressed() {
+        Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake whenBecomesFalse Intake.stopIntake
+        Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake whenBecomesFalse Intake.stopIntake
     }
 
     override fun onUpdate() {

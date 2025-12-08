@@ -1,18 +1,23 @@
 package org.firstinspires.ftc.teamcode.next
 
-import com.bylazar.telemetry.PanelsTelemetry
 import com.bylazar.telemetry.JoinedTelemetry
+import com.bylazar.telemetry.PanelsTelemetry
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
+import dev.nextftc.core.commands.groups.SequentialGroup
+import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.extensions.pedro.PedroComponent
+import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
+import org.firstinspires.ftc.teamcode.next.subsystems.data.Alliance
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
+import org.firstinspires.ftc.teamcode.pedroPathing.Far12
 
 @TeleOp
 class TeleOP: NextFTCOpMode() {
@@ -20,11 +25,18 @@ class TeleOP: NextFTCOpMode() {
 
     init {
         addComponents(
-            SubsystemComponent(Intake, Outtake, DriveTrain),
             PedroComponent(Constants::createFollower),
+            SubsystemComponent(Intake, Outtake, DriveTrain),
             BulkReadComponent,
             BindingsComponent,
         )
+    }
+
+    override fun onInit() {
+        when (DriveTrain.alliance) {
+            Alliance.RED -> follower.setStartingPose(Far12.park)
+            Alliance.BLUE -> follower.setStartingPose(Far12.park.mirror())
+        }
     }
 
     override fun onStartButtonPressed() {
@@ -37,24 +49,21 @@ class TeleOP: NextFTCOpMode() {
         Gamepads.gamepad2.leftTrigger.greaterThan(0.3) whenBecomesTrue Outtake.aimDown
 
         // Flywheel Controls
-        Gamepads.gamepad2.a whenBecomesTrue Outtake.flywheelOn
-        Gamepads.gamepad2.b whenBecomesTrue Outtake.flywheelOff
-        Gamepads.gamepad2.x whenBecomesTrue Outtake.flywheelBack
+        Gamepads.gamepad2.a whenBecomesTrue SequentialGroup(InstantCommand{ Outtake.canSpin = true}, Outtake.flywheelOn)
+        Gamepads.gamepad2.b whenBecomesTrue SequentialGroup(InstantCommand { Outtake.canSpin = false }, Outtake.flywheelOff)
+        Gamepads.gamepad2.x whenBecomesTrue SequentialGroup(Outtake.flywheelBack)
 
         // Gear Controls
         Gamepads.gamepad2.rightBumper whenBecomesTrue  Outtake.spinGearRight whenBecomesFalse Outtake.stopGear
         Gamepads.gamepad2.leftBumper whenBecomesTrue  Outtake.spinGearLeft whenBecomesFalse Outtake.stopGear
-        Gamepads.gamepad2.dpadLeft whenBecomesTrue  Outtake.gearAlittleLeft whenBecomesFalse Outtake.stopGear
-        Gamepads.gamepad2.dpadRight whenBecomesTrue  Outtake.gearAlittleRight whenBecomesFalse Outtake.stopGear
+        Gamepads.gamepad2.dpadRight whenBecomesTrue  Outtake.gearAlittleLeft whenBecomesFalse Outtake.stopGear
+        Gamepads.gamepad2.dpadLeft whenBecomesTrue  Outtake.gearAlittleRight whenBecomesFalse Outtake.stopGear
 
         // Flap Controls
         Gamepads.gamepad2.dpadUp whenBecomesTrue Outtake.FlapDown
         Gamepads.gamepad2.dpadDown whenBecomesTrue Outtake.FlapUp
 
         // Aimbot Controls
-        Gamepads.gamepad2.leftStickButton whenBecomesTrue { Outtake.auto = !Outtake.auto }
-        Gamepads.gamepad2.rightStickButton whenBecomesTrue { Outtake.autoShoot = !Outtake.autoShoot }
-        Gamepads.gamepad2.y whenBecomesTrue {Outtake.manualOn = !Outtake.manualOn}
     }
 
     override fun onUpdate() {
@@ -63,8 +72,7 @@ class TeleOP: NextFTCOpMode() {
             addData("Power ", Outtake.targetVelo)
             addData("Distance in Tiles ", Outtake.manualAim/24.0)
             addData("Manual Mode ", Outtake.manualOn)
-            addData("Auto Aim", Outtake.auto)
-            addData("Auto Shoot", Outtake.autoShoot)
+            addData("Can Shoot", Outtake.canSpin)
             update()
         }
     }
