@@ -23,9 +23,6 @@ object Intake: Subsystem {
     @JvmField
     var iP = 0.0
 
-    @JvmField
-    var outTime = 0.0
-
     override fun periodic() {
         iM.power = iP
     }
@@ -38,24 +35,7 @@ object Intake: Subsystem {
         iP = -1.0
     }
 
-    val reverseIntakeSlow = InstantCommand {
-        iP = -0.5
-    }
-
-    val reverseIntakeVerySlow = InstantCommand {
-        iP = -0.2
-    }
-
-
     val stopIntake = InstantCommand {
         iP = 0.0
     }
-
-    val backOutWith2 = SequentialGroup(
-        Intake.reverseIntakeSlow,
-        Flywheels.backOut,
-        Delay(0.98.seconds),
-        Intake.stopIntake,
-        Flywheels.spin
-    )
 }

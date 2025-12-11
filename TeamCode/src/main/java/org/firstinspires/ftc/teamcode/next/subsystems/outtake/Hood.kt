@@ -13,8 +13,4 @@ object Hood: Subsystem {
     override fun periodic() {
         hoodServo.position = hoodPosition
     }
-
-    fun updatePosition(position: Double) {
-        hoodPosition = position
-    }
 }

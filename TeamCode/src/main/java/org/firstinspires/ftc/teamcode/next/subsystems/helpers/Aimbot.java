@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.next.subsystems.data;
+package org.firstinspires.ftc.teamcode.next.subsystems.helpers;
 
 /**
  * Auto-generated Aimbot lookup table using regression.

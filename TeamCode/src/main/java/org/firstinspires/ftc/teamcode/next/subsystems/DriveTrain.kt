@@ -8,7 +8,7 @@ import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.hardware.driving.MecanumDriverControlled
 import dev.nextftc.hardware.impl.MotorEx
-import org.firstinspires.ftc.teamcode.next.subsystems.data.Alliance
+import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import org.firstinspires.ftc.teamcode.pedroPathing.Far12
 
 @Configurable
@@ -58,6 +58,9 @@ object DriveTrain: Subsystem {
     }
 
     fun inShootZone(): Boolean {
+        if(currentX > 144 || currentX < 0 || currentY > 144 || currentY < 0) {
+            return false // Stop if odometry cannot track us
+        }
         val obstacle = listOf(
             Pose(0.0, 115.0),
             Pose(25.0, 144.0),

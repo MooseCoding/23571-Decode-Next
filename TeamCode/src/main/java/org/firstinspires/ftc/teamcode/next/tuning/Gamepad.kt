@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.next.tuning
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
@@ -9,6 +10,7 @@ import dev.nextftc.ftc.components.BulkReadComponent
 import org.firstinspires.ftc.teamcode.next.subsystems.Limelight
 
 @TeleOp
+@Disabled
 class Gamepad: NextFTCOpMode() {
     init {
         addComponents(

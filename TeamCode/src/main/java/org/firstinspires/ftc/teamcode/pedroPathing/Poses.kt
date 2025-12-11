@@ -1,25 +1,21 @@
 package org.firstinspires.ftc.teamcode.pedroPathing
 
-import com.pedropathing.follower.Follower
 import com.pedropathing.geometry.BezierCurve
 import com.pedropathing.geometry.BezierLine
 import com.pedropathing.geometry.Pose
-import dev.nextftc.core.commands.conditionals.switchCommand
 import dev.nextftc.core.commands.groups.ParallelGroup
 import dev.nextftc.core.commands.groups.SequentialGroup
 import dev.nextftc.extensions.pedro.FollowPath
-import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
-import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
-import org.firstinspires.ftc.teamcode.next.subsystems.data.Alliance
+import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import kotlin.math.PI
 
 public class Far12(a: Alliance) {
     companion object {
         // These poses are for the red alliance
 
-        var start = Pose(89.5,6.5, PI/2)
+        var start = Pose(89.0,8.0, PI/2)
         var row1 = Pose(110.0, 35.5, 0.0)// Row closest to the front of the field
         var row1End = Pose(129.0, 35.5, 0.0) // End of row 1 (e.g. where we stop intake)
         var row2 = Pose(110.0, 59.5, 0.0) // Row seconds closest
@@ -29,12 +25,17 @@ public class Far12(a: Alliance) {
         var shootFar = Pose(84.5, 14.0, PI/2)
         var park = Pose(84.5,40.0,PI/2)
         var target = Pose()
+
+        /*
+            // Actual Values
+        var
+         */
     }
 
     var index = 0
     var pathCount = 11
     init {
-        if (a == Alliance.BLUE) {
+        if (a == Alliance.RED) {
             start = start.mirror()
             row1 = row1.mirror()
             row2 = row2.mirror()
@@ -79,7 +80,6 @@ public class Far12(a: Alliance) {
     var Row1ToShoot = SequentialGroup(
         Intake.stopIntake,
         ParallelGroup(
-            Intake.backOutWith2,
             FollowPath(
                 follower.pathBuilder()
                     .addPath(
@@ -92,7 +92,6 @@ public class Far12(a: Alliance) {
                     .build()
             )
         ),
-        Outtake.outtakeBalls,
     )
     var ShootToRow2 = SequentialGroup(
         Intake.runIntake,
@@ -121,7 +120,6 @@ public class Far12(a: Alliance) {
     var Row2ToShoot = SequentialGroup(
         Intake.stopIntake,
         ParallelGroup(
-            Intake.backOutWith2,
             FollowPath(
                 follower.pathBuilder()
                     .addPath(
@@ -134,7 +132,6 @@ public class Far12(a: Alliance) {
                     .build()
             )
         ),
-        Outtake.outtakeBalls,
     )
     var ShootToRow3 = SequentialGroup(
         Intake.runIntake,
@@ -163,7 +160,6 @@ public class Far12(a: Alliance) {
     var Row3ToShoot = SequentialGroup(
         Intake.stopIntake,
         ParallelGroup(
-            Intake.backOutWith2,
             FollowPath(
                 follower.pathBuilder()
                     .addPath(
@@ -176,7 +172,6 @@ public class Far12(a: Alliance) {
                     .build()
             )
         ),
-        Outtake.outtakeBalls,
     )
     var ToPark = SequentialGroup(
         FollowPath(

@@ -6,7 +6,7 @@ import com.qualcomm.hardware.limelightvision.LLResult
 import com.qualcomm.hardware.limelightvision.Limelight3A
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
-import org.firstinspires.ftc.teamcode.next.subsystems.data.Motif
+import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Motif
 
 @Configurable
 object Limelight: Subsystem {

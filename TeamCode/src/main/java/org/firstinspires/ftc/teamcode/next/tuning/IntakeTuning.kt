@@ -13,7 +13,6 @@ import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
-import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 
 @TeleOp
 class IntakeTuning(): NextFTCOpMode() {
