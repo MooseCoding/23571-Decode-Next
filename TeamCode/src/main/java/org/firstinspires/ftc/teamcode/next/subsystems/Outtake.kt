@@ -16,13 +16,9 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-@Config
 object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
-    @JvmField
     var fullManual = false
-    @JvmField
     var distance = 12
-    @JvmField
     var autoShoot = false
 
     private val waiter: Waiter = Waiter()

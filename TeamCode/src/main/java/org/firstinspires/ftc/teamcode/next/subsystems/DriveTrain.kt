@@ -13,10 +13,10 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Far12
 
 @Configurable
 object DriveTrain: Subsystem {
-     val fL = MotorEx("frontLeft")
-     val fR = MotorEx("frontRight")
-     val bL = MotorEx("backLeft")
-     val bR = MotorEx("backRight")
+     val fL = MotorEx("cm1")
+     val fR = MotorEx("cm0")
+     val bL = MotorEx("cm2")
+     val bR = MotorEx("cm3")
 
     @JvmField var alliance = Alliance.RED
     @JvmField var sensitivity = 0.8

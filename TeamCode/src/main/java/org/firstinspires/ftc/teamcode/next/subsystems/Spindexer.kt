@@ -184,8 +184,8 @@ object Spindexer: Subsystem {
 
     // Call this after each successful shot to update state
     fun markShotComplete() {
-        // Mark this ball as shot in the sequence
         val shotsCompleted = currentMotifShot.count { it != null }
+
         if (shotsCompleted < 3 && motifMode) {
             val targetSequence = when(targetMotif) {
                 Motif.GPP -> arrayOf(Artifact.GREEN, Artifact.PURPLE, Artifact.PURPLE)
@@ -196,11 +196,12 @@ object Spindexer: Subsystem {
             currentMotifShot[shotsCompleted] = ballsHeld[0]
         }
 
-        // Clear bucket 0 since we just shot
         ballsHeld[0] = null
 
-        // autoSort will handle finding and rotating the next ball to position 0
+        // 👇 This makes the whole system work.
+        autoSort()
     }
+
 
     fun intakeSort(): Command = LambdaCommand("intake_sort")
         .setStart {

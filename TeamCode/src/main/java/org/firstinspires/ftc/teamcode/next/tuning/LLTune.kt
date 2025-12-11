@@ -8,7 +8,6 @@ import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import org.firstinspires.ftc.teamcode.next.subsystems.Limelight
 @TeleOp
-@Disabled
 class LLTune:NextFTCOpMode() {
     init {
         addComponents(
@@ -25,5 +24,12 @@ class LLTune:NextFTCOpMode() {
             telemetry.addData("r.y", r.ty)
             telemetry.addData("r.a", r.ta)
         }
+
+        val m = Limelight.motif()
+        if (m!=null) {
+            telemetry.addData("motif", m)
+        }
+
+        telemetry.update()
     }
 }
