@@ -13,7 +13,7 @@ import kotlin.math.PI
 
 public class Far12(a: Alliance) {
     companion object {
-        // These poses are for the red alliance
+        // These poses are for the blue alliance
 
         var start = Pose(89.0,8.0, PI/2)
         var row1 = Pose(110.0, 35.5, 0.0)// Row closest to the front of the field
@@ -25,7 +25,8 @@ public class Far12(a: Alliance) {
         var shootFar = Pose(84.5, 14.0, PI/2)
         var park = Pose(84.5,40.0,PI/2)
 
-        var humanPlayerStart = Pose()
+        var humanPlayerStart = Pose(134.5, 17.0, 2*PI-96/180*PI)
+        var humanPlayerEnd = Pose(135.4, 8.0, 0.0)
         /*
             // Actual Values
         var
@@ -196,6 +197,15 @@ public class Far12(a: Alliance) {
                     )
                 )
                 .setConstantHeadingInterpolation(Math.PI/2)
+                .build()
+        )
+    )
+    var ShootToHuman = SequentialGroup(
+        FollowPath(
+            follower.pathBuilder()
+                .addPath(
+
+                )
                 .build()
         )
     )

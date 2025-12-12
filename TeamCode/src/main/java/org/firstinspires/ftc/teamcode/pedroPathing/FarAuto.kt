@@ -59,7 +59,11 @@ class FarAuto: NextFTCOpMode() {
     public override fun onStartButtonPressed() {
         val p: Far12 = Far12(DriveTrain.alliance)
         SequentialGroup(
-
+            p.ShootStart,
+            p.Row3Intake,
+            p.Row3ToShoot,
+            p.HPIntake,
+            p.HPToShoot
         ).schedule()
     }
 
