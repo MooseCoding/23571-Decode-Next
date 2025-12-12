@@ -32,7 +32,6 @@ object Spindexer: Subsystem {
 
     enum class cmds {
         spin_pos,
-        spin_sht,
         none
     }
 
@@ -64,6 +63,10 @@ object Spindexer: Subsystem {
             autoSort()
         }
         updateLED()
+    }
+
+    fun topherSort() {
+
     }
 
     private fun updateLED() {
@@ -266,4 +269,6 @@ object Spindexer: Subsystem {
         }
         .setIsDone { currentPos == 0 && currentCmd == cmds.none }
         .addRequirements(this)
+
+
 }

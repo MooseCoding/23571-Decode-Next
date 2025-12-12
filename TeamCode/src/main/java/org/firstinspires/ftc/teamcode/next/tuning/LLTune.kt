@@ -23,12 +23,11 @@ class LLTune:NextFTCOpMode() {
             telemetry.addData("r.x", r.tx)
             telemetry.addData("r.y", r.ty)
             telemetry.addData("r.a", r.ta)
+            telemetry.addData("fiducial", r.fiducialResults[0].fiducialId)
         }
 
         val m = Limelight.motif()
-        if (m!=null) {
-            telemetry.addData("motif", m)
-        }
+        telemetry.addData("motif", m)
 
         telemetry.update()
     }

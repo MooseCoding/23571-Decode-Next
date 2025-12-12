@@ -28,17 +28,17 @@ class NewFlywheel: NextFTCOpMode() {
         )
     }
 
-    val f1M = MotorEx("f1M")
-    val f2M = MotorEx("f2M").reversed()
+    val f1M = MotorEx("em0")
+    val f2M = MotorEx("em3").reversed()
     var pid = false
 
     companion object {
         @JvmField
-        var veloTarget = -2000.0
+        var veloTarget = 2000.0
     }
 
     @JvmField var flywheelPID = PIDCoefficients(0.005, 0.0, 0.0)
-    @JvmField var flywheelFF = BasicFeedforwardParameters(1/1800.0 , 0.0, 0.07)
+    @JvmField var flywheelFF = BasicFeedforwardParameters(1/2000.0 , 0.0, 0.08)
     private var control = controlSystem {
         velPid(flywheelPID)
         basicFF(flywheelFF)
@@ -62,6 +62,8 @@ class NewFlywheel: NextFTCOpMode() {
         telemetry.addData("gamepad1 left stick", gamepad1.left_stick_x)
         telemetry.addData("pid", pid)
         telemetry.addData("motor velo", f1M.velocity)
+        telemetry.addData("motor velo", f2M.velocity)
+
         telemetry.addData("flywheel power", control.calculate(f1M.state))
         telemetry.update()
     }

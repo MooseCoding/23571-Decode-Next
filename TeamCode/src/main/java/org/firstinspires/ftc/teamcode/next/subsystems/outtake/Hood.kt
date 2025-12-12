@@ -6,7 +6,7 @@ import com.bylazar.configurables.annotations.Configurable
 
 @Configurable
 object Hood: Subsystem {
-    private val hoodServo = ServoEx("flap")
+    private val hoodServo = ServoEx("s1")
 
     @JvmField var hoodPosition = 0.0
 

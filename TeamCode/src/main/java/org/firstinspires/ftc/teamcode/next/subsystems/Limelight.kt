@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.next.subsystems
 import com.bylazar.configurables.annotations.Configurable
 import com.pedropathing.geometry.Pose
 import com.qualcomm.hardware.limelightvision.LLResult
+import com.qualcomm.hardware.limelightvision.LLResultTypes.FiducialResult
 import com.qualcomm.hardware.limelightvision.Limelight3A
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
@@ -28,17 +29,17 @@ object Limelight: Subsystem {
         ll.start()
     }
 
-    fun motif(): Motif? {
+    fun motif(): Motif {
         val fR = grabResultData()
         if(fR != null) {
-            val f = fR.fiducialResults[0]
-            return when(f.fiducialId) {
-                21 -> Motif.GPP
-                22 -> Motif.PGP
-                else -> Motif.PPG
+            for (f: FiducialResult in fR.fiducialResults) {
+                when (f.fiducialId) {
+                    21 -> return Motif.GPP
+                    22 -> return Motif.PGP
+                }
             }
         }
-        return null
+        return Motif.PPG
     }
 
     fun grabResultData(): LLResult? {

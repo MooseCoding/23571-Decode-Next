@@ -6318,6 +6318,7 @@ styleable zxing_view zxing_scanner_layout
 xml advanced_rc_settings
 xml app_settings
 xml builtinwebcamcalibrations
+xml config
 xml device_filter
 xml file_provider_paths
 xml ftc_about_activity

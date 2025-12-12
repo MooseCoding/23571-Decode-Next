@@ -21,7 +21,7 @@ import kotlin.math.atan2
 object Turret: Subsystem {
     private val tele = MultipleTelemetry(FtcDashboard.getInstance().telemetry,ActiveOpMode.telemetry)
     val turret = MotorEx("turret")
-    private val gearRatio = 3.47
+    private val gearRatio = 1.50
 
     @JvmField var autoTurret = true
 
@@ -32,7 +32,6 @@ object Turret: Subsystem {
 
     private val ppr = 537.7 // The resolution of our motor encoder on the goBilda site
     private val rpt = 2* PI /(ppr * gearRatio) // The amount of radians per turn of the motor
-
 
     override fun periodic() {
         if(autoTurret) {
@@ -48,7 +47,7 @@ object Turret: Subsystem {
     private fun autoAim() {
         val mu = atan2(goalY - currentY, goalX - currentX)
         val deltaHeading = (mu - currentHeading).rad.normalized
-        turretController.goal = KineticState(deltaHeading.inRad, 0.0)
+        turretController.goal = KineticState(deltaHeading.inRad.coerceIn(-PI/4.0,PI/4), 0.0)
         turret.power = turretController.calculate(KineticState(getYaw(), 0.0))
     }
 

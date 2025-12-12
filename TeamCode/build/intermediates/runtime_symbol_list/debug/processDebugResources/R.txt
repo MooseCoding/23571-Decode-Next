@@ -7991,6 +7991,7 @@ int styleable zxing_view_zxing_scanner_layout 0
 int xml advanced_rc_settings 0x7f140000
 int xml app_settings 0x7f140001
 int xml builtinwebcamcalibrations 0x7f140002
+int xml config 0x7f14000f
 int xml device_filter 0x7f140003
 int xml file_provider_paths 0x7f140004
 int xml ftc_about_activity 0x7f140005
