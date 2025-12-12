@@ -23,7 +23,7 @@ public class Far12(a: Alliance) {
         var row3 = Pose(110.0, 83.5, 0.0) // Row closest to the classifier
         var row3End = Pose(129.0, 83.5, 0.0)
         var shootFar = Pose(84.5, 14.0, PI/2)
-        var park = Pose(84.5,40.0,PI/2)
+        var park = Pose(110.0.5,15.0,0)
 
         var humanPlayerStart = Pose(134.5, 17.0)
         var humanPlayerEnd = Pose(137.5, 6.42, 0.0)
@@ -41,27 +41,17 @@ public class Far12(a: Alliance) {
         }
     }
 
-
-    var ShootStart = SequentialGroup(
-        FollowPath(
-            follower.pathBuilder().addPath(
-                BezierLine(
-                    start, shootFar
-                )
-            ).setConstantHeadingInterpolation(Math.PI/2).build()
-        )
-    ) // Move to Shooting Position with Preloads while shooting the preloads
     var StartToRow1 = SequentialGroup(
         Intake.runIntake,
         FollowPath(follower.pathBuilder()
             .addPath(
                 BezierCurve(
                     shootFar,
-                    Pose(89.1021, 36.9896),
+                    Pose(88.0, 35.35),
                     row1
                 )
             )
-            .setTangentHeadingInterpolation()
+            .setLinearHeadingInterpolation(PI/2, 0, 0.8)
             .build()
     ))
     var Row1Intake = SequentialGroup(
@@ -81,16 +71,84 @@ public class Far12(a: Alliance) {
             FollowPath(
                 follower.pathBuilder()
                     .addPath(
-                        BezierLine(
+                        BezierCurve(
                             row1End,
+                            Pose(84.5, 14.0),
                             shootFar
                         )
                     )
-                    .setTangentHeadingInterpolation().setReversed()
+                    .setLinearHeadingInterpolation(0, 55.0, 0.8)
                     .build()
             )
         ),
     )
+    var ShootToHuman = SequentialGroup(
+        FollowPath(
+            follower.pathBuilder()
+                    .addPath(
+                        BezierCurve(
+                            shootFar, 
+                            Pose(116.02, 48.18),
+                            humanPlayerStart
+                        )
+                    )
+                .setLinearHeadingInterpolation(55.0, 280.0, 0.8)
+                .build()
+        )
+    )
+    var HumanIntake = SequentialGroup(
+        Intake.runIntake,
+        FollowPath(
+            follower.pathBuilder()
+                .addPath(
+                    BezierLine(
+                        humanPlayerStart,
+                        humanPlayerEnd
+                    )
+                ).setConstantHeadingInterpolation(280.0) 
+            .build()
+        )
+    )
+    var ToPark = SequentialGroup(
+        FollowPath(
+            follower.pathBuilder()
+                .addPath(
+                    BezierLine(
+                        shootFar,
+                        park
+                    )
+                )
+                .setLinearHeadingInterpolation(55.0, 0.0,0.8)
+                .build()
+        )
+    )
+    var anywhereToPark = SequentialGroup(
+        FollowPath(
+            follower.pathBuilder()
+                .addPath(
+                    BezierLine(
+                        follower.pose,
+                        park
+                    )
+                )
+                .setConstantHeadingInterpolation(0.0)
+                .build()
+        )
+    )
+
+    // Old Stuff
+
+
+    var ShootStart = SequentialGroup(
+        FollowPath(
+            follower.pathBuilder().addPath(
+                BezierLine(
+                    start, shootFar
+                )
+            ).setConstantHeadingInterpolation(Math.PI/2).build()
+        )
+    ) // Move to Shooting Position with Preloads while shooting the preloads
+    
     var ShootToRow2 = SequentialGroup(
         Intake.runIntake,
         FollowPath(follower.pathBuilder()
@@ -171,19 +229,7 @@ public class Far12(a: Alliance) {
             )
         ),
     )
-    var ToPark = SequentialGroup(
-        FollowPath(
-            follower.pathBuilder()
-                .addPath(
-                    BezierLine(
-                        follower.pose,
-                        park
-                    )
-                )
-                .setConstantHeadingInterpolation(PI/2)
-                .build()
-        )
-    )
+
     var StartToPark = SequentialGroup(
         FollowPath(
             follower.pathBuilder()
@@ -194,18 +240,6 @@ public class Far12(a: Alliance) {
                     )
                 )
                 .setConstantHeadingInterpolation(Math.PI/2)
-                .build()
-        )
-    )
-    var ShootToHuman = SequentialGroup(
-        FollowPath(
-            follower.pathBuilder()
-                .addPath(
-                    BezierLine(
-                        humanPlayerStart,
-                        humanPlayerEnd
-                    )
-                )
                 .build()
         )
     )
