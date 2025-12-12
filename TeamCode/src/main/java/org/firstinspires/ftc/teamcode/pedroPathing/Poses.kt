@@ -25,12 +25,8 @@ public class Far12(a: Alliance) {
         var shootFar = Pose(84.5, 14.0, PI/2)
         var park = Pose(84.5,40.0,PI/2)
 
-        var humanPlayerStart = Pose(134.5, 17.0, 2*PI-96/180*PI)
-        var humanPlayerEnd = Pose(135.4, 8.0, 0.0)
-        /*
-            // Actual Values
-        var
-         */
+        var humanPlayerStart = Pose(134.5, 17.0)
+        var humanPlayerEnd = Pose(137.5, 6.42, 0.0)
     }
 
     var index = 0
@@ -44,6 +40,7 @@ public class Far12(a: Alliance) {
             shootFar = shootFar.mirror()
         }
     }
+
 
     var ShootStart = SequentialGroup(
         FollowPath(

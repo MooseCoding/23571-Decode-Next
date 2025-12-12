@@ -25,6 +25,7 @@ object Spindexer : Subsystem {
     var currentMotifShot = arrayOf<Artifact?>(null, null, null)
     var ballsHeld = arrayOf<Artifact?>(null, null, null)
 
+    // ---- HARDWARE ----
     val pos = arrayOf(0.13, 0.55, 0.99)
     var currentPos = 0
 
@@ -47,15 +48,11 @@ object Spindexer : Subsystem {
         ballsHeld = arrayOf(Artifact.GREEN, Artifact.PURPLE, Artifact.PURPLE)
     }
 
-
-    lateinit var targetSequence: ; 
-
     override fun initialize() {}
 
     override fun periodic() {
         if (ActiveOpMode.opModeInInit) {
             targetMotif = Limelight.motif()
-            
         }
 
         if (sort) autoSort()
@@ -64,6 +61,9 @@ object Spindexer : Subsystem {
         ActiveOpMode.telemetry.addData("Spindexer Pos", currentPos)
     }
 
+    // ---------------------------------------------------------
+    // MOVEMENT — uses only currentPos
+    // ---------------------------------------------------------
     fun goToPosition(): Command =
         InstantCommand {
             currentCmd = cmds.spin_pos
@@ -89,7 +89,9 @@ object Spindexer : Subsystem {
             )
         }
 
-
+    // ---------------------------------------------------------
+    // LED
+    // ---------------------------------------------------------
     private fun updateLED() {
         light.position = when (ballsHeld[0]) {
             Artifact.GREEN -> greenLED
@@ -98,7 +100,9 @@ object Spindexer : Subsystem {
         }
     }
 
-
+    // ---------------------------------------------------------
+    // AUTO SORTING
+    // ---------------------------------------------------------
     fun autoSort() {
         if (!motifMode || targetMotif == null || currentCmd != cmds.none) return
         if (targetMotif == Motif.NONE) return
