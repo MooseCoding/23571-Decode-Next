@@ -18,7 +18,7 @@ import kotlin.time.Duration.Companion.seconds
 
 @Configurable
 object Intake: Subsystem {
-    val iM = MotorEx("iM")
+    val iM = MotorEx("em2").reversed()
 
     @JvmField
     var iP = 0.0

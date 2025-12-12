@@ -32,11 +32,11 @@ class TeleOP: NextFTCOpMode() {
     }
 
     override fun onStartButtonPressed() {
-        Gamepads.gamepad1.a whenBecomesTrue Outtake.shoot // Spin up the flywheels
+        // Gamepads.gamepad1.a whenBecomesTrue Outtake.shoot // Spin up the flywheels
         Gamepads.gamepad1.b whenBecomesTrue Flywheels.stop // Slow down
 
-        Gamepads.gamepad1.leftBumper whenBecomesTrue Spindexer.spinLeft() // Spin Spindexer Left
-        Gamepads.gamepad1.rightBumper whenBecomesTrue Spindexer.spinRight() // Spin Spindexer Right
+        Gamepads.gamepad1.leftBumper whenBecomesTrue Spindexer.spinLeft // Spin Spindexer Left
+        Gamepads.gamepad1.rightBumper whenBecomesTrue Spindexer.spinRight // Spin Spindexer Right
 
         Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue ParallelGroup(
             Intake.runIntake,

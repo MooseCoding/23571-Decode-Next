@@ -10,8 +10,8 @@ import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.MotorEx
 
 object Flywheels: Subsystem {
-    private val f1 = MotorEx("f1M")
-    private val f2 = MotorEx("f2M").reversed()
+    val f1 = MotorEx("em0")
+    val f2 = MotorEx("em3").reversed()
 
     @JvmField var flywheelPID = PIDCoefficients(0.0033, 0.0, 0.0)
     @JvmField var flywheelFF = BasicFeedforwardParameters(1.66667E-4, 0.0, 0.003)
@@ -21,7 +21,8 @@ object Flywheels: Subsystem {
     }
 
     @JvmField var targetVelocity = 0.0
-
+   val f1M = MotorEx("em0")
+    val f2M = MotorEx("em3").reversed()
     @JvmField var flywheelsOn = false
 
     var motorRpm: Double = 0.0

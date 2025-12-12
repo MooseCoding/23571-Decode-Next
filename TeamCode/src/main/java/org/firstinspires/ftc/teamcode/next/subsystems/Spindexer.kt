@@ -5,6 +5,9 @@ import dev.nextftc.control.ControlSystem
 import dev.nextftc.control.builder.controlSystem
 import dev.nextftc.control.feedback.PIDCoefficients
 import dev.nextftc.core.commands.Command
+import dev.nextftc.core.commands.delays.Delay
+import dev.nextftc.core.commands.groups.SequentialGroup
+import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.commands.utility.LambdaCommand
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
@@ -12,20 +15,19 @@ import dev.nextftc.hardware.impl.ServoEx
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Artifact
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Motif
-import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Waiter
+import kotlin.time.Duration.Companion.seconds
 
 object Spindexer: Subsystem {
     var targetMotif: Motif? = null
     var motifMode:Boolean = false // Determine if the spindexer should sort for a motif
     var currentMotifShot:Array<Artifact?> = arrayOf(null, null, null)
     var ballsHeld:Array<Artifact?> = arrayOf(null, null, null) // First position is intake, third is turret/transfer, second is the other
-    val pos: Array<Double> = arrayOf(0.0, 0.0, 0.0)
-    val waiter:Waiter = Waiter()
-    var sort: Boolean = true
+    val pos: Array<Double> = arrayOf(0.13, 0.55, 0.99)
+    var sort: Boolean = false
 
     private var lastStoredColor: Artifact? = null // Track what we last stored
 
-    val light:Servo = ActiveOpMode.hardwareMap.get(Servo::class.java, "pwm")
+    val light:Servo = ActiveOpMode.hardwareMap.get(Servo::class.java, "light")
 
     private val green = 0.5 // Value for green
     private val purple = 0.7 // Value for purple
@@ -39,7 +41,7 @@ object Spindexer: Subsystem {
 
     var currentPos = 0
 
-    val servo:ServoEx = ServoEx("spindexer")
+    val servo:ServoEx = ServoEx("s0")
 
     @JvmField val servoCoeffs: PIDCoefficients = PIDCoefficients(0.0,0.0,0.0)
     val servoPID: ControlSystem = controlSystem {
@@ -62,7 +64,10 @@ object Spindexer: Subsystem {
         if(sort) {
             autoSort()
         }
+
         updateLED()
+
+        ActiveOpMode.telemetry.addData("currentPOs", currentPos)
     }
 
     fun topherSort() {
@@ -77,39 +82,29 @@ object Spindexer: Subsystem {
         }
     }
 
-    private fun goToPosition(index:Int):Command =
-        LambdaCommand("at 1")
-            .setStart {
-                currentCmd = cmds.spin_pos
-                servo.position = pos[index]
-                currentPos = index
-                waiter.wait(0.2)
-            }
-            .setUpdate {
+    private fun goToPosition(index:Int):Command = SequentialGroup(InstantCommand {
+        currentCmd = cmds.spin_pos
+        currentPos = index
+        servo.position = pos[currentPos]
+    }, InstantCommand { currentCmd = cmds.none })
 
-            }
-            .setIsDone {
-                waiter.isDone()
-            }
-            .setStop {
-                currentCmd = cmds.none
-            }
-            .addRequirements(this)
 
-    fun spinRight():Command =
-        if(currentPos == 2) {
-            goToPosition(0)
+    val spinRight: SequentialGroup = SequentialGroup(InstantCommand {
+        if (currentPos == 2) {
+            currentPos = 0
         } else {
-            goToPosition(currentPos + 1)
+            currentPos += 1
         }
+    }, goToPosition(currentPos)
+    )
 
-    fun spinLeft():Command =
-        if(currentPos == 0) {
-            goToPosition(2)
+    val spinLeft: SequentialGroup = SequentialGroup(InstantCommand{
+        if (currentPos == 0) {
+            currentPos = 2
+        } else {
+            currentPos -= 1
         }
-        else {
-            goToPosition(currentPos - 1)
-        }
+    }, goToPosition(currentPos))
 
     fun autoSort() {
         // Don't sort if we're in the middle of a command or not in motif mode
@@ -236,7 +231,7 @@ object Spindexer: Subsystem {
                     lastStoredColor = detectedColor
 
                     // Wait a moment for ball to settle
-                    waiter.wait(0.1)
+                     // waiter.wait(0.1)
 
                     // Find next empty bucket and rotate to it
                     val nextEmpty = ballsHeld.indexOfFirst { it == null }

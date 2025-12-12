@@ -7,15 +7,15 @@ import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.hardware.impl.CRServoEx
 
 object Transfer: Subsystem {
-    val topServo: CRServoEx = CRServoEx("top")
-    val bottomServo: CRServoEx = CRServoEx("bottom")
+    val topServo: CRServoEx = CRServoEx("cr0")
+    val bottomServo: CRServoEx = CRServoEx("cr1")
 
     var spinBottom:Boolean = false
     var spinTop:Boolean = false
 
     override fun periodic() {
         topServo.power = if(spinTop) 1.0 else 0.0
-        bottomServo.power = if(spinBottom) 1.0 else 0.0
+        bottomServo.power = if(spinBottom) -1.0 else 0.0
     }
 
     val spin:InstantCommand = InstantCommand {

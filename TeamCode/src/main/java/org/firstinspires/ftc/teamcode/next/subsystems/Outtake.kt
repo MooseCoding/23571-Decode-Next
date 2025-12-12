@@ -9,7 +9,6 @@ import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.currentX
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.currentY
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Aimbot
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
-import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Waiter
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
@@ -20,8 +19,6 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
     var fullManual = false
     var distance = 12
     var autoShoot = false
-
-    private val waiter: Waiter = Waiter()
 
     var goalX = 0.0
     val goalY = 144 - 8.0
@@ -124,6 +121,7 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
         Flywheels.updatePid(values[1])
     }
 
+    /*
     val shoot: Command = LambdaCommand("shoot")
         .setStart {
             Flywheels.spin.schedule()
@@ -152,4 +150,5 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
             Transfer.stop.schedule()
         }
         .addRequirements(Outtake, Spindexer, Transfer)
+     */
 }

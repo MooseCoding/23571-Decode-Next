@@ -62,8 +62,8 @@ class FarAuto: NextFTCOpMode() {
             p.ShootStart,
             p.Row3Intake,
             p.Row3ToShoot,
-            p.HPIntake,
-            p.HPToShoot
+//            p.HPIntake,
+//            p.HPToShoot
         ).schedule()
     }
 

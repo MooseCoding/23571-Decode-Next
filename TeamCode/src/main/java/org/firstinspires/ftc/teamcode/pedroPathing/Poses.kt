@@ -204,7 +204,10 @@ public class Far12(a: Alliance) {
         FollowPath(
             follower.pathBuilder()
                 .addPath(
-
+                    BezierLine(
+                        humanPlayerStart,
+                        humanPlayerEnd
+                    )
                 )
                 .build()
         )
