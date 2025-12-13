@@ -20,12 +20,12 @@ import kotlin.math.atan2
 
 object Turret: Subsystem {
     private val tele = MultipleTelemetry(FtcDashboard.getInstance().telemetry,ActiveOpMode.telemetry)
-    val turret = MotorEx("em1").reversed()
+    val turret = MotorEx("em1")
     private val gearRatio = 1.50
 
     @JvmField var autoTurret = true
 
-    @JvmField var turretPID = PIDCoefficients(1.0,0.0,0.2)
+    @JvmField var turretPID = PIDCoefficients(2.5,0.0,0.0)
     var turretController = controlSystem {
         posPid(turretPID)
     }
@@ -47,7 +47,7 @@ object Turret: Subsystem {
     private fun autoAim() {
         val mu = atan2(goalY - currentY, goalX - currentX)
         val deltaHeading = (mu - currentHeading).rad.normalized
-        turretController.goal = KineticState(deltaHeading.inRad.coerceIn(-PI/4.0,PI/4), 0.0)
+        turretController.goal = KineticState(deltaHeading.inRad.coerceIn(-PI/4.0,PI/4.0), 0.0)
         turret.power = turretController.calculate(KineticState(getYaw(), 0.0))
     }
 

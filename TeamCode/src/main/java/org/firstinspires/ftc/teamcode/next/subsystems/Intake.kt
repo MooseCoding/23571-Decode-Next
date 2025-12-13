@@ -11,7 +11,7 @@ import dev.nextftc.hardware.controllable.RunToVelocity
 import dev.nextftc.hardware.impl.MotorEx
 import com.bylazar.configurables.annotations.Configurable
 import dev.nextftc.core.commands.delays.Delay
-import dev.nextftc.core.commands.groups.SequentialGroup
+import org.firstinspires.ftc.teamcode.helpers.SequentialGroupLocal
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import java.time.Instant
 import kotlin.time.Duration.Companion.seconds

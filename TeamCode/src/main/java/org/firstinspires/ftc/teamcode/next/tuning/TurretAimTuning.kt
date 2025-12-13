@@ -4,9 +4,11 @@ import com.bylazar.telemetry.JoinedTelemetry
 import com.bylazar.telemetry.PanelsTelemetry
 import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
+import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.extensions.pedro.PedroComponent
+import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
@@ -29,6 +31,10 @@ class TurretAimTuning: NextFTCOpMode() {
 
     override fun onInit() {
 
+    }
+
+    override fun onStartButtonPressed() {
+        Gamepads.gamepad1.cross whenBecomesTrue InstantCommand { Turret.turret.zero() }
     }
 
     override fun onUpdate() {

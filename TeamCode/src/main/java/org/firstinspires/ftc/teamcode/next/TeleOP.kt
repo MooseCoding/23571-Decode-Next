@@ -34,7 +34,6 @@ class TeleOP: NextFTCOpMode() {
 
     override fun onStartButtonPressed() {
         // Gamepads.gamepad1.a whenBecomesTrue Outtake.shoot // Spin up the flywheels
-        Gamepads.gamepad1.b whenBecomesTrue Flywheels.stop // Slow down
 
         Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue ParallelGroup(
             Intake.runIntake,
@@ -50,7 +49,7 @@ class TeleOP: NextFTCOpMode() {
 
         Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake whenBecomesFalse Intake.stopIntake
 
-        Gamepads.gamepad1.triangle whenBecomesTrue InstantCommand { Flywheels.flywheelsOn = !Flywheels.flywheelsOn  }
+        Gamepads.gamepad1.triangle whenBecomesTrue Outtake.shoot()
 
         // Gamepad 2
 
@@ -65,5 +64,11 @@ class TeleOP: NextFTCOpMode() {
         Gamepads.gamepad2.x whenBecomesTrue InstantCommand { Spindexer.sort = !Spindexer.sort } // Sort off
         Gamepads.gamepad2.b whenBecomesTrue InstantCommand { Turret.autoTurret = !Turret.autoTurret }
         Gamepads.gamepad2.y whenBecomesTrue InstantCommand{ Transfer.spinTop = true }
+        Gamepads.gamepad2.a whenBecomesTrue InstantCommand { Flywheels.flywheelsOn = !Flywheels.flywheelsOn  }
+    }
+
+    override fun onUpdate() {
+        telemetry.addData("Transfer Top", Transfer.spinTop)
+        telemetry.update()
     }
 }

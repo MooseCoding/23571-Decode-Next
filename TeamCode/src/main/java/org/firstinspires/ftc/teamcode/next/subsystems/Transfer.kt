@@ -13,6 +13,10 @@ object Transfer: Subsystem {
     var spinBottom:Boolean = false
     var spinTop:Boolean = false
 
+    override fun initialize() {
+        bottomServo.power = 0.0
+    }
+
     override fun periodic() {
         topServo.power = if(spinTop) 1.0 else 0.0
         bottomServo.power = -1.0

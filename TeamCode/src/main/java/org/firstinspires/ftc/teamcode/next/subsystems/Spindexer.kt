@@ -7,13 +7,13 @@ import dev.nextftc.control.builder.controlSystem
 import dev.nextftc.control.feedback.PIDCoefficients
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.delays.Delay
-import dev.nextftc.core.commands.groups.SequentialGroup
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.commands.utility.LambdaCommand
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.ServoEx
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
+import org.firstinspires.ftc.teamcode.helpers.SequentialGroupLocal
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Artifact
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Motif
 import org.firstinspires.inspection.InspectionState
@@ -59,7 +59,7 @@ object Spindexer : Subsystem {
     val servoPID: ControlSystem = controlSystem { servoCoeffs }
 
     init {
-        ballsHeld = arrayOf(Artifact.GREEN, Artifact.PURPLE, Artifact.PURPLE)
+        // ballsHeld = arrayOf(Artifact.GREEN, Artifact.PURPLE, Artifact.PURPLE)
     }
 
     override fun initialize() {}
@@ -79,7 +79,6 @@ object Spindexer : Subsystem {
         if (sort) autoSort()
         if (intaking) intakeSort()
 
-        updateLED()
         ActiveOpMode.telemetry.addData("Spindexer Pos", currentPos)
     }
 
@@ -119,17 +118,17 @@ object Spindexer : Subsystem {
         }
     }
 
-    val spinTo0: Command = SequentialGroup( InstantCommand {
+    val spinTo0: Command = SequentialGroupLocal( InstantCommand {
         currentPos = 0
         servo.position = pos[0]
     })
 
-    val spinTo1: Command = SequentialGroup( InstantCommand {
+    val spinTo1: Command = SequentialGroupLocal( InstantCommand {
         currentPos = 1
         servo.position = pos[1]
     })
 
-    val spinTo2: Command = SequentialGroup( InstantCommand {
+    val spinTo2: Command = SequentialGroupLocal( InstantCommand {
         currentPos = 2
         servo.position = pos[2]
     })

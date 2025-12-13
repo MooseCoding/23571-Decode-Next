@@ -4,7 +4,7 @@ import com.pedropathing.geometry.BezierCurve
 import com.pedropathing.geometry.BezierLine
 import com.pedropathing.geometry.Pose
 import dev.nextftc.core.commands.groups.ParallelGroup
-import dev.nextftc.core.commands.groups.SequentialGroup
+import org.firstinspires.ftc.teamcode.helpers.SequentialGroupLocal
 import dev.nextftc.extensions.pedro.FollowPath
 import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
@@ -13,7 +13,7 @@ import kotlin.math.PI
 
 public class Far12(a: Alliance) {
     companion object {
-        // These poses are for the blue alliance
+        // These poses are for the red alliance
 
         var start = Pose(89.0,8.0, PI/2)
         var row1 = Pose(110.0, 35.5, 0.0)// Row closest to the front of the field
@@ -32,16 +32,22 @@ public class Far12(a: Alliance) {
     var index = 0
     var pathCount = 11
     init {
-        if (a == Alliance.RED) {
-            start = start.mirror()
-            row1 = row1.mirror()
-            row2 = row2.mirror()
-            row3 = row3.mirror()
-            shootFar = shootFar.mirror()
+        if (a == Alliance.BLUE) {
+            row1 = flipPose(row1)
+            start = flipPose(start)
+            row1End = flipPose(row1End)
+            shootFar = flipPose(shootFar)
+            park = flipPose(park)
+            humanPlayerStart = flipPose(humanPlayerStart)
+            humanPlayerEnd = flipPose(humanPlayerEnd)
         }
     }
 
-    var StartToRow1 = SequentialGroup(
+    fun flipPose(p:Pose): Pose {
+        return Pose(144-p.x, p.y)
+    }
+
+    var StartToRow1 = SequentialGroupLocal(
         Intake.runIntake,
         FollowPath(follower.pathBuilder()
             .addPath(
@@ -54,7 +60,7 @@ public class Far12(a: Alliance) {
             .setLinearHeadingInterpolation(PI/2, 0.0, 0.8)
             .build()
     ))
-    var Row1Intake = SequentialGroup(
+    var Row1Intake = SequentialGroupLocal(
         FollowPath(follower.pathBuilder()
             .addPath(
                 BezierLine(
@@ -65,7 +71,7 @@ public class Far12(a: Alliance) {
             .setConstantHeadingInterpolation(0.0)
             .build()),
     )
-    var Row1ToShoot = SequentialGroup(
+    var Row1ToShoot = SequentialGroupLocal(
         Intake.stopIntake,
         ParallelGroup(
             FollowPath(
@@ -82,7 +88,7 @@ public class Far12(a: Alliance) {
             )
         ),
     )
-    var ShootToHuman = SequentialGroup(
+    var ShootToHuman = SequentialGroupLocal(
         FollowPath(
             follower.pathBuilder()
                     .addPath(
@@ -96,7 +102,7 @@ public class Far12(a: Alliance) {
                 .build()
         )
     )
-    var HumanIntake = SequentialGroup(
+    var HumanIntake = SequentialGroupLocal(
         Intake.runIntake,
         FollowPath(
             follower.pathBuilder()
@@ -109,7 +115,7 @@ public class Far12(a: Alliance) {
             .build()
         )
     )
-    var ToPark = SequentialGroup(
+    var ToPark = SequentialGroupLocal(
         FollowPath(
             follower.pathBuilder()
                 .addPath(
@@ -122,7 +128,7 @@ public class Far12(a: Alliance) {
                 .build()
         )
     )
-    var anywhereToPark = SequentialGroup(
+    var anywhereToPark = SequentialGroupLocal(
         FollowPath(
             follower.pathBuilder()
                 .addPath(
@@ -139,17 +145,18 @@ public class Far12(a: Alliance) {
     // Old Stuff
 
 
-    var ShootStart = SequentialGroup(
+    var ShootStart = SequentialGroupLocal(
         FollowPath(
             follower.pathBuilder().addPath(
                 BezierLine(
-                    start, shootFar
+                    start,
+                    shootFar
                 )
             ).setConstantHeadingInterpolation(Math.PI/2).build()
         )
     ) // Move to Shooting Position with Preloads while shooting the preloads
     
-    var ShootToRow2 = SequentialGroup(
+    var ShootToRow2 = SequentialGroupLocal(
         Intake.runIntake,
         FollowPath(follower.pathBuilder()
             .addPath(
@@ -162,7 +169,7 @@ public class Far12(a: Alliance) {
             .setTangentHeadingInterpolation()
             .build()
     ))
-    var Row2Intake = SequentialGroup(
+    var Row2Intake = SequentialGroupLocal(
         FollowPath(follower.pathBuilder()
             .addPath(
                 BezierLine(
@@ -173,7 +180,7 @@ public class Far12(a: Alliance) {
             .setConstantHeadingInterpolation(0.0)
             .build()),
     )
-    var Row2ToShoot = SequentialGroup(
+    var Row2ToShoot = SequentialGroupLocal(
         Intake.stopIntake,
         ParallelGroup(
             FollowPath(
@@ -189,7 +196,7 @@ public class Far12(a: Alliance) {
             )
         ),
     )
-    var ShootToRow3 = SequentialGroup(
+    var ShootToRow3 = SequentialGroupLocal(
         Intake.runIntake,
         FollowPath(follower.pathBuilder()
             .addPath(
@@ -202,7 +209,7 @@ public class Far12(a: Alliance) {
             .setTangentHeadingInterpolation()
             .build()
     ))
-    var Row3Intake = SequentialGroup(
+    var Row3Intake = SequentialGroupLocal(
         FollowPath(follower.pathBuilder()
             .addPath(
                 BezierLine(
@@ -213,7 +220,7 @@ public class Far12(a: Alliance) {
             .setConstantHeadingInterpolation(0.0)
             .build()),
     )
-    var Row3ToShoot = SequentialGroup(
+    var Row3ToShoot = SequentialGroupLocal(
         Intake.stopIntake,
         ParallelGroup(
             FollowPath(
@@ -230,7 +237,7 @@ public class Far12(a: Alliance) {
         ),
     )
 
-    var StartToPark = SequentialGroup(
+    var StartToPark = SequentialGroupLocal(
         FollowPath(
             follower.pathBuilder()
                 .addPath(
@@ -244,7 +251,7 @@ public class Far12(a: Alliance) {
         )
     )
 
-    fun Next(): SequentialGroup {
+    fun Next(): SequentialGroupLocal {
         return when(index++) {
             1 -> ShootStart
             2 -> StartToRow1

@@ -4,7 +4,7 @@ import com.acmerobotics.dashboard.config.Config
 import com.bylazar.configurables.annotations.Configurable
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.delays.Delay
-import dev.nextftc.core.commands.groups.SequentialGroup
+import org.firstinspires.ftc.teamcode.helpers.SequentialGroupLocal
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.commands.utility.LambdaCommand
 import dev.nextftc.core.subsystems.SubsystemGroup
@@ -24,7 +24,7 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
     var distance = 12
     var autoShoot = false
 
-    var goalX = 0.0
+    var goalX = 6.0;
     val goalY = 144 - 8.0
 
     override fun initialize() {
@@ -125,15 +125,14 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
         Flywheels.updatePid(values[1])
     }
 
-    fun shoot(): Command { return SequentialGroup(*buildList {
+    fun shoot(): Command { return SequentialGroupLocal(*buildList {
                     for (i in 0..balls()) {
                         add(
-                            SequentialGroup(
+                            SequentialGroupLocal(
                                 Transfer.spin,
                                 Delay(0.5),
                                 InstantCommand {
-                                    Spindexer.currentShot[i] =
-                                        Spindexer.ballsHeld[Spindexer.currentPos]
+                                    Spindexer.currentShot[i] = Spindexer.ballsHeld[Spindexer.currentPos]
                                     Spindexer.ballsHeld[Spindexer.currentPos] = null
                                 },
                                 Delay(0.8)

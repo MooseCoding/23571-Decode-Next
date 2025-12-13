@@ -2,7 +2,9 @@ package org.firstinspires.ftc.teamcode.pedroPathing
 
 import com.bylazar.configurables.annotations.Configurable
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
-import dev.nextftc.core.commands.groups.SequentialGroup
+import dev.nextftc.core.commands.delays.Delay
+import dev.nextftc.core.commands.utility.InstantCommand
+import org.firstinspires.ftc.teamcode.helpers.SequentialGroupLocal
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.extensions.pedro.PedroComponent
@@ -15,15 +17,17 @@ import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
+import org.firstinspires.ftc.teamcode.next.subsystems.Spindexer
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
+import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Motif
 
 @Autonomous
 @Configurable
 class FarAuto: NextFTCOpMode() {
     init {
         addComponents(
-            SubsystemComponent(Intake, Outtake, DriveTrain),
             PedroComponent(Constants::createFollower),
+            SubsystemComponent(DriveTrain),
             BulkReadComponent,
             BindingsComponent,
         )
@@ -36,6 +40,10 @@ class FarAuto: NextFTCOpMode() {
         Gamepads.gamepad1.b whenBecomesTrue  { alliance = Alliance.BLUE }
         telemetry.run {
             addData("Alliance ", alliance)
+            addData("follower X", follower.pose.x)
+            addData("follower Y", follower.pose.y)
+            addData("follower heading", follower.heading)
+
             update()
         }
     }
@@ -52,15 +60,51 @@ class FarAuto: NextFTCOpMode() {
     }
 
     public override fun onStartButtonPressed() {
-        val p: Far12 = Far12(DriveTrain.alliance)
-        SequentialGroup(
-            p.ShootStart,
-            p.Row3Intake,
-            p.Row3ToShoot,
-            p.ToPark,
-//            p.HPIntake,
-//            p.HPToShoot
-        ).schedule()
+        val p = Far12(alliance)
+
+        when(Spindexer.targetMotif) {
+            Motif.PGP -> {
+                SequentialGroupLocal(
+                    Spindexer.spinTo1,
+                    Outtake.shoot(),
+                    Spindexer.spinTo0,
+                    Delay(2.0),
+                    Outtake.shoot(),
+                    Spindexer.spinTo2,
+                    Delay(2.0),
+                    Outtake.shoot(),
+                    Delay(2.0),
+                    p.StartToPark,
+                )
+            }
+            Motif.PPG -> {
+                SequentialGroupLocal(
+                    Spindexer.spinTo1,
+                    Outtake.shoot(),
+                    Spindexer.spinTo2,
+                    Delay(2.0),
+                    Outtake.shoot(),
+                    Spindexer.spinTo0,
+                    Delay(2.0),
+                    Outtake.shoot(),
+                    Delay(2.0),
+                    p.StartToPark,
+                )
+            }
+            else -> {
+                SequentialGroupLocal(
+                    Outtake.shoot(),
+                    Spindexer.spinTo1,
+                    Delay(2.0),
+                    Outtake.shoot(),
+                    Spindexer.spinTo2,
+                    Delay(2.0),
+                    Outtake.shoot(),
+                    Delay(2.0),
+                    p.StartToPark,
+                )
+            }
+        }
     }
 
 
