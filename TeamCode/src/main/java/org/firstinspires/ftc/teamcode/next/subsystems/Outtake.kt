@@ -3,10 +3,14 @@ package org.firstinspires.ftc.teamcode.next.subsystems
 import com.acmerobotics.dashboard.config.Config
 import com.bylazar.configurables.annotations.Configurable
 import dev.nextftc.core.commands.Command
+import dev.nextftc.core.commands.delays.Delay
+import dev.nextftc.core.commands.groups.SequentialGroup
+import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.commands.utility.LambdaCommand
 import dev.nextftc.core.subsystems.SubsystemGroup
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.currentX
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.currentY
+import org.firstinspires.ftc.teamcode.next.subsystems.Spindexer.balls
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Aimbot
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
@@ -121,34 +125,22 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
         Flywheels.updatePid(values[1])
     }
 
-    /*
-    val shoot: Command = LambdaCommand("shoot")
-        .setStart {
-            Flywheels.spin.schedule()
-            waiter.wait(0.3) // Initial spinup
-        }
-        .setUpdate {
-            if (waiter.isDone() && Spindexer.currentCmd == Spindexer.cmds.none) {
-                // Check if there's a ball ready to shoot
-                if (Spindexer.readyToShoot()) {
-                    // Shoot the ball
-                    Transfer.spin.schedule()
-                    waiter.wait(0.5) // Wait for ball to shoot through transfer
-                } else if (Spindexer.ballsHeld.any { it != null }) {
-                    // Just finished shooting, mark complete and wait for autoSort
-                    Spindexer.markShotComplete()
-                    waiter.wait(0.6) // Wait longer for autoSort to find and position next ball
-                }
-            }
-        }
-        .setIsDone {
-            // Done when no more balls left AND not waiting
-            Spindexer.ballsHeld.all { it == null } && waiter.isDone() && Spindexer.currentCmd == Spindexer.cmds.none
-        }
-        .setStop {
-            Flywheels.stop.schedule()
-            Transfer.stop.schedule()
-        }
-        .addRequirements(Outtake, Spindexer, Transfer)
-     */
+    fun shoot():Command { return SequentialGroup(
+//                buildList {
+//                    for (i in 0..balls()) {
+//                        add(
+//                            SequentialGroup(
+//                                Transfer.spin,
+//                                Delay(0.5),
+//                                InstantCommand {
+//                                    Spindexer.currentShot[i] =
+//                                        Spindexer.ballsHeld[Spindexer.currentPos]
+//                                    Spindexer.ballsHeld[Spindexer.currentPos] = null
+//                                },
+//                                Delay(0.8)
+//                            )
+//                        )
+//                    }
+//                }
+    )}
 }

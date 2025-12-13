@@ -18,7 +18,7 @@ object DriveTrain: Subsystem {
      val bL = MotorEx("cm2")
      val bR = MotorEx("cm3")
 
-    @JvmField var alliance = Alliance.RED
+    @JvmField var alliance = Alliance.BLUE
     @JvmField var sensitivity = 0.8
     var currentX = 0.0
     var currentY = 0.0
@@ -43,8 +43,8 @@ object DriveTrain: Subsystem {
 
     override fun initialize() {
         when (alliance) {
-            Alliance.RED -> follower.setStartingPose(Far12.park)
-            Alliance.BLUE -> follower.setStartingPose(Far12.park.mirror())
+            Alliance.RED -> follower.setStartingPose(Far12.start)
+            Alliance.BLUE -> follower.setStartingPose(Far12.start.mirror())
         }
     }
 

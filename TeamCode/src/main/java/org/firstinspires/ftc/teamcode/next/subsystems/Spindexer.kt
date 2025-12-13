@@ -32,6 +32,14 @@ object Spindexer : Subsystem {
     var currentShot = arrayOf<Artifact?>(null, null, null)
     var ballsHeld = arrayOf<Artifact?>(null, null, null)
 
+    fun balls(): Int {
+        var j = 0
+        for(i:Artifact? in ballsHeld) {
+            if (i != null) j++
+        }
+        return j
+    }
+
     val pos = arrayOf(0.13, 0.55, 0.99)
     var currentPos = 0 // Current Position Under Shoot
 
@@ -152,7 +160,7 @@ object Spindexer : Subsystem {
 
 
     private fun updateLED() {
-        light.position = when (ballsHeld[0]) {
+        light.position = when (ballsHeld[currentPos]) {
             Artifact.GREEN -> greenLED
             Artifact.PURPLE -> purpleLED
             null -> 0.0

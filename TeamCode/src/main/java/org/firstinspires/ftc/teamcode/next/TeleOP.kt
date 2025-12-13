@@ -58,9 +58,7 @@ class TeleOP: NextFTCOpMode() {
         Gamepads.gamepad2.leftBumper whenTrue InstantCommand { Turret.autoTurret = false; Turret.turret.power = 0.1} // Turret Left
         Gamepads.gamepad2.rightBumper whenTrue InstantCommand { Turret.autoTurret = false; Turret.turret.power = -0.1} // Turret Right
 
-        Gamepads.gamepad2.a whenBecomesTrue InstantCommand { Outtake.fullManual = !Outtake.fullManual }
-        Gamepads.gamepad2.b whenBecomesTrue InstantCommand { Turret.autoTurret = !Turret.autoTurret }
         Gamepads.gamepad2.x whenBecomesTrue InstantCommand { Spindexer.sort = !Spindexer.sort } // Sort off
-        Gamepads.gamepad2.y whenBecomesTrue Transfer.spin whenBecomesFalse Transfer.stop
+        Gamepads.gamepad2.y whenBecomesTrue InstantCommand{ Transfer.spinTop = true }
     }
 }

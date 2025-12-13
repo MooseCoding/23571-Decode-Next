@@ -27,7 +27,13 @@ object Sensor: Subsystem {
         cS.gain = 8.0f
     }
     override fun periodic() {
-        if(frames > framesReq && cS.getDistance(DistanceUnit.MM)<25.0) {
+        val ds = cS.getDistance(DistanceUnit.MM)
+
+        if(ds > 40.0) {
+            currentArtifact = null
+        }
+
+        if(frames > framesReq && ds<25.0 && currentArtifact != null) {
             currentArtifact = getColor()
 
             frames = 0

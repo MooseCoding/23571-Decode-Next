@@ -15,7 +15,7 @@ object Transfer: Subsystem {
 
     override fun periodic() {
         topServo.power = if(spinTop) 1.0 else 0.0
-        bottomServo.power = if(spinBottom) -1.0 else 0.0
+        bottomServo.power = -1.0
     }
 
     val spin:InstantCommand = InstantCommand {
