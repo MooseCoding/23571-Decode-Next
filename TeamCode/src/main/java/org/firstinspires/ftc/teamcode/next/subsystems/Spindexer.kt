@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
+import androidx.core.content.pm.ShortcutInfoCompatSaver.NoopImpl
 import com.qualcomm.robotcore.hardware.Servo
 import dev.nextftc.control.ControlSystem
 import dev.nextftc.control.builder.controlSystem
 import dev.nextftc.control.feedback.PIDCoefficients
 import dev.nextftc.core.commands.Command
+import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.groups.SequentialGroup
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.commands.utility.LambdaCommand
@@ -14,6 +16,8 @@ import dev.nextftc.hardware.impl.ServoEx
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Artifact
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Motif
+import org.firstinspires.inspection.InspectionState
+import kotlin.time.Duration.Companion.seconds
 
 object Spindexer : Subsystem {
 
@@ -21,12 +25,15 @@ object Spindexer : Subsystem {
     var targetMotif: Motif? = null
     var motifMode = false
     var sort = false
+    var intaking = false
 
-    var currentMotifShot = arrayOf<Artifact?>(null, null, null)
+    var motif = arrayOf<Artifact?>(null, null, null)
+    var motifShot: Int = 0
+    var currentShot = arrayOf<Artifact?>(null, null, null)
     var ballsHeld = arrayOf<Artifact?>(null, null, null)
 
     val pos = arrayOf(0.13, 0.55, 0.99)
-    var currentPos = 0
+    var currentPos = 0 // Current Position Under Shoot
 
     enum class cmds { spin_pos, none }
     var currentCmd = cmds.none
@@ -47,46 +54,100 @@ object Spindexer : Subsystem {
         ballsHeld = arrayOf(Artifact.GREEN, Artifact.PURPLE, Artifact.PURPLE)
     }
 
-
-    lateinit var targetSequence: ; 
-
     override fun initialize() {}
 
     override fun periodic() {
         if (ActiveOpMode.opModeInInit) {
             targetMotif = Limelight.motif()
-            
+            if(motif[0] == null) {
+                motif = when (targetMotif) {
+                    Motif.GPP -> arrayOf(Artifact.GREEN, Artifact.PURPLE, Artifact.PURPLE)
+                    Motif.PGP -> arrayOf(Artifact.PURPLE, Artifact.GREEN, Artifact.PURPLE)
+                    else -> arrayOf(Artifact.PURPLE, Artifact.PURPLE, Artifact.GREEN)
+                }
+            }
         }
 
         if (sort) autoSort()
+        if (intaking) intakeSort()
 
         updateLED()
         ActiveOpMode.telemetry.addData("Spindexer Pos", currentPos)
     }
 
-    fun goToPosition(): Command =
-        InstantCommand {
-            currentCmd = cmds.spin_pos
-            servo.position = pos[currentPos]
-            currentCmd = cmds.none
+    fun autoSort() {
+        for(i: Int in 0 .. 2) {
+            if(i != currentPos) {
+                if(ballsHeld[i] == motif[motifShot]) {
+                    currentPos = i
+                    goToCurrent()
+                    break
+                }
+            }
+
+            if(i==2) {
+
+            }
         }
 
-    val spinRight: Command
-        get() {
-            val newPos = if (currentPos == 2) 0 else currentPos + 1
-            return SequentialGroup(
-                InstantCommand { currentPos = newPos },
-                goToPosition()
-            )
+        shootBall().schedule()
+    }
+
+    fun shootBall(): Command {
+        return LambdaCommand("test")
+    }
+
+    fun intakeSort() {
+        ballsHeld[currentPos] = Sensor.currentArtifact
+
+        for(i: Int in 0 .. 2) {
+            if(i != currentPos) {
+                if(ballsHeld[i] == null) {
+                    currentPos = i
+                    goToCurrent()
+                    break
+                }
+            }
+        }
+    }
+
+    val spinTo0: Command = SequentialGroup( InstantCommand {
+        currentPos = 0
+        servo.position = pos[0]
+    }, Delay(0.2.seconds))
+
+    val spinTo1: Command = SequentialGroup( InstantCommand {
+        currentPos = 1
+        servo.position = pos[1]
+    }, Delay(0.2.seconds))
+
+    val spinTo2: Command = SequentialGroup( InstantCommand {
+        currentPos = 2
+        servo.position = pos[2]
+    }, Delay(0.2.seconds))
+
+    fun goToCurrent(): Command =
+        when(currentPos) {
+            0 -> spinTo0
+            1 -> spinTo1
+            2 -> spinTo2
+            else -> error("uh oh")
         }
 
-    val spinLeft: Command
-        get() {
-            val newPos = if (currentPos == 0) 2 else currentPos - 1
-            return SequentialGroup(
-                InstantCommand { currentPos = newPos },
-                goToPosition()
-            )
+    fun spinRight(): Command =
+        when(currentPos) {
+            0 -> spinTo1
+            1 -> spinTo2
+            2 -> spinTo0
+            else -> error("uh oh")
+        }
+
+    fun spinLeft(): Command =
+        when(currentPos) {
+            0 -> spinTo2
+            1 -> spinTo0
+            2 -> spinTo1
+            else -> error("uh oh")
         }
 
 
@@ -97,129 +158,4 @@ object Spindexer : Subsystem {
             null -> 0.0
         }
     }
-
-
-    fun autoSort() {
-        if (!motifMode || targetMotif == null || currentCmd != cmds.none) return
-        if (targetMotif == Motif.NONE) return
-
-        val targetSequence = when (targetMotif) {
-            Motif.GPP -> arrayOf(Artifact.GREEN, Artifact.PURPLE, Artifact.PURPLE)
-            Motif.PGP -> arrayOf(Artifact.PURPLE, Artifact.GREEN, Artifact.PURPLE)
-            Motif.PPG -> arrayOf(Artifact.PURPLE, Artifact.PURPLE, Artifact.GREEN)
-            else -> return
-        }
-
-        val completed = currentMotifShot.count { it != null }
-        if (completed >= 3) {
-            currentMotifShot = arrayOf(null, null, null)
-            return
-        }
-
-        val needed = targetSequence[completed]
-
-        // Already at intake with correct ball
-        if (currentPos == 0 && ballsHeld[0] == needed) return
-
-        // Search other slots
-        for (i in 1..2) {
-            if (ballsHeld[i] == needed) {
-                if (currentPos != i) {
-                    currentPos = i
-                    goToPosition().schedule()
-                } else {
-                    currentPos = 0
-                    goToPosition().schedule()
-                }
-                return
-            }
-        }
-
-        // No needed ball → prepare intake slot
-        if (currentPos != 0 && ballsHeld[0] == null) {
-            currentPos = 0
-            goToPosition().schedule()
-        }
-    }
-
-    fun readyToShoot(): Boolean {
-        if (currentPos != 0) return false
-        if (!motifMode || targetMotif == null || targetMotif == Motif.NONE)
-            return ballsHeld[0] != null
-
-        val sequence = when (targetMotif) {
-            Motif.GPP -> arrayOf(Artifact.GREEN, Artifact.PURPLE, Artifact.PURPLE)
-            Motif.PGP -> arrayOf(Artifact.PURPLE, Artifact.GREEN, Artifact.PURPLE)
-            Motif.PPG -> arrayOf(Artifact.PURPLE, Artifact.PURPLE, Artifact.GREEN)
-            else -> return false
-        }
-
-        val completed = currentMotifShot.count { it != null }
-        return ballsHeld[0] == sequence[completed]
-    }
-
-    fun markShotComplete() {
-        val completed = currentMotifShot.count { it != null }
-
-        if (motifMode && completed < 3) {
-            currentMotifShot[completed] = ballsHeld[0]
-        }
-
-        ballsHeld[0] = null
-        autoSort()
-    }
-
-    // ---------------------------------------------------------
-    // INTAKE SORTING
-    // ---------------------------------------------------------
-    fun intakeSort(): Command =
-        LambdaCommand("intake_sort")
-            .setStart {
-                val empty = ballsHeld.indexOfFirst { it == null }
-                if (empty != -1 && empty != currentPos) {
-                    currentPos = empty
-                    goToPosition().schedule()
-                }
-                lastStoredColor = null
-            }
-            .setUpdate {
-                if (currentCmd != cmds.none) return@setUpdate
-
-                val color = Sensor.cC
-                val dist = Sensor.cS.getDistance(DistanceUnit.MM)
-
-                if (color != null && ballsHeld[currentPos] == null) {
-                    if (lastStoredColor == null || lastStoredColor != color || dist < 20.0) {
-
-                        ballsHeld[currentPos] = color
-                        lastStoredColor = color
-
-                        val nextEmpty = ballsHeld.indexOfFirst { it == null }
-
-                        if (nextEmpty != -1 && nextEmpty != currentPos) {
-                            currentPos = nextEmpty
-                            goToPosition().schedule()
-                        } else if (currentPos != 0) {
-                            currentPos = 0
-                            goToPosition().schedule()
-                        }
-                    }
-                } else if (color == null && dist > 30.0) {
-                    lastStoredColor = null
-                }
-            }
-            .setIsDone { false }
-            .setStop { lastStoredColor = null }
-            .addRequirements(this)
-
-    val stopIntakeSort: Command =
-        LambdaCommand("stop_intake_sort")
-            .setStart {
-                if (currentPos != 0 && currentCmd == cmds.none) {
-                    currentPos = 0
-                    goToPosition().schedule()
-                }
-            }
-            .setIsDone { currentPos == 0 && currentCmd == cmds.none }
-            .addRequirements(this)
 }

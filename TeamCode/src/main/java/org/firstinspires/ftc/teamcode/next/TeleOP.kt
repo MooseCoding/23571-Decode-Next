@@ -35,15 +35,15 @@ class TeleOP: NextFTCOpMode() {
         // Gamepads.gamepad1.a whenBecomesTrue Outtake.shoot // Spin up the flywheels
         Gamepads.gamepad1.b whenBecomesTrue Flywheels.stop // Slow down
 
-        Gamepads.gamepad1.leftBumper whenBecomesTrue Spindexer.spinLeft // Spin Spindexer Left
-        Gamepads.gamepad1.rightBumper whenBecomesTrue Spindexer.spinRight // Spin Spindexer Right
+        Gamepads.gamepad1.leftBumper whenBecomesTrue Spindexer.spinLeft() // Spin Spindexer Left
+        Gamepads.gamepad1.rightBumper whenBecomesTrue Spindexer.spinRight() // Spin Spindexer Right
 
         Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue ParallelGroup(
             Intake.runIntake,
-            Spindexer.intakeSort()
+            InstantCommand { Spindexer.intaking = true }
         ) whenBecomesFalse ParallelGroup(
             Intake.stopIntake,
-            Spindexer.stopIntakeSort
+            InstantCommand { Spindexer.intaking = false }
         )
 
         Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake whenBecomesFalse Intake.stopIntake

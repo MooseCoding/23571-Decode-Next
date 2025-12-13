@@ -20,7 +20,7 @@ object Sensor: Subsystem {
     val framesReq = 5
     var frames = 0
 
-    var cC:Artifact? = null
+    var currentArtifact:Artifact? = null
 
     override fun initialize() {
         cS.enableLed(true)
@@ -28,7 +28,7 @@ object Sensor: Subsystem {
     }
     override fun periodic() {
         if(frames > framesReq && cS.getDistance(DistanceUnit.MM)<25.0) {
-            cC = getColor()
+            currentArtifact = getColor()
 
             frames = 0
         }
@@ -37,11 +37,10 @@ object Sensor: Subsystem {
             addData("green", cS.normalizedColors.green)
             addData("red", cS.normalizedColors.red)
             addData("blue", cS.normalizedColors.blue)
-            addData("color", cC)
+            addData("color", currentArtifact)
             addData("frames", frames)
             addData("loop time", timer.elapsedTime)
             addData("Distance", cS.getDistance(DistanceUnit.MM))
-            update()
         }
 
         timer.resetTimer()

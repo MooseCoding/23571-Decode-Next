@@ -23,7 +23,7 @@ public class Far12(a: Alliance) {
         var row3 = Pose(110.0, 83.5, 0.0) // Row closest to the classifier
         var row3End = Pose(129.0, 83.5, 0.0)
         var shootFar = Pose(84.5, 14.0, PI/2)
-        var park = Pose(110.0.5,15.0,0)
+        var park = Pose(110.0,15.0,0.0)
 
         var humanPlayerStart = Pose(134.5, 17.0)
         var humanPlayerEnd = Pose(137.5, 6.42, 0.0)
@@ -51,7 +51,7 @@ public class Far12(a: Alliance) {
                     row1
                 )
             )
-            .setLinearHeadingInterpolation(PI/2, 0, 0.8)
+            .setLinearHeadingInterpolation(PI/2, 0.0, 0.8)
             .build()
     ))
     var Row1Intake = SequentialGroup(
@@ -77,7 +77,7 @@ public class Far12(a: Alliance) {
                             shootFar
                         )
                     )
-                    .setLinearHeadingInterpolation(0, 55.0, 0.8)
+                    .setLinearHeadingInterpolation(0.0, 55.0, 0.8)
                     .build()
             )
         ),

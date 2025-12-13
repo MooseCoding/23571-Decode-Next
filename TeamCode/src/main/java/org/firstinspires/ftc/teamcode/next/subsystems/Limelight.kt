@@ -50,8 +50,10 @@ object Limelight: Subsystem {
         return null
     }
 
-    fun megaTag(): Pose? {
+    fun megatag2(): Pose? {
         var lR = grabResultData() ?: return null // Return null if the tag is null
+        if(lR.fiducialResults.isEmpty()) return null
+
         val botpose_mt2 = lR.botpose_MT2
 
         if (botpose_mt2 != null) {
