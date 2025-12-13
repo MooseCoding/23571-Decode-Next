@@ -122,17 +122,17 @@ object Spindexer : Subsystem {
     val spinTo0: Command = SequentialGroup( InstantCommand {
         currentPos = 0
         servo.position = pos[0]
-    }, Delay(0.2.seconds))
+    })
 
     val spinTo1: Command = SequentialGroup( InstantCommand {
         currentPos = 1
         servo.position = pos[1]
-    }, Delay(0.2.seconds))
+    })
 
     val spinTo2: Command = SequentialGroup( InstantCommand {
         currentPos = 2
         servo.position = pos[2]
-    }, Delay(0.2.seconds))
+    })
 
     fun goToCurrent(): Command =
         when(currentPos) {

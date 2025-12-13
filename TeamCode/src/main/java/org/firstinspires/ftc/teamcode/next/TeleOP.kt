@@ -19,6 +19,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
+import java.time.Instant
 
 @TeleOp
 class TeleOP: NextFTCOpMode() {
@@ -35,9 +36,6 @@ class TeleOP: NextFTCOpMode() {
         // Gamepads.gamepad1.a whenBecomesTrue Outtake.shoot // Spin up the flywheels
         Gamepads.gamepad1.b whenBecomesTrue Flywheels.stop // Slow down
 
-        Gamepads.gamepad1.leftBumper whenBecomesTrue Spindexer.spinLeft() // Spin Spindexer Left
-        Gamepads.gamepad1.rightBumper whenBecomesTrue Spindexer.spinRight() // Spin Spindexer Right
-
         Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue ParallelGroup(
             Intake.runIntake,
             InstantCommand { Spindexer.intaking = true }
@@ -46,7 +44,13 @@ class TeleOP: NextFTCOpMode() {
             InstantCommand { Spindexer.intaking = false }
         )
 
+        Gamepads.gamepad1.cross whenBecomesTrue Spindexer.spinTo0
+        Gamepads.gamepad1.square whenBecomesTrue Spindexer.spinTo2
+        Gamepads.gamepad1.circle whenBecomesTrue Spindexer.spinTo1
+
         Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake whenBecomesFalse Intake.stopIntake
+
+        Gamepads.gamepad1.triangle whenBecomesTrue InstantCommand { Flywheels.flywheelsOn = !Flywheels.flywheelsOn  }
 
         // Gamepad 2
 
@@ -55,10 +59,11 @@ class TeleOP: NextFTCOpMode() {
 
         Gamepads.gamepad2.dpadUp whenBecomesTrue InstantCommand { Hood.hoodPosition += 0.05 } // Hood Up
         Gamepads.gamepad2.dpadDown whenBecomesTrue InstantCommand { Hood.hoodPosition -= 0.05 }// Down
-        Gamepads.gamepad2.leftBumper whenTrue InstantCommand { Turret.autoTurret = false; Turret.turret.power = 0.1} // Turret Left
-        Gamepads.gamepad2.rightBumper whenTrue InstantCommand { Turret.autoTurret = false; Turret.turret.power = -0.1} // Turret Right
+        Gamepads.gamepad2.dpadLeft whenTrue InstantCommand { Turret.autoTurret = false; Turret.turret.power = 0.1} // Turret Left
+        Gamepads.gamepad2.dpadRight whenTrue InstantCommand { Turret.autoTurret = false; Turret.turret.power = -0.1} // Turret Right
 
         Gamepads.gamepad2.x whenBecomesTrue InstantCommand { Spindexer.sort = !Spindexer.sort } // Sort off
+        Gamepads.gamepad2.b whenBecomesTrue InstantCommand { Turret.autoTurret = !Turret.autoTurret }
         Gamepads.gamepad2.y whenBecomesTrue InstantCommand{ Transfer.spinTop = true }
     }
 }

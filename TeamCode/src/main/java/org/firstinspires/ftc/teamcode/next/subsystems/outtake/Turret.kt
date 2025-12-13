@@ -20,12 +20,12 @@ import kotlin.math.atan2
 
 object Turret: Subsystem {
     private val tele = MultipleTelemetry(FtcDashboard.getInstance().telemetry,ActiveOpMode.telemetry)
-    val turret = MotorEx("em1")
+    val turret = MotorEx("em1").reversed()
     private val gearRatio = 1.50
 
     @JvmField var autoTurret = true
 
-    @JvmField var turretPID = PIDCoefficients(2.0,0.0,0.2)
+    @JvmField var turretPID = PIDCoefficients(1.0,0.0,0.2)
     var turretController = controlSystem {
         posPid(turretPID)
     }

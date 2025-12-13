@@ -125,22 +125,21 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
         Flywheels.updatePid(values[1])
     }
 
-    fun shoot():Command { return SequentialGroup(
-//                buildList {
-//                    for (i in 0..balls()) {
-//                        add(
-//                            SequentialGroup(
-//                                Transfer.spin,
-//                                Delay(0.5),
-//                                InstantCommand {
-//                                    Spindexer.currentShot[i] =
-//                                        Spindexer.ballsHeld[Spindexer.currentPos]
-//                                    Spindexer.ballsHeld[Spindexer.currentPos] = null
-//                                },
-//                                Delay(0.8)
-//                            )
-//                        )
-//                    }
-//                }
-    )}
+    fun shoot(): Command { return SequentialGroup(*buildList {
+                    for (i in 0..balls()) {
+                        add(
+                            SequentialGroup(
+                                Transfer.spin,
+                                Delay(0.5),
+                                InstantCommand {
+                                    Spindexer.currentShot[i] =
+                                        Spindexer.ballsHeld[Spindexer.currentPos]
+                                    Spindexer.ballsHeld[Spindexer.currentPos] = null
+                                },
+                                Delay(0.8)
+                            )
+                        )
+                    }
+                }.toTypedArray())
+    }
 }

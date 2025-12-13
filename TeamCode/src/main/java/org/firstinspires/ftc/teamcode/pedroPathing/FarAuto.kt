@@ -39,11 +39,6 @@ class FarAuto: NextFTCOpMode() {
             update()
         }
     }
-    
-    var frontLeft = MotorEx("frontLeft")
-    var fR = MotorEx("frontRight")
-    var bR = MotorEx("backRight")
-    var bL = MotorEx("backLeft")
 
     public override fun onInit() {
         follower.setStartingPose(Far12.start)
@@ -62,6 +57,7 @@ class FarAuto: NextFTCOpMode() {
             p.ShootStart,
             p.Row3Intake,
             p.Row3ToShoot,
+            p.ToPark,
 //            p.HPIntake,
 //            p.HPToShoot
         ).schedule()
