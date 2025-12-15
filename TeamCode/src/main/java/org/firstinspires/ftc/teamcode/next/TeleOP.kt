@@ -16,6 +16,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 import org.firstinspires.ftc.teamcode.next.subsystems.data.Alliance
+import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 import org.firstinspires.ftc.teamcode.pedroPathing.Far12
 
@@ -63,7 +64,9 @@ class TeleOP: NextFTCOpMode() {
         Gamepads.gamepad2.dpadUp whenBecomesTrue Outtake.FlapDown
         Gamepads.gamepad2.dpadDown whenBecomesTrue Outtake.FlapUp
 
-        // Aimbot Controls
+        // org.firstinspires.ftc.teamcode.next.subsystems.data.Aimbot Controls
+        Gamepads.gamepad2.leftStickButton whenBecomesTrue InstantCommand { Turret.autoTurret = false }
+        Gamepads.gamepad2.rightStickButton whenBecomesTrue InstantCommand { Outtake.manualOn = false; Outtake.auto = true }
     }
 
     override fun onUpdate() {

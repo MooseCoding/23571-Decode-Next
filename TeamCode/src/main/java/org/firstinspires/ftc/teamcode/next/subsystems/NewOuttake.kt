@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
 import dev.nextftc.core.subsystems.SubsystemGroup
-import org.firstinspires.ftc.teamcode.helpers.getIndex
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.currentX
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.currentY
 import org.firstinspires.ftc.teamcode.next.subsystems.data.Aimbot

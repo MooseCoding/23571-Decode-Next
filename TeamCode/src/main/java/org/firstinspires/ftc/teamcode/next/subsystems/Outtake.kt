@@ -15,10 +15,8 @@ import dev.nextftc.hardware.impl.FeedbackCRServoEx
 import dev.nextftc.hardware.impl.FeedbackServoEx
 import dev.nextftc.hardware.impl.MotorEx
 import dev.nextftc.hardware.impl.ServoEx
-import org.firstinspires.ftc.teamcode.helpers.getIndex
 import org.firstinspires.ftc.teamcode.next.subsystems.data.Aimbot
 import org.firstinspires.ftc.teamcode.next.subsystems.data.Alliance
-import org.firstinspires.ftc.teamcode.next.tuning.Drive
 import kotlin.math.*
 import kotlin.time.Duration.Companion.seconds
 
@@ -208,6 +206,10 @@ object Outtake: Subsystem {
             spin.power = gP
             hS.position = hP
         }
+
+//        if(!manualOn && auto) {
+//            hP = Aimbot.getValues(dist)
+//        }
     }
 
     fun aimTurret() {
@@ -271,43 +273,47 @@ object Outtake: Subsystem {
         Outtake.flywheelOff,
     )
 
+    fun autoAim(){
+    }
+
+
 
     fun aimDistance() {
         if(canSpin) {
             when(manualAim){
-                12 -> targetVelo = 835.0 // 0.81
-                24 -> targetVelo = 862.0 // 0.93
-                36 -> targetVelo = 844.0 // 0.71
-                48 -> targetVelo = 848.0 // 0.6
-                60 -> targetVelo = 908.0 // 0.62
-                72 -> targetVelo = 1025.0 // 0.73
+                12 -> targetVelo = 825.0 // 0.81
+                24 -> targetVelo = 900.0 // 0.93
+                36 -> targetVelo = 930.0 // 0.71
+                48 -> targetVelo = 950.0 // 0.6
+                60 -> targetVelo = 990.0 // 0.62
+                72 -> targetVelo = 1050.0 // 0.73
                 84 -> targetVelo = 1165.0 // 0.7
                 96 -> targetVelo = 1230.0 // 0.7
                 108 -> targetVelo = 1070.0 // 0.42
                 120 -> targetVelo = 1112.0 // 0.44
                 132 -> targetVelo = 1150.0 // 0.43
-                144 -> targetVelo = 1250.0 // 0.44
+                144 -> targetVelo = 1350.0 // 0.44
                 else -> targetVelo = 0.0 // 0.0
             }
         }
         when(manualAim){
-            12 -> hP = 0.81 // 0.81
-            24 -> hP = 0.93 // 0.93
+            12 -> hP = 0.90 // 0.81
+            24 -> hP = 0.80 // 0.93
             36 -> hP = 0.71 // 0.71
-            48 -> hP = 0.6 // 0.6
-            60 -> hP = 0.62 // 0.62
-            72 -> hP = 0.65 // 0.65
-            84 -> hP = 0.7 // 0.7
-            96 -> hP = 0.7 // 0.7
+            48 -> hP = 0.50 // 0.6
+            60 -> hP = 0.45 // 0.62
+            72 -> hP = 0.35 // 0.65
+            84 -> hP = 0.40 // 0.7
+            96 -> hP = 0.43 // 0.7
             108 -> hP = 0.42 // 0.42
             120 -> hP = 0.43 // 0.43
-            134 -> hP = 0.44 // 0.44
-            146 -> hP = 0.45 // 0.45
-            else -> hP = 0.0 // 0.0
+            132 -> hP = 0.44 // 0.44
+            144 -> hP = 0.45 // 0.45
+            else -> hP = 1.0 // 0.0
         }
         if(manualAim > 146){
             manualAim = 146
-        }else if (manualAim < 12){
+        }else if (manualAim < 12) {
             manualAim = 12
         }
 

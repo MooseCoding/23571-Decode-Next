@@ -4,6 +4,8 @@ import com.acmerobotics.dashboard.FtcDashboard
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry
 import com.bylazar.telemetry.JoinedTelemetry
 import com.bylazar.telemetry.PanelsTelemetry
+import com.qualcomm.robotcore.hardware.DcMotor
+import com.qualcomm.robotcore.hardware.DcMotorSimple
 import dev.nextftc.control.KineticState
 import dev.nextftc.control.builder.controlSystem
 import dev.nextftc.control.feedback.PIDCoefficients
@@ -23,7 +25,7 @@ import kotlin.math.atan2
 
 object Turret: Subsystem {
     private val tele = MultipleTelemetry(FtcDashboard.getInstance().telemetry,ActiveOpMode.telemetry)
-    private val turret = MotorEx("turret")
+    val turret = MotorEx("turret")
     private val gearRatio = 3.47
 
     @JvmField var autoTurret = true
@@ -54,6 +56,10 @@ object Turret: Subsystem {
         val clampedHeading = deltaHeading.coerceIn(-PI, PI)
         turretController.goal = KineticState(clampedHeading, 0.0)
         turret.power = turretController.calculate(KineticState(getYaw(), 0.0))
+    }
+
+    fun zero() {
+        turret.motor.mode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
     }
 
     fun goToYaw(yaw:Double) { // Go to a specific position

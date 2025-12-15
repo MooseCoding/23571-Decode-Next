@@ -19,7 +19,7 @@ object DriveTrain: Subsystem {
      val bR = MotorEx("backRight")
 
     @JvmField var alliance = Alliance.RED
-    @JvmField var sensitivity = 0.8
+    @JvmField var sensitivity = 0.6
     var currentX = 0.0
     var currentY = 0.0
     var currentHeading = 0.0

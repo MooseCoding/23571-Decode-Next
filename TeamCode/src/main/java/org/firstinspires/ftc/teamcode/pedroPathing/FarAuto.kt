@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.pedroPathing
 
 import com.bylazar.configurables.annotations.Configurable
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
+import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.groups.SequentialGroup
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
@@ -16,14 +17,17 @@ import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 import org.firstinspires.ftc.teamcode.next.subsystems.data.Alliance
+import dev.nextftc.core.commands.utility.InstantCommand
+import kotlin.time.Duration.Companion.seconds
+
 
 @Autonomous
 @Configurable
 class FarAuto: NextFTCOpMode() {
     init {
         addComponents(
-            SubsystemComponent(Intake, Outtake, DriveTrain),
             PedroComponent(Constants::createFollower),
+            SubsystemComponent(Intake, Outtake, DriveTrain),
             BulkReadComponent,
             BindingsComponent,
         )
@@ -62,16 +66,14 @@ class FarAuto: NextFTCOpMode() {
     public override fun onStartButtonPressed() {
         val p: Far12 = Far12(DriveTrain.alliance)
         SequentialGroup(
-            p.ShootStart,
-            /*
-            InstantCommand{ Outtake.velocityTrue=true;Outtake.targetVelo = 1350.0; Outtake.hP = 0.0; Outtake.hS.position = 0.0},
-            Delay(0.5.seconds),
+            InstantCommand{ Outtake.velocityTrue=true;Outtake.targetVelo = 1280.0; Outtake.hP = 0.0; Outtake.hS.position = 0.0},
+            Delay(2.seconds),
             Intake.runIntake,
             Delay(0.2.seconds),
             Intake.stopIntake,
-            Delay(0.5.seconds),
+            Delay(1.seconds),
             Intake.runIntake,
-            Delay(0.2.seconds),
+            Delay(0.5.seconds),
             InstantCommand {
                 frontLeft.power = 0.5
                 fR.power = 0.5
@@ -100,7 +102,7 @@ class FarAuto: NextFTCOpMode() {
                 fR.power = 0.0
                 bL.power = 0.0
                 bR.power = 0.0
-            }*/
+            }
             /*p.StartToRow1,
            p.Row1Intake,
            p.Row1ToShoot,
