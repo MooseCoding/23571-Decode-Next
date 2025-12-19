@@ -11,6 +11,7 @@ import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName
+import org.firstinspires.ftc.teamcode.next.subsystems.Camera
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
@@ -27,20 +28,13 @@ class TeleOP: NextFTCOpMode() {
 
     init {
         addComponents(
-            SubsystemComponent(Intake, Outtake, DriveTrain),
+            SubsystemComponent(Intake, Outtake, DriveTrain, Camera),
             BulkReadComponent,
             BindingsComponent,
         )
     }
 
     override fun onStartButtonPressed() {
-        aprilTagProcessor = AprilTagProcessor.Builder()
-            .build()
-        visionPortal = VisionPortal.Builder()
-            .setCamera(hardwareMap.get(WebcamName::class.java, "The Eye")) // Webcam name from config
-            .addProcessor(aprilTagProcessor)
-            .setLiveViewContainerId(0)
-            .build()
         // Flap Controls
         Gamepads.gamepad2.dpadUp whenBecomesTrue Outtake.FlapDown
         Gamepads.gamepad2.dpadDown whenBecomesTrue Outtake.FlapUp
@@ -68,18 +62,7 @@ class TeleOP: NextFTCOpMode() {
     }
 
     override fun onUpdate() {
-
         tele.run {
-            val detections = aprilTagProcessor.detections
-            if (detections.isNotEmpty()) {
-                for (tag in detections) {
-                    telemetry.addData("Tag ID: ", tag.id)
-                    telemetry.addData("Center: ", tag.center)
-                    telemetry.addData("Pose: ", tag.ftcPose)
-                }
-            } else {
-                telemetry.addLine("No AprilTags detected.")
-            }
             addData("Hood Position: ", Outtake.hP)
             addData("Power: ", Outtake.targetVelo)
             addData("Distance in Tiles: ", Outtake.manualAim/24.0)
