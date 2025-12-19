@@ -6,9 +6,10 @@ INJECTED from C:\Users\phoen\Documents\GitHub\23571-decode-next\TeamCode\src\mai
 INJECTED from C:\Users\phoen\Documents\GitHub\23571-decode-next\TeamCode\src\main\AndroidManifest.xml:8:1-11:12
 MERGED from [:FtcRobotController] C:\Users\phoen\Documents\GitHub\23571-decode-next\FtcRobotController\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-78:12
 MERGED from [com.bylazar:fullpanels:1.0.7] C:\Users\phoen\.gradle\caches\8.9\transforms\638426c61d9e60977dec803d94d4b55b\transformed\fullpanels-1.0.7\AndroidManifest.xml:2:1-7:12
+MERGED from [dev.frozenmilk.sinister:Sloth:0.2.4] C:\Users\phoen\.gradle\caches\8.9\transforms\f6e88948da4cd7541e029048306b3d6c\transformed\Sloth-0.2.4\AndroidManifest.xml:2:1-7:12
 MERGED from [dev.nextftc.extensions:pedro:1.0.0] C:\Users\phoen\.gradle\caches\8.9\transforms\543af62602ce594500139a728330f274\transformed\pedro-1.0.0\AndroidManifest.xml:2:1-7:12
-MERGED from [dev.nextftc:hardware:1.0.0] C:\Users\phoen\.gradle\caches\8.9\transforms\f2f749cb291fcdf84a99cd6c10c5ad13\transformed\hardware-1.0.0\AndroidManifest.xml:2:1-7:12
-MERGED from [dev.nextftc:ftc:1.0.0] C:\Users\phoen\.gradle\caches\8.9\transforms\6904b147acd22d62878c37e375fc7d07\transformed\ftc-1.0.0\AndroidManifest.xml:2:1-7:12
+MERGED from [dev.nextftc:hardware:1.0.1] C:\Users\phoen\.gradle\caches\8.9\transforms\c3568b6bf932bc5ec0ff3f3c80e5c55c\transformed\hardware-1.0.1\AndroidManifest.xml:2:1-7:12
+MERGED from [dev.nextftc:ftc:1.0.1] C:\Users\phoen\.gradle\caches\8.9\transforms\7739dbf5381e5560e8c3ec4630293e42\transformed\ftc-1.0.1\AndroidManifest.xml:2:1-7:12
 MERGED from [com.bylazar:panels:1.0.3] C:\Users\phoen\.gradle\caches\8.9\transforms\674fa9f0867206fb7cb1ea8aa177c030\transformed\panels-1.0.3\AndroidManifest.xml:2:1-7:12
 MERGED from [com.bylazar:opmodecontrol:1.0.2] C:\Users\phoen\.gradle\caches\8.9\transforms\0bda7068c7e062990e76450568fb0192\transformed\opmodecontrol-1.0.2\AndroidManifest.xml:2:1-7:12
 MERGED from [com.bylazar:telemetry:1.0.3] C:\Users\phoen\.gradle\caches\8.9\transforms\7bc7ebb4a7ab184e12d431983b418b11\transformed\telemetry-1.0.3\AndroidManifest.xml:2:1-7:12
@@ -147,12 +148,14 @@ MERGED from [:FtcRobotController] C:\Users\phoen\Documents\GitHub\23571-decode-n
 MERGED from [:FtcRobotController] C:\Users\phoen\Documents\GitHub\23571-decode-next\FtcRobotController\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:8:5-44
 MERGED from [com.bylazar:fullpanels:1.0.7] C:\Users\phoen\.gradle\caches\8.9\transforms\638426c61d9e60977dec803d94d4b55b\transformed\fullpanels-1.0.7\AndroidManifest.xml:5:5-44
 MERGED from [com.bylazar:fullpanels:1.0.7] C:\Users\phoen\.gradle\caches\8.9\transforms\638426c61d9e60977dec803d94d4b55b\transformed\fullpanels-1.0.7\AndroidManifest.xml:5:5-44
+MERGED from [dev.frozenmilk.sinister:Sloth:0.2.4] C:\Users\phoen\.gradle\caches\8.9\transforms\f6e88948da4cd7541e029048306b3d6c\transformed\Sloth-0.2.4\AndroidManifest.xml:5:5-44
+MERGED from [dev.frozenmilk.sinister:Sloth:0.2.4] C:\Users\phoen\.gradle\caches\8.9\transforms\f6e88948da4cd7541e029048306b3d6c\transformed\Sloth-0.2.4\AndroidManifest.xml:5:5-44
 MERGED from [dev.nextftc.extensions:pedro:1.0.0] C:\Users\phoen\.gradle\caches\8.9\transforms\543af62602ce594500139a728330f274\transformed\pedro-1.0.0\AndroidManifest.xml:5:5-44
 MERGED from [dev.nextftc.extensions:pedro:1.0.0] C:\Users\phoen\.gradle\caches\8.9\transforms\543af62602ce594500139a728330f274\transformed\pedro-1.0.0\AndroidManifest.xml:5:5-44
-MERGED from [dev.nextftc:hardware:1.0.0] C:\Users\phoen\.gradle\caches\8.9\transforms\f2f749cb291fcdf84a99cd6c10c5ad13\transformed\hardware-1.0.0\AndroidManifest.xml:5:5-44
-MERGED from [dev.nextftc:hardware:1.0.0] C:\Users\phoen\.gradle\caches\8.9\transforms\f2f749cb291fcdf84a99cd6c10c5ad13\transformed\hardware-1.0.0\AndroidManifest.xml:5:5-44
-MERGED from [dev.nextftc:ftc:1.0.0] C:\Users\phoen\.gradle\caches\8.9\transforms\6904b147acd22d62878c37e375fc7d07\transformed\ftc-1.0.0\AndroidManifest.xml:5:5-44
-MERGED from [dev.nextftc:ftc:1.0.0] C:\Users\phoen\.gradle\caches\8.9\transforms\6904b147acd22d62878c37e375fc7d07\transformed\ftc-1.0.0\AndroidManifest.xml:5:5-44
+MERGED from [dev.nextftc:hardware:1.0.1] C:\Users\phoen\.gradle\caches\8.9\transforms\c3568b6bf932bc5ec0ff3f3c80e5c55c\transformed\hardware-1.0.1\AndroidManifest.xml:5:5-44
+MERGED from [dev.nextftc:hardware:1.0.1] C:\Users\phoen\.gradle\caches\8.9\transforms\c3568b6bf932bc5ec0ff3f3c80e5c55c\transformed\hardware-1.0.1\AndroidManifest.xml:5:5-44
+MERGED from [dev.nextftc:ftc:1.0.1] C:\Users\phoen\.gradle\caches\8.9\transforms\7739dbf5381e5560e8c3ec4630293e42\transformed\ftc-1.0.1\AndroidManifest.xml:5:5-44
+MERGED from [dev.nextftc:ftc:1.0.1] C:\Users\phoen\.gradle\caches\8.9\transforms\7739dbf5381e5560e8c3ec4630293e42\transformed\ftc-1.0.1\AndroidManifest.xml:5:5-44
 MERGED from [com.bylazar:panels:1.0.3] C:\Users\phoen\.gradle\caches\8.9\transforms\674fa9f0867206fb7cb1ea8aa177c030\transformed\panels-1.0.3\AndroidManifest.xml:5:5-44
 MERGED from [com.bylazar:panels:1.0.3] C:\Users\phoen\.gradle\caches\8.9\transforms\674fa9f0867206fb7cb1ea8aa177c030\transformed\panels-1.0.3\AndroidManifest.xml:5:5-44
 MERGED from [com.bylazar:opmodecontrol:1.0.2] C:\Users\phoen\.gradle\caches\8.9\transforms\0bda7068c7e062990e76450568fb0192\transformed\opmodecontrol-1.0.2\AndroidManifest.xml:5:5-44
