@@ -9,9 +9,6 @@ import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
-import org.firstinspires.ftc.robotcore.external.Telemetry
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName
-import org.firstinspires.ftc.teamcode.next.subsystems.Camera
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
@@ -28,7 +25,7 @@ class TeleOP: NextFTCOpMode() {
 
     init {
         addComponents(
-            SubsystemComponent(Intake, Outtake, DriveTrain, Camera),
+            SubsystemComponent(Intake, Outtake, DriveTrain),
             BulkReadComponent,
             BindingsComponent,
         )
