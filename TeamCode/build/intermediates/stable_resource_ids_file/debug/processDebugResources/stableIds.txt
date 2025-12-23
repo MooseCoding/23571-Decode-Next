@@ -1,3 +1,4 @@
+com.qualcomm.ftcrobotcontroller:xml/swyft_test = 0x7f14000f
 com.qualcomm.ftcrobotcontroller:xml/squarebot = 0x7f14000e
 com.qualcomm.ftcrobotcontroller:xml/rev_scoot = 0x7f14000d
 com.qualcomm.ftcrobotcontroller:xml/pushbotsens = 0x7f14000c
@@ -1905,7 +1906,7 @@ com.qualcomm.ftcrobotcontroller:attr/helperText = 0x7f04020c
 com.qualcomm.ftcrobotcontroller:macro/m3_comp_navigation_bar_active_pressed_icon_color = 0x7f0d0068
 com.qualcomm.ftcrobotcontroller:macro/m3_comp_navigation_bar_active_label_text_color = 0x7f0d0067
 com.qualcomm.ftcrobotcontroller:macro/m3_comp_navigation_bar_active_indicator_color = 0x7f0d0066
-com.qualcomm.ftcrobotcontroller:xml/teamwebcamcalibrations = 0x7f14000f
+com.qualcomm.ftcrobotcontroller:xml/teamwebcamcalibrations = 0x7f140010
 com.qualcomm.ftcrobotcontroller:style/Theme.Material3.DayNight.NoActionBar = 0x7f12024a
 com.qualcomm.ftcrobotcontroller:macro/m3_comp_navigation_bar_active_hover_state_layer_color = 0x7f0d0064
 com.qualcomm.ftcrobotcontroller:color/m3_button_outline_color_selector = 0x7f060090

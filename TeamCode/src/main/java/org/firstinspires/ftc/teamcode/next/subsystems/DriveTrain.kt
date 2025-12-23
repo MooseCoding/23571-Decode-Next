@@ -9,7 +9,7 @@ import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.hardware.driving.MecanumDriverControlled
 import dev.nextftc.hardware.impl.MotorEx
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName
+import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import org.firstinspires.ftc.teamcode.pedroPathing.Far12
 import org.firstinspires.ftc.vision.VisionPortal
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor
@@ -21,7 +21,7 @@ object DriveTrain: Subsystem {
      val bL = MotorEx("cm2")
      val bR = MotorEx("cm3")
 
-    @JvmField var alliance = Alliance.BLUE
+    @JvmField var alliance:Alliance = Alliance.BLUE
     @JvmField var sensitivity = 0.8
     var currentX = 0.0
     var currentY = 0.0

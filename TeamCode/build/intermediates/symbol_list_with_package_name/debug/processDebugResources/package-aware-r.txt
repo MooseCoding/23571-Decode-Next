@@ -6330,4 +6330,5 @@ xml pushbot
 xml pushbotsens
 xml rev_scoot
 xml squarebot
+xml swyft_test
 xml teamwebcamcalibrations

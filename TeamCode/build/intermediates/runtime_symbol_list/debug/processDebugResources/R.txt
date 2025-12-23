@@ -8003,4 +8003,5 @@ int xml pushbot 0x7f14000b
 int xml pushbotsens 0x7f14000c
 int xml rev_scoot 0x7f14000d
 int xml squarebot 0x7f14000e
-int xml teamwebcamcalibrations 0x7f14000f
+int xml swyft_test 0x7f14000f
+int xml teamwebcamcalibrations 0x7f140010
