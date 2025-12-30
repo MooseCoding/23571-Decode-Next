@@ -7,11 +7,12 @@ import dev.nextftc.ftc.ActiveOpMode.telemetry
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName
 import org.firstinspires.ftc.vision.VisionPortal
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection
-import org.firstinspires.ftc.vision.apriltag.AprilTagLibrary
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor
 
 
-object Camera: Subsystem {
+class Camera: Subsystem {
+    private val aprilTag: AprilTagProcessor? = null
+
     private var aprilTagProcessor = AprilTagProcessor.Builder()
         .build()
 
