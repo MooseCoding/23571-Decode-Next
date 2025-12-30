@@ -9,17 +9,18 @@ import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
+import org.firstinspires.ftc.teamcode.next.subsystems.Camera
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 
 @TeleOp
-class TeleOP: NextFTCOpMode() {
+object TeleOP: NextFTCOpMode() {
     var tele = JoinedTelemetry(PanelsTelemetry.ftcTelemetry, telemetry)
 
     init {
         addComponents(
-            SubsystemComponent(Intake, Outtake, DriveTrain),
+            SubsystemComponent(Intake, Outtake, DriveTrain, Camera),
             BulkReadComponent,
             BindingsComponent,
         )

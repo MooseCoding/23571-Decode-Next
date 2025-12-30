@@ -10,7 +10,10 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagDetection
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor
 
 
-class Camera: Subsystem {
+object Camera: Subsystem {
+    val Distance = 0.0
+    val Rotation = 0.0
+
     private val aprilTag: AprilTagProcessor? = null
 
     private var aprilTagProcessor = AprilTagProcessor.Builder()
@@ -34,7 +37,7 @@ class Camera: Subsystem {
 
         // Step through the list of detections and display info for each one.
         for (detection in currentDetections) {
-            if (detection.metadata != null) {
+            if (detection.metadata != null) { //Blue ID = 20 // Red ID = 24
                 telemetry.addLine(
                     String.format(
                         "\n==== (ID %d) %s",
@@ -45,25 +48,9 @@ class Camera: Subsystem {
                 telemetry.addLine(
                     String.format(
                         "XYZ %6.1f %6.1f %6.1f  (inch)",
-                        detection.ftcPose.x,
-                        detection.ftcPose.y,
+                        detection.ftcPose.x, //x is horizontal distance aka turret rotation
+                        detection.ftcPose.y, //y is distance from tag
                         detection.ftcPose.z
-                    )
-                )
-                telemetry.addLine(
-                    String.format(
-                        "PRY %6.1f %6.1f %6.1f  (deg)",
-                        detection.ftcPose.pitch,
-                        detection.ftcPose.roll,
-                        detection.ftcPose.yaw
-                    )
-                )
-                telemetry.addLine(
-                    String.format(
-                        "RBE %6.1f %6.1f %6.1f  (inch, deg, deg)",
-                        detection.ftcPose.range,
-                        detection.ftcPose.bearing,
-                        detection.ftcPose.elevation
                     )
                 )
             } else {
@@ -80,9 +67,7 @@ class Camera: Subsystem {
 
 
         // Add "key" information to telemetry
-        telemetry.addLine("\nkey:\nXYZ = X (Right), Y (Forward), Z (Up) dist.")
-        telemetry.addLine("PRY = Pitch, Roll & Yaw (XYZ Rotation)")
-        telemetry.addLine("RBE = Range, Bearing & Elevation")
+        telemetry.addLine("\nkey:\nXYZ = X (Right/Left), Y (Forward), Z (Up/Down) dist.")
     } // end method telemetryAprilTag()
 
 }

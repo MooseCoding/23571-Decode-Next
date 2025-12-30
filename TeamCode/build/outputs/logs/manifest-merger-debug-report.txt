@@ -5,14 +5,15 @@ INJECTED from C:\Users\phoen\Documents\GitHub\23571-decode-next\TeamCode\src\mai
 INJECTED from C:\Users\phoen\Documents\GitHub\23571-decode-next\TeamCode\src\main\AndroidManifest.xml:8:1-11:12
 INJECTED from C:\Users\phoen\Documents\GitHub\23571-decode-next\TeamCode\src\main\AndroidManifest.xml:8:1-11:12
 MERGED from [:FtcRobotController] C:\Users\phoen\Documents\GitHub\23571-decode-next\FtcRobotController\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-78:12
-MERGED from [com.bylazar:fullpanels:1.0.7] C:\Users\phoen\.gradle\caches\8.9\transforms\638426c61d9e60977dec803d94d4b55b\transformed\fullpanels-1.0.7\AndroidManifest.xml:2:1-7:12
+MERGED from [com.acmerobotics.slothboard:dashboard:0.2.4+0.4.17] C:\Users\phoen\.gradle\caches\8.9\transforms\677d788ac6214fd40a2eb03bbe714c77\transformed\dashboard-0.2.4+0.4.17\AndroidManifest.xml:2:1-7:12
+MERGED from [com.bylazar:fullpanels:1.0.8] C:\Users\phoen\.gradle\caches\8.9\transforms\79ed00148510a7ba0eed7c485474dfea\transformed\fullpanels-1.0.8\AndroidManifest.xml:2:1-7:12
 MERGED from [dev.frozenmilk.sinister:Sloth:0.2.4] C:\Users\phoen\.gradle\caches\8.9\transforms\f6e88948da4cd7541e029048306b3d6c\transformed\Sloth-0.2.4\AndroidManifest.xml:2:1-7:12
 MERGED from [dev.nextftc.extensions:pedro:1.0.0] C:\Users\phoen\.gradle\caches\8.9\transforms\543af62602ce594500139a728330f274\transformed\pedro-1.0.0\AndroidManifest.xml:2:1-7:12
 MERGED from [dev.nextftc:hardware:1.0.1] C:\Users\phoen\.gradle\caches\8.9\transforms\c3568b6bf932bc5ec0ff3f3c80e5c55c\transformed\hardware-1.0.1\AndroidManifest.xml:2:1-7:12
 MERGED from [dev.nextftc:ftc:1.0.1] C:\Users\phoen\.gradle\caches\8.9\transforms\7739dbf5381e5560e8c3ec4630293e42\transformed\ftc-1.0.1\AndroidManifest.xml:2:1-7:12
 MERGED from [com.bylazar:panels:1.0.3] C:\Users\phoen\.gradle\caches\8.9\transforms\674fa9f0867206fb7cb1ea8aa177c030\transformed\panels-1.0.3\AndroidManifest.xml:2:1-7:12
 MERGED from [com.bylazar:opmodecontrol:1.0.2] C:\Users\phoen\.gradle\caches\8.9\transforms\0bda7068c7e062990e76450568fb0192\transformed\opmodecontrol-1.0.2\AndroidManifest.xml:2:1-7:12
-MERGED from [com.bylazar:telemetry:1.0.3] C:\Users\phoen\.gradle\caches\8.9\transforms\7bc7ebb4a7ab184e12d431983b418b11\transformed\telemetry-1.0.3\AndroidManifest.xml:2:1-7:12
+MERGED from [com.bylazar:telemetry:1.0.4] C:\Users\phoen\.gradle\caches\8.9\transforms\6603879c48aebff1060177b47ea01acf\transformed\telemetry-1.0.4\AndroidManifest.xml:2:1-7:12
 MERGED from [com.bylazar:configurables:1.0.3] C:\Users\phoen\.gradle\caches\8.9\transforms\f6ba0535647af7943a94279a67d27b22\transformed\configurables-1.0.3\AndroidManifest.xml:2:1-7:12
 MERGED from [com.bylazar:themes:1.0.2] C:\Users\phoen\.gradle\caches\8.9\transforms\6ee105e8b0eaedddfa2caef0e7c32bdd\transformed\themes-1.0.2\AndroidManifest.xml:2:1-7:12
 MERGED from [com.bylazar:capture:1.0.2] C:\Users\phoen\.gradle\caches\8.9\transforms\fc546a7db3639cfd1a9c2c42f537b413\transformed\capture-1.0.2\AndroidManifest.xml:2:1-7:12
@@ -146,8 +147,10 @@ INJECTED from C:\Users\phoen\Documents\GitHub\23571-decode-next\TeamCode\src\mai
 INJECTED from C:\Users\phoen\Documents\GitHub\23571-decode-next\TeamCode\src\main\AndroidManifest.xml
 MERGED from [:FtcRobotController] C:\Users\phoen\Documents\GitHub\23571-decode-next\FtcRobotController\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:8:5-44
 MERGED from [:FtcRobotController] C:\Users\phoen\Documents\GitHub\23571-decode-next\FtcRobotController\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:8:5-44
-MERGED from [com.bylazar:fullpanels:1.0.7] C:\Users\phoen\.gradle\caches\8.9\transforms\638426c61d9e60977dec803d94d4b55b\transformed\fullpanels-1.0.7\AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar:fullpanels:1.0.7] C:\Users\phoen\.gradle\caches\8.9\transforms\638426c61d9e60977dec803d94d4b55b\transformed\fullpanels-1.0.7\AndroidManifest.xml:5:5-44
+MERGED from [com.acmerobotics.slothboard:dashboard:0.2.4+0.4.17] C:\Users\phoen\.gradle\caches\8.9\transforms\677d788ac6214fd40a2eb03bbe714c77\transformed\dashboard-0.2.4+0.4.17\AndroidManifest.xml:5:5-44
+MERGED from [com.acmerobotics.slothboard:dashboard:0.2.4+0.4.17] C:\Users\phoen\.gradle\caches\8.9\transforms\677d788ac6214fd40a2eb03bbe714c77\transformed\dashboard-0.2.4+0.4.17\AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:fullpanels:1.0.8] C:\Users\phoen\.gradle\caches\8.9\transforms\79ed00148510a7ba0eed7c485474dfea\transformed\fullpanels-1.0.8\AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:fullpanels:1.0.8] C:\Users\phoen\.gradle\caches\8.9\transforms\79ed00148510a7ba0eed7c485474dfea\transformed\fullpanels-1.0.8\AndroidManifest.xml:5:5-44
 MERGED from [dev.frozenmilk.sinister:Sloth:0.2.4] C:\Users\phoen\.gradle\caches\8.9\transforms\f6e88948da4cd7541e029048306b3d6c\transformed\Sloth-0.2.4\AndroidManifest.xml:5:5-44
 MERGED from [dev.frozenmilk.sinister:Sloth:0.2.4] C:\Users\phoen\.gradle\caches\8.9\transforms\f6e88948da4cd7541e029048306b3d6c\transformed\Sloth-0.2.4\AndroidManifest.xml:5:5-44
 MERGED from [dev.nextftc.extensions:pedro:1.0.0] C:\Users\phoen\.gradle\caches\8.9\transforms\543af62602ce594500139a728330f274\transformed\pedro-1.0.0\AndroidManifest.xml:5:5-44
@@ -160,8 +163,8 @@ MERGED from [com.bylazar:panels:1.0.3] C:\Users\phoen\.gradle\caches\8.9\transfo
 MERGED from [com.bylazar:panels:1.0.3] C:\Users\phoen\.gradle\caches\8.9\transforms\674fa9f0867206fb7cb1ea8aa177c030\transformed\panels-1.0.3\AndroidManifest.xml:5:5-44
 MERGED from [com.bylazar:opmodecontrol:1.0.2] C:\Users\phoen\.gradle\caches\8.9\transforms\0bda7068c7e062990e76450568fb0192\transformed\opmodecontrol-1.0.2\AndroidManifest.xml:5:5-44
 MERGED from [com.bylazar:opmodecontrol:1.0.2] C:\Users\phoen\.gradle\caches\8.9\transforms\0bda7068c7e062990e76450568fb0192\transformed\opmodecontrol-1.0.2\AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar:telemetry:1.0.3] C:\Users\phoen\.gradle\caches\8.9\transforms\7bc7ebb4a7ab184e12d431983b418b11\transformed\telemetry-1.0.3\AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar:telemetry:1.0.3] C:\Users\phoen\.gradle\caches\8.9\transforms\7bc7ebb4a7ab184e12d431983b418b11\transformed\telemetry-1.0.3\AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:telemetry:1.0.4] C:\Users\phoen\.gradle\caches\8.9\transforms\6603879c48aebff1060177b47ea01acf\transformed\telemetry-1.0.4\AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:telemetry:1.0.4] C:\Users\phoen\.gradle\caches\8.9\transforms\6603879c48aebff1060177b47ea01acf\transformed\telemetry-1.0.4\AndroidManifest.xml:5:5-44
 MERGED from [com.bylazar:configurables:1.0.3] C:\Users\phoen\.gradle\caches\8.9\transforms\f6ba0535647af7943a94279a67d27b22\transformed\configurables-1.0.3\AndroidManifest.xml:5:5-44
 MERGED from [com.bylazar:configurables:1.0.3] C:\Users\phoen\.gradle\caches\8.9\transforms\f6ba0535647af7943a94279a67d27b22\transformed\configurables-1.0.3\AndroidManifest.xml:5:5-44
 MERGED from [com.bylazar:themes:1.0.2] C:\Users\phoen\.gradle\caches\8.9\transforms\6ee105e8b0eaedddfa2caef0e7c32bdd\transformed\themes-1.0.2\AndroidManifest.xml:5:5-44
