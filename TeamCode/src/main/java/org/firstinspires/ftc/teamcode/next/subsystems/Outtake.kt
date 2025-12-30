@@ -25,15 +25,9 @@ import dev.nextftc.hardware.impl.MotorEx
 import dev.nextftc.hardware.impl.ServoEx
 import dev.nextftc.hardware.powerable.SetPower
 import java.time.Instant
-import kotlin.time.Duration.Companion.seconds
 import  dev.nextftc.ftc.ActiveOpMode;
 import org.firstinspires.ftc.robotcore.internal.hardware.android.GpioPin.Active
-import kotlin.math.atan
-import kotlin.math.atan2
-import kotlin.math.cos
-import kotlin.math.pow
-import kotlin.math.sin
-import kotlin.math.sqrt
+
 
 @Configurable
 object Outtake: Subsystem {
