@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 
 @TeleOp
-object TeleOP: NextFTCOpMode() {
+class TeleOP: NextFTCOpMode() {
     var tele = JoinedTelemetry(PanelsTelemetry.ftcTelemetry, telemetry)
 
     init {
