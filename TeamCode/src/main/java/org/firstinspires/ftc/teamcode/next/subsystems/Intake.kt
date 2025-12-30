@@ -27,15 +27,24 @@ object Intake: Subsystem {
         iM.power = iP
     }
 
-    val runIntake = InstantCommand {
+    /**
+     * @return Runs the intake at full power
+     */
+    fun runIntake(): InstantCommand = InstantCommand {
         iP = 1.0 // Some constant
     }
 
-    val reverseIntake = InstantCommand {
+    /**
+     * @return Reverses the intake at full power
+     */
+    fun reverseIntake(): InstantCommand = InstantCommand {
         iP = -1.0
     }
 
-    val stopIntake = InstantCommand {
+    /**
+     * @return Stops the intake
+     */
+    fun stopIntake(): InstantCommand = InstantCommand {
         iP = 0.0
     }
 }

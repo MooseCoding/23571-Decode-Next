@@ -47,6 +47,8 @@ object DriveTrain: Subsystem {
     override fun initialize() {
     }
 
+    /*
+
     fun PoseInTriangle(p: Pose, a: Pose, b: Pose, c: Pose): Boolean {
         val det = (b.y - c.y) * (a.x - c.x) + (c.x - b.x) * (a.y - c.y)
         if (kotlin.math.abs(det) < 1e-6) return false
@@ -91,4 +93,6 @@ object DriveTrain: Subsystem {
         val inObstacle = overlaps(obstacle)
         return (inUpper || inLower) && !inObstacle
     }
+
+     */
 }

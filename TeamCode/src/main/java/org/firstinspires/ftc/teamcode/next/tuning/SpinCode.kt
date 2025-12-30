@@ -9,7 +9,6 @@ import dev.nextftc.ftc.components.BulkReadComponent
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Limelight
 import org.firstinspires.ftc.teamcode.next.subsystems.Sensor
-import org.firstinspires.ftc.teamcode.next.subsystems.Spindexer
 import org.firstinspires.ftc.teamcode.next.subsystems.Transfer
 
 @TeleOp

@@ -5,30 +5,35 @@ import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.commands.utility.LambdaCommand
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.hardware.impl.CRServoEx
+import dev.nextftc.hardware.impl.MotorEx
 
 object Transfer: Subsystem {
-    val topServo: CRServoEx = CRServoEx("cr0")
-    val bottomServo: CRServoEx = CRServoEx("cr1")
+    private val transferMotor: MotorEx = MotorEx("em0")
 
-    var spinBottom:Boolean = false
-    var spinTop:Boolean = false
-
-    override fun initialize() {
-        bottomServo.power = 0.0
-    }
+    private var power: Double = 0.0
 
     override fun periodic() {
-        topServo.power = if(spinTop) 1.0 else 0.0
-        bottomServo.power = -1.0
+        transferMotor.power = power
     }
 
-    val spin:InstantCommand = InstantCommand {
-        spinTop = true
-        spinBottom = true
+    /**
+     * @return Starts the transfer up at full power
+     */
+    fun start():InstantCommand = InstantCommand {
+        power = 1.0
     }
 
-    val stop:InstantCommand = InstantCommand {
-        spinTop = false
-        spinBottom = false
+    /**
+     * @return Stops the transfer
+     */
+    fun stop() :InstantCommand = InstantCommand {
+        power = 0.0
+    }
+
+    /**
+     * @return Spins the transfer in reverse at full power
+     */
+    fun reverse(): InstantCommand = InstantCommand {
+        power = -1.0
     }
 }

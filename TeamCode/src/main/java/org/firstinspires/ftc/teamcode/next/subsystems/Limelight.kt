@@ -5,6 +5,8 @@ import com.pedropathing.geometry.Pose
 import com.qualcomm.hardware.limelightvision.LLResult
 import com.qualcomm.hardware.limelightvision.LLResultTypes.FiducialResult
 import com.qualcomm.hardware.limelightvision.Limelight3A
+import dev.nextftc.control2.filters.KalmanFilter
+import dev.nextftc.control2.model.LinearModel
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Motif

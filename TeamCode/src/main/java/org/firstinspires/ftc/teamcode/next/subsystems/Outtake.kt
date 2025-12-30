@@ -10,7 +10,6 @@ import dev.nextftc.core.commands.utility.LambdaCommand
 import dev.nextftc.core.subsystems.SubsystemGroup
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.currentX
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.currentY
-import org.firstinspires.ftc.teamcode.next.subsystems.Spindexer.balls
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Aimbot
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
@@ -45,7 +44,9 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
         }
     }
 
-    // Manual Aim From Hardcoded Values
+    /**
+    * Manual Aim From Hardcoded Values
+     */
     fun manualAim() {
         var fP = 0.0
         var hP = 0.0
@@ -116,7 +117,9 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
         Hood.hoodPosition = hP
     }
 
-    // Auto Functions
+    /**
+     * Auto flywheel and auto hood positioning
+     */
     fun auto() {
         val dist: Double = sqrt((goalX - currentX).pow(2) + (goalY - currentY).pow(2))
         val values: DoubleArray = Aimbot.getValues(dist)
@@ -125,20 +128,8 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
         Flywheels.updatePid(values[1])
     }
 
-    fun shoot(): Command { return SequentialGroupLocal(*buildList {
-                    for (i in 0..balls()) {
-                        add(
-                            SequentialGroupLocal(
-                                Transfer.spin,
-                                Delay(0.5),
-                                InstantCommand {
-                                    Spindexer.currentShot[i] = Spindexer.ballsHeld[Spindexer.currentPos]
-                                    Spindexer.ballsHeld[Spindexer.currentPos] = null
-                                },
-                                Delay(0.8)
-                            )
-                        )
-                    }
-                }.toTypedArray())
-    }
+    fun shoot(): Command = SequentialGroupLocal(
+
+    )
+
 }

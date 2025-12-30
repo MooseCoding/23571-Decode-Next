@@ -4,6 +4,7 @@ import dev.nextftc.control.KineticState
 import dev.nextftc.control.builder.controlSystem
 import dev.nextftc.control.feedback.PIDCoefficients
 import dev.nextftc.control.feedforward.BasicFeedforwardParameters
+import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
@@ -51,17 +52,17 @@ object Flywheels: Subsystem {
         targetVelocity = velocity
     }
 
-    val spin = InstantCommand {
+    /**
+     * @return Spins the Flywheel
+     */
+    fun spin(): Command = InstantCommand {
         flywheelsOn = true
     }
 
+    /**
+     * @return Stops the Flywheel
+     */
     val stop = InstantCommand {
         flywheelsOn = false
-    }
-
-    val backOut = InstantCommand {
-        stop.schedule()
-        f1.power = -0.5
-        f2.power = f1.power
     }
 }

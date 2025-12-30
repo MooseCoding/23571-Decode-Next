@@ -17,7 +17,6 @@ import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
-import org.firstinspires.ftc.teamcode.next.subsystems.Spindexer
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Motif
 
@@ -61,50 +60,6 @@ class FarAuto: NextFTCOpMode() {
 
     public override fun onStartButtonPressed() {
         val p = Far12(alliance)
-
-        when(Spindexer.targetMotif) {
-            Motif.PGP -> {
-                SequentialGroupLocal(
-                    Spindexer.spinTo1,
-                    Outtake.shoot(),
-                    Spindexer.spinTo0,
-                    Delay(2.0),
-                    Outtake.shoot(),
-                    Spindexer.spinTo2,
-                    Delay(2.0),
-                    Outtake.shoot(),
-                    Delay(2.0),
-                    p.StartToPark,
-                )
-            }
-            Motif.PPG -> {
-                SequentialGroupLocal(
-                    Spindexer.spinTo1,
-                    Outtake.shoot(),
-                    Spindexer.spinTo2,
-                    Delay(2.0),
-                    Outtake.shoot(),
-                    Spindexer.spinTo0,
-                    Delay(2.0),
-                    Outtake.shoot(),
-                    Delay(2.0),
-                    p.StartToPark,
-                )
-            }
-            else -> {
-                SequentialGroupLocal(
-                    Outtake.shoot(),
-                    Spindexer.spinTo1,
-                    Delay(2.0),
-                    Outtake.shoot(),
-                    Spindexer.spinTo2,
-                    Delay(2.0),
-                    Outtake.shoot(),
-                    Delay(2.0),
-                    p.StartToPark,
-                )
-            }
-        }
     }
 
 
