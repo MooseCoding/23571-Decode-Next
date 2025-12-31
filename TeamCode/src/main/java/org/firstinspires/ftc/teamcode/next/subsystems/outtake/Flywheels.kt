@@ -62,7 +62,7 @@ object Flywheels: Subsystem {
     /**
      * @return Stops the Flywheel
      */
-    val stop = InstantCommand {
+    fun stop(): Command = InstantCommand {
         flywheelsOn = false
     }
 }

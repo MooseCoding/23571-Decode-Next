@@ -8,6 +8,7 @@ import com.qualcomm.hardware.limelightvision.Limelight3A
 import dev.nextftc.control2.filters.KalmanFilter
 import dev.nextftc.control2.model.LinearModel
 import dev.nextftc.core.subsystems.Subsystem
+import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import dev.nextftc.ftc.ActiveOpMode
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Motif
 
@@ -29,6 +30,14 @@ object Limelight: Subsystem {
         ll.setPollRateHz(100)
         ll.pipelineSwitch(0)
         ll.start()
+    }
+
+    override fun periodic() {
+        val p = megatag2()
+
+        if (p != null) {
+            follower.pose = Pose(p.x, p.y, follower.heading)
+        }
     }
 
     fun motif(): Motif {

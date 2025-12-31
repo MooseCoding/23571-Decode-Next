@@ -10,15 +10,18 @@ import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Artifact
+import java.sql.Time
 import kotlin.math.max
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 @Config
 object Sensor: Subsystem {
     val cS: RevColorSensorV3 = ActiveOpMode.hardwareMap.get(RevColorSensorV3::class.java, "cs")
 
     var timer: Timer = Timer()
-    val framesReq = 5
-    var frames = 0
+
+    private const val INTAKE_TIME: Double = 0.2
 
     var currentArtifact:Artifact? = null
 
@@ -33,10 +36,17 @@ object Sensor: Subsystem {
             currentArtifact = null
         }
 
-        if(frames > framesReq && ds<25.0 && currentArtifact != null) {
+        if(timer.elapsedTime > INTAKE_TIME && ds<25.0 && currentArtifact == null && Transfer.currentBall != 3) {
             currentArtifact = getColor()
+            Transfer.ballsHeld[Transfer.currentBall] = currentArtifact
+            Transfer.currentBall++
 
-            frames = 0
+            if(Transfer.currentBall == 3) {
+                Light.Green().schedule()
+            }
+
+            currentArtifact = null
+            timer.resetTimer()
         }
 
         ActiveOpMode.telemetry.run {
@@ -44,16 +54,14 @@ object Sensor: Subsystem {
             addData("red", cS.normalizedColors.red)
             addData("blue", cS.normalizedColors.blue)
             addData("color", currentArtifact)
-            addData("frames", frames)
             addData("loop time", timer.elapsedTime)
             addData("Distance", cS.getDistance(DistanceUnit.MM))
         }
-
-        timer.resetTimer()
-
-        frames++
     }
 
+    /**
+     * @return An [Artifact] or null based on the color of the ball
+     */
     fun getColor(): Artifact? {
         val c = cS.normalizedColors
         val d = cS.getDistance(DistanceUnit.MM)

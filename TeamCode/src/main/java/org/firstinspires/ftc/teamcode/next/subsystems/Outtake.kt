@@ -1,9 +1,15 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
+import androidx.core.content.pm.ShortcutInfoCompatSaver
 import com.acmerobotics.dashboard.config.Config
 import com.bylazar.configurables.annotations.Configurable
+import com.qualcomm.ftccommon.FtcEventLoopHandler
 import dev.nextftc.core.commands.Command
+import dev.nextftc.core.commands.conditionals.IfElseCommand
+import dev.nextftc.core.commands.conditionals.switchCommand
 import dev.nextftc.core.commands.delays.Delay
+import dev.nextftc.core.commands.delays.WaitUntil
+import dev.nextftc.core.commands.groups.ParallelGroup
 import org.firstinspires.ftc.teamcode.helpers.SequentialGroupLocal
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.commands.utility.LambdaCommand
@@ -12,16 +18,18 @@ import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.currentX
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.currentY
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Aimbot
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
+import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Dist
+import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Blocker
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import kotlin.math.pow
 import kotlin.math.sqrt
+import kotlin.time.Duration.Companion.seconds
 
 object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
     var fullManual = false
-    var distance = 12
-    var autoShoot = false
+    var distance: Dist = Dist.FAR
 
     var goalX = 6.0;
     val goalY = 144 - 8.0
@@ -52,64 +60,14 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
         var hP = 0.0
 
         when (distance) {
-            12 -> {
-                fP = 850.0 // Idk tune
-                hP = 0.0
+            Dist.FAR -> {
+                fP = 1500.0
+                hP = 0.5
             }
 
-            24 -> {
-                fP = 890.0
-                hP = 0.1
-            }
-
-            36 -> {
-                fP = 950.0
-                hP = 0.15
-            }
-
-            48 -> {
-                fP = 1000.0
-                hP = 0.2
-            }
-
-            60 -> {
+            Dist.CLOSE -> {
                 fP = 1200.0
                 hP = 0.3
-            }
-
-            72 -> {
-                fP = 1300.0
-                hP = 0.4
-            }
-
-            84 -> {
-                fP = 1400.0
-                hP = 0.6
-            }
-
-            96 -> {
-                fP = 1600.0
-                hP = 0.7
-            }
-
-            108 -> {
-                fP = 1800.0
-                hP = 0.7
-            }
-
-            120 -> {
-                fP = 1900.0
-                hP = 0.8
-            }
-
-            132 -> {
-                fP = 2000.0
-                hP = 0.8
-            }
-
-            144 -> {
-                fP = 2200.0
-                hP = 0.9
             }
         }
 
@@ -128,8 +86,90 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
         Flywheels.updatePid(values[1])
     }
 
-    fun shoot(): Command = SequentialGroupLocal(
+    /**
+     * @return Command to run for the shoot command
+     */
+    fun shoot(): Command {
+        val i = Transfer.getBalls()
+        var c: Command = InstantCommand { } // Command to return
+        when(i) {
+            1 -> {
+                c = SequentialGroupLocal(
+                    Blocker.open(),
+                    WaitUntil { Flywheels.targetVelocity > Flywheels.targetVelocity - 60.0 },
+                    ParallelGroup(
+                        Transfer.start(),
+                        Intake.runIntake()
+                    ),
+                    Blocker.close(),
+                    Flywheels.stop()
+                )
+                Transfer.currentBall--
+            }
+            2 -> {
+                c = SequentialGroupLocal(
+                    Blocker.open(),
+                    WaitUntil { Flywheels.targetVelocity > Flywheels.targetVelocity - 60.0 },
+                    ParallelGroup(
+                        Transfer.start(),
+                        Intake.runIntake(),
+                        Delay(0.05.seconds)
+                    ),
+                    ParallelGroup(
+                        Intake.stopIntake(),
+                        Transfer.stop()
+                    ),
 
-    )
+                    InstantCommand { Transfer.currentBall-- },
+                    WaitUntil { Flywheels.targetVelocity > Flywheels.targetVelocity - 60.0 },
+                    ParallelGroup(
+                        Transfer.start(),
+                        Intake.runIntake()
+                    ),
+                    Blocker.close(),
+                    Flywheels.stop()
+                )
+                Transfer.currentBall--
+            }
+            3 -> {
+                c = SequentialGroupLocal(
+                    Blocker.open(),
+                    WaitUntil { Flywheels.targetVelocity > Flywheels.targetVelocity - 60.0 },
+                    ParallelGroup(
+                        Transfer.start(),
+                        Intake.runIntake(),
+                        Delay(0.05.seconds)
+                    ),
+                    InstantCommand { Transfer.currentBall-- },
+                    ParallelGroup(
+                      Intake.stopIntake(),
+                        Transfer.stop()
+                    ),
+
+                    WaitUntil { Flywheels.targetVelocity > Flywheels.targetVelocity - 60.0 },
+                    ParallelGroup(
+                        Transfer.start(),
+                        Intake.runIntake(),
+                        Delay(0.05.seconds)
+                    ),
+                    InstantCommand { Transfer.currentBall-- },
+                    ParallelGroup(
+                        Intake.stopIntake(),
+                        Transfer.stop()
+                    ),
+
+                    WaitUntil { Flywheels.targetVelocity > Flywheels.targetVelocity - 60.0 },
+                    ParallelGroup(
+                        Transfer.start(),
+                        Intake.runIntake()
+                    ),
+                    Blocker.close(),
+                    Flywheels.stop()
+                )
+                Transfer.currentBall--
+            }
+        }
+        return c
+    }
 
 }

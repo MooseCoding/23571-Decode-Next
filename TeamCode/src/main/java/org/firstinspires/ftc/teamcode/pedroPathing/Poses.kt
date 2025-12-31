@@ -15,14 +15,17 @@ public class Far12(a: Alliance) {
     companion object {
         // These poses are for the red alliance
 
-        var start = Pose(89.0,8.0, PI/2)
+        var start = Pose(89.0,9.0, PI/2)
         var row1 = Pose(110.0, 35.5, 0.0)// Row closest to the front of the field
+        var row1CP = Pose(88.0, 35.35)
         var row1End = Pose(129.0, 35.5, 0.0) // End of row 1 (e.g. where we stop intake)
+        var row1EndCP = Pose(84.5, 14.0)
+
         var row2 = Pose(110.0, 59.5, 0.0) // Row seconds closest
         var row2End = Pose(129.0, 59.5, 0.0)
         var row3 = Pose(110.0, 83.5, 0.0) // Row closest to the classifier
         var row3End = Pose(129.0, 83.5, 0.0)
-        var shootFar = Pose(84.5, 14.0, PI/2)
+        var shootFar = Pose(84.5, 18.0, PI/2)
         var park = Pose(110.0,15.0,0.0)
 
         var humanPlayerStart = Pose(134.5, 17.0)
@@ -48,12 +51,11 @@ public class Far12(a: Alliance) {
     }
 
     var StartToRow1 = SequentialGroupLocal(
-        Intake.runIntake,
         FollowPath(follower.pathBuilder()
             .addPath(
                 BezierCurve(
                     shootFar,
-                    Pose(88.0, 35.35),
+                    row1CP,
                     row1
                 )
             )
@@ -72,14 +74,12 @@ public class Far12(a: Alliance) {
             .build()),
     )
     var Row1ToShoot = SequentialGroupLocal(
-        Intake.stopIntake,
         ParallelGroup(
             FollowPath(
                 follower.pathBuilder()
                     .addPath(
                         BezierCurve(
                             row1End,
-                            Pose(84.5, 14.0),
                             shootFar
                         )
                     )
@@ -103,7 +103,6 @@ public class Far12(a: Alliance) {
         )
     )
     var HumanIntake = SequentialGroupLocal(
-        Intake.runIntake,
         FollowPath(
             follower.pathBuilder()
                 .addPath(
@@ -157,7 +156,6 @@ public class Far12(a: Alliance) {
     ) // Move to Shooting Position with Preloads while shooting the preloads
     
     var ShootToRow2 = SequentialGroupLocal(
-        Intake.runIntake,
         FollowPath(follower.pathBuilder()
             .addPath(
                 BezierCurve(
@@ -181,7 +179,6 @@ public class Far12(a: Alliance) {
             .build()),
     )
     var Row2ToShoot = SequentialGroupLocal(
-        Intake.stopIntake,
         ParallelGroup(
             FollowPath(
                 follower.pathBuilder()
@@ -197,7 +194,6 @@ public class Far12(a: Alliance) {
         ),
     )
     var ShootToRow3 = SequentialGroupLocal(
-        Intake.runIntake,
         FollowPath(follower.pathBuilder()
             .addPath(
                 BezierCurve(
@@ -221,7 +217,6 @@ public class Far12(a: Alliance) {
             .build()),
     )
     var Row3ToShoot = SequentialGroupLocal(
-        Intake.stopIntake,
         ParallelGroup(
             FollowPath(
                 follower.pathBuilder()
