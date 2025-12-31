@@ -42,6 +42,7 @@ class TeleOP: NextFTCOpMode() {
         Gamepads.gamepad2.a whenBecomesTrue Outtake.flywheelOn
         Gamepads.gamepad2.b whenBecomesTrue Outtake.flywheelOff
         Gamepads.gamepad2.x whenBecomesTrue Outtake.flywheelBack
+        Gamepads.gamepad2.y whenBecomesTrue Outtake.toggleManual
 
         // Aim Controls
         Gamepads.gamepad2.rightTrigger.greaterThan(0.3) whenBecomesTrue Outtake.aimUp
@@ -58,6 +59,9 @@ class TeleOP: NextFTCOpMode() {
             addData("Hood Position: ", Outtake.hP)
             addData("Power: ", Outtake.targetVelo)
             addData("Distance in Tiles: ", Outtake.manualAim/24.0)
+            addData("Distance From Target: ", Camera.Distance)
+            addData("Turret Rotation From AprilTag: ", Camera.Rotation)
+            addData("Target Found = ", Camera.targetAcquired)
             update()
         }
     }

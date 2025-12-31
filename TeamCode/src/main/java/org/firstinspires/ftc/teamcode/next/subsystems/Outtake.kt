@@ -27,17 +27,12 @@ import dev.nextftc.hardware.powerable.SetPower
 import java.time.Instant
 import  dev.nextftc.ftc.ActiveOpMode;
 import org.firstinspires.ftc.robotcore.internal.hardware.android.GpioPin.Active
+import kotlin.time.Duration.Companion.seconds
 
 
 @Configurable
 object Outtake: Subsystem {
-     val gS = FeedbackCRServoEx(
-         cacheTolerance = 0.01,
-         feedbackFactory = { ActiveOpMode.hardwareMap.analogInput.get("gSA") },
-         servoFactory = { ActiveOpMode.hardwareMap.crservo.get("gS") }
-     )
-
-    // val gS = CRServoEx("gS")
+     val gS = MotorEx("spin")
      val f1 = MotorEx("f1M")
      val f2 = MotorEx("f2M").reversed()
      val hS = ServoEx("flap")
@@ -71,6 +66,8 @@ object Outtake: Subsystem {
     var hoodPos = 0.0 // Hood position is some function of angle
     @JvmField
     var manualAim = 12
+    @JvmField
+    var manual = false
 
     override fun periodic() {
         if (velocityTrue) {
@@ -83,40 +80,54 @@ object Outtake: Subsystem {
 
         hS.position = hP
 
-       aimDistance()
+        aimDistance()
+        autoSpin()
     }
 
+    fun autoSpin(){
+        if(!manual){//positive left, negative right // Right has negative numberline, Left has positive numberline
+            if(Camera.Rotation > 0.1){
+                gP = -0.1 * Camera.Rotation
+            }else if(Camera.Rotation < -0.1){
+                gP = 0.1 * Camera.Rotation
+            }else{
+                gP = 0.0
+            }
+        }
+    }
     // Commands
     fun aimDistance() {
-        when(manualAim){
-            12 -> targetVelo = 835.0 // 0.81
-            24 -> targetVelo = 862.0 // 0.93
-            36 -> targetVelo = 844.0 // 0.71
-            48 -> targetVelo = 848.0 // 0.51
-            60 -> targetVelo = 908.0 // 0.51
-            72 -> targetVelo = 1025.0 // 0.73
-            84 -> targetVelo = 1165.0 // 1
-            96 -> targetVelo = 1260.0 // 1
-            108 -> targetVelo = 1100.0 // 0.42 Broken
-            120 -> targetVelo = 1112.0 // 0.44 Broken
-            132 -> targetVelo = 1150.0 // 0.43 Broken
-            144 -> targetVelo = 1172.0 // 0.44 Broken
-            else -> targetVelo = 0.0 // 0.0
-        }
-        when(manualAim){
-            12 -> hP = 0.81 // 0.81
-            24 -> hP = 0.93 // 0.93
-            36 -> hP = 0.71 // 0.71
-            48 -> hP = 0.51 // 0.51
-            60 -> hP = 0.51 // 0.51
-            72 -> hP = 0.73 // 0.73
-            84 -> hP = 1.0 // 1
-            96 -> hP = 1.0 // 1
-            108 -> hP = 0.42 // Broken
-            120 -> hP = 0.43 // Broken
-            134 -> hP = 0.44 // Broken
-            146 -> hP = 0.45 // Broken
-            else -> hP = 0.0 // 0.0
+        if(manual) {
+            when (manualAim) {
+                12 -> targetVelo = 835.0 // 0.81
+                24 -> targetVelo = 862.0 // 0.93
+                36 -> targetVelo = 844.0 // 0.71
+                48 -> targetVelo = 848.0 // 0.51
+                60 -> targetVelo = 908.0 // 0.51
+                72 -> targetVelo = 1025.0 // 0.73
+                84 -> targetVelo = 1165.0 // 1
+                96 -> targetVelo = 1260.0 // 1
+                108 -> targetVelo = 1100.0 // 0.42 Broken
+                120 -> targetVelo = 1112.0 // 0.44 Broken
+                132 -> targetVelo = 1150.0 // 0.43 Broken
+                144 -> targetVelo = 1172.0 // 0.44 Broken
+                else -> targetVelo = 0.0 // 0.0
+            }
+            when (manualAim) {
+                12 -> hP = 0.81 // 0.81
+                24 -> hP = 0.93 // 0.93
+                36 -> hP = 0.71 // 0.71
+                48 -> hP = 0.51 // 0.51
+                60 -> hP = 0.51 // 0.51
+                72 -> hP = 0.73 // 0.73
+                84 -> hP = 1.0 // 1
+                96 -> hP = 1.0 // 1
+                108 -> hP = 0.42 // Broken
+                120 -> hP = 0.43 // Broken
+                134 -> hP = 0.44 // Broken
+                146 -> hP = 0.45 // Broken
+                else -> hP = 0.0 // 0.0
+            }
         }
         if(manualAim > 146){
             manualAim = 146
@@ -127,6 +138,9 @@ object Outtake: Subsystem {
         if(manualAim % 12 != 0){
             manualAim -= manualAim % 12
         }
+    }
+    val toggleManual = InstantCommand{
+        manual = !manual
     }
     val spinGearLeft = InstantCommand {
         gP = 0.7 // Some Constant

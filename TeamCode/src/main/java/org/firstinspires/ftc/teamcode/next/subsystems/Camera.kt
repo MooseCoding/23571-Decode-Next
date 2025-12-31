@@ -11,13 +11,13 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor
 
 
 object Camera: Subsystem {
-    val Distance = 0.0
-    val Rotation = 0.0
+    var Distance = 0.0
+    var Rotation = 0.0
 
-    private val aprilTag: AprilTagProcessor? = null
+    var targetAcquired = false
+    var Target = 20
 
-    private var aprilTagProcessor = AprilTagProcessor.Builder()
-        .build()
+    var aprilTagProcessor = AprilTagProcessor.easyCreateWithDefaults()
 
     private var visionPortal = VisionPortal.Builder()
     .setCamera(hardwareMap.get(WebcamName::class.java, "The Eye")) // Webcam name from config
@@ -32,42 +32,19 @@ object Camera: Subsystem {
 
     @SuppressLint("DefaultLocale")
     private fun telemetryAprilTag() {
-        val currentDetections: MutableList<AprilTagDetection> = aprilTagProcessor.getDetections()
-        telemetry.addData("# AprilTags Detected", currentDetections.size)
-
+        val currentDetections: MutableList<AprilTagDetection> = aprilTagProcessor.detections
         // Step through the list of detections and display info for each one.
         for (detection in currentDetections) {
-            if (detection.metadata != null) { //Blue ID = 20 // Red ID = 24
-                telemetry.addLine(
-                    String.format(
-                        "\n==== (ID %d) %s",
-                        detection.id,
-                        detection.metadata.name
-                    )
-                )
-                telemetry.addLine(
-                    String.format(
-                        "XYZ %6.1f %6.1f %6.1f  (inch)",
-                        detection.ftcPose.x, //x is horizontal distance aka turret rotation
-                        detection.ftcPose.y, //y is distance from tag
-                        detection.ftcPose.z
-                    )
-                )
+            if (detection.id == Target) { //Blue ID = 20 // Red ID = 24
+                targetAcquired = true
+                Rotation = detection.ftcPose.x
+                Distance = detection.ftcPose.y
             } else {
-                telemetry.addLine(String.format("\n==== (ID %d) Unknown", detection.id))
-                telemetry.addLine(
-                    String.format(
-                        "Center %6.0f %6.0f   (pixels)",
-                        detection.center.x,
-                        detection.center.y
-                    )
-                )
+                targetAcquired = false
+                Rotation = 99999.0
+                Distance = 99999.0
             }
-        } // end for() loop
-
-
-        // Add "key" information to telemetry
-        telemetry.addLine("\nkey:\nXYZ = X (Right/Left), Y (Forward), Z (Up/Down) dist.")
-    } // end method telemetryAprilTag()
+        }
+    }
 
 }
