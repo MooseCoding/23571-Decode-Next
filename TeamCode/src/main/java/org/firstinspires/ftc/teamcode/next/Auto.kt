@@ -18,7 +18,7 @@ import kotlin.time.Duration.Companion.seconds
 
 @Autonomous
 class Auto() : NextFTCOpMode() {
-    /*val fL = MotorEx("frontLeft").reversed()
+    val fL = MotorEx("frontLeft").reversed()
     val fR = MotorEx("frontRight")
     val bL = MotorEx("backLeft").reversed()
     val bR = MotorEx("backRight")
@@ -39,5 +39,5 @@ class Auto() : NextFTCOpMode() {
                 bR.power = 0.0
             }
         ).schedule()
-    }*/
+    }
 }
