@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.next.subsystems
 import com.bylazar.configurables.annotations.Configurable
 import com.pedropathing.follower.Follower
 import com.pedropathing.geometry.Pose
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.AnalogInput
 import com.qualcomm.robotcore.hardware.AnalogInputController
 import dev.nextftc.control.KineticState
@@ -85,12 +86,12 @@ object Outtake: Subsystem {
     }
 
     fun autoSpin(){
-        if(!manual){//positive left, negative right // Right has negative numberline, Left has positive numberline
-            if(Camera.Rotation > 0.1){
-                gP = -0.1 * Camera.Rotation
-            }else if(Camera.Rotation < -0.1){
-                gP = 0.1 * Camera.Rotation
-            }else{
+        if(!manual) {
+            if (TestCamera.ConceptAprilTagEasy.Rotation > 0.2) {
+                gP = 0.2
+            } else if (TestCamera.ConceptAprilTagEasy.Rotation < -0.2) {
+                gP = -0.2
+            } else {
                 gP = 0.0
             }
         }
@@ -149,7 +150,7 @@ object Outtake: Subsystem {
         gP = -0.7 // Some Constant
     }
     val gearAlittleLeft = InstantCommand {
-        gP = -0.2
+        gP = 0.2
     }
     val gearAlittleRight = InstantCommand {
         gP = -0.2

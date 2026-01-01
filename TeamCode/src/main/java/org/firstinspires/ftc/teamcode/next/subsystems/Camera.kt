@@ -13,15 +13,14 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor
 object Camera: Subsystem {
     var Distance = 0.0
     var Rotation = 0.0
-
     var targetAcquired = false
     var Target = 20
 
-    var aprilTagProcessor = AprilTagProcessor.easyCreateWithDefaults()
+    var aprilTag = AprilTagProcessor.easyCreateWithDefaults()
 
     private var visionPortal = VisionPortal.Builder()
     .setCamera(hardwareMap.get(WebcamName::class.java, "The Eye")) // Webcam name from config
-    .addProcessor(aprilTagProcessor)
+    .addProcessor(aprilTag)
     .setLiveViewContainerId(0)
     .build()
 
@@ -32,17 +31,18 @@ object Camera: Subsystem {
 
     @SuppressLint("DefaultLocale")
     private fun telemetryAprilTag() {
-        val currentDetections: MutableList<AprilTagDetection> = aprilTagProcessor.detections
+        val currentDetections: List<AprilTagDetection> = aprilTag.detections
         // Step through the list of detections and display info for each one.
         for (detection in currentDetections) {
-            if (detection.id == Target) { //Blue ID = 20 // Red ID = 24
+            if (detection.metadata.id == Target) { //Blue ID = 20 // Red ID = 24
                 targetAcquired = true
                 Rotation = detection.ftcPose.x
                 Distance = detection.ftcPose.y
-            } else {
+            }
+            else if(detection.metadata.id != Target) {
                 targetAcquired = false
-                Rotation = 99999.0
-                Distance = 99999.0
+                Rotation = 0.0
+                Distance = 100.0
             }
         }
     }
