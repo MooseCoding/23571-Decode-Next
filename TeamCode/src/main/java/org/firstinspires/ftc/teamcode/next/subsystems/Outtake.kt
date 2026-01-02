@@ -95,9 +95,9 @@ object Outtake: Subsystem {
     fun autoSpin(){
         if(!manual) { //negative number line right, positive number line left
             if (Camera.Rotation > 1) {
-                spinSpeed = -7 * Math.abs(Camera.Rotation)
+                spinSpeed = -5 * Math.abs(Camera.Rotation)
             } else if (Camera.Rotation < -1) {
-                spinSpeed = 7 * Math.abs(Camera.Rotation)
+                spinSpeed = 5 * Math.abs(Camera.Rotation)
             } else {
                 spinSpeed = 0.0
             }
