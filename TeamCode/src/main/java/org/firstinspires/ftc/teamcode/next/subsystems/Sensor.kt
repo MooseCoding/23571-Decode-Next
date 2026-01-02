@@ -29,6 +29,7 @@ object Sensor: Subsystem {
         cS.enableLed(true)
         cS.gain = 8.0f
     }
+
     override fun periodic() {
         val ds = cS.getDistance(DistanceUnit.MM)
 
@@ -41,6 +42,10 @@ object Sensor: Subsystem {
             Transfer.ballsHeld[Transfer.currentBall] = currentArtifact
             Transfer.currentBall++
 
+            if(Transfer.currentBall == 1) {
+                Transfer.intakeBall().schedule()
+            }
+
             if(Transfer.currentBall == 3) {
                 Light.Green().schedule()
             }
@@ -49,6 +54,7 @@ object Sensor: Subsystem {
             timer.resetTimer()
         }
 
+        /*
         ActiveOpMode.telemetry.run {
             addData("green", cS.normalizedColors.green)
             addData("red", cS.normalizedColors.red)
@@ -57,6 +63,8 @@ object Sensor: Subsystem {
             addData("loop time", timer.elapsedTime)
             addData("Distance", cS.getDistance(DistanceUnit.MM))
         }
+
+         */
     }
 
     /**

@@ -15,6 +15,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 import org.firstinspires.ftc.teamcode.next.subsystems.Transfer
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Dist
+import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Blocker
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
@@ -44,6 +45,9 @@ class TeleOp: NextFTCOpMode() {
         // Shoot
         Gamepads.gamepad1.triangle whenBecomesTrue Outtake.shoot()
 
+        Gamepads.gamepad1.dpadLeft whenBecomesTrue Transfer.reverse() whenBecomesFalse Transfer.stop()
+        Gamepads.gamepad1.dpadRight whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()
+
         /*
 
         Gamepad 2 manual electric-boogaloo
@@ -57,18 +61,21 @@ class TeleOp: NextFTCOpMode() {
 
         Gamepads.gamepad2.triangle whenBecomesTrue InstantCommand { Outtake.fullManual = true}
 
-        Gamepads.gamepad2.dpadUp whenBecomesTrue InstantCommand { Hood.hoodPosition += 0.1 }
-        Gamepads.gamepad2.dpadDown whenBecomesTrue InstantCommand { Hood.hoodPosition -= 0.1 }
+        Gamepads.gamepad2.dpadUp whenBecomesTrue InstantCommand { Hood.hoodPosition += 0.05 }
+        Gamepads.gamepad2.dpadDown whenBecomesTrue InstantCommand { Hood.hoodPosition -= 0.05 }
 
         Gamepads.gamepad2.options whenBecomesTrue InstantCommand {
             when(DriveTrain.alliance) {
                 Alliance.RED -> {
-                    PedroComponent.follower.pose = Pose(8.0, 9.0, PI/2)
+                    PedroComponent.follower.pose = Pose(8.0, 8.0, PI/2)
                 }
                 Alliance.BLUE -> {
-                    PedroComponent.follower.pose = Pose(144-8.0, 9.0, PI/2)
+                    PedroComponent.follower.pose = Pose(144-8.0, 8.0, PI/2)
                 }
             }
         }
+
+        Gamepads.gamepad2.dpadRight whenBecomesTrue Blocker.open()
+        Gamepads.gamepad2.dpadLeft whenBecomesTrue Blocker.close()
     }
 }

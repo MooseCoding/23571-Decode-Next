@@ -25,6 +25,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import kotlin.math.pow
 import kotlin.math.sqrt
+import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
 object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
@@ -33,6 +34,8 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
 
     var goalX = 6.0;
     val goalY = 144 - 8.0
+
+    val shootTime: Duration = 0.05.seconds
 
     override fun initialize() {
         goalX = if (DriveTrain.alliance == Alliance.RED) {
@@ -113,7 +116,7 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
                     ParallelGroup(
                         Transfer.start(),
                         Intake.runIntake(),
-                        Delay(0.05.seconds)
+                        Delay(shootTime)
                     ),
                     ParallelGroup(
                         Intake.stopIntake(),
@@ -138,7 +141,7 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
                     ParallelGroup(
                         Transfer.start(),
                         Intake.runIntake(),
-                        Delay(0.05.seconds)
+                        Delay(shootTime)
                     ),
                     InstantCommand { Transfer.currentBall-- },
                     ParallelGroup(
@@ -150,14 +153,13 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
                     ParallelGroup(
                         Transfer.start(),
                         Intake.runIntake(),
-                        Delay(0.05.seconds)
+                        Delay(shootTime)
                     ),
                     InstantCommand { Transfer.currentBall-- },
                     ParallelGroup(
                         Intake.stopIntake(),
                         Transfer.stop()
                     ),
-
                     WaitUntil { Flywheels.targetVelocity > Flywheels.targetVelocity - 60.0 },
                     ParallelGroup(
                         Transfer.start(),

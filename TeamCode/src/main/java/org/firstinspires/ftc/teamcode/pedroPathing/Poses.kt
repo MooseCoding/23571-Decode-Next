@@ -30,6 +30,7 @@ public class Far12(a: Alliance) {
 
         var humanPlayerStart = Pose(134.5, 17.0)
         var humanPlayerEnd = Pose(137.5, 6.42, 0.0)
+
     }
 
     var index = 0

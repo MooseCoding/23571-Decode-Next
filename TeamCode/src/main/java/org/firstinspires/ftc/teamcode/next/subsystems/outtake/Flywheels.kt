@@ -48,6 +48,9 @@ object Flywheels: Subsystem {
         }
     }
 
+    /**
+     * Update the PID target
+     */
     fun updatePid(velocity:Double) {
         targetVelocity = velocity
     }
