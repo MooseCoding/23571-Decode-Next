@@ -51,6 +51,10 @@ object Outtake: Subsystem {
         velPid(pid)
         basicFF(ff)
     }
+    var spinControl = controlSystem{
+        velPid(pid)
+        basicFF(ff)
+    }
 
     // Changing Vars
     @JvmField
@@ -69,6 +73,8 @@ object Outtake: Subsystem {
     var manualAim = 12
     @JvmField
     var manual = false
+    @JvmField
+    var spinSpeed = 0.0
 
     override fun periodic() {
         if (velocityTrue) {
@@ -77,7 +83,8 @@ object Outtake: Subsystem {
             controller.goal = KineticState(0.0, targetVelo)
         }
 
-        gS.power= gP
+        gS.power= spinControl.calculate(gS.state)
+        spinControl.goal = KineticState(0.0, spinSpeed)
 
         hS.position = hP
 
@@ -86,13 +93,13 @@ object Outtake: Subsystem {
     }
 
     fun autoSpin(){
-        if(!manual) {
-            if (TestCamera.ConceptAprilTagEasy.Rotation > 0.2) {
-                gP = 0.2
-            } else if (TestCamera.ConceptAprilTagEasy.Rotation < -0.2) {
-                gP = -0.2
+        if(!manual) { //negative number line right, positive number line left
+            if (Camera.Rotation > 1) {
+                spinSpeed = -7 * Math.abs(Camera.Rotation)
+            } else if (Camera.Rotation < -1) {
+                spinSpeed = 7 * Math.abs(Camera.Rotation)
             } else {
-                gP = 0.0
+                spinSpeed = 0.0
             }
         }
     }

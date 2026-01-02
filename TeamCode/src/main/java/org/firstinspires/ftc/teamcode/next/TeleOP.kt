@@ -3,22 +3,15 @@ package org.firstinspires.ftc.teamcode.next
 import com.bylazar.telemetry.PanelsTelemetry
 import com.bylazar.telemetry.JoinedTelemetry
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
-import dev.nextftc.core.commands.groups.ParallelGroup
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
-import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName
 import org.firstinspires.ftc.teamcode.next.subsystems.Camera
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
-import org.firstinspires.ftc.teamcode.next.subsystems.TestCamera
-import org.firstinspires.ftc.vision.VisionPortal
-import org.firstinspires.ftc.vision.apriltag.AprilTagDetection
-import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor
 
 @TeleOp
 class TeleOP: NextFTCOpMode() {
@@ -26,10 +19,11 @@ class TeleOP: NextFTCOpMode() {
 
     init {
         addComponents(
-            SubsystemComponent(Intake, Outtake, DriveTrain, TestCamera),
+            SubsystemComponent(Intake, Outtake, DriveTrain, Camera),
             BulkReadComponent,
             BindingsComponent,
         )
+        Camera.startCamera()
     }
 
     override fun onStartButtonPressed() {
@@ -57,7 +51,6 @@ class TeleOP: NextFTCOpMode() {
         // Intake Controls
         Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake whenBecomesFalse Intake.stopIntake
         Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake whenBecomesFalse Intake.stopIntake
-
     }
 
     override fun onUpdate() {
