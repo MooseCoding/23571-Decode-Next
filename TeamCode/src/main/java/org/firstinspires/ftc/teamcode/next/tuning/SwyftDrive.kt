@@ -19,10 +19,10 @@ class SwyftDrive: NextFTCOpMode() {
         )
     }
 
-    val fl =             MotorEx("cm0")
-    val fr =             MotorEx("cm1").reversed()
-    val bl =             MotorEx("cm2")
-    val br =             MotorEx("cm3").reversed()
+    val fl =             MotorEx("cm1") // Yse
+    val fr =             MotorEx("cm2").reversed()
+    val bl =             MotorEx("cm0")
+    val br =             MotorEx("cm3").reversed() // Yes
 
     override fun onStartButtonPressed() {
     }

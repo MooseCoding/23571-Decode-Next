@@ -48,7 +48,7 @@ class FarAuto: NextFTCOpMode() {
     }
 
     public override fun onInit() {
-        follower.setStartingPose(Far12.start)
+        // follower.setStartingPose(Far12.start)
     }
 
     override fun waitForStart() {

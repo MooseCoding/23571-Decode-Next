@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Artifact
 import kotlin.time.Duration.Companion.seconds
 
 object Transfer: Subsystem {
-    private val transferMotor: MotorEx = MotorEx("em0")
+    val transferMotor: MotorEx = MotorEx("cm3").reversed()
 
     private var power: Double = 0.0
 
