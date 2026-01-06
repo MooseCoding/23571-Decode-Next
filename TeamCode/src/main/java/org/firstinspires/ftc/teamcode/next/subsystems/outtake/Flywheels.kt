@@ -9,6 +9,7 @@ import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.MotorEx
+import org.firstinspires.ftc.teamcode.next.subsystems.Light
 
 object Flywheels: Subsystem {
     val f1 = MotorEx("em0")
@@ -24,20 +25,30 @@ object Flywheels: Subsystem {
     @JvmField var targetVelocity = 0.0
    val f1M = MotorEx("em0")
     val f2M = MotorEx("em3").reversed()
-    @JvmField var flywheelsOn = false
+
+    /**
+     * To determine if we are spinning slow or at PID
+     */
+    @JvmField var spinSlow = false
 
     var motorRpm: Double = 0.0
 
     override fun periodic() {
         motorRpm = f1.velocity * 60.0/28.0
 
-        f1.power = flywheelController.calculate(f1.state)
-        f2.power = f1.power
-        if (flywheelsOn) {
-            flywheelController.goal = KineticState(0.0, targetVelocity)
+        if(spinSlow) {
+            f1.power = 0.4
         }
         else {
-            flywheelController.goal = KineticState(0.0, 0.0)
+            f1.power = flywheelController.calculate(f1.state)
+        }
+
+        f2.power = f1.power
+
+        flywheelController.goal = KineticState(0.0, targetVelocity)
+
+        if(f1.velocity >= targetVelocity - 150) { // Figure ts out
+            Light.Green().schedule() // If we can shoot, light that SOB up
         }
 
         ActiveOpMode.telemetry.run {
@@ -59,13 +70,21 @@ object Flywheels: Subsystem {
      * @return Spins the Flywheel
      */
     fun spin(): Command = InstantCommand {
-        flywheelsOn = true
+        spinSlow = false
     }
 
     /**
-     * @return Stops the Flywheel
+     * @return Stops the Flywheel to cruise speed
      */
     fun stop(): Command = InstantCommand {
-        flywheelsOn = false
+        spinSlow = true
+    }
+
+    /**
+     * @return Hard Stop
+     */
+    fun hardStop(): Command = InstantCommand {
+        spinSlow = false
+        targetVelocity = 0.0
     }
 }

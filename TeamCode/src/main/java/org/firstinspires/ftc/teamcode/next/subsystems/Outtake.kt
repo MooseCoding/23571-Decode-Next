@@ -19,7 +19,6 @@ import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.currentY
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Aimbot
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Dist
-import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Blocker
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
@@ -93,85 +92,15 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
      * @return Command to run for the shoot command
      */
     fun shoot(): Command {
-        val i = Transfer.getBalls()
-        var c: Command = InstantCommand { } // Command to return
-        when(i) {
-            1 -> {
-                c = SequentialGroupLocal(
-                    Blocker.open(),
-                    WaitUntil { Flywheels.targetVelocity > Flywheels.targetVelocity - 60.0 },
-                    ParallelGroup(
-                        Transfer.start(),
-                        Intake.runIntake()
-                    ),
-                    Blocker.close(),
-                    Flywheels.stop()
-                )
-                Transfer.currentBall--
-            }
-            2 -> {
-                c = SequentialGroupLocal(
-                    Blocker.open(),
-                    WaitUntil { Flywheels.targetVelocity > Flywheels.targetVelocity - 60.0 },
-                    ParallelGroup(
-                        Transfer.start(),
-                        Intake.runIntake(),
-                        Delay(shootTime)
-                    ),
-                    ParallelGroup(
-                        Intake.stopIntake(),
-                        Transfer.stop()
-                    ),
-
-                    InstantCommand { Transfer.currentBall-- },
-                    WaitUntil { Flywheels.targetVelocity > Flywheels.targetVelocity - 60.0 },
-                    ParallelGroup(
-                        Transfer.start(),
-                        Intake.runIntake()
-                    ),
-                    Blocker.close(),
-                    Flywheels.stop()
-                )
-                Transfer.currentBall--
-            }
-            3 -> {
-                c = SequentialGroupLocal(
-                    Blocker.open(),
-                    WaitUntil { Flywheels.targetVelocity > Flywheels.targetVelocity - 60.0 },
-                    ParallelGroup(
-                        Transfer.start(),
-                        Intake.runIntake(),
-                        Delay(shootTime)
-                    ),
-                    InstantCommand { Transfer.currentBall-- },
-                    ParallelGroup(
-                      Intake.stopIntake(),
-                        Transfer.stop()
-                    ),
-
-                    WaitUntil { Flywheels.targetVelocity > Flywheels.targetVelocity - 60.0 },
-                    ParallelGroup(
-                        Transfer.start(),
-                        Intake.runIntake(),
-                        Delay(shootTime)
-                    ),
-                    InstantCommand { Transfer.currentBall-- },
-                    ParallelGroup(
-                        Intake.stopIntake(),
-                        Transfer.stop()
-                    ),
-                    WaitUntil { Flywheels.targetVelocity > Flywheels.targetVelocity - 60.0 },
-                    ParallelGroup(
-                        Transfer.start(),
-                        Intake.runIntake()
-                    ),
-                    Blocker.close(),
-                    Flywheels.stop()
-                )
-                Transfer.currentBall--
-            }
-        }
-        return c
+        return SequentialGroupLocal(
+            ParallelGroup(
+                Intake.runIntake(),
+                Transfer.start(),
+                Delay(0.2.seconds),
+                Intake.stopIntake(),
+                Transfer.stop(),
+                Flywheels.stop()
+            ),
+        )
     }
-
 }

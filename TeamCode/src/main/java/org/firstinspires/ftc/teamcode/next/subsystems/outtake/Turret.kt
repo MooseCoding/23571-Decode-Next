@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.next.subsystems.outtake
 
 import com.acmerobotics.dashboard.FtcDashboard
+import com.acmerobotics.dashboard.config.Config
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry
 import com.qualcomm.robotcore.hardware.AnalogInput
 import com.qualcomm.robotcore.hardware.Servo
@@ -26,28 +27,37 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.goalY
 import kotlin.math.PI
 import kotlin.math.atan2
 
+@Config
 object Turret: Subsystem {
-    private val tele = MultipleTelemetry(FtcDashboard.getInstance().telemetry,ActiveOpMode.telemetry)
+    private lateinit var tele: MultipleTelemetry
 
     private val leftServo: CRServoEx = CRServoEx("cr0")
     private val rightServo: CRServoEx = CRServoEx("cr1") // Check direction
-    private val encoder: AnalogInput = ActiveOpMode.hardwareMap.analogInput.get("turret")
+    private lateinit var encoder: AnalogInput
 
-    @JvmField var autoTurret = true
+    @JvmField var autoTurret = false
 
     @JvmField var turretPID = PIDCoefficients(2.5,0.0,0.0)
     var turretController = controlSystem {
         posPid(turretPID)
     }
 
-    private var currentAngle = 0.0
+    override fun initialize() {
+        tele = MultipleTelemetry(FtcDashboard.getInstance().telemetry, ActiveOpMode.telemetry)
+        encoder = ActiveOpMode.hardwareMap.analogInput.get("turret")
+    }
+
     private var lastValue = 0.0
 
     private var pow: Double = 0.0
 
     @JvmField var coeffs: PIDCoefficients = PIDCoefficients(0.0,0.0,0.0)
 
-    private var controller: ControlSystem = controlSystem {
+    private val offset = 3.0578
+    private var currentAngle = 0.0
+
+
+        private var controller: ControlSystem = controlSystem {
         velPid(coeffs)
     }
 
@@ -62,20 +72,22 @@ object Turret: Subsystem {
         rightServo.power = pow
 
         tele.run {
-            addData("goal", turretController.goal.position)
-            addData("turret Pos", getYaw())
+            addData("pos", getYaw())
+            addData("current angle", currentAngle)
+            addData("pos in deg", 180/PI*getYaw())
+            update()
         }
     }
 
     private fun autoAim() {
         val mu = atan2(goalY - currentY, goalX - currentX)
-        val deltaHeading = (mu - currentHeading).rad.normalized.inRad.coerceIn((-160.0/180)*PI, (160.0/180)*PI) // Coerce Properly
+        val deltaHeading = (mu - currentHeading).rad.normalized.inRad.coerceIn((-125.0/180)*PI, (125.0/180)*PI) // Coerce Properly
         controller.goal = KineticState(deltaHeading)
         pow = controller.calculate(KineticState(currentAngle))
     }
 
     private fun updateAngle() {
-        val pos = encoder.voltage / 3.3
+        val pos = encoder.voltage / 3.3 * 2*PI - offset
         var delta = pos - lastValue
 
         if(delta > PI) delta -= 2*PI
@@ -89,7 +101,7 @@ object Turret: Subsystem {
      * @return yaw in radians from servo position
      */
     fun getYaw(): Double {
-        return currentAngle
+        return (currentAngle) * 90/22.0 * (319/1628.0)
     }
 
     /**

@@ -30,14 +30,18 @@ object Intake: Subsystem {
      * @return Runs the intake at full power
      */
     fun runIntake(): InstantCommand = InstantCommand {
-        iP = 1.0 // Some constant
+        if(iP != -1.0) {
+            iP = 1.0
+        }
     }
 
     /**
      * @return Reverses the intake at full power
      */
     fun reverseIntake(): InstantCommand = InstantCommand {
-        iP = -1.0
+        if(iP != 1.0) {
+            iP = -1.0
+        }
     }
 
     /**

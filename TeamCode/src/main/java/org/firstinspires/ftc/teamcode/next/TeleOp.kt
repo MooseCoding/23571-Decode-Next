@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 import org.firstinspires.ftc.teamcode.next.subsystems.Transfer
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Dist
-import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Blocker
+import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
@@ -50,14 +50,23 @@ class TeleOp: NextFTCOpMode() {
 
         /*
 
-        Gamepad 2 manual electric-boogaloo
+        Gamepad 2 Main Tele Control
 
          */
+        Gamepads.gamepad2.rightTrigger.greaterThan(0.3) whenBecomesTrue Flywheels.spin()
+        Gamepads.gamepad2.leftTrigger.greaterThan(0.3) whenBecomesTrue Flywheels.stop()
+
+        /*
+
+        Manual Stuff
+
+         */
+
         Gamepads.gamepad2.leftBumper whenBecomesTrue Turret.spinLeft() whenBecomesFalse Turret.stopSpin()
         Gamepads.gamepad2.rightBumper whenBecomesTrue Turret.spinRight() whenBecomesFalse Turret.stopSpin()
 
-        Gamepads.gamepad2.leftTrigger.greaterThan(0.3) whenBecomesTrue InstantCommand { Outtake.distance = Dist.CLOSE }
-        Gamepads.gamepad2.rightTrigger.greaterThan(0.3) whenBecomesTrue InstantCommand { Outtake.distance = Dist.FAR }
+        Gamepads.gamepad2.cross whenBecomesTrue InstantCommand { Outtake.distance = Dist.CLOSE }
+        Gamepads.gamepad2.circle whenBecomesTrue InstantCommand { Outtake.distance = Dist.FAR }
 
         Gamepads.gamepad2.triangle whenBecomesTrue InstantCommand { Outtake.fullManual = true}
 
@@ -74,8 +83,5 @@ class TeleOp: NextFTCOpMode() {
                 }
             }
         }
-
-        Gamepads.gamepad2.dpadRight whenBecomesTrue Blocker.open()
-        Gamepads.gamepad2.dpadLeft whenBecomesTrue Blocker.close()
     }
 }

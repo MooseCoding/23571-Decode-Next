@@ -48,23 +48,12 @@ object Sensor: Subsystem {
 
             if(Transfer.currentBall == 3) {
                 Light.Green().schedule()
+                ActiveOpMode.gamepad1.rumble(1.0, 1.0, 10)
             }
 
             currentArtifact = null
             timer.resetTimer()
         }
-
-        /*
-        ActiveOpMode.telemetry.run {
-            addData("green", cS.normalizedColors.green)
-            addData("red", cS.normalizedColors.red)
-            addData("blue", cS.normalizedColors.blue)
-            addData("color", currentArtifact)
-            addData("loop time", timer.elapsedTime)
-            addData("Distance", cS.getDistance(DistanceUnit.MM))
-        }
-
-         */
     }
 
     /**

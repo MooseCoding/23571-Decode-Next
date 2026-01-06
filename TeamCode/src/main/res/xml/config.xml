@@ -11,6 +11,7 @@
             <Servo name="s0" port="1" />
             <Servo name="light" port="5" />
             <RevColorSensorV3 name="cs" port="3" bus="3" />
+            <AnalogInput name="turret" port="0" />
         </LynxModule>
         <LynxModule name="Control Hub" port="173">
             <goBILDA5202SeriesMotor name="cm0" port="0" />

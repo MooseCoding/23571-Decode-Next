@@ -25,11 +25,12 @@ public class Far12(val all: Alliance) {
             shoot = flipPose(shoot)
             hPIntake = flipPose(hPIntake)
             row2Start = flipPose(row2Start)
-            row2 = flipPose(row2)
+            cP2 = flipPose(cP2)
             row2End = flipPose(row2End)
             rampIntake = flipPose(rampIntake)
             row3 = flipPose(row3)
             row3End = flipPose(row3End)
+            park = flipPose(park)
         }
     }
 
@@ -41,18 +42,20 @@ public class Far12(val all: Alliance) {
         var shoot = Pose(93.0, 18.0)
         var hPIntake = Pose(133.0, 10.500)
         var row2Start = Pose(88.0, 20.0)
-        var row2 = Pose(87.304, 60.394)
+        var cP2 = Pose(87.304, 60.394)
         var row2End = Pose(110.0, 59.500)
         var rampIntake = Pose(130.0, 63.0)
 
         var row3 = Pose(110.0, 83.5, 0.0)
         var row3End = Pose(129.0, 83.5, 0.0)
 
+        var park = Pose(102.0,13.0)
+
         fun flipPose(p: Pose): Pose {
             return Pose(144 - p.x, p.y)
         }
 
-        var path1 = follower.pathBuilder()
+        var ToRow1 = follower.pathBuilder()
         .addPath(
         BezierCurve(
         follower.pose,
@@ -60,10 +63,10 @@ public class Far12(val all: Alliance) {
         row1
         )
         )
-        .setLinearHeadingInterpolation(Math.toRadians(90.0), Math.toRadians(0.0))
+        .setLinearHeadingInterpolation(Math.toRadians(70.0), Math.toRadians(0.0))
         .build()
 
-        var path2 = follower.pathBuilder()
+        var Row1Intake = follower.pathBuilder()
         .addPath(
         BezierLine(
         follower.pose,
@@ -73,7 +76,7 @@ public class Far12(val all: Alliance) {
         .setConstantHeadingInterpolation(Math.toRadians(0.0))
         .build()
 
-        var path3 = follower.pathBuilder()
+        var ShootRow1 = follower.pathBuilder()
         .addPath(
         BezierLine(
         follower.pose,
@@ -83,7 +86,7 @@ public class Far12(val all: Alliance) {
         .setLinearHeadingInterpolation(Math.toRadians(0.0), Math.toRadians(355.0))
         .build()
 
-        var path4 = follower.pathBuilder()
+        var HumanPlayerIntake = follower.pathBuilder()
         .addPath(
         BezierLine(
         follower.pose,
@@ -93,56 +96,46 @@ public class Far12(val all: Alliance) {
         .setConstantHeadingInterpolation(Math.toRadians(355.0))
         .build()
 
-        var path5 = follower.pathBuilder()
+        var HumanPlayerShoot = follower.pathBuilder()
+            .addPath(
+                BezierLine(
+                    follower.pose,
+                    shoot
+                )
+            )
+            .setLinearHeadingInterpolation(Math.toRadians(355.0), PI/2)
+            .build()
+
+        var ToRow2 = follower.pathBuilder()
         .addPath(
-        BezierLine(
+        BezierCurve(
         follower.pose,
+            cP2,
         row2Start
         )
         )
         .setLinearHeadingInterpolation(Math.toRadians(355.0), Math.toRadians(70.0))
         .build()
 
-        var path6 = follower.pathBuilder()
+        var Row2Intake = follower.pathBuilder()
         .addPath(
-        BezierCurve(
+            BezierLine(
         follower.pose,
-        row2,
         row2End
         )
         )
         .setLinearHeadingInterpolation(Math.toRadians(70.0), Math.toRadians(0.0))
         .build()
 
-        var path7 = follower.pathBuilder()
-        .addPath(
-        BezierLine(
-        follower.pose,
-        row2End
-        )
-        )
-        .setConstantHeadingInterpolation(Math.toRadians(0.0))
-        .build()
-
-        var path8 = follower.pathBuilder()
-        .addPath(
-        BezierLine(
-        follower.pose,
-        row2End
-        )
-        )
-        .setLinearHeadingInterpolation(Math.toRadians(0.0), Math.toRadians(280.0))
-        .build()
-
-        var path9 = follower.pathBuilder()
-        .addPath(
-        BezierLine(
-        follower.pose,
-        row2Start
-        )
-        )
-        .setLinearHeadingInterpolation(Math.toRadians(280.0), Math.toRadians(44.0))
-        .build()
+        var RampToShoot = follower.pathBuilder()
+            .addPath(
+                BezierLine(
+                    follower.pose,
+                    shoot
+                )
+            )
+            .setLinearHeadingInterpolation(-PI/2, Math.toRadians(70.0))
+            .build()
 
         var path10 = follower.pathBuilder()
         .addPath(
@@ -154,6 +147,15 @@ public class Far12(val all: Alliance) {
         .setLinearHeadingInterpolation(Math.toRadians(44.0), Math.toRadians(355.0))
         .build()
 
+        var Park = follower.pathBuilder()
+            .addPath(
+                BezierLine(
+                    follower.pose,
+                    park
+                )
+            )
+            .setConstantHeadingInterpolation(follower.heading)
+            .build()
     }
 }
 
