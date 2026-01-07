@@ -72,8 +72,6 @@ object Outtake: Subsystem {
     @JvmField
     var manualAim = 12
     @JvmField
-    var manual = false
-    @JvmField
     var spinSpeed = 0.0
 
     override fun periodic() {
@@ -84,7 +82,7 @@ object Outtake: Subsystem {
         }
 
         gS.power= spinControl.calculate(gS.state)
-        spinControl.goal = KineticState(0.0, spinSpeed)
+        spinControl.goal = KineticState(1.0, spinSpeed)
 
         hS.position = hP
 
@@ -93,7 +91,7 @@ object Outtake: Subsystem {
     }
 
     fun autoSpin(){
-        if(!manual) { //negative number line right, positive number line left
+        if(Camera.targetAcquired) { //negative number line right, positive number line left
             if (Camera.Rotation > 1) {
                 spinSpeed = -5 * Math.abs(Camera.Rotation)
             } else if (Camera.Rotation < -1) {
@@ -105,7 +103,7 @@ object Outtake: Subsystem {
     }
     // Commands
     fun aimDistance() {
-        if(manual) {
+        if(!Camera.targetAcquired) {
             when (manualAim) {
                 12 -> targetVelo = 835.0 // 0.81
                 24 -> targetVelo = 862.0 // 0.93
@@ -136,6 +134,37 @@ object Outtake: Subsystem {
                 146 -> hP = 0.45 // Broken
                 else -> hP = 0.0 // 0.0
             }
+        }else{
+            when (Camera.Distance) {
+                in 0.0..12.0 -> targetVelo = 835.0 // 0.81
+                in 12.1..24.0 -> targetVelo = 862.0 // 0.93
+                in 24.1..36.0 -> targetVelo = 844.0 // 0.71
+                in 36.1..48.0 -> targetVelo = 848.0 // 0.51
+                in 48.1..60.0 -> targetVelo = 1100.0 // 0.51
+                in 60.1..72.0 -> targetVelo = 1200.0 // 0.73
+                in 72.1..84.0 -> targetVelo = 1165.0 // 1
+                in 84.1..96.0 -> targetVelo = 1260.0 // 1
+                in 96.1..108.0 -> targetVelo = 1100.0 // 0.42 Broken
+                in 108.1..120.0 -> targetVelo = 1112.0 // 0.44 Broken
+                in 120.1..132.0 -> targetVelo = 1150.0 // 0.43 Broken
+                in 132.1..144.0 -> targetVelo = 1172.0 // 0.44 Broken
+                else -> targetVelo = 0.0 // 0.0
+            }
+            when (Camera.Distance) {
+                in 0.0..12.0 -> hP = 0.81 // 0.81
+                in 12.1..24.0 -> hP = 0.93 // 0.93
+                in 24.1..36.0 -> hP = 0.71 // 0.71
+                in 36.1..48.0 -> hP = 0.51 // 0.51
+                in 48.1..60.0 -> hP = 0.50 // 0.51
+                in 60.1..72.0 -> hP = 0.50 // 0.73
+                in 72.1..84.0 -> hP = 1.0 // 1
+                in 84.1..96.0 -> hP = 1.0 // 1
+                in 96.1..108.0 -> hP = 0.42 // Broken
+                in 108.1..120.0 -> hP = 0.43 // Broken
+                in 120.1..132.0 -> hP = 0.44 // Broken
+                in 132.1..144.0 -> hP = 0.45 // Broken
+                else -> hP = 0.0 // 0.0
+            }
         }
         if(manualAim > 146){
             manualAim = 146
@@ -147,23 +176,28 @@ object Outtake: Subsystem {
             manualAim -= manualAim % 12
         }
     }
-    val toggleManual = InstantCommand{
-        manual = !manual
-    }
     val spinGearLeft = InstantCommand {
-        gP = 0.7 // Some Constant
+
+            spinSpeed = 100.0 // Some Constant
+
     }
     val spinGearRight = InstantCommand {
-        gP = -0.7 // Some Constant
+
+            spinSpeed = -100.0 // Some Constant
+
     }
     val gearAlittleLeft = InstantCommand {
-        gP = 0.2
+
+            spinSpeed = 20.0
+
     }
     val gearAlittleRight = InstantCommand {
-        gP = -0.2
+
+            spinSpeed = -20.0
+
     }
     val stopGear = InstantCommand {
-        gP = 0.0
+        spinSpeed = 0.0
     }
     val FlapDown = InstantCommand {
         hP += 0.05

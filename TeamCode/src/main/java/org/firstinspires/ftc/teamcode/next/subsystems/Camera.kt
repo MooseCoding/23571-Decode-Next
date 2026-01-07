@@ -13,7 +13,7 @@ object Camera: Subsystem {
     var Rotation = 0.0
     var targetAcquired = false
     var Target = 20
-    var aprilTag = AprilTagProcessor.easyCreateWithDefaults()
+    var aprilTag: AprilTagProcessor? = AprilTagProcessor.easyCreateWithDefaults()
 
     private var visionPortal = VisionPortal.Builder()
     .setCamera(hardwareMap.get(WebcamName::class.java, "The Eye")) // Webcam name from config
@@ -28,7 +28,7 @@ object Camera: Subsystem {
         visionPortal.resumeStreaming()
     }
     private fun telemetryAprilTag() {
-        val currentDetections: List<AprilTagDetection> = aprilTag.detections
+        val currentDetections: List<AprilTagDetection> = aprilTag!!.detections
         val targetDetection = currentDetections.find { it.metadata.id == Target }
         if (targetDetection != null) {
             targetAcquired = true

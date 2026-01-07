@@ -42,7 +42,6 @@ class TeleOP: NextFTCOpMode() {
         Gamepads.gamepad2.a whenBecomesTrue Outtake.flywheelOn
         Gamepads.gamepad2.b whenBecomesTrue Outtake.flywheelOff
         Gamepads.gamepad2.x whenBecomesTrue Outtake.flywheelBack
-        Gamepads.gamepad2.y whenBecomesTrue Outtake.toggleManual
 
         // Aim Controls
         Gamepads.gamepad2.rightTrigger.greaterThan(0.3) whenBecomesTrue Outtake.aimUp
