@@ -48,7 +48,7 @@ object Flywheels: Subsystem {
         flywheelController.goal = KineticState(0.0, targetVelocity)
 
         if(f1.velocity >= targetVelocity - 150) { // Figure ts out
-            Light.Green().schedule() // If we can shoot, light that SOB up
+            Light.Purple().schedule() // If we can shoot, light that SOB up
         }
 
         ActiveOpMode.telemetry.run {

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
+import com.acmerobotics.dashboard.config.Config
 import com.bylazar.configurables.annotations.Configurable
 import com.pedropathing.geometry.Pose
 import com.qualcomm.hardware.limelightvision.LLResult
@@ -12,7 +13,7 @@ import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import dev.nextftc.ftc.ActiveOpMode
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Motif
 
-@Configurable
+@Config
 object Limelight: Subsystem {
     lateinit var ll: Limelight3A
 

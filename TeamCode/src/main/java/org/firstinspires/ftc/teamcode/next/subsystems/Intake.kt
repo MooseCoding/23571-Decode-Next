@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
+import com.acmerobotics.dashboard.config.Config
 import dev.nextftc.control.KineticState
 import dev.nextftc.control.builder.controlSystem
 import dev.nextftc.control.feedback.PIDCoefficients
@@ -16,7 +17,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import java.time.Instant
 import kotlin.time.Duration.Companion.seconds
 
-@Configurable
+@Config
 object Intake: Subsystem {
     val iM = MotorEx("em2")
     @JvmField

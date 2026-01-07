@@ -56,6 +56,8 @@ object Turret: Subsystem {
     private val offset = 3.0578
     private var currentAngle = 0.0
 
+    @JvmField var maxAngle = 90.0
+
 
         private var controller: ControlSystem = controlSystem {
         velPid(coeffs)
@@ -81,7 +83,7 @@ object Turret: Subsystem {
 
     private fun autoAim() {
         val mu = atan2(goalY - currentY, goalX - currentX)
-        val deltaHeading = (mu - currentHeading).rad.normalized.inRad.coerceIn((-125.0/180)*PI, (125.0/180)*PI) // Coerce Properly
+        val deltaHeading = (mu - currentHeading).rad.normalized.inRad.coerceIn((-maxAngle/180)*PI, (maxAngle/180)*PI) // Coerce Properly
         controller.goal = KineticState(deltaHeading)
         pow = controller.calculate(KineticState(currentAngle))
     }
