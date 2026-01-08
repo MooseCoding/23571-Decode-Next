@@ -13,10 +13,9 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Light
 
 object Flywheels: Subsystem {
     val f1 = MotorEx("em0")
-    val f2 = MotorEx("em1").reversed()
 
-    @JvmField var flywheelPID = PIDCoefficients(0.0033, 0.0, 0.0)
-    @JvmField var flywheelFF = BasicFeedforwardParameters(1/2400.0, 0.0, 0.003)
+    @JvmField var flywheelPID = PIDCoefficients(0.003, 1.0, 0.0)
+    @JvmField var flywheelFF = BasicFeedforwardParameters(1/3600.0, 0.0, 0.0)
     private var flywheelController = controlSystem {
         velPid(flywheelPID)
         basicFF(flywheelFF)
@@ -32,36 +31,15 @@ object Flywheels: Subsystem {
     var motorRpm: Double = 0.0
 
     override fun periodic() {
-        motorRpm = f1.velocity * 60.0/28.0
-
-        if(spinSlow) {
-            f1.power = 0.4
-        }
-        else {
-            f1.power = flywheelController.calculate(f1.state)
-        }
-
-        f2.power = f1.power
-
+        f1.power = flywheelController.calculate(f1.state)
         flywheelController.goal = KineticState(0.0, targetVelocity)
-
-        if(f1.velocity >= targetVelocity - 150) { // Figure ts out
-            Light.Purple().schedule() // If we can shoot, light that SOB up
-        }
-
-        ActiveOpMode.telemetry.run {
-            addData("targetVelo", targetVelocity)
-            addData("Current RPM", motorRpm)
-            addData("RPM target", targetVelocity*60.0/28.0)
-            addData("flywheel goal", flywheelController.goal)
-        }
     }
 
     /**
      * Update the PID target
      */
     fun updatePid(velocity:Double) {
-        targetVelocity = velocity
+        //targetVelocity = velocity
     }
 
     /**
