@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Light
 
 object Flywheels: Subsystem {
     val f1 = MotorEx("em0")
-    val f2 = MotorEx("em3").reversed()
+    val f2 = MotorEx("em1").reversed()
 
     @JvmField var flywheelPID = PIDCoefficients(0.0033, 0.0, 0.0)
     @JvmField var flywheelFF = BasicFeedforwardParameters(1.66667E-4, 0.0, 0.003)
@@ -23,9 +23,7 @@ object Flywheels: Subsystem {
     }
 
     @JvmField var targetVelocity = 0.0
-   val f1M = MotorEx("em0")
-    val f2M = MotorEx("em3").reversed()
-
+   
     /**
      * To determine if we are spinning slow or at PID
      */
