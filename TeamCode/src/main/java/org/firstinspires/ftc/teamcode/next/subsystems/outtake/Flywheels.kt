@@ -16,7 +16,7 @@ object Flywheels: Subsystem {
     val f2 = MotorEx("em1").reversed()
 
     @JvmField var flywheelPID = PIDCoefficients(0.0033, 0.0, 0.0)
-    @JvmField var flywheelFF = BasicFeedforwardParameters(1.66667E-4, 0.0, 0.003)
+    @JvmField var flywheelFF = BasicFeedforwardParameters(1/2400.0, 0.0, 0.003)
     private var flywheelController = controlSystem {
         velPid(flywheelPID)
         basicFF(flywheelFF)
