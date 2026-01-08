@@ -14,8 +14,8 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Light
 object Flywheels: Subsystem {
     val f1 = MotorEx("em0")
 
-    @JvmField var flywheelPID = PIDCoefficients(0.003, 1.0, 0.0)
-    @JvmField var flywheelFF = BasicFeedforwardParameters(1/3600.0, 0.0, 0.0)
+    @JvmField var flywheelPID = PIDCoefficients(0.00003, 0.0, 0.0)
+    @JvmField var flywheelFF = BasicFeedforwardParameters(1/2400.0, 0.0, 0.3)
     private var flywheelController = controlSystem {
         velPid(flywheelPID)
         basicFF(flywheelFF)

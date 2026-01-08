@@ -28,7 +28,7 @@ class TestShooter: NextFTCOpMode() {
 
 
     override fun onStartButtonPressed() {
-        Gamepads.gamepad1.a whenBecomesTrue InstantCommand {Flywheels.targetVelocity = 0.5}
+        Gamepads.gamepad1.a whenBecomesTrue InstantCommand {Flywheels.targetVelocity = 200.0}
         Gamepads.gamepad1.b whenBecomesTrue InstantCommand {Flywheels.targetVelocity = 0.0}
         Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake() whenBecomesFalse Intake.stopIntake()
         Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake() whenBecomesFalse Intake.stopIntake()
@@ -42,7 +42,7 @@ class TestShooter: NextFTCOpMode() {
         telemetry.run {
             addData("f1m.velo", Flywheels.f1.power)
             addData("hood pose", hood.position)
-            addData("is this working", hoodP)
+            addData("target Velocity", Flywheels.targetVelocity)
             update()
         }
     }
