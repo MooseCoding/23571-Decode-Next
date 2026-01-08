@@ -1,6 +1,10 @@
 package org.firstinspires.ftc.teamcode.next.tuning
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
+import dev.nextftc.control.KineticState
+import dev.nextftc.control.builder.controlSystem
+import dev.nextftc.control.feedback.PIDCoefficients
+import dev.nextftc.control.feedforward.BasicFeedforwardParameters
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
@@ -16,21 +20,18 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Transfer
 class TestShooter: NextFTCOpMode() {
     init {
         addComponents(
-            SubsystemComponent(Intake, Transfer),
+            SubsystemComponent(Intake, Transfer, FlywheelPID),
             BulkReadComponent,
             BindingsComponent
         )
     }
-
-    val f1: MotorEx = MotorEx("em0")
-    val f2: MotorEx = MotorEx("em1").reversed()
     val hood: ServoEx = ServoEx("s0")
 
     @JvmField var hoodP = 0.2
 
     override fun onStartButtonPressed() {
-        Gamepads.gamepad1.a whenBecomesTrue InstantCommand { f1.power = 1.0; f2.power = 1.0}
-        Gamepads.gamepad1.b whenBecomesTrue InstantCommand { f1.power = 0.0; f2.power = 0.0}
+        Gamepads.gamepad1.a whenBecomesTrue InstantCommand {FlywheelPID.targetVelo = 200.0}
+        Gamepads.gamepad1.b whenBecomesTrue InstantCommand {FlywheelPID.targetVelo = 0.0}
         Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake() whenBecomesFalse Intake.stopIntake()
         Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake() whenBecomesFalse Intake.stopIntake()
         Gamepads.gamepad1.leftBumper whenBecomesTrue Transfer.start()
@@ -41,9 +42,10 @@ class TestShooter: NextFTCOpMode() {
     override fun onUpdate() {
         // hood.position = hoodP
         telemetry.run {
-            addData("f1m.velo", f1.velocity)
-            addData("f2m.velo", f2.velocity)
+            addData("f1m.velo", FlywheelPID.f1.velocity)
+            addData("f2m.velo", FlywheelPID.f2.velocity)
             addData("hood pose", hood.position)
+            addData("is this working?", hood.position)
             update()
         }
     }
