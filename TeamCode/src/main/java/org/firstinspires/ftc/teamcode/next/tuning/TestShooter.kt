@@ -9,6 +9,7 @@ import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import dev.nextftc.hardware.impl.MotorEx
 import dev.nextftc.hardware.impl.ServoEx
+import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Transfer
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
@@ -18,7 +19,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 class TestShooter: NextFTCOpMode() {
     init {
         addComponents(
-            SubsystemComponent(Intake, Transfer, Flywheels, Turret),
+            SubsystemComponent(Intake, Transfer, Flywheels, Turret, DriveTrain),
             BulkReadComponent,
             BindingsComponent
         )

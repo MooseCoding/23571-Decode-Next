@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.next
 
+import com.bylazar.telemetry.JoinedTelemetry
+import com.bylazar.telemetry.PanelsTelemetry
 import com.pedropathing.geometry.Pose
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.commands.utility.InstantCommand
@@ -23,6 +25,7 @@ import kotlin.math.PI
 
 @TeleOp
 class TeleOp: NextFTCOpMode() {
+    var tele = JoinedTelemetry(PanelsTelemetry.ftcTelemetry, telemetry)
     init {
         addComponents(
             PedroComponent(Constants::createFollower),
