@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.next.tuning
 
 import com.acmerobotics.dashboard.config.Config
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
@@ -12,6 +13,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Transfer
 
 @Config
 @TeleOp
+@Disabled
 class SpinTune: NextFTCOpMode() {
     init {
         addComponents(

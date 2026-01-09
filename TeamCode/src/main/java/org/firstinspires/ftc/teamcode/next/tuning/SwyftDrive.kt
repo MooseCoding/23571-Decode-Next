@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.next.tuning
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.ftc.Gamepads
@@ -11,6 +12,7 @@ import java.lang.Double.max
 import java.lang.Math.abs
 
 @TeleOp
+@Disabled
 class SwyftDrive: NextFTCOpMode() {
     init {
         addComponents(

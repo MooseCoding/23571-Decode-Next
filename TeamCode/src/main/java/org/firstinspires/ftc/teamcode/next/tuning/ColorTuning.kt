@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.next.tuning
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
@@ -10,6 +11,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Sensor
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 
 @TeleOp
+@Disabled
 class ColorTuning: NextFTCOpMode() {
     init {
         addComponents(

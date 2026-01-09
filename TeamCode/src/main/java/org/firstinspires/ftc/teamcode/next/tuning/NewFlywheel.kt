@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.next.tuning
 
 import com.acmerobotics.dashboard.config.Config
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.control.KineticState
 import dev.nextftc.control.builder.controlSystem
@@ -20,6 +21,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 
 @Config
 @TeleOp
+@Disabled
 class NewFlywheel: NextFTCOpMode() {
     init {
         addComponents(
