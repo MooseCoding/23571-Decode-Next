@@ -99,7 +99,6 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
                 Delay(0.2.seconds),
                 Intake.stopIntake(),
                 Transfer.stop(),
-                Flywheels.stop()
             ),
         )
     }

@@ -28,12 +28,7 @@ class TeleOp: NextFTCOpMode() {
             PedroComponent(Constants::createFollower),
             BindingsComponent,
             BulkReadComponent,
-            SubsystemComponent(
-                DriveTrain,
-                Intake,
-                Transfer,
-                Outtake
-            )
+            SubsystemComponent(DriveTrain, Intake, Transfer, Outtake)
         )
     }
 
@@ -45,8 +40,8 @@ class TeleOp: NextFTCOpMode() {
         // Shoot
         Gamepads.gamepad1.triangle whenBecomesTrue Outtake.shoot()
 
-        Gamepads.gamepad1.dpadLeft whenBecomesTrue Transfer.reverse() whenBecomesFalse Transfer.stop()
-        Gamepads.gamepad1.dpadRight whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()
+        Gamepads.gamepad1.leftBumper whenBecomesTrue Transfer.reverse() whenBecomesFalse Transfer.stop()
+        Gamepads.gamepad1.rightBumper whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()
 
         /*
 
@@ -83,5 +78,9 @@ class TeleOp: NextFTCOpMode() {
                 }
             }
         }
+    }
+
+    override fun onUpdate() {
+        telemetry.update()
     }
 }
