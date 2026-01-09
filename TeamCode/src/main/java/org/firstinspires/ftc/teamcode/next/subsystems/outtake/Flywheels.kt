@@ -12,7 +12,8 @@ import dev.nextftc.hardware.impl.MotorEx
 import org.firstinspires.ftc.teamcode.next.subsystems.Light
 
 object Flywheels: Subsystem {
-    val f1 = MotorEx("em0")
+    val f1 = MotorEx("f1")
+    val f2 = MotorEx("f2").reversed()
 
     @JvmField var flywheelPID = PIDCoefficients(0.00003, 0.0, 0.0)
     @JvmField var flywheelFF = BasicFeedforwardParameters(1/2400.0, 0.0, 0.3)
@@ -32,6 +33,7 @@ object Flywheels: Subsystem {
 
     override fun periodic() {
         f1.power = flywheelController.calculate(f1.state)
+        f2.power = f1.power
         flywheelController.goal = KineticState(0.0, targetVelocity)
     }
 

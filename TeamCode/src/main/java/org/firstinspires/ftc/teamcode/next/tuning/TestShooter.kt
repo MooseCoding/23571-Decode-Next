@@ -19,13 +19,13 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 class TestShooter: NextFTCOpMode() {
     init {
         addComponents(
-            SubsystemComponent(Intake, Transfer, Flywheels, Turret, DriveTrain),
+            SubsystemComponent(Intake, Transfer, Flywheels),
             BulkReadComponent,
             BindingsComponent
         )
     }
     val hood: ServoEx = ServoEx("s0")
-    val f1 = MotorEx("em0")
+    val f1 = MotorEx("f1")
     @JvmField var hoodP = 0.2
 
 

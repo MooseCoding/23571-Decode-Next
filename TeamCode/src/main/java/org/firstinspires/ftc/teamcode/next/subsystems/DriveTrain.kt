@@ -16,10 +16,10 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor
 
 @Configurable
 object DriveTrain: Subsystem {
-     val fL = MotorEx("cm1")
-     val fR = MotorEx("cm2")
-     val bL = MotorEx("cm0")
-     val bR = MotorEx("cm3")
+     val fL = MotorEx("fL")
+     val fR = MotorEx("fR")
+     val bL = MotorEx("bL")
+     val bR = MotorEx("bR")
 
     @JvmField var alliance:Alliance = Alliance.BLUE
     @JvmField var sensitivity = 0.8
