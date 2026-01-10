@@ -27,7 +27,7 @@ object Flywheels: Subsystem {
         basicFF(flywheelFF)
     }
 
-    @JvmField var targetVelocity = 0.0
+    @JvmField var targetVelocity = 1350.0
    
     /**
      * To determine if we are spinning slow or at PID

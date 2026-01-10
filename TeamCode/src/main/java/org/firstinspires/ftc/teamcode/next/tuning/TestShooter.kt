@@ -34,8 +34,8 @@ class TestShooter: NextFTCOpMode() {
     val servo = ServoEx("hood")
     companion object {
         @JvmField
-        var hoodPos = 0.2
-        @JvmField var flywheelVelocity = 0.0
+        var hoodPos = 0.50
+        @JvmField var flywheelVelocity = 1350.0
     }
     override fun onStartButtonPressed() {
         Gamepads.gamepad1.rightBumper whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()

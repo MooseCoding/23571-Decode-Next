@@ -29,7 +29,7 @@ import kotlin.time.Duration.Companion.seconds
 
 object Outtake: SubsystemGroup(Flywheels, Hood, Turret, Light) {
     var fullManual = false
-    var distance: Dist = Dist.FAR
+    var distance: Dist = Dist.CLOSE
 
     var goalX = 6.0;
     val goalY = 144 - 8.0
@@ -67,8 +67,8 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret, Light) {
             }
 
             Dist.CLOSE -> {
-                fP = 750.0
-                hP = 0.73
+                fP = 1350.0
+                hP = 0.50
             }
         }
 
@@ -95,10 +95,10 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret, Light) {
             ParallelGroup(
                 Intake.runIntake(),
                 Transfer.start(),
-                Delay(0.5.seconds),
+                Delay(0.75.seconds),
                 Intake.stopIntake(),
                 Transfer.stop(),
-                //Flywheels.stop()
+                Flywheels.stop()
             ),
         )
     }

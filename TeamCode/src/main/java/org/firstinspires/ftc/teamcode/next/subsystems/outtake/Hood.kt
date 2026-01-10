@@ -11,11 +11,10 @@ import dev.nextftc.ftc.ActiveOpMode
 object Hood: Subsystem {
     val hoodServo = ServoEx("hood")
 
-    @JvmField var hoodPosition = 0.25
+    @JvmField var hoodPosition = 0.50
     /* min is 0.75 max is 0.25*/
 
     override fun periodic() {
         hoodServo.position = hoodPosition
-        ActiveOpMode.telemetry.addData("hood pose", hoodServo.position)
     }
 }
