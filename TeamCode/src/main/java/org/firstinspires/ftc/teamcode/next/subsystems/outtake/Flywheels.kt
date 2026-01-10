@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.next.subsystems.outtake
 
+import com.acmerobotics.dashboard.config.Config
+import com.bylazar.configurables.annotations.Configurable
 import dev.nextftc.control.KineticState
 import dev.nextftc.control.builder.controlSystem
 import dev.nextftc.control.feedback.PIDCoefficients
@@ -10,7 +12,10 @@ import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.MotorEx
 import org.firstinspires.ftc.teamcode.next.subsystems.Light
+import kotlin.math.absoluteValue
 
+@Config
+@Configurable
 object Flywheels: Subsystem {
     val f1 = MotorEx("f1")
     val f2 = MotorEx("f2").reversed()
@@ -32,9 +37,16 @@ object Flywheels: Subsystem {
     var motorRpm: Double = 0.0
 
     override fun periodic() {
-        f1.power = flywheelController.calculate(f1.state)
+        f1.power = flywheelController.calculate(KineticState(0.0, f1.velocity.absoluteValue))
         f2.power = f1.power
         flywheelController.goal = KineticState(0.0, targetVelocity)
+
+        if(f1.velocity.absoluteValue + 200.0 > targetVelocity) {
+            Light.Green().schedule()
+        }
+        else {
+            Light.Blue().schedule()
+        }
     }
 
     /**

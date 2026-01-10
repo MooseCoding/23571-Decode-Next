@@ -12,7 +12,6 @@ import java.lang.Double.max
 import java.lang.Math.abs
 
 @TeleOp
-@Disabled
 class SwyftDrive: NextFTCOpMode() {
     init {
         addComponents(
@@ -21,10 +20,10 @@ class SwyftDrive: NextFTCOpMode() {
         )
     }
 
-    val fl =             MotorEx("cm1") // Yse
-    val fr =             MotorEx("cm2").reversed()
-    val bl =             MotorEx("cm0")
-    val br =             MotorEx("cm3").reversed() // Yes
+    val fl =             MotorEx("fL") // Yse
+    val fr =             MotorEx("fR").reversed()
+    val bl =             MotorEx("bL")
+    val br =             MotorEx("bR").reversed() // Yes
 
     override fun onStartButtonPressed() {
     }

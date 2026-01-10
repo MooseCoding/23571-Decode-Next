@@ -8002,6 +8002,7 @@ int xml maxmodules 0x7f14000a
 int xml pushbot 0x7f14000b
 int xml pushbotsens 0x7f14000c
 int xml rev_scoot 0x7f14000d
-int xml squarebot 0x7f14000e
-int xml swyft_test 0x7f14000f
-int xml teamwebcamcalibrations 0x7f140010
+int xml sherman 0x7f14000e
+int xml squarebot 0x7f14000f
+int xml swyft_test 0x7f140010
+int xml teamwebcamcalibrations 0x7f140011

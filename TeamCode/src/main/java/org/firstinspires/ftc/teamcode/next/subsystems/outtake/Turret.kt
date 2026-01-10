@@ -25,26 +25,28 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.goalX
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.goalY
 
 import kotlin.math.PI
+import kotlin.math.absoluteValue
 import kotlin.math.atan2
 
 @Config
 object Turret: Subsystem {
     private lateinit var tele: MultipleTelemetry
 
-    private val leftServo: CRServoEx = CRServoEx("cr0")
-    private val rightServo: CRServoEx = CRServoEx("cr1") // Check direction
+    private val leftServo: CRServoEx = CRServoEx("dS2")
+    private val rightServo: CRServoEx = CRServoEx("dS1") // Check direction
     private lateinit var encoder: AnalogInput
 
     @JvmField var autoTurret = false
 
-    @JvmField var turretPID = PIDCoefficients(2.5,0.0,0.0)
-    var turretController = controlSystem {
+    @JvmField var turretPID = PIDCoefficients(0.2,0.0,0.0)
+
+    var controller = controlSystem {
         posPid(turretPID)
     }
 
     override fun initialize() {
         tele = MultipleTelemetry(FtcDashboard.getInstance().telemetry, ActiveOpMode.telemetry)
-        encoder = ActiveOpMode.hardwareMap.analogInput.get("turret")
+        encoder = ActiveOpMode.hardwareMap.analogInput.get("aS")
     }
 
     private var lastValue = 0.0
@@ -58,16 +60,15 @@ object Turret: Subsystem {
 
     @JvmField var maxAngle = 90.0
 
-
-        private var controller: ControlSystem = controlSystem {
-        velPid(coeffs)
-    }
-
     override fun periodic() {
         updateAngle()
 
         if(autoTurret) {
             autoAim()
+        }
+
+        if(!autoTurret && pow.absoluteValue != 1.0) {
+            pow = 0.0
         }
 
         leftServo.power = pow
@@ -77,12 +78,14 @@ object Turret: Subsystem {
             addData("pos", getYaw())
             addData("current angle", currentAngle)
             addData("pos in deg", 180/PI*getYaw())
+            addData("servo pow", pow)
             update()
         }
     }
 
     private fun autoAim() {
         val mu = atan2(goalY - currentY, goalX - currentX)
+        // val mu = atan2(goalY - 16.0, goalX - 60.0)
         val deltaHeading = (mu - currentHeading).rad.normalized.inRad.coerceIn((-maxAngle/180)*PI, (maxAngle/180)*PI) // Coerce Properly
         controller.goal = KineticState(deltaHeading)
         pow = controller.calculate(KineticState(currentAngle))
@@ -110,14 +113,14 @@ object Turret: Subsystem {
      * @return Spins a little left
      */
     fun spinLeft(): Command = InstantCommand {
-        pow = -0.5
+        pow = -1.0
     }
 
     /**
      * @return Spins a little right
      */
     fun spinRight(): Command = InstantCommand {
-        pow = 0.5
+        pow = 1.0
     }
 
     /**

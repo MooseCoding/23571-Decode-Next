@@ -27,7 +27,7 @@ import kotlin.math.sqrt
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
-object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
+object Outtake: SubsystemGroup(Flywheels, Hood, Turret, Light) {
     var fullManual = false
     var distance: Dist = Dist.FAR
 
@@ -47,11 +47,10 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
     override fun periodic() {
         if (fullManual) {
             Turret.autoTurret = false
-            manualAim()
         } else {
-            Turret.autoTurret = true
-            auto()
+            Turret.autoTurret = false
         }
+        manualAim()
     }
 
     /**
@@ -63,13 +62,13 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
 
         when (distance) {
             Dist.FAR -> {
-                fP = 1500.0
-                hP = 0.5
+                fP = 2400.0
+                hP = 0.4
             }
 
             Dist.CLOSE -> {
-                fP = 1200.0
-                hP = 0.3
+                fP = 750.0
+                hP = 0.73
             }
         }
 
@@ -96,9 +95,10 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Turret) {
             ParallelGroup(
                 Intake.runIntake(),
                 Transfer.start(),
-                Delay(0.2.seconds),
+                Delay(0.5.seconds),
                 Intake.stopIntake(),
                 Transfer.stop(),
+                //Flywheels.stop()
             ),
         )
     }

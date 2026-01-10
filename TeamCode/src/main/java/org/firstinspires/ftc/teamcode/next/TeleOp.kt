@@ -11,7 +11,13 @@ import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
+import dev.nextftc.hardware.driving.MecanumDriverControlled
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
+import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.bL
+import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.bR
+import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.fL
+import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.fR
+import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.sensitivity
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 import org.firstinspires.ftc.teamcode.next.subsystems.Transfer
@@ -31,9 +37,18 @@ class TeleOp: NextFTCOpMode() {
             PedroComponent(Constants::createFollower),
             BindingsComponent,
             BulkReadComponent,
-            SubsystemComponent(DriveTrain, Intake, Transfer, Outtake)
+            SubsystemComponent(DriveTrain, Intake, Outtake, Transfer)
         )
     }
+
+    override fun onWaitForStart() {
+
+    }
+
+    override fun onInit() {
+
+    }
+
 
     override fun onStartButtonPressed() {
         // Intake

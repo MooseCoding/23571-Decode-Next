@@ -6329,6 +6329,7 @@ xml maxmodules
 xml pushbot
 xml pushbotsens
 xml rev_scoot
+xml sherman
 xml squarebot
 xml swyft_test
 xml teamwebcamcalibrations

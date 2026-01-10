@@ -23,5 +23,7 @@ class TurretTuning: NextFTCOpMode() {
     }
 
     override fun onStartButtonPressed() {
+        Gamepads.gamepad1.leftBumper whenBecomesTrue Turret.spinLeft() whenBecomesFalse Turret.stopSpin()
+        Gamepads.gamepad1.rightBumper whenBecomesTrue  Turret.spinRight() whenBecomesFalse Turret.stopSpin()
     }
 }

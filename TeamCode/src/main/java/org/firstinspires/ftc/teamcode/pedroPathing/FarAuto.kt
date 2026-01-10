@@ -18,6 +18,7 @@ import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import dev.nextftc.extensions.pedro.TurnBy
 import dev.nextftc.extensions.pedro.TurnTo
+import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
@@ -28,9 +29,11 @@ import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
+import org.firstinspires.ftc.teamcode.next.subsystems.Transfer
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Motif
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
+import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import kotlin.math.PI
 import kotlin.time.Duration.Companion.seconds
 
@@ -40,17 +43,15 @@ class FarAuto: NextFTCOpMode() {
     init {
         addComponents(
             PedroComponent(Constants::createFollower),
-            SubsystemComponent(DriveTrain),
+            SubsystemComponent(DriveTrain, Intake, Transfer, Outtake),
             BulkReadComponent,
             BindingsComponent,
         )
     }
 
-    lateinit var poses: Far12
-
     private lateinit var timer: Timer
 
-    public override fun onWaitForStart() {
+    override fun onWaitForStart() {
         Gamepads.gamepad1.a whenBecomesTrue { alliance = Alliance.RED }
         Gamepads.gamepad1.b whenBecomesTrue  { alliance = Alliance.BLUE }
         telemetry.run {
@@ -63,8 +64,8 @@ class FarAuto: NextFTCOpMode() {
         }
     }
 
-    public override fun onInit() {
-        // follower.setStartingPose(Far12.start)
+    override fun onInit() {
+        follower.setStartingPose(Far12.startPoint)
     }
 
     override fun waitForStart() {
@@ -74,15 +75,18 @@ class FarAuto: NextFTCOpMode() {
     override fun onStop() {
     }
 
-    public override fun onStartButtonPressed() {
+    override fun onStartButtonPressed() {
         timer = Timer()
         val p = Far12(alliance)
+
         SequentialGroupLocal(
             // Shoot the 3 preloads
+            InstantCommand { Flywheels.targetVelocity = 2300.0 },
             Flywheels.spin(),
             Delay(3.seconds),
             Outtake.shoot(),
             Delay(0.3.seconds),
+            /*
 
                     // Intake from row 2
             FollowPath(Far12.ToRow2),
@@ -118,7 +122,7 @@ class FarAuto: NextFTCOpMode() {
                 ),
             ),
 
-            FollowPath(Far12.Park),
+            FollowPath(Far12.Park),*/
         ).schedule()
     }
 

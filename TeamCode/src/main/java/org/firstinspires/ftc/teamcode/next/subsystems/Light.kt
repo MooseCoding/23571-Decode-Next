@@ -1,16 +1,18 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
 import android.bluetooth.BluetoothGatt
+import com.acmerobotics.dashboard.config.Config
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.hardware.impl.ServoEx
 import kotlinx.coroutines.internal.RemoveFirstDesc
 
+@Config
 object Light: Subsystem{
-    private val light: ServoEx = ServoEx("pwm")
+    val light: ServoEx = ServoEx("pwm")
 
-    private var color = 0.0
+    @JvmField var color = 0.0
 
     override fun periodic() {
         light.position = color
@@ -41,6 +43,6 @@ object Light: Subsystem{
      * @return A command turning the light blue
      */
     fun Blue(): Command = InstantCommand {
-        color = 0.3
+        color = 0.6
     }
 }
