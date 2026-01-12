@@ -27,7 +27,7 @@ import kotlin.math.sqrt
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
-object Outtake: SubsystemGroup(Flywheels, Hood, Turret, Light) {
+object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
     var fullManual = false
     var distance: Dist = Dist.CLOSE
 

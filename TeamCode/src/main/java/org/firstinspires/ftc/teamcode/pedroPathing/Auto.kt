@@ -34,13 +34,14 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Transfer
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Motif
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
+import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import kotlin.math.PI
 import kotlin.time.Duration.Companion.seconds
 
-@Autonomous
+@Autonomous(name = "BlueAuto")
 @Configurable
-class FarAuto: NextFTCOpMode() {
+class Auto: NextFTCOpMode() {
     init {
         addComponents(
             PedroComponent(Constants::createFollower),
@@ -63,6 +64,8 @@ class FarAuto: NextFTCOpMode() {
 
             update()
         }
+        Flywheels.targetVelocity = 0.0
+        Hood.hoodPosition = 0.5
     }
 
     val fL = MotorEx("fL")
@@ -83,15 +86,95 @@ class FarAuto: NextFTCOpMode() {
 
     override fun onStartButtonPressed() {
         timer = Timer()
-        val p = Far12(alliance)
+        val p = Far12(alliance)  //41.5 In at 0.5 power for 1 second
 
         SequentialGroupLocal(
-            InstantCommand { // Go left
+            // Shoot the 3 preloads
+            InstantCommand { Flywheels.targetVelocity = 1350.0 },
+            Flywheels.spin(),
+            InstantCommand { //forward
+                fR.power = 0.5
+                fL.power = -0.5
+                bL.power = -0.5
+                bR.power = 0.5
+            },
+            Delay(1.0.seconds),
+            InstantCommand{//shoot
+                fR.power = 0.0
+                fL.power = 0.0
+                bL.power = 0.0
+                bR.power = 0.0
+            },
+            Delay(1.0),
+            Intake.runIntake(),
+            Transfer.start(),
+            Delay(2.0),
+            Transfer.stop(),
+            InstantCommand{//turn
+                fR.power = -0.5
+                fL.power = -0.5
+                bR.power = -0.5
+                bL.power = -0.5
+            },
+            Delay(0.2) ,
+            InstantCommand{//strafe left
+                fR.power = -0.7
+                fL.power = -0.7
+                bR.power = 0.7
+                bL.power = 0.7
+            },
+            Delay(1.5),
+            //CUT FOR FAILURE
+            /*
+            InstantCommand{//turn
+                fR.power = -0.0
+                fL.power = -0.0
+                bR.power = -0.0
+                bL.power = -0.0
+            },
+            Delay(0.1),
+            InstantCommand{ //forward
+                fR.power = 0.5
+                fL.power = -0.5
+                bR.power = -0.5
+                bL.power = 0.5
+            },
+            Delay(0.8),
+            InstantCommand{ //back
+                fR.power = -0.5
+                fL.power = 0.5
+                bR.power = 0.5
+                bL.power = -0.5
+            },
+            Delay(0.8),
+            InstantCommand{//strafe right
                 fR.power = 0.5
                 fL.power = 0.5
-                bL.power = -0.5
                 bR.power = -0.5
-            }
+                bL.power = -0.5
+            },
+            Delay(0.25),
+            InstantCommand{//turn
+                fR.power = 0.5
+                fL.power = 0.5
+                bR.power = 0.5
+                bL.power = 0.5
+            },
+            Delay(0.25),
+            Transfer.start(),
+            Delay(1.0),
+             */
+            InstantCommand{//turn
+                fR.power = -0.0
+                fL.power = -0.0
+                bR.power = -0.0
+                bL.power = -0.0
+            },
+            Delay(0.1),
+            Transfer.stop(),
+            Intake.stopIntake(),
+            Flywheels.hardStop()
+
             /*
 
                     // Intake from row 2

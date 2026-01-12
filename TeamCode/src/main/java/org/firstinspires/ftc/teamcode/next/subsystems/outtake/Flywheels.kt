@@ -69,7 +69,6 @@ object Flywheels: Subsystem {
     fun stop(): Command = InstantCommand {
         spinSlow = true
     }
-
     /**
      * @return Hard Stop
      */
