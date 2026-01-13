@@ -62,12 +62,12 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
 
         when (distance) {
             Dist.FAR -> {
-                fP = 2400.0
-                hP = 0.4
+                fP = 1500.0
+                hP = 0.6
             }
 
             Dist.CLOSE -> {
-                fP = 1350.0
+                fP = 900.0
                 hP = 0.50
             }
         }
@@ -95,7 +95,13 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
             ParallelGroup(
                 Intake.runIntake(),
                 Transfer.start(),
-                Delay(0.75.seconds),
+                Hood.setRestore(),
+                Delay(0.1.seconds),
+                Hood.sequence(),
+                Delay(0.1),
+                Hood.sequence(),
+                Delay(0.1),
+                Hood.restore(),
                 Intake.stopIntake(),
                 Transfer.stop(),
                 Flywheels.stop()

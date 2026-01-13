@@ -73,38 +73,21 @@ class TeleOp
         driveTrain.scalar = 1.0
 
         // Intake
-        Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake() whenBecomesFalse Intake.stopIntake()
-        Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake() whenBecomesFalse Intake.stopIntake()
+        //Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake() whenBecomesFalse Intake.stopIntake()
+        //Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake() whenBecomesFalse Intake.stopIntake()
 
         // Shoot
         Gamepads.gamepad1.triangle whenBecomesTrue Outtake.shoot()
 
-        Gamepads.gamepad1.leftBumper whenBecomesTrue Transfer.reverse() whenBecomesFalse Transfer.stop()
-        Gamepads.gamepad1.rightBumper whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()
+        //Gamepads.gamepad1.leftBumper whenBecomesTrue Transfer.reverse() whenBecomesFalse Transfer.stop()
+        //Gamepads.gamepad1.rightBumper whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()
 
-        // Maybe Boldin gButtons slows down bot for endgame/precision
+        Gamepads.gamepad1.dpadUp whenBecomesTrue {Flywheels.targetVelocity += 50}
+        Gamepads.gamepad1.dpadDown whenBecomesTrue {Flywheels.targetVelocity -= 50}
+        Gamepads.gamepad1.dpadLeft whenBecomesTrue {Hood.hoodPosition -= 0.1}
+        Gamepads.gamepad1.dpadRight whenBecomesTrue {Hood.hoodPosition += 0.1}
 
-        /*
-
-        Gamepad 2 Main Tele Control
-
-         */
-
-        Gamepads.gamepad2.rightTrigger.greaterThan(0.3) whenBecomesTrue Flywheels.spin()
-        Gamepads.gamepad2.leftTrigger.greaterThan(0.3) whenBecomesTrue Flywheels.stop()
-
-        /*
-
-        Manual Stuff
-
-         */
-        Gamepads.gamepad2.cross whenBecomesTrue InstantCommand { Outtake.distance = Dist.CLOSE }
-        Gamepads.gamepad2.circle whenBecomesTrue InstantCommand { Outtake.distance = Dist.FAR }
-
-        Gamepads.gamepad2.triangle whenBecomesTrue InstantCommand { Outtake.fullManual = true}
-
-        Gamepads.gamepad2.dpadUp whenBecomesTrue InstantCommand { Hood.hoodPosition += 0.05 }
-        Gamepads.gamepad2.dpadDown whenBecomesTrue InstantCommand { Hood.hoodPosition -= 0.05 }
+        // Maybe holding Buttons slows down bot for endgame/precision
 
         Gamepads.gamepad2.options whenBecomesTrue InstantCommand {
             when(DriveTrain.alliance) {
@@ -121,6 +104,7 @@ class TeleOp
     }
 
     override fun onUpdate() {
+        telemetry.addData("Beans", Hood.hoodPosition)
         telemetry.update()
     }
 }
