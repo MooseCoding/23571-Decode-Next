@@ -86,25 +86,31 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
         Hood.hoodPosition = values[0]
         Flywheels.updatePid(values[1])
     }
+    fun accelerate(): Command = InstantCommand{
+        Flywheels.targetVelocity += 600
+    }
+    fun decelerate(): Command = InstantCommand{
+        Flywheels.targetVelocity -= 600
+    }
 
     /**
      * @return Command to run for the shoot command
      */
     fun shoot(): Command {
         return SequentialGroupLocal(
-            ParallelGroup(
                 Intake.runIntake(),
                 Transfer.start(),
                 Hood.setRestore(),
-                Delay(0.1.seconds),
+                accelerate(),
+                Delay(0.3.seconds),
                 Hood.sequence(),
-                Delay(0.1),
+                Delay(0.3),
                 Hood.sequence(),
-                Delay(0.1),
+                Delay(0.3),
+                decelerate(),
                 Hood.restore(),
-                //Intake.stopIntake(),
-                //Transfer.stop(),
-            ),
-        )
+                Intake.stopIntake(),
+                Transfer.stop(),
+            )
     }
 }
