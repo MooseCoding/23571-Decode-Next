@@ -84,8 +84,9 @@ class TeleOp
 
         Gamepads.gamepad1.dpadUp whenBecomesTrue {Flywheels.targetVelocity += 50}
         Gamepads.gamepad1.dpadDown whenBecomesTrue {Flywheels.targetVelocity -= 50}
-        Gamepads.gamepad1.leftBumper whenBecomesTrue {Turret.spinLeft()} whenBecomesFalse {Turret.stopSpin()}
-        Gamepads.gamepad1.rightBumper whenBecomesTrue {Turret.spinRight()} whenBecomesFalse {Turret.stopSpin()}
+        Gamepads.gamepad1.rightBumper whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()
+        Gamepads.gamepad1.dpadRight whenBecomesTrue {Hood.hoodPosition += 0.1}
+        Gamepads.gamepad1.dpadLeft whenBecomesTrue {Hood.hoodPosition -= 0.1}
 
         // Maybe holding Buttons slows down bot for endgame/precision
 
@@ -104,7 +105,7 @@ class TeleOp
     }
 
     override fun onUpdate() {
-        telemetry.addData("no Beans", Hood.hoodPosition)
+        telemetry.addData("Beans", Hood.hoodPosition)
         telemetry.addData("Velocity = ",Flywheels.targetVelocity)
         telemetry.addData("Hood Position = ", Hood.hoodPosition)
         telemetry.update()

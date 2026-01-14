@@ -87,10 +87,10 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
         Flywheels.updatePid(values[1])
     }
     fun accelerate(): Command = InstantCommand{
-        Flywheels.targetVelocity += 600
+        Flywheels.targetVelocity += 800
     }
     fun decelerate(): Command = InstantCommand{
-        Flywheels.targetVelocity -= 600
+        Flywheels.targetVelocity -= 800
     }
 
     /**
@@ -102,9 +102,9 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
                 Transfer.start(),
                 Hood.setRestore(),
                 accelerate(),
-                Delay(0.3.seconds),
+                Delay(0.15.seconds),
                 Hood.sequence(),
-                Delay(0.3),
+                Delay(0.15),
                 Hood.sequence(),
                 Delay(0.3),
                 decelerate(),

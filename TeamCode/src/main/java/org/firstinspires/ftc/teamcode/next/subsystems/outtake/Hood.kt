@@ -23,7 +23,7 @@ object Hood: Subsystem {
         restoreTo = hoodPosition
     }
     fun sequence(): InstantCommand = InstantCommand{
-        hoodPosition += 0.1
+        hoodPosition -= 0.1
     }
     fun restore(): InstantCommand = InstantCommand{
         hoodPosition = restoreTo
