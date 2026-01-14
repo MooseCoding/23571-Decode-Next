@@ -24,7 +24,6 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 import kotlin.math.atan2
 
-@TeleOp(name ="TeleOp")
 @Config
 
 class TestShooter: NextFTCOpMode() {

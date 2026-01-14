@@ -32,7 +32,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 import kotlin.math.PI
-@Disabled
+
 @TeleOp
 class TeleOp
     : NextFTCOpMode() {
@@ -42,7 +42,7 @@ class TeleOp
             PedroComponent(Constants::createFollower),
             BindingsComponent,
             BulkReadComponent,
-            SubsystemComponent(Intake, Outtake, Transfer)
+            SubsystemComponent(Intake, Outtake, Transfer, Turret, Hood)
         )
     }
 
@@ -73,8 +73,8 @@ class TeleOp
         driveTrain.scalar = 1.0
 
         // Intake
-        //Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake() whenBecomesFalse Intake.stopIntake()
-        //Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake() whenBecomesFalse Intake.stopIntake()
+        Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake() whenBecomesFalse Intake.stopIntake()
+        Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake() whenBecomesFalse Intake.stopIntake()
 
         // Shoot
         Gamepads.gamepad1.triangle whenBecomesTrue Outtake.shoot()
@@ -84,8 +84,8 @@ class TeleOp
 
         Gamepads.gamepad1.dpadUp whenBecomesTrue {Flywheels.targetVelocity += 50}
         Gamepads.gamepad1.dpadDown whenBecomesTrue {Flywheels.targetVelocity -= 50}
-        Gamepads.gamepad1.dpadLeft whenBecomesTrue {Hood.hoodPosition -= 0.1}
-        Gamepads.gamepad1.dpadRight whenBecomesTrue {Hood.hoodPosition += 0.1}
+        Gamepads.gamepad1.leftBumper whenBecomesTrue {Turret.spinLeft()} whenBecomesFalse {Turret.stopSpin()}
+        Gamepads.gamepad1.rightBumper whenBecomesTrue {Turret.spinRight()} whenBecomesFalse {Turret.stopSpin()}
 
         // Maybe holding Buttons slows down bot for endgame/precision
 
@@ -104,7 +104,9 @@ class TeleOp
     }
 
     override fun onUpdate() {
-        telemetry.addData("Beans", Hood.hoodPosition)
+        telemetry.addData("no Beans", Hood.hoodPosition)
+        telemetry.addData("Velocity = ",Flywheels.targetVelocity)
+        telemetry.addData("Hood Position = ", Hood.hoodPosition)
         telemetry.update()
     }
 }

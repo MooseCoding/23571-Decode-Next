@@ -61,7 +61,7 @@ object Turret: Subsystem {
     @JvmField var maxAngle = 90.0
 
     override fun periodic() {
-        updateAngle()
+        /*updateAngle()
 
         if(autoTurret) {
             autoAim()
@@ -70,17 +70,17 @@ object Turret: Subsystem {
         if(!autoTurret && pow.absoluteValue != 1.0) {
             pow = 0.0
         }
-
+        */
         leftServo.power = pow
         rightServo.power = pow
-
+        /*
         tele.run {
             addData("pos", getYaw())
             addData("current angle", currentAngle)
             addData("pos in deg", 180/PI*getYaw())
             addData("servo pow", pow)
             update()
-        }
+        }*/
     }
 
     private fun autoAim() {

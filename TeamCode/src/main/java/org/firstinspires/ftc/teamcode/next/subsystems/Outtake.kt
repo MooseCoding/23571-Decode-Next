@@ -73,7 +73,7 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
         }
 
         Flywheels.updatePid(fP)
-        Hood.hoodPosition = hP
+        //Hood.hoodPosition = hP
     }
 
     /**
@@ -102,9 +102,8 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
                 Hood.sequence(),
                 Delay(0.1),
                 Hood.restore(),
-                Intake.stopIntake(),
-                Transfer.stop(),
-                Flywheels.stop()
+                //Intake.stopIntake(),
+                //Transfer.stop(),
             ),
         )
     }
