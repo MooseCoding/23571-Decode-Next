@@ -98,19 +98,21 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
      */
     fun shoot(): Command {
         return SequentialGroupLocal(
+            ParallelGroup (
                 Intake.runIntake(),
                 Transfer.start(),
                 Hood.setRestore(),
-                accelerate(),
-                Delay(0.15.seconds),
-                Hood.sequence(),
-                Delay(0.15),
-                Hood.sequence(),
-                Delay(0.3),
-                decelerate(),
+                ),
+                Delay(0.2.seconds),
+                Hood.sequence(0.2),
+                Delay(0.2.seconds),
+                Hood.sequence(0.1),
+                Delay(0.2.seconds),
+                ParallelGroup(
                 Hood.restore(),
                 Intake.stopIntake(),
                 Transfer.stop(),
+                ), //ball shoots every 0.2 seconds
             )
     }
 }

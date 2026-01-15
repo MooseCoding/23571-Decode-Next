@@ -22,8 +22,8 @@ object Hood: Subsystem {
     fun setRestore(): InstantCommand = InstantCommand{
         restoreTo = hoodPosition
     }
-    fun sequence(): InstantCommand = InstantCommand{
-        hoodPosition -= 0.1
+    fun sequence( increment: Double): InstantCommand = InstantCommand{
+        hoodPosition -= increment //- goes up + goes down
     }
     fun restore(): InstantCommand = InstantCommand{
         hoodPosition = restoreTo
