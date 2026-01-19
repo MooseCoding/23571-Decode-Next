@@ -34,7 +34,7 @@ object Turret: Subsystem {
 
     private val leftServo: CRServoEx = CRServoEx("dS2")
     private val rightServo: CRServoEx = CRServoEx("dS1") // Check direction
-    private lateinit var encoder: AnalogInput
+    lateinit var encoder: AnalogInput
 
     @JvmField var autoTurret = false
 
@@ -61,8 +61,9 @@ object Turret: Subsystem {
     @JvmField var maxAngle = 90.0
 
     override fun periodic() {
-        /*updateAngle()
+        updateAngle()
 
+        /*
         if(autoTurret) {
             autoAim()
         }
@@ -73,14 +74,6 @@ object Turret: Subsystem {
         */
         leftServo.power = pow
         rightServo.power = pow
-        /*
-        tele.run {
-            addData("pos", getYaw())
-            addData("current angle", currentAngle)
-            addData("pos in deg", 180/PI*getYaw())
-            addData("servo pow", pow)
-            update()
-        }*/
     }
 
     private fun autoAim() {
@@ -106,7 +99,7 @@ object Turret: Subsystem {
      * @return yaw in radians from servo position
      */
     fun getYaw(): Double {
-        return (currentAngle) * 90/22.0 * (319/1628.0)
+        return (currentAngle) * 90/22.0 * (319/1628.0) * 90/2.587
     }
 
     /**

@@ -26,6 +26,7 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
+import kotlin.time.Instant
 
 object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
     var fullManual = false
@@ -35,6 +36,8 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
     val goalY = 144 - 8.0
 
     val shootTime: Duration = 0.05.seconds
+
+    var restore = 0.0
 
     override fun initialize() {
         goalX = if (DriveTrain.alliance == Alliance.RED) {
@@ -86,11 +89,11 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
         Hood.hoodPosition = values[0]
         Flywheels.updatePid(values[1])
     }
-    fun accelerate(): Command = InstantCommand{
-        Flywheels.targetVelocity += 800
+    fun setBack(): InstantCommand = InstantCommand{
+        Flywheels.targetVelocity = restore
     }
-    fun decelerate(): Command = InstantCommand{
-        Flywheels.targetVelocity -= 800
+    fun setSetBack(): InstantCommand = InstantCommand{
+        restore = Flywheels.targetVelocity
     }
 
     /**
@@ -99,19 +102,27 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
     fun shoot(): Command {
         return SequentialGroupLocal(
             ParallelGroup (
-                Intake.runIntake(),
-                Transfer.start(),
-                Hood.setRestore(),
+                    Intake.runIntake(),
+                    Transfer.start(),
+                    Hood.setRestore(),
+                    setSetBack()
                 ),
-                Delay(0.2.seconds),
-                Hood.sequence(0.2),
-                Delay(0.2.seconds),
-                Hood.sequence(0.1),
-                Delay(0.2.seconds),
+                Delay(0.11),
+                InstantCommand {
+                    Flywheels.targetVelocity += 150
+                },
+                Hood.sequence(-0.14),
+                Delay(0.12),
+                InstantCommand {
+                    Flywheels.targetVelocity += 220
+                },
+                Hood.sequence(-0.2),
+                Delay(0.12),
                 ParallelGroup(
-                Hood.restore(),
-                Intake.stopIntake(),
-                Transfer.stop(),
+                    Hood.restore(),
+                    Intake.stopIntake(),
+                    Transfer.stop(),
+                    setBack()
                 ), //ball shoots every 0.2 seconds
             )
     }
