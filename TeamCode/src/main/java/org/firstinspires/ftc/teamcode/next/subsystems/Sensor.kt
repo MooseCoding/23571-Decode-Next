@@ -48,7 +48,7 @@ object Sensor: Subsystem {
 
             if(Transfer.currentBall == 3) {
                 Light.Green().schedule()
-                ActiveOpMode.gamepad1.rumble(1.0, 1.0, 10)
+                // ActiveOpMode.gamepad1.rumble(1.0, 1.0, 10)
             }
 
             currentArtifact = null

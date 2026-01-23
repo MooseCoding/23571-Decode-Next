@@ -31,6 +31,8 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
+import java.lang.Double.max
+import java.lang.Math.abs
 import kotlin.math.PI
 
 @TeleOp
@@ -42,14 +44,10 @@ class TeleOp
             PedroComponent(Constants::createFollower),
             BindingsComponent,
             BulkReadComponent,
-            SubsystemComponent(Intake, Outtake, Transfer, Turret, Hood)
+            SubsystemComponent( Intake, Outtake, Transfer, Turret, Hood)
         )
     }
 
-    val fL = MotorEx("fL")
-    val fR = MotorEx("fR")
-    val bL = MotorEx("bL")
-    val bR = MotorEx("bR")
 
     val alliance: Alliance = Alliance.BLUE
 
@@ -63,14 +61,19 @@ class TeleOp
 
     }
 
+    val fl =             MotorEx("fL")// Yse
+    val fr =             MotorEx("fR")
+    val bl =             MotorEx("bL")
+    val br =             MotorEx("bR")// Yes
+
 
     override fun onStartButtonPressed() {
-        driveTrain = PedroDriverControlled(
-            -Gamepads.gamepad1.leftStickY,
-            Gamepads.gamepad1.leftStickX,
-            Gamepads.gamepad1.rightStickX
-        )
-        driveTrain.scalar = 1.0
+//        driveTrain = PedroDriverControlled(
+//            -Gamepads.gamepad1.leftStickY,
+//            -Gamepads.gamepad1.leftStickX,
+//            -Gamepads.gamepad1.rightStickX
+//        )
+//        driveTrain.scalar = 1.0
 
         // Intake
         Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake() whenBecomesFalse Intake.stopIntake()
@@ -82,11 +85,11 @@ class TeleOp
         //Gamepads.gamepad1.leftBumper whenBecomesTrue Transfer.reverse() whenBecomesFalse Transfer.stop()
         //Gamepads.gamepad1.rightBumper whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()
 
-        Gamepads.gamepad1.dpadUp whenBecomesTrue {Flywheels.targetVelocity += 50}
-        Gamepads.gamepad1.dpadDown whenBecomesTrue {Flywheels.targetVelocity -= 50}
-        Gamepads.gamepad1.rightBumper whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()
-        Gamepads.gamepad1.dpadRight whenBecomesTrue {Hood.hoodPosition += 0.1}
-        Gamepads.gamepad1.dpadLeft whenBecomesTrue {Hood.hoodPosition -= 0.1}
+        Gamepads.gamepad2.dpadUp whenBecomesTrue {Flywheels.targetVelocity += 50}
+        Gamepads.gamepad2.dpadDown whenBecomesTrue {Flywheels.targetVelocity -= 50}
+        Gamepads.gamepad2.rightBumper whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()
+        Gamepads.gamepad2.dpadRight whenBecomesTrue {Hood.hoodPosition += 0.1}
+        Gamepads.gamepad2.dpadLeft whenBecomesTrue {Hood.hoodPosition -= 0.1}
 
         // Maybe holding Buttons slows down bot for endgame/precision
 
@@ -101,10 +104,27 @@ class TeleOp
             }
         }
 
+        Gamepads.gamepad2.triangle whenBecomesTrue {
+            if (Flywheels.spinSlow) {
+                Flywheels.spin().schedule()
+            } else {
+                Flywheels.stop().schedule()
+            }
+        }
+
        //  Gamepads.gamepad2.rightStickButton whenBecomesTrue HeadingLock()
     }
 
     override fun onUpdate() {
+        val y = -gamepad1.left_stick_y
+        val x = gamepad1.left_stick_x
+        val t = gamepad1.right_stick_x
+
+        val d = max((abs(y)+abs(x)+abs(t)).toDouble(), 1.0)
+        fl.power = (y+x+t)/d
+        fr.power = (y-x-t)/d
+        bl.power = (y-x+t)/d
+        br.power = (y+x-t)/d
         telemetry.addData("Beans", Hood.hoodPosition)
         telemetry.addData("Velocity = ",Flywheels.targetVelocity)
         telemetry.addData("Hood Position = ", Hood.hoodPosition)

@@ -139,15 +139,15 @@
 83-->[org.firstinspires.ftc:RobotCore:11.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/7570163ef81bbb1c562af943ff08898f/transformed/RobotCore-11.0.0/AndroidManifest.xml:83:19-57
 84
 85    <permission
-85-->[androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+85-->[androidx.core:core:1.9.0] /home/moosecoding/.gradle/caches/8.9/transforms/101e510f58f0999455769328febef481/transformed/core-1.9.0/AndroidManifest.xml:22:5-24:47
 86        android:name="com.qualcomm.ftcrobotcontroller.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-86-->[androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+86-->[androidx.core:core:1.9.0] /home/moosecoding/.gradle/caches/8.9/transforms/101e510f58f0999455769328febef481/transformed/core-1.9.0/AndroidManifest.xml:23:9-81
 87        android:protectionLevel="signature" />
-87-->[androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+87-->[androidx.core:core:1.9.0] /home/moosecoding/.gradle/caches/8.9/transforms/101e510f58f0999455769328febef481/transformed/core-1.9.0/AndroidManifest.xml:24:9-44
 88
 89    <uses-permission android:name="com.qualcomm.ftcrobotcontroller.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-89-->[androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
-89-->[androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+89-->[androidx.core:core:1.9.0] /home/moosecoding/.gradle/caches/8.9/transforms/101e510f58f0999455769328febef481/transformed/core-1.9.0/AndroidManifest.xml:26:5-97
+89-->[androidx.core:core:1.9.0] /home/moosecoding/.gradle/caches/8.9/transforms/101e510f58f0999455769328febef481/transformed/core-1.9.0/AndroidManifest.xml:26:22-94
 90
 91    <uses-feature
 91-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:28:5-30:36
@@ -188,7 +188,7 @@
 110        android:allowBackup="true"
 110-->[:FtcRobotController] /home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:13:9-35
 111        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-111-->[androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
+111-->[androidx.core:core:1.9.0] /home/moosecoding/.gradle/caches/8.9/transforms/101e510f58f0999455769328febef481/transformed/core-1.9.0/AndroidManifest.xml:28:18-86
 112        android:debuggable="true"
 113        android:extractNativeLibs="true"
 114        android:icon="@drawable/ic_launcher"
@@ -676,71 +676,27 @@
 378                android:value="androidx.startup" />
 378-->[androidx.emoji2:emoji2:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/95418c606d9f942809010a53ae6f7cfd/transformed/emoji2-1.2.0/AndroidManifest.xml:31:17-49
 379            <meta-data
-379-->[androidx.lifecycle:lifecycle-process:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/67441a2a2e69f8b8c04b28d639a30b57/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:29:13-31:52
+379-->[androidx.lifecycle:lifecycle-process:2.4.1] /home/moosecoding/.gradle/caches/8.9/transforms/f83fbbfc350fcdbef43e7ac98257fe1b/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
 380                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-380-->[androidx.lifecycle:lifecycle-process:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/67441a2a2e69f8b8c04b28d639a30b57/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:30:17-78
+380-->[androidx.lifecycle:lifecycle-process:2.4.1] /home/moosecoding/.gradle/caches/8.9/transforms/f83fbbfc350fcdbef43e7ac98257fe1b/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
 381                android:value="androidx.startup" />
-381-->[androidx.lifecycle:lifecycle-process:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/67441a2a2e69f8b8c04b28d639a30b57/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:31:17-49
-382            <meta-data
-382-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
-383                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-383-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
-384                android:value="androidx.startup" />
-384-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
-385        </provider>
-386
-387        <receiver
-387-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
-388            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-388-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
-389            android:directBootAware="false"
-389-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
-390            android:enabled="true"
-390-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
-391            android:exported="true"
-391-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
-392            android:permission="android.permission.DUMP" >
-392-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
-393            <intent-filter>
-393-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
-394                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-394-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
-394-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
-395            </intent-filter>
-396            <intent-filter>
-396-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
-397                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-397-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
-397-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
-398            </intent-filter>
-399            <intent-filter>
-399-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
-400                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-400-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
-400-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
-401            </intent-filter>
-402            <intent-filter>
-402-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
-403                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-403-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
-403-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
-404            </intent-filter>
-405        </receiver>
-406
-407        <activity
-407-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:47:9-53:63
-408            android:name="com.journeyapps.barcodescanner.CaptureActivity"
-408-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:48:13-74
-409            android:clearTaskOnLaunch="true"
-409-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:49:13-45
-410            android:screenOrientation="sensorLandscape"
-410-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:50:13-56
-411            android:stateNotNeeded="true"
-411-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:51:13-42
-412            android:theme="@style/zxing_CaptureTheme"
-412-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:52:13-54
-413            android:windowSoftInputMode="stateAlwaysHidden" />
-413-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:53:13-60
-414    </application>
-415
-416</manifest>
+381-->[androidx.lifecycle:lifecycle-process:2.4.1] /home/moosecoding/.gradle/caches/8.9/transforms/f83fbbfc350fcdbef43e7ac98257fe1b/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
+382        </provider>
+383
+384        <activity
+384-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:47:9-53:63
+385            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+385-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:48:13-74
+386            android:clearTaskOnLaunch="true"
+386-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:49:13-45
+387            android:screenOrientation="sensorLandscape"
+387-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:50:13-56
+388            android:stateNotNeeded="true"
+388-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:51:13-42
+389            android:theme="@style/zxing_CaptureTheme"
+389-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:52:13-54
+390            android:windowSoftInputMode="stateAlwaysHidden" />
+390-->[com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:53:13-60
+391    </application>
+392
+393</manifest>

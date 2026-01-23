@@ -6,8 +6,8 @@
   "websiteURL": "https://panels.bylazar.com/docs/com.bylazar.limelightproxy/",
   "mavenURL": "https://mymaven.bylazar.com/releases",
   "packageString": "com.bylazar:limelightproxy:<VERSION>",
-  "version": "1.0.2",
-  "pluginsCoreVersion": "1.1.43",
+  "version": "1.0.4",
+  "pluginsCoreVersion": "1.1.44",
   "author": "Lazar",
   "manager": "src/manager.ts",
   "components": [
@@ -41,6 +41,28 @@
   "includedPluginsIDs": [],
   "changelog": [
     {
+      "version": "1.0.4",
+      "release_date": "6.12.2025",
+      "changes": [
+        {
+          "type": "fixed",
+          "description": "Fixed issue with camera proxy crashing the app.",
+          "upgrading": ""
+        }
+      ]
+    },
+    {
+      "version": "1.0.3",
+      "release_date": "1.11.2025",
+      "changes": [
+        {
+          "type": "other",
+          "description": "Updated Panels Core to 1.0.4",
+          "upgrading": ""
+        }
+      ]
+    },
+    {
       "version": "1.0.2",
       "release_date": "9.09.2025",
       "changes": [
@@ -57,7 +79,7 @@
       "changes": [
         {
           "type": "other",
-          "description": "Updated ftc-panels to 1.1.43",
+          "description": "Updated ftc-panels to 1.1.44",
           "upgrading": ""
         }
       ]

@@ -30,7 +30,7 @@ class TurretTuning: NextFTCOpMode() {
     override fun onUpdate() {
         telemetry.run {
             addData("Yaw", Turret.getYaw())
-            addData("Yaw", Turret.encoder.voltage/3.3 * 360)
+            addData("Encoder * 360", Turret.encoder.voltage/3.3 * 360)
             update()
         }
     }
