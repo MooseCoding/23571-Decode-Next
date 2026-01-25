@@ -17,7 +17,7 @@ import kotlin.time.Duration.Companion.seconds
 
 @Config
 object Sensor: Subsystem {
-    val cS: RevColorSensorV3 = ActiveOpMode.hardwareMap.get(RevColorSensorV3::class.java, "cs")
+    lateinit var cS: RevColorSensorV3
 
     var timer: Timer = Timer()
 
@@ -26,6 +26,7 @@ object Sensor: Subsystem {
     var currentArtifact:Artifact? = null
 
     override fun initialize() {
+        cS = ActiveOpMode.hardwareMap.get(RevColorSensorV3::class.java, "cS")
         cS.enableLed(true)
         cS.gain = 8.0f
     }
@@ -53,6 +54,13 @@ object Sensor: Subsystem {
 
             currentArtifact = null
             timer.resetTimer()
+        }
+
+        ActiveOpMode.telemetry.run {
+            // addData("Current Color", Transfer.ballsHeld[Transfer.currentBall])
+            addData("cSD", cS.getDistance(DistanceUnit.MM))
+            addData("Current Ball", Transfer.currentBall)
+            addData("Timer", timer.elapsedTime)
         }
     }
 

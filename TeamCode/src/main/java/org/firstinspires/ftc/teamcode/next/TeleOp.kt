@@ -44,14 +44,10 @@ class TeleOp
             PedroComponent(Constants::createFollower),
             BindingsComponent,
             BulkReadComponent,
-            SubsystemComponent( Intake, Outtake, Transfer, Turret, Hood)
+            SubsystemComponent( DriveTrain, Intake, Outtake, Transfer, Turret, Hood)
         )
     }
 
-
-    val alliance: Alliance = Alliance.BLUE
-
-    lateinit var driveTrain: DriverControlledCommand
 
     override fun onWaitForStart() {
 
@@ -68,13 +64,6 @@ class TeleOp
 
 
     override fun onStartButtonPressed() {
-//        driveTrain = PedroDriverControlled(
-//            -Gamepads.gamepad1.leftStickY,
-//            -Gamepads.gamepad1.leftStickX,
-//            -Gamepads.gamepad1.rightStickX
-//        )
-//        driveTrain.scalar = 1.0
-
         // Intake
         Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake() whenBecomesFalse Intake.stopIntake()
         Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake() whenBecomesFalse Intake.stopIntake()

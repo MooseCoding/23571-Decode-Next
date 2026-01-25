@@ -21,7 +21,7 @@ object Light: Subsystem{
      * @return A command turning the light purple
      */
     fun Purple(): Command = InstantCommand {
-        color = 0.7
+        color = 0.722
     }
 
     /**
@@ -32,16 +32,51 @@ object Light: Subsystem{
     }
 
     /**
+     * @return A command turning the light orange
+     */
+    fun Orange(): Command = InstantCommand {
+        color = 0.333
+    }
+
+    /**
      * @return A command turning the light red
      */
     fun Red(): Command = InstantCommand {
-        color = 0.2
+        color = 0.277 // Check this
     }
 
     /**
      * @return A command turning the light blue
      */
     fun Blue(): Command = InstantCommand {
-        color = 0.6
+        color = 0.611
+    }
+
+    /**
+     * @return A command turning the light sage
+     */
+    fun Sage(): Command = InstantCommand {
+        color = 0.444
+    }
+
+    /**
+     * @return A command turning the light yellow
+     */
+    fun Yellow(): Command = InstantCommand {
+        color = 0.388
+    }
+
+    /**
+     * @return A command turning the light indigo
+     */
+    fun Indigo(): Command = InstantCommand {
+        color = 0.666
+    }
+
+    /**
+     * @return A command turning the light azure
+     */
+    fun Azure(): Command = InstantCommand {
+        color = 0.555
     }
 }

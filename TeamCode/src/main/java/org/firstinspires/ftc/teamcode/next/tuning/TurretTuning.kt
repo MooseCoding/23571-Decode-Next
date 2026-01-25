@@ -25,12 +25,11 @@ class TurretTuning: NextFTCOpMode() {
     override fun onStartButtonPressed() {
         Gamepads.gamepad1.leftBumper whenBecomesTrue Turret.spinLeft() whenBecomesFalse Turret.stopSpin()
         Gamepads.gamepad1.rightBumper whenBecomesTrue  Turret.spinRight() whenBecomesFalse Turret.stopSpin()
+        Gamepads.gamepad1.triangle whenBecomesTrue Turret.zero()
     }
 
     override fun onUpdate() {
         telemetry.run {
-            addData("Yaw", Turret.getYaw())
-            addData("Encoder * 360", Turret.encoder.voltage/3.3 * 360)
             update()
         }
     }

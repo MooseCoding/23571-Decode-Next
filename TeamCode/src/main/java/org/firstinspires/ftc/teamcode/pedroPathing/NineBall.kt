@@ -3,40 +3,27 @@ package org.firstinspires.ftc.teamcode.pedroPathing
 import com.bylazar.configurables.annotations.Configurable
 import com.pedropathing.util.Timer
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
-import com.qualcomm.robotcore.eventloop.opmode.Disabled
-import dev.nextftc.core.commands.conditionals.IfElseCommand
 import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.delays.WaitUntil
 import dev.nextftc.core.commands.groups.ParallelDeadlineGroup
-import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.commands.utility.PerpetualCommand
-import org.firstinspires.ftc.teamcode.helpers.SequentialGroupLocal
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
-import dev.nextftc.core.units.Angle
 import dev.nextftc.extensions.pedro.FollowPath
 import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
-import dev.nextftc.extensions.pedro.TurnBy
-import dev.nextftc.extensions.pedro.TurnTo
-import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import dev.nextftc.hardware.impl.MotorEx
-import dev.nextftc.units.unittypes.Ounces
-import dev.nextftc.units.unittypes.gradians
-import dev.nextftc.units.unittypes.radians
+import org.firstinspires.ftc.teamcode.helpers.SequentialGroupLocal
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 import org.firstinspires.ftc.teamcode.next.subsystems.Transfer
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
-import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Motif
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
-import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
-import kotlin.math.PI
 import kotlin.time.Duration.Companion.seconds
 
 @Autonomous
@@ -117,9 +104,10 @@ class NineBall: NextFTCOpMode() {
                 PerpetualCommand(
                     SequentialGroupLocal(
                         FollowPath(far12.HumanPlayerIntake),
+                        Flywheels.spin(),
                         FollowPath(far12.HumanPlayerShoot),
                         Outtake.shoot(),
-                        Delay(0.3.seconds)
+                        Flywheels.stop(),
                     )
                 ),
             ),

@@ -45,9 +45,9 @@ object Limelight : Subsystem {
 
         fusionLocalizer = FusionLocalizer(
             PinpointLocalizer(ActiveOpMode.hardwareMap, Constants.localizerConstants),
-            doubleArrayOf(0.0, 0.0, 0.0),
-            doubleArrayOf(0.00, 0.00, 0.00),
-            doubleArrayOf(0.2*0, 0.2*0, 0.2*0),
+            doubleArrayOf(0.2, 0.2, 0.2),
+            doubleArrayOf(0.04, 0.04, 0.04),
+            doubleArrayOf(0.2, 0.2, 0.2),
             50
         )
         follower = FollowerBuilder(Constants.followerConstants, ActiveOpMode.hardwareMap)
@@ -56,7 +56,7 @@ object Limelight : Subsystem {
             .mecanumDrivetrain(Constants.driveConstants)
             .build()
 
-       follower.setStartingPose(Pose(72.0, 72.0, Math.PI/4))
+       follower.setStartingPose(PedroComponent.follower.pose)
     }
 
     override fun periodic() {
@@ -125,9 +125,9 @@ object Limelight : Subsystem {
         val lR = grabResultData() ?: return null
         if (lR.fiducialResults.isEmpty()) return null
 
-        // ll.updateRobotOrientation(lR.botpose.orientation.yaw)
+        ll.updateRobotOrientation(lR.botpose.orientation.yaw)
         // val pos = (Math.PI/4 + PI/2)*180/PI
-        ll.updateRobotOrientation(135.0)
+        // ll.updateRobotOrientation(135.0)
 
         val botpose = lR.botpose_MT2 ?: return null
 

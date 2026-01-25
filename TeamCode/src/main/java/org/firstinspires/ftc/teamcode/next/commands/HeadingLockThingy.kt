@@ -5,6 +5,7 @@ import com.pedropathing.math.MathFunctions
 import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import dev.nextftc.hardware.driving.DriverControlledCommand
 import java.util.function.Supplier
+import kotlin.math.atan2
 
 class HeadingLockThingy @JvmOverloads constructor(
     drivePower: Supplier<Double>,
@@ -45,7 +46,7 @@ class HeadingLockThingy @JvmOverloads constructor(
     }
 
     fun getHeadingError(): Double {
-        var headingGoal: Double = Math.atan2(140.0-follower.pose.y, 140.0 - follower.pose.x)
+        var headingGoal: Double = atan2(140.0 - follower.pose.y, 140.0 - follower.pose.x)
 
         val headingError = MathFunctions.getTurnDirection(follower.getPose().getHeading(), headingGoal) * MathFunctions.getSmallestAngleDifference(follower.getPose().getHeading(), headingGoal);
         return headingError;
