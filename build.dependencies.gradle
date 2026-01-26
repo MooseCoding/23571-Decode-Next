@@ -27,7 +27,7 @@ dependencies {
 
     implementation 'com.acmerobotics.slothboard:dashboard:0.2.4+0.5.1'
     implementation("com.bylazar.sloth:fullpanels:0.2.4+1.0.12")
-    implementation 'com.pedropathing:ftc:2.0.3'
+    implementation 'com.pedropathing:ftc:2.0.5'
     implementation 'com.pedropathing:telemetry:1.0.0'
     implementation 'org.psilynx.psikit:core:0.1.0-beta2'
     implementation 'org.psilynx.psikit:ftc:0.1.0-beta2'

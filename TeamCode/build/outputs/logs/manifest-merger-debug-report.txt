@@ -7,11 +7,12 @@ INJECTED from /home/moosecoding/projects/23571-Decode-Next/TeamCode/src/main/And
 MERGED from [:FtcRobotController] /home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-78:12
 MERGED from [com.acmerobotics.slothboard:dashboard:0.2.4+0.5.1] /home/moosecoding/.gradle/caches/8.9/transforms/e72741af8f72cb16794cc0055c382c39/transformed/dashboard-0.2.4+0.5.1/AndroidManifest.xml:2:1-7:12
 MERGED from [com.bylazar.sloth:fullpanels:0.2.4+1.0.12] /home/moosecoding/.gradle/caches/8.9/transforms/4fdaeed0fe2214daba73e0f81d7d98ea/transformed/fullpanels-0.2.4+1.0.12/AndroidManifest.xml:2:1-7:12
+MERGED from [dev.nextftc.extensions:pedro:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/ad67d2612f6319f8ea534a7724360bb1/transformed/pedro-1.0.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.pedropathing:ftc:2.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/0f229f4a2f84a82c5652263ccf06afdc/transformed/ftc-2.0.5/AndroidManifest.xml:2:1-7:12
 MERGED from [org.psilynx.psikit:ftc:0.1.0-beta2] /home/moosecoding/.gradle/caches/8.9/transforms/f81cf70a881601a5266dc0cfa1c317a0/transformed/ftc-0.1.0-beta2/AndroidManifest.xml:2:1-7:12
 MERGED from [com.bylazar.sloth:opmodecontrol:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/e2249e61e96476c59d468b0b1ba06f93/transformed/opmodecontrol-0.2.4+1.0.3/AndroidManifest.xml:2:1-7:12
 MERGED from [com.bylazar.sloth:configurables:0.2.4+1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/4d592e2cce0321afbf3d64e34e6afb0b/transformed/configurables-0.2.4+1.0.5/AndroidManifest.xml:2:1-7:12
 MERGED from [dev.frozenmilk.sinister:Sloth:0.2.4] /home/moosecoding/.gradle/caches/8.9/transforms/507cce40b2ddfa60da14e830cb27440d/transformed/Sloth-0.2.4/AndroidManifest.xml:2:1-7:12
-MERGED from [dev.nextftc.extensions:pedro:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/ad67d2612f6319f8ea534a7724360bb1/transformed/pedro-1.0.0/AndroidManifest.xml:2:1-7:12
 MERGED from [dev.nextftc:hardware:1.0.1] /home/moosecoding/.gradle/caches/8.9/transforms/23c277daccf386013fe7678d25204f51/transformed/hardware-1.0.1/AndroidManifest.xml:2:1-7:12
 MERGED from [dev.nextftc:ftc:1.0.1] /home/moosecoding/.gradle/caches/8.9/transforms/233a53d9d466f7303e4211f726de09e8/transformed/ftc-1.0.1/AndroidManifest.xml:2:1-7:12
 MERGED from [com.bylazar.sloth:panels:0.2.4+1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/aed6558ac61c846c408829096ba18c38/transformed/panels-0.2.4+1.0.5/AndroidManifest.xml:2:1-7:12
@@ -54,7 +55,6 @@ MERGED from [androidx.customview:customview:1.0.0] /home/moosecoding/.gradle/cac
 MERGED from [androidx.core:core:1.9.0] /home/moosecoding/.gradle/caches/8.9/transforms/101e510f58f0999455769328febef481/transformed/core-1.9.0/AndroidManifest.xml:17:1-30:12
 MERGED from [androidx.core:core-ktx:1.9.0] /home/moosecoding/.gradle/caches/8.9/transforms/a046dd606f5f917d6bf64247a4285f74/transformed/core-ktx-1.9.0/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.annotation:annotation-experimental:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/aed37977e3534dfa2490438c5856f28b/transformed/annotation-experimental-1.3.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.pedropathing:ftc:2.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/4276c30d83c1c674bffc1d3df83d8fac/transformed/ftc-2.0.3/AndroidManifest.xml:2:1-7:12
 MERGED from [com.pedropathing:telemetry:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/1a203d8c7165627b3922e1e64b05ff0a/transformed/telemetry-1.0.0/AndroidManifest.xml:2:1-7:12
 MERGED from [com.skeletonarmyftc.marrow:core:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/010556fe9e34f2bec9df309fca764323/transformed/core-1.0.0/AndroidManifest.xml:2:1-7:12
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:17:1-56:12
@@ -135,6 +135,10 @@ MERGED from [com.acmerobotics.slothboard:dashboard:0.2.4+0.5.1] /home/moosecodin
 MERGED from [com.acmerobotics.slothboard:dashboard:0.2.4+0.5.1] /home/moosecoding/.gradle/caches/8.9/transforms/e72741af8f72cb16794cc0055c382c39/transformed/dashboard-0.2.4+0.5.1/AndroidManifest.xml:5:5-44
 MERGED from [com.bylazar.sloth:fullpanels:0.2.4+1.0.12] /home/moosecoding/.gradle/caches/8.9/transforms/4fdaeed0fe2214daba73e0f81d7d98ea/transformed/fullpanels-0.2.4+1.0.12/AndroidManifest.xml:5:5-44
 MERGED from [com.bylazar.sloth:fullpanels:0.2.4+1.0.12] /home/moosecoding/.gradle/caches/8.9/transforms/4fdaeed0fe2214daba73e0f81d7d98ea/transformed/fullpanels-0.2.4+1.0.12/AndroidManifest.xml:5:5-44
+MERGED from [dev.nextftc.extensions:pedro:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/ad67d2612f6319f8ea534a7724360bb1/transformed/pedro-1.0.0/AndroidManifest.xml:5:5-44
+MERGED from [dev.nextftc.extensions:pedro:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/ad67d2612f6319f8ea534a7724360bb1/transformed/pedro-1.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.pedropathing:ftc:2.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/0f229f4a2f84a82c5652263ccf06afdc/transformed/ftc-2.0.5/AndroidManifest.xml:5:5-44
+MERGED from [com.pedropathing:ftc:2.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/0f229f4a2f84a82c5652263ccf06afdc/transformed/ftc-2.0.5/AndroidManifest.xml:5:5-44
 MERGED from [org.psilynx.psikit:ftc:0.1.0-beta2] /home/moosecoding/.gradle/caches/8.9/transforms/f81cf70a881601a5266dc0cfa1c317a0/transformed/ftc-0.1.0-beta2/AndroidManifest.xml:5:5-44
 MERGED from [org.psilynx.psikit:ftc:0.1.0-beta2] /home/moosecoding/.gradle/caches/8.9/transforms/f81cf70a881601a5266dc0cfa1c317a0/transformed/ftc-0.1.0-beta2/AndroidManifest.xml:5:5-44
 MERGED from [com.bylazar.sloth:opmodecontrol:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/e2249e61e96476c59d468b0b1ba06f93/transformed/opmodecontrol-0.2.4+1.0.3/AndroidManifest.xml:5:5-44
@@ -143,8 +147,6 @@ MERGED from [com.bylazar.sloth:configurables:0.2.4+1.0.5] /home/moosecoding/.gra
 MERGED from [com.bylazar.sloth:configurables:0.2.4+1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/4d592e2cce0321afbf3d64e34e6afb0b/transformed/configurables-0.2.4+1.0.5/AndroidManifest.xml:5:5-44
 MERGED from [dev.frozenmilk.sinister:Sloth:0.2.4] /home/moosecoding/.gradle/caches/8.9/transforms/507cce40b2ddfa60da14e830cb27440d/transformed/Sloth-0.2.4/AndroidManifest.xml:5:5-44
 MERGED from [dev.frozenmilk.sinister:Sloth:0.2.4] /home/moosecoding/.gradle/caches/8.9/transforms/507cce40b2ddfa60da14e830cb27440d/transformed/Sloth-0.2.4/AndroidManifest.xml:5:5-44
-MERGED from [dev.nextftc.extensions:pedro:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/ad67d2612f6319f8ea534a7724360bb1/transformed/pedro-1.0.0/AndroidManifest.xml:5:5-44
-MERGED from [dev.nextftc.extensions:pedro:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/ad67d2612f6319f8ea534a7724360bb1/transformed/pedro-1.0.0/AndroidManifest.xml:5:5-44
 MERGED from [dev.nextftc:hardware:1.0.1] /home/moosecoding/.gradle/caches/8.9/transforms/23c277daccf386013fe7678d25204f51/transformed/hardware-1.0.1/AndroidManifest.xml:5:5-44
 MERGED from [dev.nextftc:hardware:1.0.1] /home/moosecoding/.gradle/caches/8.9/transforms/23c277daccf386013fe7678d25204f51/transformed/hardware-1.0.1/AndroidManifest.xml:5:5-44
 MERGED from [dev.nextftc:ftc:1.0.1] /home/moosecoding/.gradle/caches/8.9/transforms/233a53d9d466f7303e4211f726de09e8/transformed/ftc-1.0.1/AndroidManifest.xml:5:5-44
@@ -229,8 +231,6 @@ MERGED from [androidx.core:core-ktx:1.9.0] /home/moosecoding/.gradle/caches/8.9/
 MERGED from [androidx.core:core-ktx:1.9.0] /home/moosecoding/.gradle/caches/8.9/transforms/a046dd606f5f917d6bf64247a4285f74/transformed/core-ktx-1.9.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.annotation:annotation-experimental:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/aed37977e3534dfa2490438c5856f28b/transformed/annotation-experimental-1.3.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.annotation:annotation-experimental:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/aed37977e3534dfa2490438c5856f28b/transformed/annotation-experimental-1.3.0/AndroidManifest.xml:20:5-44
-MERGED from [com.pedropathing:ftc:2.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/4276c30d83c1c674bffc1d3df83d8fac/transformed/ftc-2.0.3/AndroidManifest.xml:5:5-44
-MERGED from [com.pedropathing:ftc:2.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/4276c30d83c1c674bffc1d3df83d8fac/transformed/ftc-2.0.3/AndroidManifest.xml:5:5-44
 MERGED from [com.pedropathing:telemetry:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/1a203d8c7165627b3922e1e64b05ff0a/transformed/telemetry-1.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.pedropathing:telemetry:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/1a203d8c7165627b3922e1e64b05ff0a/transformed/telemetry-1.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.skeletonarmyftc.marrow:core:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/010556fe9e34f2bec9df309fca764323/transformed/core-1.0.0/AndroidManifest.xml:5:5-44

@@ -1,10 +1,13 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
 import com.bylazar.configurables.annotations.Configurable
+import com.bylazar.opmodecontrol.ActiveOpMode
+import com.pedropathing.geometry.Pose
 import com.skeletonarmy.marrow.zones.Point
 import com.skeletonarmy.marrow.zones.PolygonZone
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.subsystems.Subsystem
+import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.hardware.driving.MecanumDriverControlled
 import dev.nextftc.hardware.impl.MotorEx
@@ -57,10 +60,16 @@ object DriveTrain: Subsystem {
             Alliance.RED -> robotZone.isInside(redBase)
         }
 
+
+        dev.nextftc.ftc.ActiveOpMode.telemetry.run {
+            addData("Is in zone", inZone)
+            addData("parked", parked)
+        }
         // Make a determination to turn light orange when not parked and another color when parked like green
     }
 
     override fun initialize() {
+        PedroComponent.follower.pose = Pose(80.0, 91.0, 0.0)
     }
 
 

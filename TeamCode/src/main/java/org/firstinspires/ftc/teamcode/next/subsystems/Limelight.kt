@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
 import com.acmerobotics.dashboard.config.Config
+import com.bylazar.panels.Panels
+import com.bylazar.telemetry.PanelsTelemetry
 import com.pedropathing.follower.Follower
 import com.pedropathing.ftc.FollowerBuilder
 import com.pedropathing.ftc.localization.localizers.PinpointLocalizer
@@ -17,6 +19,8 @@ import org.firstinspires.ftc.teamcode.next.filters.Kalman
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Motif
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
+import org.firstinspires.ftc.teamcode.pedroPathing.Drawing
+import org.firstinspires.ftc.teamcode.pedroPathing.Tuning
 import kotlin.math.PI
 
 @Config
@@ -45,9 +49,9 @@ object Limelight : Subsystem {
 
         fusionLocalizer = FusionLocalizer(
             PinpointLocalizer(ActiveOpMode.hardwareMap, Constants.localizerConstants),
+            doubleArrayOf(5.0, 5.0, 5.0),
             doubleArrayOf(0.2, 0.2, 0.2),
-            doubleArrayOf(0.04, 0.04, 0.04),
-            doubleArrayOf(0.2, 0.2, 0.2),
+            doubleArrayOf(0.1, 0.1, 0.1),
             50
         )
         follower = FollowerBuilder(Constants.followerConstants, ActiveOpMode.hardwareMap)
@@ -56,7 +60,8 @@ object Limelight : Subsystem {
             .mecanumDrivetrain(Constants.driveConstants)
             .build()
 
-       follower.setStartingPose(PedroComponent.follower.pose)
+       follower.setStartingPose(Pose(88.0, 117.0, 117/180.0*PI))
+        PedroComponent.follower.setStartingPose(Pose(88.0, 117.0, 117/180.0*PI))
     }
 
     override fun periodic() {
@@ -91,9 +96,19 @@ object Limelight : Subsystem {
             addData("LL Heading: ",visionPose.heading )
             addData("Fusion X", follower.pose.x)
             addData("Fusion Y", follower.pose.y)
+            addData("Fusion H", follower.heading / PI * 180.0)
+        }
+
+        Drawing.drawRobot(follower.pose)
+        Drawing.drawRobot(PedroComponent.follower.pose)
+
+        PanelsTelemetry.telemetry.run {
+            addData("Limelight X: ", visionPose.x)
+            addData("Limelight Y: ", visionPose.y)
+            addData("LL Heading: ",visionPose.heading )
+            addData("Fusion X", follower.pose.x)
+            addData("Fusion Y", follower.pose.y)
             addData("Fusion H", follower.heading)
-            addData("Predicted X: ", kx.x)
-            addData("Predicted Y: ", ky.x)
         }
 
 //        follower.pose = Pose(
@@ -126,6 +141,8 @@ object Limelight : Subsystem {
         if (lR.fiducialResults.isEmpty()) return null
 
         ll.updateRobotOrientation(lR.botpose.orientation.yaw)
+
+        ActiveOpMode.telemetry.addData("LL Heading", lR.botpose.orientation.yaw)
         // val pos = (Math.PI/4 + PI/2)*180/PI
         // ll.updateRobotOrientation(135.0)
 
