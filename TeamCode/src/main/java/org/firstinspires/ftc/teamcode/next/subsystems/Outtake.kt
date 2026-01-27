@@ -14,8 +14,8 @@ import org.firstinspires.ftc.teamcode.helpers.SequentialGroupLocal
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.commands.utility.LambdaCommand
 import dev.nextftc.core.subsystems.SubsystemGroup
-import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.currentX
-import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.currentY
+import dev.nextftc.extensions.pedro.PedroComponent
+import dev.nextftc.ftc.ActiveOpMode
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Aimbot
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Dist
@@ -48,12 +48,14 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
     }
 
     override fun periodic() {
-        if (fullManual) {
-            Turret.autoTurret = false
+        if (!fullManual) {
+            Turret.autoTurret = true
+            auto()
+
         } else {
+            manualAim()
             Turret.autoTurret = false
         }
-        manualAim()
     }
 
     /**
@@ -83,8 +85,12 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
      * Auto flywheel and auto hood positioning
      */
     fun auto() {
-        val dist: Double = sqrt((goalX - currentX).pow(2) + (goalY - currentY).pow(2))
+
+        val dist: Double = sqrt((goalX - PedroComponent.follower.pose.x).pow(2) + (goalY - PedroComponent.follower.pose.y).pow(2))
         val values: DoubleArray = Aimbot.getValues(dist)
+
+        ActiveOpMode.telemetry.addData("dist", dist)
+
 
         Hood.hoodPosition = values[0]
         Flywheels.updatePid(values[1])

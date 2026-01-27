@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.next.subsystems.vision
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.ftc.ActiveOpMode.telemetry
-import kotlinx.coroutines.delay
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName
 import org.firstinspires.ftc.vision.VisionPortal
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection

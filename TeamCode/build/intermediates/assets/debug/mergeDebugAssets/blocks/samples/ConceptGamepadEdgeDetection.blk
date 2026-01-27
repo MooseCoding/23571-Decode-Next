@@ -171,6 +171,134 @@ There are two main types of edge detection. Rising edge detection will trigger w
 </block>
 </value>
 <next>
+<block type="comment" id="LEG:4kgvOT+D)D11E`+(">
+<field name="COMMENT">Add an empty line to separate the buttons in telemetry</field>
+<next>
+<block type="telemetry_addLine" id=")8arpI;E2cFTcUkYbQ{`">
+<value name="TEXT">
+<shadow type="text" id="yA;Pw^,(OOZ[4yNK`,8/">
+<field name="TEXT"/>
+</shadow>
+</value>
+<next>
+<block type="comment" id="jKnD?]/JEjQ%as^5tKK=">
+<field name="COMMENT">Add the status of the Gamepad 1 Left trigger</field>
+<next>
+<block type="telemetry_addTextData_All" id="#@hP+*@08(C1r|Y5{q2,">
+<value name="KEY">
+<shadow type="text" id="bz2OX7OM,C6QK7m4DQW(">
+<field name="TEXT">Gamepad 1 Left Trigger Pressed</field>
+</shadow>
+</value>
+<value name="TEXT">
+<shadow type="text" id="RC(/A:)[57x.Y}EX|Tg^">
+<field name="TEXT">text</field>
+</shadow>
+<block type="gamepad_getProperty_Boolean" id="eiGDUB_1P|:@^S.mJzPs">
+<field name="IDENTIFIER">gamepad1</field>
+<field name="PROP">LeftTriggerWasPressed</field>
+<data>{"IDENTIFIER":"gamepad1"}</data>
+</block>
+</value>
+<next>
+<block type="telemetry_addTextData_All" id="**jQSWk,`}ng7yJg3qXh">
+<value name="KEY">
+<shadow type="text" id="le|g8671Fis@EmVrPuqe">
+<field name="TEXT">Gamepad 1 Left Trigger Released</field>
+</shadow>
+</value>
+<value name="TEXT">
+<shadow type="text" id="0C2*.%g9+]cB9Gq#+o2C">
+<field name="TEXT">text</field>
+</shadow>
+<block type="gamepad_getProperty_Boolean" id="!HJFUx2?oZYm88hyA=M9">
+<field name="IDENTIFIER">gamepad1</field>
+<field name="PROP">LeftTriggerWasReleased</field>
+<data>{"IDENTIFIER":"gamepad1"}</data>
+</block>
+</value>
+<next>
+<block type="telemetry_addTextData_All" id="r[4qR}a**HM*]4?xCg.w">
+<value name="KEY">
+<shadow type="text" id="JDpBk.6eMmyV^qb9sDnM">
+<field name="TEXT">Gamepad 1 Left Trigger Status</field>
+</shadow>
+</value>
+<value name="TEXT">
+<shadow type="text" id="Ow#8?;d,sXD9o8=q!pGv">
+<field name="TEXT">text</field>
+</shadow>
+<block type="gamepad_getProperty_Boolean" id="x#zA~s,o~=odvt#whpXM">
+<field name="IDENTIFIER">gamepad1</field>
+<field name="PROP">LeftTriggerPressed</field>
+<data>{"IDENTIFIER":"gamepad1"}</data>
+</block>
+</value>
+<next>
+<block type="comment" id="9*}*(irJ(YzGC7;s%n{C">
+<field name="COMMENT">Add an empty line to separate the buttons in telemetry</field>
+<next>
+<block type="telemetry_addLine" id="^^isaj(oj*vXs~t$DwF=">
+<value name="TEXT">
+<shadow type="text" id="=fIkA];{Yb7U-BI0s5-%">
+<field name="TEXT"/>
+</shadow>
+</value>
+<next>
+<block type="comment" id="p)2,JPY.A}+EKR~/xfSW">
+<field name="COMMENT">Add the status of the Gamepad 1 Right trigger</field>
+<next>
+<block type="telemetry_addTextData_All" id="vaY7Je56ut{Ui;vrqPF+">
+<value name="KEY">
+<shadow type="text" id="`oSB2h1YG?LW+H3@ak!H">
+<field name="TEXT">Gamepad 1 Right Trigger Pressed</field>
+</shadow>
+</value>
+<value name="TEXT">
+<shadow type="text" id="AnEPyL8GQWt69i9OIql;">
+<field name="TEXT">text</field>
+</shadow>
+<block type="gamepad_getProperty_Boolean" id="En3~?#VX/x[CjuT6oxgY">
+<field name="IDENTIFIER">gamepad1</field>
+<field name="PROP">RightTriggerWasPressed</field>
+<data>{"IDENTIFIER":"gamepad1"}</data>
+</block>
+</value>
+<next>
+<block type="telemetry_addTextData_All" id="EULg[?O.T_-#g?VI2;!+">
+<value name="KEY">
+<shadow type="text" id=".fAS3NGr2Ch9d~sG%({r">
+<field name="TEXT">Gamepad 1 Right Trigger Released</field>
+</shadow>
+</value>
+<value name="TEXT">
+<shadow type="text" id="/p?[t89V}1/jY+H%tfxt">
+<field name="TEXT">text</field>
+</shadow>
+<block type="gamepad_getProperty_Boolean" id="RI]%lk{+.jAI(ax)N-]k">
+<field name="IDENTIFIER">gamepad1</field>
+<field name="PROP">RightTriggerWasReleased</field>
+<data>{"IDENTIFIER":"gamepad1"}</data>
+</block>
+</value>
+<next>
+<block type="telemetry_addTextData_All" id="mH29S,Ux?T1wNzbm$ivM">
+<value name="KEY">
+<shadow type="text" id="!fw+|!p)7gr4iVh`7QXI">
+<field name="TEXT">Gamepad 1 Right Trigger Status</field>
+</shadow>
+</value>
+<value name="TEXT">
+<shadow type="text" id="-#*%s9jyi0ye{gH)/JOH">
+<field name="TEXT">text</field>
+</shadow>
+<block type="gamepad_getProperty_Boolean" id="X3VZmqJ!W$Vte:Ct6.JS">
+<field name="IDENTIFIER">gamepad1</field>
+<field name="PROP">RightTriggerPressed</field>
+<data>{"IDENTIFIER":"gamepad1"}</data>
+</block>
+</value>
+<next>
 <block type="comment" id="GZ503.H:~GnimA7w6}.~">
 <field name="COMMENT">Add a note that the telemetry is only updated every 2 seconds</field>
 <next>
@@ -192,6 +320,30 @@ There are two main types of edge detection. Rising edge detection will trigger w
 <field name="COMMENT">Update the telemetry on the DS screen</field>
 <next>
 <block type="telemetry_update" id="exvivmft-pX$n!1,8Ea$"/>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
+</next>
+</block>
 </next>
 </block>
 </next>

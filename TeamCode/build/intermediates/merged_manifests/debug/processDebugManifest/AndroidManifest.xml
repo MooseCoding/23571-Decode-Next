@@ -81,13 +81,6 @@
         assumed as required.
     -->
     <uses-feature android:name="android.hardware.camera" />
-
-    <permission
-        android:name="com.qualcomm.ftcrobotcontroller.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-        android:protectionLevel="signature" />
-
-    <uses-permission android:name="com.qualcomm.ftcrobotcontroller.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-
     <uses-feature
         android:name="android.hardware.camera.front"
         android:required="false" /> <!-- TODO replace above two with next line after Android 4.2 -->
@@ -368,18 +361,6 @@
                 <action android:name="com.revrobotics.controlhubupdater.broadcast.RESULT_BROADCAST" />
             </intent-filter>
         </receiver>
-
-        <provider
-            android:name="androidx.startup.InitializationProvider"
-            android:authorities="com.qualcomm.ftcrobotcontroller.androidx-startup"
-            android:exported="false" >
-            <meta-data
-                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-                android:value="androidx.startup" />
-            <meta-data
-                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-                android:value="androidx.startup" />
-        </provider>
 
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"

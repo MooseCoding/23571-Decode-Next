@@ -7,7 +7,7 @@
   "mavenURL": "https://mymaven.bylazar.com/releases",
   "packageString": "com.bylazar:telemetry:<VERSION>",
   "version": "1.0.5",
-  "pluginsCoreVersion": "1.1.44",
+  "pluginsCoreVersion": "1.1.43",
   "author": "Lazar",
   "manager": "src/manager.ts",
   "components": [
@@ -85,7 +85,7 @@
       "changes": [
         {
           "type": "other",
-          "description": "Updated ftc-panels to 1.1.44",
+          "description": "Updated ftc-panels to 1.1.43",
           "upgrading": ""
         }
       ]

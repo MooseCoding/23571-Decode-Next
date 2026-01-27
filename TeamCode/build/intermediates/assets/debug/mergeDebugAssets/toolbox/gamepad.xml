@@ -65,6 +65,10 @@
   </block>
   <block type="gamepad_getProperty_Boolean">
     <field name="IDENTIFIER">gamepad1</field>
+    <field name="PROP">LeftTriggerPressed</field>
+  </block>
+  <block type="gamepad_getProperty_Boolean">
+    <field name="IDENTIFIER">gamepad1</field>
     <field name="PROP">Options</field>
   </block>
   <block type="gamepad_getProperty_Boolean">
@@ -90,6 +94,10 @@
   <block type="gamepad_getProperty_Number">
     <field name="IDENTIFIER">gamepad1</field>
     <field name="PROP">RightTrigger</field>
+  </block>
+  <block type="gamepad_getProperty_Boolean">
+    <field name="IDENTIFIER">gamepad1</field>
+    <field name="PROP">RightTriggerPressed</field>
   </block>
   <block type="gamepad_getProperty_Boolean">
     <field name="IDENTIFIER">gamepad1</field>
@@ -134,6 +142,15 @@
   <block type="gamepad_getProperty_Boolean">
     <field name="IDENTIFIER">gamepad1</field>
     <field name="PROP">Triangle</field>
+  </block>
+  <block type="gamepad_getProperty_Number">
+    <field name="IDENTIFIER">gamepad1</field>
+    <field name="PROP">TriggerThreshold</field>
+  </block>
+  <block type="gamepad_setProperty_Number">
+    <field name="IDENTIFIER">gamepad1</field>
+    <field name="PROP">TriggerThreshold</field>
+    <value name="VALUE"><shadow type="math_number"><field name="NUM">0.5</field></shadow></value>
   </block>
   <block type="gamepad_getProperty_Boolean">
     <field name="IDENTIFIER">gamepad1</field>
@@ -194,6 +211,10 @@
     </block>
     <block type="gamepad_getProperty_Boolean">
       <field name="IDENTIFIER">gamepad1</field>
+      <field name="PROP">LeftTriggerWasPressed</field>
+    </block>
+    <block type="gamepad_getProperty_Boolean">
+      <field name="IDENTIFIER">gamepad1</field>
       <field name="PROP">OptionsWasPressed</field>
     </block>
     <block type="gamepad_getProperty_Boolean">
@@ -207,6 +228,10 @@
     <block type="gamepad_getProperty_Boolean">
       <field name="IDENTIFIER">gamepad1</field>
       <field name="PROP">RightStickButtonWasPressed</field>
+    </block>
+    <block type="gamepad_getProperty_Boolean">
+      <field name="IDENTIFIER">gamepad1</field>
+      <field name="PROP">RightTriggerWasPressed</field>
     </block>
     <block type="gamepad_getProperty_Boolean">
       <field name="IDENTIFIER">gamepad1</field>
@@ -291,6 +316,10 @@
     </block>
     <block type="gamepad_getProperty_Boolean">
       <field name="IDENTIFIER">gamepad1</field>
+      <field name="PROP">LeftTriggerWasReleased</field>
+    </block>
+    <block type="gamepad_getProperty_Boolean">
+      <field name="IDENTIFIER">gamepad1</field>
       <field name="PROP">OptionsWasReleased</field>
     </block>
     <block type="gamepad_getProperty_Boolean">
@@ -304,6 +333,10 @@
     <block type="gamepad_getProperty_Boolean">
       <field name="IDENTIFIER">gamepad1</field>
       <field name="PROP">RightStickButtonWasReleased</field>
+    </block>
+    <block type="gamepad_getProperty_Boolean">
+      <field name="IDENTIFIER">gamepad1</field>
+      <field name="PROP">RightTriggerWasReleased</field>
     </block>
     <block type="gamepad_getProperty_Boolean">
       <field name="IDENTIFIER">gamepad1</field>

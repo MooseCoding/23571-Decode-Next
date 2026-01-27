@@ -37,6 +37,7 @@ object Flywheels: Subsystem {
     var motorRpm: Double = 0.0
 
     override fun periodic() {
+        /*
         if (spinSlow) {
             f1.power = flywheelController.calculate(KineticState(0.0, f1.velocity.absoluteValue))
             f2.power = f1.power
@@ -47,11 +48,17 @@ object Flywheels: Subsystem {
             f2.power = 0.3
         }
 
+         */
+
         if(f1.velocity.absoluteValue + 200.0 > targetVelocity) {
             Light.Green().schedule()
         }
         else {
             Light.Blue().schedule()
+        }
+
+        ActiveOpMode.telemetry.run {
+            addData("Flywheel Target Velo", targetVelocity)
         }
     }
 
@@ -59,7 +66,7 @@ object Flywheels: Subsystem {
      * Update the PID target
      */
     fun updatePid(velocity:Double) {
-        //targetVelocity = velocity
+        targetVelocity = velocity
     }
 
     /**
