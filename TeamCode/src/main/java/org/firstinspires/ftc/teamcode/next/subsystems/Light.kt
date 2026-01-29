@@ -5,6 +5,7 @@ import com.acmerobotics.dashboard.config.Config
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.Subsystem
+import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.ServoEx
 
 @Config
@@ -15,6 +16,9 @@ object Light: Subsystem{
 
     override fun periodic() {
         light.position = color
+        ActiveOpMode.telemetry.run {
+            addData("pos", color)
+        }
     }
 
     /**

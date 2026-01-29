@@ -16,6 +16,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 import java.time.Instant
 
 @TeleOp(name="Drive ONLY")
+@Disabled
 class Drive: NextFTCOpMode() {
     init {
         addComponents(

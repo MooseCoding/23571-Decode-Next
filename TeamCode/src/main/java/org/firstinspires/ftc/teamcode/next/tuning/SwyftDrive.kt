@@ -12,6 +12,7 @@ import java.lang.Double.max
 import java.lang.Math.abs
 
 @TeleOp
+@Disabled
 class SwyftDrive: NextFTCOpMode() {
     init {
         addComponents(

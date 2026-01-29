@@ -37,6 +37,7 @@ import kotlin.math.PI
 import kotlin.time.Duration.Companion.seconds
 
 @Autonomous
+@Disabled
 class FarAuto: NextFTCOpMode() {
     init {
         addComponents(

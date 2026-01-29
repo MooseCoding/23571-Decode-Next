@@ -27,6 +27,8 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 import kotlin.math.PI
 
 @Config
+@TeleOp
+@Disabled
 class TestShooter: NextFTCOpMode() {
     init {
         addComponents(
@@ -64,14 +66,14 @@ class TestShooter: NextFTCOpMode() {
         driveTrain.scalar = 1.0
 
         // Intake
-        //Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake() whenBecomesFalse Intake.stopIntake()
-        //Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake() whenBecomesFalse Intake.stopIntake()
+        Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake() whenBecomesFalse Intake.stopIntake()
+        Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake() whenBecomesFalse Intake.stopIntake()
 
         // Shoot
         Gamepads.gamepad1.triangle whenBecomesTrue Outtake.shoot()
 
-        //Gamepads.gamepad1.leftBumper whenBecomesTrue Transfer.reverse() whenBecomesFalse Transfer.stop()
-        //Gamepads.gamepad1.rightBumper whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()
+        Gamepads.gamepad1.leftBumper whenBecomesTrue Transfer.reverse() whenBecomesFalse Transfer.stop()
+        Gamepads.gamepad1.rightBumper whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()
 
         Gamepads.gamepad1.dpadUp whenBecomesTrue {Flywheels.targetVelocity += 50}
         Gamepads.gamepad1.dpadDown whenBecomesTrue {Flywheels.targetVelocity -= 50}

@@ -23,7 +23,9 @@ import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.fL
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.fR
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.sensitivity
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
+import org.firstinspires.ftc.teamcode.next.subsystems.Light
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
+import org.firstinspires.ftc.teamcode.next.subsystems.Sensor
 import org.firstinspires.ftc.teamcode.next.subsystems.Transfer
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Dist
@@ -44,7 +46,7 @@ class TeleOp
             PedroComponent(Constants::createFollower),
             BindingsComponent,
             BulkReadComponent,
-            SubsystemComponent( DriveTrain, Intake, Outtake, Transfer, Turret, Hood)
+            SubsystemComponent( DriveTrain, Intake, Outtake, Light, Sensor, Transfer)
         )
     }
 
@@ -62,25 +64,50 @@ class TeleOp
     val bl =             MotorEx("bL")
     val br =             MotorEx("bR")// Yes
 
+    var sens: Double = 1.0
 
     override fun onStartButtonPressed() {
-        // Intake
+        Gamepads.gamepad1.rightBumper whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()
         Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake() whenBecomesFalse Intake.stopIntake()
         Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake() whenBecomesFalse Intake.stopIntake()
 
         // Shoot
         Gamepads.gamepad1.triangle whenBecomesTrue Outtake.shoot()
 
-        //Gamepads.gamepad1.leftBumper whenBecomesTrue Transfer.reverse() whenBecomesFalse Transfer.stop()
-        //Gamepads.gamepad1.rightBumper whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()
+        Gamepads.gamepad2.triangle whenBecomesTrue {
+            if (Flywheels.spinSlow) {
+                Flywheels.spin().schedule()
+            } else {
+                Flywheels.stop().schedule()
+            }
+        }
 
-        Gamepads.gamepad2.dpadUp whenBecomesTrue {Flywheels.targetVelocity += 50}
-        Gamepads.gamepad2.dpadDown whenBecomesTrue {Flywheels.targetVelocity -= 50}
-        Gamepads.gamepad2.rightBumper whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()
-        Gamepads.gamepad2.dpadRight whenBecomesTrue {Hood.hoodPosition += 0.1}
-        Gamepads.gamepad2.dpadLeft whenBecomesTrue {Hood.hoodPosition -= 0.1}
+        Gamepads.gamepad2.cross whenBecomesTrue Turret.zero()
 
-        // Maybe holding Buttons slows down bot for endgame/precision
+        Gamepads.gamepad2.circle whenBecomesTrue {
+            Outtake.fullManual = !Outtake.fullManual
+        }
+
+        Gamepads.gamepad2.rightBumper whenBecomesTrue {
+            Outtake.distance = Dist.FAR
+        }
+        Gamepads.gamepad2.leftBumper whenBecomesTrue {
+            Outtake.distance = Dist.CLOSE
+        }
+
+        Gamepads.gamepad2.dpadUp whenBecomesTrue {
+            Hood.hoodPosition -= 0.1
+        }
+        Gamepads.gamepad2.dpadDown whenBecomesTrue {
+            Hood.hoodPosition += 0.1
+        }
+
+        Gamepads.gamepad2.dpadLeft whenBecomesTrue {
+            Flywheels.targetVelocity -= 50
+        }
+        Gamepads.gamepad2.dpadRight whenBecomesTrue {
+            Flywheels.targetVelocity += 50
+        }
 
         Gamepads.gamepad2.options whenBecomesTrue InstantCommand {
             when(DriveTrain.alliance) {
@@ -101,13 +128,14 @@ class TeleOp
             }
         }
 
-       //  Gamepads.gamepad2.rightStickButton whenBecomesTrue HeadingLock()
+        Gamepads.gamepad1.rightStickButton.whenBecomesTrue { sens=0.3 } whenBecomesFalse { sens=1.0 }
+
     }
 
     override fun onUpdate() {
-        val y = -gamepad1.left_stick_y
-        val x = gamepad1.left_stick_x
-        val t = gamepad1.right_stick_x
+        val y = -gamepad1.left_stick_y * sens
+        val x = gamepad1.left_stick_x * sens
+        val t = gamepad1.right_stick_x * sens
 
         val d = max((abs(y)+abs(x)+abs(t)).toDouble(), 1.0)
         fl.power = (y+x+t)/d

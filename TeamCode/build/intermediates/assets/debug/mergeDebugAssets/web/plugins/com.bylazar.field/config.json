@@ -7,7 +7,7 @@
   "mavenURL": "https://mymaven.bylazar.com/releases",
   "packageString": "com.bylazar:field:<VERSION>",
   "version": "1.0.6",
-  "pluginsCoreVersion": "1.1.43",
+  "pluginsCoreVersion": "1.1.44",
   "author": "Lazar",
   "manager": "src/manager.ts",
   "components": [
@@ -80,7 +80,7 @@
       "changes": [
         {
           "type": "other",
-          "description": "Updated ftc-panels to 1.1.43",
+          "description": "Updated ftc-panels to 1.1.44",
           "upgrading": ""
         }
       ]

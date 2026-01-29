@@ -17,10 +17,11 @@ object Hood: Subsystem {
     /* min is 0.75 max is 0.25*/
 
     override fun periodic() {
-        // hoodServo.position = hoodPosition
+        hoodServo.position = hoodPosition
 
         ActiveOpMode.telemetry.run {
             addData("Hood position", hoodPosition)
+            addData("restoreTo", restoreTo)
         }
     }
     fun setRestore(): InstantCommand = InstantCommand{

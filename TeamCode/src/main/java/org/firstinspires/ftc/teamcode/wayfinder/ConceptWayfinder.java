@@ -20,7 +20,7 @@ import java.util.Locale;
 
 @Autonomous(name="Odometry Navigation Example", group="Pinpoint")
 //@Disabled
-
+@Disabled
 public class ConceptWayfinder extends LinearOpMode {
 
     DcMotor frontLeftDrive;

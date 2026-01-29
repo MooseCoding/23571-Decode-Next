@@ -50,7 +50,7 @@ object DriveTrain: Subsystem {
     }
 
     override fun initialize() {
-        PedroComponent.follower.pose = Pose(80.0, 91.0, 0.0)
+
     }
 
 

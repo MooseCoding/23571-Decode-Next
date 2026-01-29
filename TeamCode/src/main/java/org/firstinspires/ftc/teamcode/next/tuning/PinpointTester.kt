@@ -9,6 +9,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
 import org.firstinspires.ftc.teamcode.next.subsystems.Pinpoint
 
 @TeleOp
+@Disabled
 class PinpointTester: NextFTCOpMode() {
     init{
         addComponents(

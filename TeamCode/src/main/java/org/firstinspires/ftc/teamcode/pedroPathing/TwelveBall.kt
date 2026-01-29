@@ -43,6 +43,16 @@ class TwelveBall: NextFTCOpMode() {
 
     private lateinit var timer: Timer
 
+    val fL = MotorEx("fL")
+    val fR = MotorEx("fR").reversed()
+    val bL = MotorEx("bL")
+    val bR = MotorEx("bR").reversed()
+
+    val far12: Far12 by lazy { Far12(alliance) }
+
+    override fun onInit() {
+    }
+
     override fun onWaitForStart() {
         Gamepads.gamepad1.a whenBecomesTrue { alliance = Alliance.RED }
         Gamepads.gamepad1.b whenBecomesTrue  { alliance = Alliance.BLUE }
@@ -56,20 +66,6 @@ class TwelveBall: NextFTCOpMode() {
         }
     }
 
-    val fL = MotorEx("fL")
-    val fR = MotorEx("fR").reversed()
-    val bL = MotorEx("bL")
-    val bR = MotorEx("bR").reversed()
-
-    val far12: Far12 by lazy { Far12(alliance) }
-
-    override fun onInit() {
-        follower.setStartingPose(far12.startPoint)
-    }
-
-    override fun waitForStart() {
-
-    }
 
     override fun onStop() {
     }
@@ -83,6 +79,8 @@ class TwelveBall: NextFTCOpMode() {
      * 4. Parking.
      */
     override fun onStartButtonPressed() {
+        follower.setStartingPose(far12.startPoint)
+
         timer = Timer()
 
         SequentialGroupLocal(

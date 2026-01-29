@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.next.tuning
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.components.SubsystemComponent
@@ -10,12 +11,14 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Sensor
 import org.firstinspires.ftc.teamcode.next.subsystems.Transfer
 import dev.nextftc.core.components.BindingsComponent
+import org.firstinspires.ftc.teamcode.next.subsystems.Light
 
 @TeleOp
+@Disabled
 class SensorTest: NextFTCOpMode() {
     init {
         addComponents(
-            SubsystemComponent(Sensor, Intake, Transfer),
+            SubsystemComponent(Sensor, Intake, Transfer, Light),
             BulkReadComponent,
             BindingsComponent,
         )

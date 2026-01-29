@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.pedroPathing
 import com.bylazar.configurables.annotations.Configurable
 import com.pedropathing.util.Timer
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.delays.WaitUntil
 import dev.nextftc.core.commands.groups.ParallelDeadlineGroup
@@ -28,6 +29,7 @@ import kotlin.time.Duration.Companion.seconds
 
 @Autonomous
 @Configurable
+@Disabled
 class NineBall: NextFTCOpMode() {
     init {
         addComponents(
@@ -62,10 +64,6 @@ class NineBall: NextFTCOpMode() {
 
     override fun onInit() {
         follower.setStartingPose(far12.startPoint)
-    }
-
-    override fun waitForStart() {
-
     }
 
     override fun onStop() {

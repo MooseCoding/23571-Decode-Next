@@ -1,21 +1,13 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
-import androidx.core.content.pm.ShortcutInfoCompatSaver
-import com.acmerobotics.dashboard.config.Config
-import com.bylazar.configurables.annotations.Configurable
-import com.qualcomm.ftccommon.FtcEventLoopHandler
 import dev.nextftc.core.commands.Command
-import dev.nextftc.core.commands.conditionals.IfElseCommand
-import dev.nextftc.core.commands.conditionals.switchCommand
 import dev.nextftc.core.commands.delays.Delay
-import dev.nextftc.core.commands.delays.WaitUntil
 import dev.nextftc.core.commands.groups.ParallelGroup
-import org.firstinspires.ftc.teamcode.helpers.SequentialGroupLocal
 import dev.nextftc.core.commands.utility.InstantCommand
-import dev.nextftc.core.commands.utility.LambdaCommand
 import dev.nextftc.core.subsystems.SubsystemGroup
 import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.ftc.ActiveOpMode
+import org.firstinspires.ftc.teamcode.helpers.SequentialGroupLocal
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Aimbot
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Dist
@@ -24,20 +16,20 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import kotlin.math.pow
 import kotlin.math.sqrt
-import kotlin.time.Duration
-import kotlin.time.Duration.Companion.seconds
-import kotlin.time.Instant
 
 object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
     var fullManual = false
     var distance: Dist = Dist.CLOSE
 
-    var goalX = 6.0;
-    val goalY = 144 - 8.0
+    var goalX = 6.0
+    val goalY = 144
 
-    val shootTime: Duration = 0.05.seconds
+    var turretGoalX = 0.0
+    val turretGoalY = 144.0
 
     var restore = 0.0
+
+    var isShooting: Boolean = false
 
     override fun initialize() {
         goalX = if (DriveTrain.alliance == Alliance.RED) {
@@ -45,13 +37,17 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
         } else {
             6.0
         }
+        turretGoalX = if (DriveTrain.alliance == Alliance.RED) {
+            140.0
+        } else {
+            0.0
+        }
     }
 
     override fun periodic() {
         if (!fullManual) {
             Turret.autoTurret = true
             auto()
-
         } else {
             manualAim()
             Turret.autoTurret = false
@@ -77,23 +73,32 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
             }
         }
 
-        Flywheels.updatePid(fP)
-        //Hood.hoodPosition = hP
+        Flywheels.targetVelocity = (fP)
+        Hood.hoodPosition = hP
     }
 
     /**
      * Auto flywheel and auto hood positioning
      */
     fun auto() {
-
         val dist: Double = sqrt((goalX - PedroComponent.follower.pose.x).pow(2) + (goalY - PedroComponent.follower.pose.y).pow(2))
-        val values: DoubleArray = Aimbot.getValues(dist)
+        val values: DoubleArray = Aimbot.get(dist)
 
         ActiveOpMode.telemetry.addData("dist", dist)
+        ActiveOpMode.telemetry.addData("isShooting", isShooting)
+        ActiveOpMode.telemetry.addData("restore", restore)
 
 
-        Hood.hoodPosition = values[0]
-        Flywheels.updatePid(values[1])
+        if(!isShooting) {
+            Hood.hoodPosition = values[0]
+
+                Flywheels.targetVelocity = (values[1])
+
+        }
+
+        ActiveOpMode.telemetry.addData("hood[0]", values[0])
+        ActiveOpMode.telemetry.addData("flywheel[1]", values[1])
+
     }
     fun setBack(): InstantCommand = InstantCommand{
         Flywheels.targetVelocity = restore
@@ -106,7 +111,9 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
      * @return Command to run for the shoot command
      */
     fun shoot(): Command {
+        // isShooting = true
         return SequentialGroupLocal(
+            InstantCommand {isShooting = true},
             ParallelGroup (
                     Intake.runIntake(),
                     Transfer.start(),
@@ -115,21 +122,24 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
                 ),
                 Delay(0.11),
                 InstantCommand {
-                    Flywheels.targetVelocity += 150
+                    Flywheels.targetVelocity += 300
                 },
-                Hood.sequence(-0.14),
+                Hood.sequence(-0.15),
                 Delay(0.12),
                 InstantCommand {
-                    Flywheels.targetVelocity += 220
+                    Flywheels.targetVelocity += 300
                 },
-                Hood.sequence(-0.2),
+                Hood.sequence(-0.24),
                 Delay(0.12),
                 ParallelGroup(
                     Hood.restore(),
                     Intake.stopIntake(),
                     Transfer.stop(),
                     setBack()
-                ), //ball shoots every 0.2 seconds
+                ),
+            InstantCommand {
+                isShooting = false
+            }//ball shoots every 0.2 seconds
             )
     }
 }

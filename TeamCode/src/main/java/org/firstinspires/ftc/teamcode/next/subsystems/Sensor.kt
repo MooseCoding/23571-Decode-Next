@@ -21,7 +21,7 @@ object Sensor: Subsystem {
 
     var timer: Timer = Timer()
 
-    private const val INTAKE_TIME: Double = 0.2
+    private const val INTAKE_TIME: Double = 0.22
 
     var currentArtifact:Artifact? = null
 
@@ -34,31 +34,21 @@ object Sensor: Subsystem {
     override fun periodic() {
         val ds = cS.getDistance(DistanceUnit.MM)
 
-        if(ds > 40.0) {
-            currentArtifact = null
+        if(ds > 45.0) {
+            Light.Azure().schedule()
+            timer.resetTimer()
         }
 
-        if(timer.elapsedTime > INTAKE_TIME && ds<25.0 && currentArtifact == null && Transfer.currentBall != 3) {
-            currentArtifact = getColor()
-            Transfer.ballsHeld[Transfer.currentBall] = currentArtifact
-            Transfer.currentBall++
-
-            if(Transfer.currentBall == 1) {
-                Transfer.intakeBall().schedule()
+        if(timer.elapsedTime > 62 && ds<40.00) {
+            Light.Green().schedule()
+            ActiveOpMode.telemetry.run {
+                addData("UHOHOHOH", "NOOO")
             }
-
-            if(Transfer.currentBall == 3) {
-                Light.Green().schedule()
-                // ActiveOpMode.gamepad1.rumble(1.0, 1.0, 10)
-            }
-
-            currentArtifact = null
-            timer.resetTimer()
         }
 
         ActiveOpMode.telemetry.run {
             // addData("Current Color", Transfer.ballsHeld[Transfer.currentBall])
-            addData("cSD", cS.getDistance(DistanceUnit.MM))
+            addData("cSD", ds)
             addData("Current Ball", Transfer.currentBall)
             addData("Timer", timer.elapsedTime)
         }
