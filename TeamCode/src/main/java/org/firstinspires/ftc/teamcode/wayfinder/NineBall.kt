@@ -4,6 +4,7 @@ import android.text.Layout
 import com.qualcomm.hardware.dfrobot.HuskyLens
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.util.ElapsedTime
 import dev.nextftc.core.commands.conditionals.IfElseCommand
 import dev.nextftc.core.commands.delays.Delay
@@ -16,10 +17,12 @@ import dev.nextftc.core.commands.utility.NullCommand
 import dev.nextftc.core.commands.utility.PerpetualCommand
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
+import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
+import dev.nextftc.hardware.impl.MotorEx
 import org.firstinspires.ftc.robotcore.external.Telemetry
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
 import org.firstinspires.ftc.teamcode.helpers.SequentialGroupLocal
@@ -33,14 +36,15 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Transfer
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import org.firstinspires.ftc.teamcode.next.tuning.Drive
+import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 import kotlin.math.PI
 import kotlin.time.Duration.Companion.seconds
 
 @Autonomous
-@Disabled
-class FarAuto: NextFTCOpMode() {
+class NineBall: NextFTCOpMode() {
     init {
         addComponents(
+            PedroComponent(Constants::createFollower),
             SubsystemComponent(
                 DriveTrain, Intake, Outtake, Transfer, Pinpoint, Light
             ),
@@ -51,8 +55,14 @@ class FarAuto: NextFTCOpMode() {
 
     private lateinit var wayfinder: MotorWayfinder
 
+    val bL = MotorEx("bL")
+    val bR = MotorEx("bR")
+    val fL = MotorEx("fL")
+    val fR = MotorEx("fR")
+
+
     override fun onInit() {
-        wayfinder = MotorWayfinder(DriveTrain.bL, DriveTrain.bR, DriveTrain.fR, DriveTrain.fL, Pinpoint.pinpoint)
+        wayfinder = MotorWayfinder(bL, bR, fR, fL, Pinpoint.pinpoint)
     }
 
     private var balls: Int = 18
@@ -91,29 +101,41 @@ class FarAuto: NextFTCOpMode() {
             update()
         }
     }
-    val cycleFarSequence = PerpetualCommand(
-        SequentialGroupLocal(
-            Intake.runIntake(),
-            WayfinderDrive(wayfinder, FarPoses.cyclePose),
-            ParallelGroup(
-                WayfinderDrive(wayfinder, FarPoses.cycleShoot),
-                SequentialGroupLocal(
-                    Delay(0.2.seconds),
-                    Intake.stopIntake()
-                )
-            ),
-            Outtake.shoot(),
-        )
-    )
+
+
 
     val timer: ElapsedTime = ElapsedTime()
 
+    override fun onUpdate() {
+        telemetry.run {
+            addData("Timer", timer.seconds())
+            update()
+        }
+    }
+
 
     override fun onStartButtonPressed() {
+
         when(alliance) {
             Alliance.BLUE -> FarPoses.switchToBlue()
             else -> {}
         }
+
+        val cycleFarSequence = PerpetualCommand(
+            SequentialGroupLocal(
+                Intake.runIntake(),
+                WayfinderDrive(wayfinder, FarPoses.cyclePose),
+                ParallelGroup(
+                    WayfinderDrive(wayfinder, FarPoses.cycleShoot),
+                    SequentialGroupLocal(
+                        Delay(0.2.seconds),
+                        Intake.stopIntake()
+                    )
+                ),
+                Delay(2.seconds),
+                Outtake.shoot(),
+            )
+        )
 
         timer.reset()
 
@@ -122,26 +144,7 @@ class FarAuto: NextFTCOpMode() {
                 WaitUntil { timer.seconds() > 28.0 },
                 SequentialGroupLocal(
                     Flywheels.spin(),
-                    Delay(2.seconds),
-                    Outtake.shoot(),
-
-                    // Intake from middle row
-                    Intake.runIntake(),
-                    WayfinderDrive(wayfinder, FarPoses.row2),
-                    WayfinderDrive(wayfinder, FarPoses.row2End),
-
-                    // Hit the thing
-                    ParallelGroup(
-                        WayfinderTurn(wayfinder, -PI /2),
-                        ParallelDeadlineGroup(
-                            Delay(0.2.seconds),
-                            Intake.stopIntake()
-                        )
-                    ),
-
-                    WayfinderDrive(wayfinder, FarPoses.row2ShootPoint),
-
-                    WayfinderDrive(wayfinder, FarPoses.shoot1),
+                    Delay(2.5.seconds),
                     Outtake.shoot(),
 
                     // Intake from far row
@@ -150,6 +153,7 @@ class FarAuto: NextFTCOpMode() {
                     WayfinderDrive(wayfinder, FarPoses.row3End),
                     Intake.stopIntake(),
                     WayfinderDrive(wayfinder, FarPoses.shoot2),
+                    Delay(2.seconds),
                     Outtake.shoot(),
 
 
@@ -164,9 +168,8 @@ class FarAuto: NextFTCOpMode() {
                             Intake.runIntake()
                         )
                     ),
+                    Delay(2.seconds),
                     Outtake.shoot(),
-
-                    // That's 12 Ball Auto
 
                     ParallelRaceGroup(
                         WaitUntil { !cycleFar },

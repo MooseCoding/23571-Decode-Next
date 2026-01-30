@@ -2,12 +2,15 @@ package org.firstinspires.ftc.teamcode.pedroPathing.tuners;
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.configuration.annotations.DigitalIoDeviceType;
 
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 @TeleOp(name="ForwardTuner")
+@Disabled
 public class ForwardTuner extends OpMode {
     private Follower follower;
     public static double DISTANCE = 48;

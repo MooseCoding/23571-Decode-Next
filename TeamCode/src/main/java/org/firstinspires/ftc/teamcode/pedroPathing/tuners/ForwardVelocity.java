@@ -4,6 +4,7 @@ import static org.firstinspires.ftc.teamcode.pedroPathing.Tuning.stopRobot;
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -27,6 +28,7 @@ import java.util.ArrayList;
  * @version 1.0, 3/13/2024
  */
 @TeleOp(name="ForwardVelocity", group="tuners")
+@Disabled
 public class ForwardVelocity extends OpMode {
     private final ArrayList<Double> velocities = new ArrayList<>();
     static ArrayList<String> changes = new ArrayList<>();

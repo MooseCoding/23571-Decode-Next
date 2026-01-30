@@ -4,6 +4,7 @@ import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
 import com.pedropathing.paths.Path;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -20,6 +21,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
  * @version 1.0, 3/12/2024
  */
 @TeleOp(name="LinePIDFs", group = "tuners")
+@Disabled
 public class LinePIDFs extends OpMode {
     public static double DISTANCE = 40;
     private Follower follower;

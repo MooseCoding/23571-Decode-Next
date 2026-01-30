@@ -9,12 +9,18 @@ fun WayfinderDrive(wF: MotorWayfinder, targetPose: Pose2D): LambdaCommand = Lamb
     .setStart {
         wF.drive(targetPose)
     }
+    .setUpdate {
+        wF.drive(targetPose)
+    }
     .setIsDone {
         wF.atTarget
     }
 
 fun WayfinderTurn(wF: MotorWayfinder, targetHeading: Double): LambdaCommand = LambdaCommand()
     .setStart {
+        wF.turn(targetHeading)
+    }
+    .setUpdate {
         wF.turn(targetHeading)
     }
     .setIsDone {

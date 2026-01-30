@@ -50,7 +50,7 @@ object Limelight : Subsystem {
         fusionLocalizer = FusionLocalizer(
             PinpointLocalizer(ActiveOpMode.hardwareMap, Constants.localizerConstants),
             doubleArrayOf(5.0, 5.0, 5.0),
-            doubleArrayOf(0.2, 0.2, 0.2),
+            doubleArrayOf(2.0, 2.0, 2.0),
             doubleArrayOf(0.1, 0.1, 0.1),
             50
         )
@@ -74,21 +74,6 @@ object Limelight : Subsystem {
         fusionLocalizer.addMeasurement(visionPose,
             (System.nanoTime() - ll.latestResult.captureLatency).toLong()
         )
-        /*val dx = follower.pose.x - lastX
-        val dy = follower.pose.y - lastY
-
-        lastX = follower.pose.x
-        lastY = follower.pose.y
-
-        kx.predict(dx)
-        ky.predict(dy)
-
-        val sigma = 0.300
-        val r = sigma.pow(2)
-
-        kx.update(visionPose.x, r)
-        ky.update(visionPose.y, r)
-         */
 
         ActiveOpMode.telemetry.run {
             addData("Limelight X: ", visionPose.x)
@@ -140,11 +125,9 @@ object Limelight : Subsystem {
         val lR = grabResultData() ?: return null
         if (lR.fiducialResults.isEmpty()) return null
 
-        ll.updateRobotOrientation(lR.botpose.orientation.yaw)
+        ll.updateRobotOrientation(PedroComponent.follower.heading - Turret.getYaw() * PI/180.0)
 
         ActiveOpMode.telemetry.addData("LL Heading", lR.botpose.orientation.yaw)
-        // val pos = (Math.PI/4 + PI/2)*180/PI
-        // ll.updateRobotOrientation(135.0)
 
         val botpose = lR.botpose_MT2 ?: return null
 

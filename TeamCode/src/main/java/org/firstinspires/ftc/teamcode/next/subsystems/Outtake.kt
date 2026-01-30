@@ -1,11 +1,14 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
+import com.bylazar.field.Drawable
+import com.bylazar.telemetry.PanelsTelemetry
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.groups.ParallelGroup
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.SubsystemGroup
 import dev.nextftc.extensions.pedro.PedroComponent
+import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import dev.nextftc.ftc.ActiveOpMode
 import org.firstinspires.ftc.teamcode.helpers.SequentialGroupLocal
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Aimbot
@@ -14,10 +17,11 @@ import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Dist
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
+import org.firstinspires.ftc.teamcode.pedroPathing.Drawing
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
+object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
     var fullManual = false
     var distance: Dist = Dist.CLOSE
 
@@ -31,7 +35,7 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
 
     var isShooting: Boolean = false
 
-    override fun initialize() {
+    override fun periodic() {
         goalX = if (DriveTrain.alliance == Alliance.RED) {
             144 - 6.0
         } else {
@@ -42,9 +46,13 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
         } else {
             0.0
         }
-    }
 
-    override fun periodic() {
+        ActiveOpMode.telemetry.run {
+            addData("goalX", turretGoalX)
+        }
+
+        Drawing.drawRobot(follower.pose)
+
         if (!fullManual) {
             Turret.autoTurret = true
             auto()
@@ -92,8 +100,12 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
         if(!isShooting) {
             Hood.hoodPosition = values[0]
 
-                Flywheels.targetVelocity = (values[1])
-
+            if(PedroComponent.follower.pose.y < 44.0 ) {
+                Flywheels.targetVelocity = (values[1]) + 110.0
+            }
+            else {
+                Flywheels.targetVelocity = values[1] + 70.0
+            }
         }
 
         ActiveOpMode.telemetry.addData("hood[0]", values[0])
@@ -124,12 +136,12 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light) {
                 InstantCommand {
                     Flywheels.targetVelocity += 300
                 },
-                Hood.sequence(-0.15),
+                Hood.sequence(-0.22),
                 Delay(0.12),
                 InstantCommand {
-                    Flywheels.targetVelocity += 300
+                    Flywheels.targetVelocity += 325
                 },
-                Hood.sequence(-0.24),
+                Hood.sequence(-0.32),
                 Delay(0.12),
                 ParallelGroup(
                     Hood.restore(),

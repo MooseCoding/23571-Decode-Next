@@ -4,12 +4,7 @@ import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver
 import dev.nextftc.hardware.impl.MotorEx
 import org.firstinspires.ftc.robotcore.external.navigation.Pose2D
 
-class MotorWayfinder(bL: MotorEx, bR: MotorEx, fR: MotorEx, fL: MotorEx, pinpoint: GoBildaPinpointDriver): Wayfinder(pinpoint) {
-    val fL = fL
-    val fR = fR
-    val bL = bL
-    val bR = bR
-
+class MotorWayfinder(val bL: MotorEx, val bR: MotorEx, val fR: MotorEx,val fL: MotorEx, pinpoint: GoBildaPinpointDriver): Wayfinder(pinpoint) {
     fun drive(to: Pose2D): Boolean {
         fL.power = this.frontLeftMotorOutput
         fR.power = this.frontRightMotorOutput

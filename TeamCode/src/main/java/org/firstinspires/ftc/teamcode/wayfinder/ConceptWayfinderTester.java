@@ -30,6 +30,7 @@
 package org.firstinspires.ftc.teamcode.wayfinder;
 
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -44,7 +45,6 @@ import dalvik.system.DelegateLastClassLoader;
 
 
 @TeleOp(name="Concept Wayfinder Tester", group="Pinpoint")
-@Disabled
 public class ConceptWayfinderTester extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
@@ -244,10 +244,10 @@ public class ConceptWayfinderTester extends LinearOpMode {
     }
 
     public void initializeMotors(){
-        frontLeftDrive = hardwareMap.get(DcMotor.class, "front_left_drive");
-        frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_drive");
-        backLeftDrive = hardwareMap.get(DcMotor.class, "back_left_drive");
-        backRightDrive = hardwareMap.get(DcMotor.class, "back_right_drive");
+        frontLeftDrive = hardwareMap.get(DcMotor.class, "fL");
+        frontRightDrive = hardwareMap.get(DcMotor.class, "fR");
+        backLeftDrive = hardwareMap.get(DcMotor.class, "bL");
+        backRightDrive = hardwareMap.get(DcMotor.class, "bR");
 
         frontLeftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontRightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -259,10 +259,10 @@ public class ConceptWayfinderTester extends LinearOpMode {
     }
 
     public void initializePinpoint(){
-        pinpoint = hardwareMap.get(GoBildaPinpointDriver.class,"pinpoint");
-        pinpoint.setOffsets(-142.0, 120.0, DistanceUnit.MM); //these are tuned for 3110-0002-0001 Product Insight #1
+        pinpoint = hardwareMap.get(GoBildaPinpointDriver.class,"pp");
+        pinpoint.setOffsets(-3.5, -2.0, DistanceUnit.INCH); //these are tuned for 3110-0002-0001 Product Insight #1
         pinpoint.setEncoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
-        pinpoint.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.FORWARD, GoBildaPinpointDriver.EncoderDirection.REVERSED);
+        pinpoint.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.REVERSED, GoBildaPinpointDriver.EncoderDirection.REVERSED);
 
         pinpoint.resetPosAndIMU();
     }

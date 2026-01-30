@@ -78,9 +78,6 @@ object Turret: Subsystem {
         posPid(betterP)
     }
 
-    override fun initialize() {
-    }
-
     private var lastValue = 0.0
 
     var pow: Double = 0.0
@@ -127,18 +124,17 @@ object Turret: Subsystem {
         //leftServo.power = pow
             //rightServo.power = pow
 
-        goToYaw(target)
+        if(!ActiveOpMode.opModeInInit) {
+            goToYaw(target)
+        }
 
 
         velocity = encoder.velocity * 360.0/4000.0 * 0.725
 
         ActiveOpMode.telemetry.run {
               addData("yaw", getYaw())
-            addData("encoder", encoder.currentPosition)
               addData("target", target)
 //            addData("targetVelo", c.goal.velocity)
-            addData("current velo", -encoder.velocity * 360/4000.0 * 0.725)
-            addData("servo pow", pow)
 //            addData("currentX",currentX)
 //            addData("currentY", currentY)
 //            addData("currentH", currentHeading)
@@ -198,17 +194,22 @@ object Turret: Subsystem {
         target = -clampedError * 180.0 / PI
     }
 
-    @JvmField var offset: Double = -8.0
+    @JvmField var offset: Double = 26.5
     @JvmField var offset2:Double = 12.0
+    @JvmField var offset3: Double = 6.0
 
     private fun goToYaw(target:Double) {
-        var position: Double = (target+135)/270.0
-        if(PedroComponent.follower.pose.y < 50.0) {
+        var position: Double = (target+135-offset)/270.0
+        /*if(PedroComponent.follower.pose.y < 50.0) {
              position -=  offset / 270.0
+        }
+        else {
+            position -= offset3/270.0
         }
         if(target > 0.0) {
             position -= offset2 / 270.0
-        }
+        }*/
+
         currentAngle = target
         leftServo.position = position
         rightServo.position = position

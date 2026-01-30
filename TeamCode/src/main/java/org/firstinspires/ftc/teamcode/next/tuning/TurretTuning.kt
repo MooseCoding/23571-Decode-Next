@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 
 @TeleOp
-@Disabled
+
 class TurretTuning: NextFTCOpMode() {
     init {
         addComponents(
@@ -37,7 +37,7 @@ class TurretTuning: NextFTCOpMode() {
     }
 
     override fun onInit() {
-        PedroComponent.follower.setStartingPose(Pose(72.0, 72.0, Math.PI/4))
+        PedroComponent.follower.setStartingPose(Pose(72.0, 72.0, Math.PI/2))
     }
 
 

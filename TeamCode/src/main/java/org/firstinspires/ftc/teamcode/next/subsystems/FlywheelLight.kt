@@ -21,6 +21,10 @@ object FlywheelLight: Subsystem{
         }
     }
 
+    override fun initialize() {
+        color = 0.0
+    }
+
     /**
      * @return A command turning the light purple
      */
@@ -46,7 +50,7 @@ object FlywheelLight: Subsystem{
      * @return A command turning the light red
      */
     fun Red(): Command = InstantCommand {
-        color = 0.277 // Check this
+        color = 0.30 // Check this
     }
 
     /**

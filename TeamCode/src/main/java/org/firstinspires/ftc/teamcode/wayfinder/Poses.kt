@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode.wayfinder
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
+import org.firstinspires.ftc.robotcore.external.navigation.Pose2D
 import kotlin.math.PI
 import kotlin.math.atan
 import kotlin.math.atan2
@@ -21,7 +24,15 @@ class FarPoses { // Red Alliance Poses
         var rampIntake = PedroPose(131.0, 16.0, 0.0)
         var park = PedroPose(106.0, 8.5, PI / 2)
 
-        fun flipPose(p: PedroPose): PedroPose = PedroPose(144 - p.x, p.y, p.h)
+        fun flipPose(p: Pose2D): Pose2D {
+            return Pose2D(
+                DistanceUnit.INCH,
+                p.getX(DistanceUnit.INCH),          // x unchanged
+                -p.getY(DistanceUnit.INCH),         // y mirrored
+                AngleUnit.RADIANS,
+                -p.getHeading(AngleUnit.RADIANS)    // heading mirrored
+            )
+        }
 
         fun switchToBlue() {
             start = flipPose(start)

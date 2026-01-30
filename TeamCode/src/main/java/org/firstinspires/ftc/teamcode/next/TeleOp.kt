@@ -56,7 +56,6 @@ class TeleOp
     }
 
     override fun onInit() {
-
     }
 
     val fl =             MotorEx("fL")// Yse
@@ -67,6 +66,7 @@ class TeleOp
     var sens: Double = 1.0
 
     override fun onStartButtonPressed() {
+        PedroComponent.follower.pose = Pose(DriveTrain.currentX, DriveTrain.currentY, DriveTrain.currentHeading)
         Gamepads.gamepad1.rightBumper whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()
         Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake() whenBecomesFalse Intake.stopIntake()
         Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake() whenBecomesFalse Intake.stopIntake()
@@ -109,13 +109,13 @@ class TeleOp
             Flywheels.targetVelocity += 50
         }
 
-        Gamepads.gamepad2.options whenBecomesTrue InstantCommand {
+        Gamepads.gamepad1.options whenBecomesTrue InstantCommand {
             when(DriveTrain.alliance) {
-                Alliance.RED -> {
+                Alliance.BLUE -> {
                     PedroComponent.follower.pose = Pose(8.0, 8.0, PI/2)
                 }
-                Alliance.BLUE -> {
-                    PedroComponent.follower.pose = Pose(144-8.0, 8.0, PI/2)
+                Alliance.RED -> {
+                    PedroComponent.follower.pose = Pose(141.5-8.0, 8.0, PI/2)
                 }
             }
         }

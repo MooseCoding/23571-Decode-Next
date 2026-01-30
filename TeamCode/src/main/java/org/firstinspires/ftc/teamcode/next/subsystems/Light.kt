@@ -21,6 +21,10 @@ object Light: Subsystem{
         }
     }
 
+    override fun initialize() {
+        color = 0.0
+    }
+
     /**
      * @return A command turning the light purple
      */

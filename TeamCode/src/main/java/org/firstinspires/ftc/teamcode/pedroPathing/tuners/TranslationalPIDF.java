@@ -4,10 +4,13 @@ import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
 import com.pedropathing.paths.Path;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
+
+import java.io.DataInput;
 
 /**
  * This is the Translational PIDF Tuner OpMode. It will keep the robot in place.
@@ -20,6 +23,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
  * @version 1.0, 3/12/2024
  */
 @TeleOp(name="TranslationalPIDF", group="tuners")
+@Disabled
 public class TranslationalPIDF extends OpMode {
     public static double DISTANCE = 40;
     private boolean forward = true;

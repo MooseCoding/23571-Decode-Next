@@ -42,11 +42,9 @@ object DriveTrain: Subsystem {
         )*/
 
     override fun periodic() {
-        dev.nextftc.ftc.ActiveOpMode.telemetry.run {
-            addData("Is in zone", inZone)
-            addData("parked", parked)
-        }
-        // Make a determination to turn light orange when not parked and another color when parked like green
+        currentX = PedroComponent.follower.pose.x
+        currentY = PedroComponent.follower.pose.y
+        currentHeading = PedroComponent.follower.pose.heading
     }
 
     override fun initialize() {

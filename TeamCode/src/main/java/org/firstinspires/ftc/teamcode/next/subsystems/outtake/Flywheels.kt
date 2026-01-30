@@ -11,6 +11,7 @@ import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.MotorEx
+import org.firstinspires.ftc.teamcode.next.subsystems.FlywheelLight
 import org.firstinspires.ftc.teamcode.next.subsystems.Light
 import kotlin.math.absoluteValue
 
@@ -37,24 +38,24 @@ object Flywheels: Subsystem {
     var motorRpm: Double = 0.0
 
     override fun periodic() {
-
-        if (spinSlow) {
-            f1.power = flywheelController.calculate(KineticState(0.0, f1.velocity.absoluteValue))
-            f2.power = f1.power
-            flywheelController.goal = KineticState(0.0, targetVelocity)
+        if(!ActiveOpMode.opModeInInit) {
+            if (!spinSlow) {
+                // f1.power = flywheelController.calculate(KineticState(0.0, f1.velocity.absoluteValue))
+                // f2.power = f1.power
+                flywheelController.goal = KineticState(0.0, targetVelocity)
+            } else {
+                f1.power = 0.5
+                f2.power = 0.5
+            }
         }
-        else {
-            f1.power = 0.5
-            f2.power = 0.5
-        }
 
 
-
-        if(f1.velocity.absoluteValue + 200.0 > targetVelocity) {
-            Light.Green().schedule()
-        }
-        else {
-            Light.Blue().schedule()
+        if(ActiveOpMode.opModeIsActive) {
+            if (f1.velocity.absoluteValue + 200.0 > targetVelocity) {
+                FlywheelLight.Green().schedule()
+            } else {
+                FlywheelLight.Blue().schedule()
+            }
         }
 
         ActiveOpMode.telemetry.run {

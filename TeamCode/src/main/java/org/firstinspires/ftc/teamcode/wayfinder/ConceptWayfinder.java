@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.wayfinder;
 
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -19,8 +20,6 @@ import java.util.Locale;
  */
 
 @Autonomous(name="Odometry Navigation Example", group="Pinpoint")
-//@Disabled
-@Disabled
 public class ConceptWayfinder extends LinearOpMode {
 
     DcMotor frontLeftDrive;
@@ -123,10 +122,10 @@ public class ConceptWayfinder extends LinearOpMode {
     }
 
     public void initializeMotors(){
-        frontLeftDrive = hardwareMap.get(DcMotor.class, "front_left_drive");
-        frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_drive");
-        backLeftDrive = hardwareMap.get(DcMotor.class, "back_left_drive");
-        backRightDrive = hardwareMap.get(DcMotor.class, "back_right_drive");
+        frontLeftDrive = hardwareMap.get(DcMotor.class, "fL");
+        frontRightDrive = hardwareMap.get(DcMotor.class, "fR");
+        backLeftDrive = hardwareMap.get(DcMotor.class, "bL");
+        backRightDrive = hardwareMap.get(DcMotor.class, "bR");
 
         frontLeftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontRightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
