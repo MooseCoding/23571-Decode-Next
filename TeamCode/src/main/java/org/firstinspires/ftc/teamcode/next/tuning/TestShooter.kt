@@ -23,19 +23,20 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Transfer
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
+import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 import kotlin.math.PI
 
 @Config
 @TeleOp
-@Disabled
+
 class TestShooter: NextFTCOpMode() {
     init {
         addComponents(
             PedroComponent(Constants::createFollower),
             BindingsComponent,
             BulkReadComponent,
-            SubsystemComponent(Intake, Outtake, Transfer)
+            SubsystemComponent(Intake, Hood, Flywheels, Transfer)
         )
     }
 
@@ -53,7 +54,7 @@ class TestShooter: NextFTCOpMode() {
     }
 
     override fun onInit() {
-
+        Turret.autoTurret = false
     }
 
 
@@ -97,7 +98,8 @@ class TestShooter: NextFTCOpMode() {
     }
 
     override fun onUpdate() {
-        telemetry.addData("Beans", Hood.hoodPosition)
+        telemetry.addData("Velo", Flywheels.targetVelocity)
+        telemetry.addData("HOod", Hood.hoodPosition)
         telemetry.update()
     }
 }

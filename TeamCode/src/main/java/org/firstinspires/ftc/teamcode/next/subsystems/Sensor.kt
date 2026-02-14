@@ -41,16 +41,6 @@ object Sensor: Subsystem {
 
         if(timer.elapsedTime > 62 && ds<40.00) {
             Light.Green().schedule()
-            ActiveOpMode.telemetry.run {
-                addData("UHOHOHOH", "NOOO")
-            }
-        }
-
-        ActiveOpMode.telemetry.run {
-            // addData("Current Color", Transfer.ballsHeld[Transfer.currentBall])
-            addData("cSD", ds)
-            addData("Current Ball", Transfer.currentBall)
-            addData("Timer", timer.elapsedTime)
         }
     }
 

@@ -57,31 +57,6 @@ object Turret: Subsystem {
 
     @JvmField var autoTurret = true
 
-    @JvmField var p: PIDCoefficients = PIDCoefficients(7.0,0.0,0.1)
-
-    @JvmField var v: PIDCoefficients = PIDCoefficients(0.0003,0.0,0.0)
-    @JvmField var ff: BasicFeedforwardParameters = BasicFeedforwardParameters(0.0001,0.0001,0.069)
-
-    @JvmField var f: BasicFeedforwardParameters = BasicFeedforwardParameters(0.0,0.0,0.069)
-    @JvmField var betterP: PIDCoefficients = PIDCoefficients(0.04,0.0,0.0)
-
-    var c: ControlSystem = controlSystem {
-        velPid(v)
-        basicFF(ff)
-    }
-
-    var cP: ControlSystem = controlSystem {
-        posPid(p)
-    }
-
-    var c2: ControlSystem = controlSystem {
-        posPid(betterP)
-    }
-
-    private var lastValue = 0.0
-
-    var pow: Double = 0.0
-
     private var currentAngle = 0.0
 
     @JvmField var maxAngle = 90.0
@@ -91,97 +66,52 @@ object Turret: Subsystem {
     var velocityX: Double = 0.0
     var velocityY: Double = 0.0
     var velocityH: Double = 0.0
-    val timer: Timer = Timer()
 
-    @JvmField var target: Double = 0.0
-    @JvmField var targetVelo: Double = 0.0
+    @JvmField var t1: Double = 0.04e-20
+    @JvmField var t2: Double = 0.04e-20
 
-    @JvmField var t1: Double = 0.6
-    @JvmField var t2: Double = 0.6
+    @JvmField var target:Double = 0.0
 
     var currentX: Double = 0.0
     var currentY = 0.0
     var currentHeading = 0.0
 
-    @JvmField var velocity = 0.0
+    override fun initialize() {
+
+    }
 
     override fun periodic() {
         currentX = PedroComponent.follower.pose.x
         currentY = PedroComponent.follower.pose.y
         currentHeading = PedroComponent.follower.heading
 
-        // updateRelative()
-
-        // updateAbsolute()
-
         if(autoTurret) {
+            // swm()
             track()
         }
 
-        //goToControl2()
-
-        // goToTarget()
-        //leftServo.power = pow
-            //rightServo.power = pow
-
         if(!ActiveOpMode.opModeInInit) {
-            goToYaw(target)
+          goToYaw(target)
         }
-
-
-        velocity = encoder.velocity * 360.0/4000.0 * 0.725
-
-        ActiveOpMode.telemetry.run {
-              addData("yaw", getYaw())
-              addData("target", target)
-//            addData("targetVelo", c.goal.velocity)
-//            addData("currentX",currentX)
-//            addData("currentY", currentY)
-//            addData("currentH", currentHeading)
-            addData("turretGoalX", turretGoalX)
-            addData("goalY", goalY)
+        else {
+            goToYaw(0.0)
         }
-        PanelsTelemetry.telemetry.run {
-            addData("Velocity", velocity)
-            addData("Target Velocity", targetVelo)
-            addData("target", target)
-            addData("yaw", getYaw())
-            update()
-        }
-    timer.resetTimer()
     }
+
     private fun swm() {
         val p = PedroComponent.follower.velocity
         val a = PedroComponent.follower.acceleration
         velocityX = p.xComponent
         velocityY = p.yComponent
         velocityH = p.theta
-        val accelX = a.xComponent
-        val accelY = a.yComponent
-        val accelH = a.theta
 
-        val mu = atan2(goalY - currentY + velocityY * t1 + accelY * t2, turretGoalX - currentX + velocityX * t1 + accelX * t2)
-        val deltaHeading = (mu - currentHeading - velocityH * t1 + accelH * t2).rad.normalized.inRad.coerceIn((-maxAngle/180)*PI, (maxAngle/180)*PI) // Coerce Properly
-        target = deltaHeading * 180/PI
-    }
-
-    @JvmField var trapezoid: TrapezoidProfileConstraints<AngleUnit> = TrapezoidProfileConstraints(500.0.degreesPerSecond, 850.0.degreesPerSecondSquared)
-    private val control2: TrapezoidProfile<AngleUnit> = TrapezoidProfile(trapezoid)
-
-    @JvmField var goalVelo: Double = 0.0
-
-    private fun goToControl2() {
-        if(((target - getYaw()).absoluteValue < 1.0)) return
-        val x = control2.calculate(TimeSource.Monotonic.markNow(), MotionState(Degrees, getYaw(), velocity) , MotionState(Degrees,target))
-        c2.goal = KineticState(x.position.magnitude, x.velocity.magnitude)
-        velocity = x.velocity.magnitude
-        pow = c2.calculate(KineticState(getYaw(), velocity)) + f.kS * (sign(x.position.magnitude)) + f.kV * x.velocity.magnitude
+        val mu = atan2(goalY - currentY - velocityY * t1 , turretGoalX - currentX - velocityX * t1 )
+        val deltaHeading = (mu - currentHeading - velocityH * t1).rad.normalized.inRad.coerceIn((-maxAngle/180)*PI, (maxAngle/180)*PI) // Coerce Properly
+        target = -deltaHeading * 180/PI
     }
 
     private fun track() {
         val mu = atan2(turretGoalY - currentY, turretGoalX - currentX)
-
-        ActiveOpMode.telemetry.addData("mu", mu*180/PI)
 
         val error = (mu - currentHeading).rad.normalized.inRad
 
@@ -194,55 +124,16 @@ object Turret: Subsystem {
         target = -clampedError * 180.0 / PI
     }
 
-    @JvmField var offset: Double = 26.5
+    @JvmField var offset: Double = 1.0
     @JvmField var offset2:Double = 12.0
     @JvmField var offset3: Double = 6.0
 
-    private fun goToYaw(target:Double) {
-        var position: Double = (target+135-offset)/270.0
-        /*if(PedroComponent.follower.pose.y < 50.0) {
-             position -=  offset / 270.0
-        }
-        else {
-            position -= offset3/270.0
-        }
-        if(target > 0.0) {
-            position -= offset2 / 270.0
-        }*/
+    fun goToYaw(target:Double) {
+        val position: Double = (target+135-offset)/270.0
 
         currentAngle = target
-        leftServo.position = position
-        rightServo.position = position
-    }
-
-    private fun goToTarget() {
-        cP.goal = KineticState(target,0.0)
-        targetVelo = cP.calculate(KineticState(getYaw(), -encoder.velocity * 360.0/4000.0 * 0.725))
-        c.goal = KineticState(target,  targetVelo)
-        pow = c.calculate(KineticState(getYaw(), encoder.velocity * 360.0/4000.0 * 0.725))
-
-        val error = target - getYaw()
-
-        if (error.absoluteValue in 1.6..9.0 && pow.absoluteValue < 0.1) {
-            pow = sign(error) * minPower
-        }
-        else if(error.absoluteValue < 1.6) {
-            pow = 0.0
-        }
-    }
-    private fun updateAbsolute() {
-        val pos = absEncoder.voltage / 3.3 * 2*PI - offset
-        var delta = pos - lastValue
-
-        if(delta > PI) delta -= 2*PI
-        else if(delta < -PI) delta += 2*PI
-
-        currentAngle += delta
-        lastValue = pos
-    }
-
-    private fun updateRelative() {
-        currentAngle = encoder.currentPosition * 360.0 / 4000.0
+        leftServo.servo.position = position
+        rightServo.servo.position = position
     }
 
     /**
@@ -261,12 +152,6 @@ object Turret: Subsystem {
      * @return Spins a little right
      */    fun spinRight(): Command = InstantCommand {
         target += 5
-    }
-
-    /**
-     * @return Stops spinning
-     */    fun stopSpin(): Command = InstantCommand {
-        pow = 0.0
     }
 
     /**

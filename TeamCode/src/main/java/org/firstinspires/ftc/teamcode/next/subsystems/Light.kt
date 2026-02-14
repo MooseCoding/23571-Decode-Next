@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.next.subsystems
 
 import android.bluetooth.BluetoothGatt
 import com.acmerobotics.dashboard.config.Config
+import com.bylazar.telemetry.PanelsTelemetry
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.Subsystem
@@ -16,12 +17,13 @@ object Light: Subsystem{
 
     override fun periodic() {
         light.position = color
-        ActiveOpMode.telemetry.run {
+        PanelsTelemetry.telemetry.run {
             addData("pos", color)
         }
     }
 
     override fun initialize() {
+        color = 1.0
         color = 0.0
     }
 

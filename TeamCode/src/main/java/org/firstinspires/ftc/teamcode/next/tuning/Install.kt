@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.next.tuning
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.ftc.Gamepads
@@ -7,6 +8,7 @@ import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.hardware.impl.ServoEx
 
 @TeleOp
+
 class Install: NextFTCOpMode() {
     init {
         addComponents(
@@ -18,8 +20,8 @@ class Install: NextFTCOpMode() {
     val s2: ServoEx = ServoEx("dS2")
 
     override fun onInit() {
-        s1.position = 0.5
-        s2.position = 0.5
+        s1.servo.position = 0.5
+        s2.servo.position = 0.5
     }
 
     override fun onStartButtonPressed() {

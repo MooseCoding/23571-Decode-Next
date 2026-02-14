@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.pedroPathing
 import com.pedropathing.geometry.BezierLine
 import com.pedropathing.geometry.Pose
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import dev.nextftc.core.commands.delays.WaitUntil
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.extensions.pedro.FollowPath
@@ -12,6 +13,7 @@ import dev.nextftc.ftc.NextFTCOpMode
 import org.firstinspires.ftc.teamcode.helpers.SequentialGroupLocal
 
 @Autonomous
+@Disabled
 class PedroTest: NextFTCOpMode(){
     init {
         addComponents(

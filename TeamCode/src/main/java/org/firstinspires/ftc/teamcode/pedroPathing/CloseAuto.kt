@@ -1,12 +1,12 @@
 package org.firstinspires.ftc.teamcode.pedroPathing
 
-import com.bylazar.configurables.annotations.Configurable
 import com.pedropathing.util.Timer
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.delays.WaitUntil
 import dev.nextftc.core.commands.groups.ParallelDeadlineGroup
 import dev.nextftc.core.commands.groups.ParallelGroup
+import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.core.units.Angle
@@ -32,9 +32,8 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import kotlin.math.PI
 import kotlin.time.Duration.Companion.seconds
 
-@Autonomous(preselectTeleOp = "TeleOp")
-@Configurable
-class FarAuto: NextFTCOpMode() {
+@Autonomous
+class CloseAuto: NextFTCOpMode() {
     init {
         addComponents(
             PedroComponent(Constants::createFollower),
@@ -43,8 +42,6 @@ class FarAuto: NextFTCOpMode() {
             BindingsComponent,
         )
     }
-
-    private lateinit var timer: Timer
 
     val far12: Far12 by lazy { Far12(alliance) }
 
@@ -89,18 +86,8 @@ class FarAuto: NextFTCOpMode() {
         }
     }
 
+    private lateinit var timer: Timer
 
-    override fun onStop() {
-    }
-
-    /**
-     * Executes the autonomous sequence once the start button is pressed.
-     * The sequence involves:
-     * 1. Initial shot.
-     * 2. Intaking and scoring from Row 2 and Row 1.
-     * 3. Continuous human player intake cycles until the end of the match.
-     * 4. Parking.
-     */
     override fun onStartButtonPressed() {
         Flywheels.targetVelocity = Outtake.farVelocity - 110.00
         Hood.hoodPosition = Outtake.farHood
@@ -292,19 +279,6 @@ class FarAuto: NextFTCOpMode() {
 
                 FollowPath(far12.Park),
             ).schedule()
-        }
-    }
-
-    /**
-     * Periodic update loop that provides real-time telemetry of the follower's position.
-     */
-    public override fun onUpdate() {
-        telemetry.run {
-            addData("follower X", follower.pose.x)
-            addData("follower Y", follower.pose.y)
-            addData("follower heading", follower.heading)
-            addData("timer", timer.elapsedTimeSeconds)
-            update()
         }
     }
 }

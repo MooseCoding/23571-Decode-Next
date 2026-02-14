@@ -38,6 +38,7 @@ import java.lang.Math.abs
 import kotlin.math.PI
 
 @TeleOp
+@Disabled
 class BlueTeleOP
     : NextFTCOpMode() {
     var tele = JoinedTelemetry(PanelsTelemetry.ftcTelemetry, telemetry)

@@ -60,11 +60,12 @@ object Limelight : Subsystem {
             .mecanumDrivetrain(Constants.driveConstants)
             .build()
 
-       follower.setStartingPose(Pose(88.0, 117.0, 117/180.0*PI))
-        PedroComponent.follower.setStartingPose(Pose(88.0, 117.0, 117/180.0*PI))
+        // follower.setStartingPose(Pose(88.0, 117.0, 117/180.0*PI))
+         // PedroComponent.follower.setStartingPose(Pose(88.0, 117.0, 117/180.0*PI))
+        follower.setStartingPose(PedroComponent.follower.pose)
     }
 
-    override fun periodic() {
+    fun kalman() {
         follower.update()
 
         if (!limelightOn) return
@@ -103,6 +104,16 @@ object Limelight : Subsystem {
 //        )
     }
 
+    override fun periodic() {
+        val d = getTx()
+
+        if(d != null) {
+            ActiveOpMode.telemetry.run {
+                addData("TARGET FROM LL", d)
+            }
+        }
+    }
+
     fun motif(): Motif {
         val fR = grabResultData()
         if (fR != null) {
@@ -116,6 +127,12 @@ object Limelight : Subsystem {
         return Motif.PPG
     }
 
+    fun getTx(): Double? {
+        val r = grabResultData() ?: return null
+
+        return r.fiducialResults[0].targetXDegrees
+    }
+
     fun grabResultData(): LLResult? {
         val lR = ll.latestResult
         return if (lR != null && lR.isValid) lR else null
@@ -125,9 +142,9 @@ object Limelight : Subsystem {
         val lR = grabResultData() ?: return null
         if (lR.fiducialResults.isEmpty()) return null
 
-        ll.updateRobotOrientation(PedroComponent.follower.heading - Turret.getYaw() * PI/180.0)
+        ll.updateRobotOrientation(PedroComponent.follower.heading)
 
-        ActiveOpMode.telemetry.addData("LL Heading", lR.botpose.orientation.yaw)
+        ActiveOpMode.telemetry.addData("LL Heading", lR.botpose_MT2.orientation.yaw)
 
         val botpose = lR.botpose_MT2 ?: return null
 

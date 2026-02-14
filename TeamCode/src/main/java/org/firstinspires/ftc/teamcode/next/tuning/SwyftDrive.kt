@@ -11,8 +11,7 @@ import dev.nextftc.hardware.impl.MotorEx
 import java.lang.Double.max
 import java.lang.Math.abs
 
-@TeleOp
-@Disabled
+@TeleOp(name = "DRIVE ONLY")
 class SwyftDrive: NextFTCOpMode() {
     init {
         addComponents(

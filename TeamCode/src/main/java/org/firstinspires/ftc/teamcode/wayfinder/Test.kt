@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.wayfinder
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.util.ElapsedTime
 import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.delays.WaitUntil
@@ -35,6 +36,7 @@ import kotlin.math.PI
 import kotlin.time.Duration.Companion.seconds
 
 @Autonomous
+@Disabled
 class Test: NextFTCOpMode() {
     init {
         addComponents(

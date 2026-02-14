@@ -41,6 +41,7 @@ import kotlin.math.PI
 import kotlin.time.Duration.Companion.seconds
 
 @Autonomous
+@Disabled
 class NineBall: NextFTCOpMode() {
     init {
         addComponents(

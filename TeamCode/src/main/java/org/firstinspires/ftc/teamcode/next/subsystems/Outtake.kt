@@ -4,6 +4,7 @@ import com.bylazar.field.Drawable
 import com.bylazar.telemetry.PanelsTelemetry
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.delays.Delay
+import dev.nextftc.core.commands.groups.ParallelDeadlineGroup
 import dev.nextftc.core.commands.groups.ParallelGroup
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.SubsystemGroup
@@ -26,10 +27,10 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
     var distance: Dist = Dist.CLOSE
 
     var goalX = 6.0
-    val goalY = 144
+    const val goalY = 144
 
     var turretGoalX = 0.0
-    val turretGoalY = 144.0
+    const val turretGoalY = 144.0
 
     var restore = 0.0
 
@@ -42,7 +43,7 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
             6.0
         }
         turretGoalX = if (DriveTrain.alliance == Alliance.RED) {
-            140.0
+            144.0
         } else {
             0.0
         }
@@ -54,10 +55,9 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
         Drawing.drawRobot(follower.pose)
 
         if (!fullManual) {
-            Turret.autoTurret = true
-            auto()
+           Turret.autoTurret = true
+             // auto()
         } else {
-            manualAim()
             Turret.autoTurret = false
         }
     }
@@ -65,52 +65,38 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
     /**
     * Manual Aim From Hardcoded Values
      */
-    fun manualAim() {
-        var fP = 0.0
-        var hP = 0.0
-
-        when (distance) {
-            Dist.FAR -> {
-                fP = 1500.0
-                hP = 0.6
-            }
-
-            Dist.CLOSE -> {
-                fP = 900.0
-                hP = 0.50
-            }
-        }
-
-        Flywheels.targetVelocity = (fP)
-        Hood.hoodPosition = hP
-    }
+    @JvmField var farHood: Double = 0.35
+    @JvmField var farVelocity: Double = 1550.0
+    @JvmField var closeHood: Double = 0.48
+    @JvmField var closeVelocity:Double = 1350.0
 
     /**
      * Auto flywheel and auto hood positioning
      */
+    var dist:Double = 0.0
     fun auto() {
-        val dist: Double = sqrt((goalX - PedroComponent.follower.pose.x).pow(2) + (goalY - PedroComponent.follower.pose.y).pow(2))
+        dist = sqrt((goalX - PedroComponent.follower.pose.x).pow(2) + (goalY - PedroComponent.follower.pose.y).pow(2))
         val values: DoubleArray = Aimbot.get(dist)
 
-        ActiveOpMode.telemetry.addData("dist", dist)
-        ActiveOpMode.telemetry.addData("isShooting", isShooting)
-        ActiveOpMode.telemetry.addData("restore", restore)
+        PanelsTelemetry.telemetry.addData("dist", dist)
+        PanelsTelemetry.telemetry.addData("isShooting", isShooting)
+        PanelsTelemetry.telemetry.addData("restore", restore)
 
 
         if(!isShooting) {
-            Hood.hoodPosition = values[0]
 
             if(PedroComponent.follower.pose.y < 44.0 ) {
-                Flywheels.targetVelocity = (values[1]) + 110.0
+                Flywheels.targetVelocity = (values[1]) + 320.0
+                Hood.hoodPosition = values[0] + 0.1
             }
             else {
-                Flywheels.targetVelocity = values[1] + 70.0
+                Flywheels.targetVelocity = values[1] + 250.0
+                Hood.hoodPosition = values[0] - 0.1
             }
         }
 
-        ActiveOpMode.telemetry.addData("hood[0]", values[0])
-        ActiveOpMode.telemetry.addData("flywheel[1]", values[1])
-
+        PanelsTelemetry.telemetry.addData("hood[0]", values[0])
+        PanelsTelemetry.telemetry.addData("flywheel[1]", values[1])
     }
     fun setBack(): InstantCommand = InstantCommand{
         Flywheels.targetVelocity = restore
@@ -136,12 +122,12 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
                 InstantCommand {
                     Flywheels.targetVelocity += 300
                 },
-                Hood.sequence(-0.22),
+                Hood.sequence(-0.25),
                 Delay(0.12),
                 InstantCommand {
-                    Flywheels.targetVelocity += 325
+                    Flywheels.targetVelocity += 500
                 },
-                Hood.sequence(-0.32),
+                Hood.sequence(-0.33),
                 Delay(0.12),
                 ParallelGroup(
                     Hood.restore(),
@@ -153,5 +139,59 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
                 isShooting = false
             }//ball shoots every 0.2 seconds
             )
+    }
+
+    fun betterShoot(): Command {
+        return SequentialGroupLocal(
+            InstantCommand {isShooting = true},
+            ParallelDeadlineGroup(
+                SequentialGroupLocal(
+            ParallelGroup (
+                Intake.runIntake(),
+                Transfer.start(),
+            ),
+            Delay(0.36),
+            InstantCommand {
+                isShooting = false
+            }//ball shoots every 0.2 second
+                ),
+                InstantCommand {
+                    Hood.hoodPosition = Aimbot.getHood(dist, Flywheels.velocity)
+                }
+            )
+        )
+    }
+
+    fun shootFar(): Command {
+        // isShooting = true
+        return SequentialGroupLocal(
+            InstantCommand {isShooting = true},
+            ParallelGroup (
+                Intake.runIntake(),
+                Transfer.start(),
+                Hood.setRestore(),
+                setSetBack()
+            ),
+            Delay(0.11),
+            InstantCommand {
+                Flywheels.targetVelocity += 180
+            },
+            Hood.sequence(-0.2),
+            Delay(0.25),
+            InstantCommand {
+                Flywheels.targetVelocity += 180
+            },
+            Hood.sequence(-0.2),
+            Delay(0.25),
+            ParallelGroup(
+                Hood.restore(),
+                Intake.stopIntake(),
+                Transfer.stop(),
+                setBack()
+            ),
+            InstantCommand {
+                isShooting = false
+            }//ball shoots every 0.2 seconds
+        )
     }
 }
