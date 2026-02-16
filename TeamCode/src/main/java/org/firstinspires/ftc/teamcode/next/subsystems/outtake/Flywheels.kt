@@ -30,7 +30,7 @@ object Flywheels: Subsystem {
         basicFF(flywheelFF)
     }
 
-    @JvmField var targetVelocity = Outtake.farVelocity
+    @JvmField var targetVelocity = 0.0 //  Outtake.farVelocity
    
     /**
      * To determine if we are spinning slow or at PID

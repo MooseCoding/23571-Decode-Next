@@ -33,14 +33,18 @@ import dev.nextftc.units.unittypes.Degrees
 import dev.nextftc.units.unittypes.degreesPerSecond
 import dev.nextftc.units.unittypes.degreesPerSecondSquared
 import org.firstinspires.ftc.robotcore.internal.hardware.android.GpioPin
+import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.dist
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.goalX
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.goalY
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.turretGoalX
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.turretGoalY
+import org.firstinspires.ftc.teamcode.next.subsystems.helpers.ShotTime
 import kotlin.math.PI
 import kotlin.math.absoluteValue
 import kotlin.math.atan2
+import kotlin.math.pow
 import kotlin.math.sign
+import kotlin.math.sqrt
 import kotlin.time.TimeMark
 import kotlin.time.TimeSource
 
@@ -80,10 +84,14 @@ object Turret: Subsystem {
 
     }
 
+    var distance = 0.0
+
     override fun periodic() {
         currentX = PedroComponent.follower.pose.x
         currentY = PedroComponent.follower.pose.y
         currentHeading = PedroComponent.follower.heading
+
+        distance = sqrt((goalX - currentX).pow(2) + (goalY - currentY).pow(2))
 
         if(autoTurret) {
             // swm()
@@ -105,8 +113,10 @@ object Turret: Subsystem {
         velocityY = p.yComponent
         velocityH = p.theta
 
-        val mu = atan2(goalY - currentY - velocityY * t1 , turretGoalX - currentX - velocityX * t1 )
-        val deltaHeading = (mu - currentHeading - velocityH * t1).rad.normalized.inRad.coerceIn((-maxAngle/180)*PI, (maxAngle/180)*PI) // Coerce Properly
+        val shotTime = ShotTime.get(distance)
+
+        val mu = atan2(goalY - currentY - velocityY * shotTime , turretGoalX - currentX - velocityX * shotTime )
+        val deltaHeading = (mu - currentHeading - velocityH * shotTime).rad.normalized.inRad.coerceIn((-maxAngle/180)*PI, (maxAngle/180)*PI) // Coerce Properly
         target = -deltaHeading * 180/PI
     }
 
@@ -125,8 +135,6 @@ object Turret: Subsystem {
     }
 
     @JvmField var offset: Double = 1.0
-    @JvmField var offset2:Double = 12.0
-    @JvmField var offset3: Double = 6.0
 
     fun goToYaw(target:Double) {
         val position: Double = (target+135-offset)/270.0

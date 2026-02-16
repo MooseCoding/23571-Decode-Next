@@ -20,6 +20,7 @@ object Sensor: Subsystem {
     lateinit var cS: RevColorSensorV3
 
     var timer: Timer = Timer()
+    var artitimer: Timer = Timer()
 
     private const val INTAKE_TIME: Double = 0.22
 
@@ -30,6 +31,8 @@ object Sensor: Subsystem {
         cS.enableLed(true)
         cS.gain = 8.0f
     }
+
+    var ballPresent = false
 
     override fun periodic() {
         val ds = cS.getDistance(DistanceUnit.MM)
@@ -42,6 +45,16 @@ object Sensor: Subsystem {
         if(timer.elapsedTime > 62 && ds<40.00) {
             Light.Green().schedule()
         }
+
+        val art = getColor()
+        val currentlySeeingBall = art != null
+
+        if (currentlySeeingBall && !ballPresent && Transfer.currentBall <= 2) {
+            Transfer.ballsHeld[Transfer.currentBall] = art
+            Transfer.currentBall++
+        }
+
+        ballPresent = currentlySeeingBall
     }
 
     /**

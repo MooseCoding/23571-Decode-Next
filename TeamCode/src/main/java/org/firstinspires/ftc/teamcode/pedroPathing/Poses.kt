@@ -9,6 +9,35 @@ import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import kotlin.math.PI
 
+public class Close12(val all:Alliance) {
+    var startPoint = Pose(34.0, 134.5,  3*PI/2)
+    var row1 = Pose(43.5, 83.5, PI)
+    var cp1 = Pose(65.1783, 89.8833)
+    var row1End = Pose(14.5,83.5, PI)
+
+    var row2 = Pose(43.5, 61.0, PI)
+    var row2End = Pose(14.0, 61.0, PI)
+
+    var rampShoot = Pose(43.5, 83.5, 160.0/180.0 * PI)
+    var rampIntake = Pose(11.0, 58.5, 160.0/180.0 * PI)
+
+    var row3 = Pose(43.5, 34.5, PI)
+    var row3End = Pose(11.0, 34.5, PI)
+
+    var farShoot = Pose(57.0, 18.67, 120.0/180.0 * PI)
+
+    var park = Pose(52.3, 23.5, 120.0/180.0 * PI)
+
+    lateinit var row1Path: Path
+    lateinit var row1Intake: Path
+    lateinit var row1Back: Path
+    // lateinit var
+
+    fun init() {
+
+    }
+}
+
 public class Far12(val all: Alliance) {
 
     // ---------------- POSES (ALL HEADINGS LIVE HERE) ----------------
@@ -19,7 +48,7 @@ public class Far12(val all: Alliance) {
     var row1 = Pose(110.0, 40.500, 0.0)
     var row1End = Pose(144.0, 40.500, 0.0)
 
-    var shoot = Pose(100.0, 18.0, Math.toRadians(80.0))
+    var shoot = Pose(90.0, 18.0, Math.toRadians(80.0))
     var hPIntake = Pose(144.0, 18.500, Math.toRadians(20.0))
 
     var row2Start = Pose(102.0, 59.5, 0.0)
@@ -33,9 +62,9 @@ public class Far12(val all: Alliance) {
 
     var park = Pose(133.0, 20.0, 0.0)
 
-    var cyclePose = Pose(130.0, 21.35, 30.0 / 180.0 * PI)
+    var cyclePose = Pose(130.0, 21.35, 80.0 / 180.0 * PI)
 
-    var farCycleShoot = Pose(shoot.x, shoot.y,20.0/180.0*PI)
+    var farCycleShoot = Pose(shoot.x, shoot.y,80.0/180.0*PI)
 
     var p10 = Pose(89.5, 18.0, PI/2)
 

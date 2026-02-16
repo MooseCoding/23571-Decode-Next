@@ -86,11 +86,11 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
         if(!isShooting) {
 
             if(PedroComponent.follower.pose.y < 44.0 ) {
-                Flywheels.targetVelocity = (values[1]) + 320.0
+                // Flywheels.targetVelocity = (values[1]) + 320.0
                 Hood.hoodPosition = values[0] + 0.1
             }
             else {
-                Flywheels.targetVelocity = values[1] + 250.0
+                // Flywheels.targetVelocity = values[1] + 250.0
                 Hood.hoodPosition = values[0] - 0.1
             }
         }
@@ -192,6 +192,63 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
             InstantCommand {
                 isShooting = false
             }//ball shoots every 0.2 seconds
+        )
+    }
+
+    fun getHoodForSort(norm: Double) {
+        for(tA in Transfer.target) {
+            if(Transfer.ballsHeld[0] == tA) {
+                Hood.hoodPosition = norm
+            }
+            else if(Transfer.ballsHeld[1] == tA) {
+                Hood.hoodPosition = norm + 0.1
+            }
+            else if(Transfer.ballsHeld[2] == tA) {
+                Hood.hoodPosition = norm + 0.2
+            }
+            else {
+                Hood.hoodPosition = norm
+            }
+        }
+    }
+
+    fun sortShoot(): Command {
+        return SequentialGroupLocal(
+            InstantCommand {isShooting = true},
+            ParallelDeadlineGroup(
+                SequentialGroupLocal(
+                    ParallelGroup (
+                        Intake.runIntake(),
+                        Transfer.start(),
+                    ),
+                    Delay(0.12),
+                    InstantCommand {
+                        Transfer.currentBall--
+                        Transfer.ballsHeld[0] = Transfer.ballsHeld[1]
+                        Transfer.ballsHeld[1] = Transfer.ballsHeld[2]
+                        Transfer.ballsHeld[2] = null
+                    },
+                    Delay(0.12),
+                    InstantCommand {
+                        Transfer.currentBall--
+                        Transfer.ballsHeld[0] = Transfer.ballsHeld[1]
+                        Transfer.ballsHeld[1] = null
+                    },
+                    Delay(0.12),
+                    InstantCommand {
+                        Transfer.currentBall--
+                        Transfer.ballsHeld[0] = null
+                    },
+                    InstantCommand {
+                        isShooting = false
+                    },
+                    Intake.stopIntake(),
+                    Transfer.stop()//ball shoots every 0.2 second
+                ),
+                InstantCommand {
+                    getHoodForSort(Aimbot.getHood(dist, 1500.0))
+                }
+            )
         )
     }
 }

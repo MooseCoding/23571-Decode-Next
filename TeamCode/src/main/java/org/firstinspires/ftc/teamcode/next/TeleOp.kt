@@ -42,9 +42,9 @@ import kotlin.math.PI
 import kotlin.math.atan2
 
 @TeleOp
-class TeleOp
-    : NextFTCOpMode() {
+class TeleOp: NextFTCOpMode() {
     var tele = JoinedTelemetry(PanelsTelemetry.ftcTelemetry, telemetry)
+
     init {
         addComponents(
             PedroComponent(Constants::createFollower),
@@ -54,7 +54,6 @@ class TeleOp
         )
     }
 
-
     override fun onWaitForStart() {
 
     }
@@ -62,10 +61,10 @@ class TeleOp
     override fun onInit() {
     }
 
-    val fl =             MotorEx("fL")// Yse
-    val fr =             MotorEx("fR")
-    val bl =             MotorEx("bL")
-    val br =             MotorEx("bR")// Yes
+    val fl = MotorEx("fL")// Yse
+    val fr = MotorEx("fR")
+    val bl = MotorEx("bL")
+    val br = MotorEx("bR")// Yes
 
     var turret: Boolean = false
 
