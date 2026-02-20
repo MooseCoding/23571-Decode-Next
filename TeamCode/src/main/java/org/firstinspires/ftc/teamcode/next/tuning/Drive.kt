@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.next.tuning
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.components.BindingsComponent
@@ -16,6 +17,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 import java.time.Instant
 
 @TeleOp(name="Drive ONLY")
+@Disabled
 class Drive: NextFTCOpMode() {
     init {
         addComponents(

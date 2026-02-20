@@ -15,6 +15,7 @@ import dev.nextftc.core.commands.delays.Delay
 import org.firstinspires.ftc.teamcode.helpers.SequentialGroupLocal
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import java.time.Instant
+import java.time.InstantSource
 import kotlin.time.Duration.Companion.seconds
 
 @Config
@@ -50,5 +51,9 @@ object Intake: Subsystem {
      */
     fun stopIntake(): InstantCommand = InstantCommand {
         iP = 0.0
+    }
+
+    fun partialIntake(): InstantCommand = InstantCommand {
+        iP = 0.65
     }
 }

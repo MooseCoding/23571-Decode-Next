@@ -205,6 +205,145 @@ Blockly.FtcJava['goBildaPinpoint_typedEnum_readData'] = function(block) {
   return [code, Blockly.FtcJava.ORDER_MEMBER];
 };
 
+Blockly.Blocks['goBildaPinpoint_typedEnum_errorDetectionType'] = {
+  init: function() {
+    var ERROR_DETECTION_TYPE_CHOICES = [
+      ['NONE', 'NONE'],
+      ['CRC', 'CRC'],
+      ['LOCAL_TEST', 'LOCAL_TEST'],
+    ];
+    this.setOutput(true, 'GoBildaPinpointDriver.ErrorDetectionType');
+    this.appendDummyInput()
+        .appendField(createNonEditableField('ErrorDetectionType'))
+        .appendField('.')
+        .appendField(new Blockly.FieldDropdown(ERROR_DETECTION_TYPE_CHOICES), 'ERROR_DETECTION_TYPE');
+    this.setColour(getPropertyColor);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    var TOOLTIPS = [
+      ['NONE',
+           'The GoBildaPinpointDriver.ErrorDetectionType value NONE. ' +
+           'Does not check the data and passes it directly to the user.'],
+      ['CRC',
+           'The GoBildaPinpointDriver.ErrorDetectionType value CRC. ' +
+           'Uses CRC8 error detection to catch incorrect reads. Only supported by devices with ' +
+           'V3 firmware or newer.'],
+      ['LOCAL_TEST',
+           'The GoBildaPinpointDriver.ErrorDetectionType value LOCAL_TEST. ' +
+           'Uses "Controller only" validation to ensure that the data is !NAN, is not all zeros, ' +
+           'and is a reasonable number. This is faster than CRC but may not catch every ' +
+           'erroneous read.'],
+    ];
+    this.setTooltip(function() {
+      var key = thisBlock.getFieldValue('ERROR_DETECTION_TYPE');
+      for (var i = 0; i < TOOLTIPS.length; i++) {
+        if (TOOLTIPS[i][0] == key) {
+          return TOOLTIPS[i][1];
+        }
+      }
+      return '';
+    });
+  }
+};
+
+Blockly.JavaScript['goBildaPinpoint_typedEnum_errorDetectionType'] = function(block) {
+  var code = '"' + block.getFieldValue('ERROR_DETECTION_TYPE') + '"';
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+};
+
+Blockly.FtcJava['goBildaPinpoint_typedEnum_errorDetectionType'] = function(block) {
+  var code = 'GoBildaPinpointDriver.ErrorDetectionType.' + block.getFieldValue('ERROR_DETECTION_TYPE');
+  Blockly.FtcJava.generateImport_('GoBildaPinpointDriver');
+  return [code, Blockly.FtcJava.ORDER_MEMBER];
+};
+
+Blockly.Blocks['goBildaPinpoint_typedEnum_register'] = {
+  init: function() {
+    var REGISTER_CHOICES = [
+      ['DEVICE_ID', 'DEVICE_ID'],
+      ['DEVICE_VERSION', 'DEVICE_VERSION'],
+      ['DEVICE_STATUS', 'DEVICE_STATUS'],
+      ['DEVICE_CONTROL', 'DEVICE_CONTROL'],
+      ['LOOP_TIME', 'LOOP_TIME'],
+      ['X_ENCODER_VALUE', 'X_ENCODER_VALUE'],
+      ['Y_ENCODER_VALUE', 'Y_ENCODER_VALUE'],
+      ['X_POSITION', 'X_POSITION'],
+      ['Y_POSITION', 'Y_POSITION'],
+      ['H_ORIENTATION', 'H_ORIENTATION'],
+      ['X_VELOCITY', 'X_VELOCITY'],
+      ['Y_VELOCITY', 'Y_VELOCITY'],
+      ['H_VELOCITY', 'H_VELOCITY'],
+      ['MM_PER_TICK', 'MM_PER_TICK'],
+      ['X_POD_OFFSET', 'X_POD_OFFSET'],
+      ['Y_POD_OFFSET', 'Y_POD_OFFSET'],
+      ['YAW_SCALAR', 'YAW_SCALAR'],
+      ['BULK_READ', 'BULK_READ'],
+      ['QUATERNION_W', 'QUATERNION_W'],
+      ['QUATERNION_X', 'QUATERNION_X'],
+      ['QUATERNION_Y', 'QUATERNION_Y'],
+      ['QUATERNION_Z', 'QUATERNION_Z'],
+      ['PITCH', 'PITCH'],
+      ['ROLL', 'ROLL'],
+      ['SET_BULK_READ', 'SET_BULK_READ'],
+    ];
+    this.setOutput(true, 'GoBildaPinpointDriver.Register');
+    this.appendDummyInput()
+        .appendField(createNonEditableField('Register'))
+        .appendField('.')
+        .appendField(new Blockly.FieldDropdown(REGISTER_CHOICES), 'REGISTER');
+    this.setColour(getPropertyColor);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    var TOOLTIPS = [
+      ['DEVICE_ID', 'The GoBildaPinpointDriver.Register value DEVICE_ID'],
+      ['DEVICE_VERSION', 'The GoBildaPinpointDriver.Register value DEVICE_VERSION'],
+      ['DEVICE_STATUS', 'The GoBildaPinpointDriver.Register value DEVICE_STATUS'],
+      ['DEVICE_CONTROL', 'The GoBildaPinpointDriver.Register value DEVICE_CONTROL'],
+      ['LOOP_TIME', 'The GoBildaPinpointDriver.Register value LOOP_TIME'],
+      ['X_ENCODER_VALUE', 'The GoBildaPinpointDriver.Register value X_ENCODER_VALUE'],
+      ['Y_ENCODER_VALUE', 'The GoBildaPinpointDriver.Register value Y_ENCODER_VALUE'],
+      ['X_POSITION', 'The GoBildaPinpointDriver.Register value X_POSITION'],
+      ['Y_POSITION', 'The GoBildaPinpointDriver.Register value Y_POSITION'],
+      ['H_ORIENTATION', 'The GoBildaPinpointDriver.Register value H_ORIENTATION'],
+      ['X_VELOCITY', 'The GoBildaPinpointDriver.Register value X_VELOCITY'],
+      ['Y_VELOCITY', 'The GoBildaPinpointDriver.Register value Y_VELOCITY'],
+      ['H_VELOCITY', 'The GoBildaPinpointDriver.Register value H_VELOCITY'],
+      ['MM_PER_TICK', 'The GoBildaPinpointDriver.Register value MM_PER_TICK'],
+      ['X_POD_OFFSET', 'The GoBildaPinpointDriver.Register value X_POD_OFFSET'],
+      ['Y_POD_OFFSET', 'The GoBildaPinpointDriver.Register value Y_POD_OFFSET'],
+      ['YAW_SCALAR', 'The GoBildaPinpointDriver.Register value YAW_SCALAR'],
+      ['BULK_READ', 'The GoBildaPinpointDriver.Register value BULK_READ'],
+      ['QUATERNION_W', 'The GoBildaPinpointDriver.Register value QUATERNION_W'],
+      ['QUATERNION_X', 'The GoBildaPinpointDriver.Register value QUATERNION_X'],
+      ['QUATERNION_Y', 'The GoBildaPinpointDriver.Register value QUATERNION_Y'],
+      ['QUATERNION_Z', 'The GoBildaPinpointDriver.Register value QUATERNION_Z'],
+      ['PITCH', 'The GoBildaPinpointDriver.Register value PITCH'],
+      ['ROLL', 'The GoBildaPinpointDriver.Register value ROLL'],
+      ['SET_BULK_READ', 'The GoBildaPinpointDriver.Register value SET_BULK_READ'],
+    ];
+    this.setTooltip(function() {
+      var key = thisBlock.getFieldValue('REGISTER');
+      for (var i = 0; i < TOOLTIPS.length; i++) {
+        if (TOOLTIPS[i][0] == key) {
+          return TOOLTIPS[i][1];
+        }
+      }
+      return '';
+    });
+  }
+};
+
+Blockly.JavaScript['goBildaPinpoint_typedEnum_register'] = function(block) {
+  var code = '"' + block.getFieldValue('REGISTER') + '"';
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+};
+
+Blockly.FtcJava['goBildaPinpoint_typedEnum_register'] = function(block) {
+  var code = 'GoBildaPinpointDriver.Register.' + block.getFieldValue('REGISTER');
+  Blockly.FtcJava.generateImport_('GoBildaPinpointDriver');
+  return [code, Blockly.FtcJava.ORDER_MEMBER];
+};
+
 // Properties
 
 Blockly.Blocks['goBildaPinpoint_setProperty_Number'] = {
@@ -421,6 +560,38 @@ Blockly.Blocks['goBildaPinpoint_getProperty_Pose2D'] = {
 Blockly.JavaScript['goBildaPinpoint_getProperty_Pose2D'] = Blockly.JavaScript['goBildaPinpoint_getProperty_Number'];
 
 Blockly.FtcJava['goBildaPinpoint_getProperty_Pose2D'] = Blockly.FtcJava['goBildaPinpoint_getProperty_Number'];
+
+Blockly.Blocks['goBildaPinpoint_getProperty_Quaternion'] = {
+  init: function() {
+    var PROPERTY_CHOICES = [
+      ['Quaternion', 'Quaternion'],
+    ];
+    this.setOutput(true, 'Quaternion');
+    this.appendDummyInput()
+        .appendField(createGoBildaPinpointDropdown(), 'IDENTIFIER')
+        .appendField('.')
+        .appendField(new Blockly.FieldDropdown(PROPERTY_CHOICES), 'PROP');
+    this.setColour(getPropertyColor);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    var TOOLTIPS = [
+      ['Quaternion', 'Returns a Quaternion which describes the 3d orientation of the device.'],
+    ];
+    this.setTooltip(function() {
+      var key = thisBlock.getFieldValue('PROP');
+      for (var i = 0; i < TOOLTIPS.length; i++) {
+        if (TOOLTIPS[i][0] == key) {
+          return TOOLTIPS[i][1];
+        }
+      }
+      return '';
+    });
+  }
+};
+
+Blockly.JavaScript['goBildaPinpoint_getProperty_Quaternion'] = Blockly.JavaScript['goBildaPinpoint_getProperty_Number'];
+
+Blockly.FtcJava['goBildaPinpoint_getProperty_Quaternion'] = Blockly.FtcJava['goBildaPinpoint_getProperty_Number'];
 
 // Functions
 
@@ -1217,5 +1388,251 @@ Blockly.FtcJava['goBildaPinpoint_getYOffset'] = function(block) {
   var distanceUnit = Blockly.FtcJava.valueToCode(
       block, 'DISTANCE_UNIT', Blockly.FtcJava.ORDER_COMMA);
   var code = identifier + '.getYOffset(' + distanceUnit + ')';
+  return [code, Blockly.FtcJava.ORDER_FUNCTION_CALL];
+};
+
+Blockly.Blocks['goBildaPinpoint_setBulkReadScope'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField('call')
+        .appendField(createGoBildaPinpointDropdown(), 'IDENTIFIER')
+        .appendField('.')
+        .appendField(createNonEditableField('setBulkReadScope'));
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(functionColor);
+    this.setTooltip(
+        'Configures the registers that are read in bulk when update is called. Use this to ' +
+        'minimize read times based on your unique application. Note that this is only supported ' +
+        'on V3 firmware and above.');
+    this.itemCount_ = 3;
+    this.updateShape_();
+    this.setMutator(new Blockly.Mutator(['goBildaPinpoint_setBulkReadScope_item']));
+  },
+  mutationToDom: function() {
+    var container = Blockly.utils.xml.createElement('mutation');
+    container.setAttribute('items', this.itemCount_);
+    return container;
+  },
+  domToMutation: function(xmlElement) {
+    this.itemCount_ = parseInt(xmlElement.getAttribute('items'), 10);
+    this.updateShape_();
+  },
+  decompose: function(workspace) {
+    var containerBlock = workspace.newBlock('goBildaPinpoint_setBulkReadScope_container');
+    containerBlock.initSvg();
+    var connection = containerBlock.getInput('STACK').connection;
+    for (var i = 0; i < this.itemCount_; i++) {
+      var itemBlock = workspace.newBlock('goBildaPinpoint_setBulkReadScope_item');
+      itemBlock.initSvg();
+      connection.connect(itemBlock.previousConnection);
+      connection = itemBlock.nextConnection;
+    }
+    return containerBlock;
+  },
+  compose: function(containerBlock) {
+    var itemBlock = containerBlock.getInputTargetBlock('STACK');
+    // Count number of inputs.
+    var connections = [];
+    while (itemBlock) {
+      connections.push(itemBlock.valueConnection_);
+      itemBlock = itemBlock.nextConnection &&
+          itemBlock.nextConnection.targetBlock();
+    }
+    // Disconnect any children that don't belong.
+    for (var i = 0; i < this.itemCount_; i++) {
+      var connection = this.getInput('REGISTER' + i).connection.targetConnection;
+      if (connection && connections.indexOf(connection) == -1) {
+        connection.disconnect();
+      }
+    }
+    this.itemCount_ = connections.length;
+    this.updateShape_();
+    // Reconnect any child blocks.
+    for (var i = 0; i < this.itemCount_; i++) {
+      Blockly.Mutator.reconnect(connections[i], this, 'REGISTER' + i);
+    }
+  },
+  saveConnections: function(containerBlock) {
+    var itemBlock = containerBlock.getInputTargetBlock('STACK');
+    var i = 0;
+    while (itemBlock) {
+      var input = this.getInput('REGISTER' + i);
+      itemBlock.valueConnection_ = input && input.connection.targetConnection;
+      i++;
+      itemBlock = itemBlock.nextConnection &&
+          itemBlock.nextConnection.targetBlock();
+    }
+  },
+  updateShape_: function() {
+    // Add new inputs.
+    for (var i = 0; i < this.itemCount_; i++) {
+      if (!this.getInput('REGISTER' + i)) {
+        var input = this.appendValueInput('REGISTER' + i);
+      }
+    }
+    // Remove deleted inputs.
+    while (this.getInput('REGISTER' + i)) {
+      this.removeInput('REGISTER' + i);
+      i++;
+    }
+  }
+};
+
+Blockly.Blocks['goBildaPinpoint_setBulkReadScope_container'] = {
+  /**
+   * Mutator block for list container.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setStyle('list_blocks');
+    this.appendDummyInput()
+        .appendField('');
+    this.appendStatementInput('STACK');
+    this.setTooltip('Add, remove, or reorder registers.');
+    this.contextMenu = false;
+  }
+};
+
+Blockly.Blocks['goBildaPinpoint_setBulkReadScope_item'] = {
+  /**
+   * Mutator block for adding items.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setStyle('list_blocks');
+    this.appendDummyInput()
+        .appendField('register');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('Add a register.');
+    this.contextMenu = false;
+  }
+};
+
+Blockly.JavaScript['goBildaPinpoint_setBulkReadScope'] = function(block) {
+  var identifier = block.getFieldValue('IDENTIFIER');
+  var elements = new Array(block.itemCount_);
+  for (var i = 0; i < block.itemCount_; i++) {
+    elements[i] = Blockly.JavaScript.valueToCode(block, 'REGISTER' + i,
+        Blockly.JavaScript.ORDER_COMMA) || 'null';
+  }
+  var registers = '[' + elements.join(', ') + ']';
+  return identifier + '.setBulkReadScope(JSON.stringify(' + registers + '));\n';
+};
+
+Blockly.FtcJava['goBildaPinpoint_setBulkReadScope'] = function(block) {
+  var identifier = Blockly.FtcJava.importDeclareAssign_(block, 'IDENTIFIER', 'GoBildaPinpointDriver');
+  var elements = new Array(block.itemCount_);
+  for (var i = 0; i < block.itemCount_; i++) {
+    elements[i] = Blockly.FtcJava.valueToCode(block, 'REGISTER' + i,
+        Blockly.FtcJava.ORDER_COMMA) || 'null';
+  }
+  var registers = elements.join(',\n' + Blockly.FtcJava.INDENT_CONTINUE);
+  return identifier + '.setBulkReadScope(\n' +
+    Blockly.FtcJava.INDENT_CONTINUE + registers + ');\n';
+};
+
+Blockly.Blocks['goBildaPinpoint_setErrorDetectionType'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField('call')
+        .appendField(createGoBildaPinpointDropdown(), 'IDENTIFIER')
+        .appendField('.')
+        .appendField(createNonEditableField('setErrorDetectionType'));
+    this.appendValueInput('ERROR_DETECTION_TYPE').setCheck('GoBildaPinpointDriver.ErrorDetectionType')
+        .appendField('errorDetectionType')
+        .setAlign(Blockly.ALIGN_RIGHT);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(functionColor);
+    this.setTooltip('Sets the kind of error correction used on the I²C communication from the device.');
+  }
+};
+
+Blockly.JavaScript['goBildaPinpoint_setErrorDetectionType'] = function(block) {
+  var identifier = block.getFieldValue('IDENTIFIER');
+  var errorDetectionType = Blockly.JavaScript.valueToCode(
+      block, 'ERROR_DETECTION_TYPE', Blockly.JavaScript.ORDER_NONE);
+  return identifier + '.setErrorDetectionType(' + errorDetectionType + ');\n';
+};
+
+Blockly.FtcJava['goBildaPinpoint_setErrorDetectionType'] = function(block) {
+  var identifier = Blockly.FtcJava.importDeclareAssign_(block, 'IDENTIFIER', 'GoBildaPinpointDriver');
+  var errorDetectionType = Blockly.FtcJava.valueToCode(
+      block, 'ERROR_DETECTION_TYPE', Blockly.FtcJava.ORDER_NONE);
+  return identifier + '.setErrorDetectionType(' + errorDetectionType + ');\n';
+};
+
+Blockly.Blocks['goBildaPinpoint_getPitch'] = {
+  init: function() {
+    this.setOutput(true, 'Number');
+    this.appendDummyInput()
+        .appendField('call')
+        .appendField(createGoBildaPinpointDropdown(), 'IDENTIFIER')
+        .appendField('.')
+        .appendField(createNonEditableField('getPitch'));
+    this.appendValueInput('ANGLE_UNIT').setCheck('AngleUnit')
+        .appendField('angleUnit')
+        .setAlign(Blockly.ALIGN_RIGHT);
+    this.setColour(functionColor);
+    this.setTooltip(
+        'Returns the current pitch of the device in the specified AngleUnit.');
+    this.getFtcJavaOutputType = function() {
+      return 'double';
+    };
+  }
+};
+
+Blockly.JavaScript['goBildaPinpoint_getPitch'] = function(block) {
+  var identifier = block.getFieldValue('IDENTIFIER');
+  var angleUnit = Blockly.JavaScript.valueToCode(
+      block, 'ANGLE_UNIT', Blockly.JavaScript.ORDER_NONE);
+  var code = identifier + '.getPitch(' + angleUnit + ')';
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};
+
+Blockly.FtcJava['goBildaPinpoint_getPitch'] = function(block) {
+  var identifier = Blockly.FtcJava.importDeclareAssign_(block, 'IDENTIFIER', 'GoBildaPinpointDriver');
+  var angleUnit = Blockly.FtcJava.valueToCode(
+      block, 'ANGLE_UNIT', Blockly.FtcJava.ORDER_NONE);
+  var code = identifier + '.getPitch(' + angleUnit + ')';
+  return [code, Blockly.FtcJava.ORDER_FUNCTION_CALL];
+};
+
+Blockly.Blocks['goBildaPinpoint_getRoll'] = {
+  init: function() {
+    this.setOutput(true, 'Number');
+    this.appendDummyInput()
+        .appendField('call')
+        .appendField(createGoBildaPinpointDropdown(), 'IDENTIFIER')
+        .appendField('.')
+        .appendField(createNonEditableField('getRoll'));
+    this.appendValueInput('ANGLE_UNIT').setCheck('AngleUnit')
+        .appendField('angleUnit')
+        .setAlign(Blockly.ALIGN_RIGHT);
+    this.setColour(functionColor);
+    this.setTooltip(
+        'Returns the current roll of the device in the specified AngleUnit.');
+    this.getFtcJavaOutputType = function() {
+      return 'double';
+    };
+  }
+};
+
+Blockly.JavaScript['goBildaPinpoint_getRoll'] = function(block) {
+  var identifier = block.getFieldValue('IDENTIFIER');
+  var angleUnit = Blockly.JavaScript.valueToCode(
+      block, 'ANGLE_UNIT', Blockly.JavaScript.ORDER_NONE);
+  var code = identifier + '.getRoll(' + angleUnit + ')';
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};
+
+Blockly.FtcJava['goBildaPinpoint_getRoll'] = function(block) {
+  var identifier = Blockly.FtcJava.importDeclareAssign_(block, 'IDENTIFIER', 'GoBildaPinpointDriver');
+  var angleUnit = Blockly.FtcJava.valueToCode(
+      block, 'ANGLE_UNIT', Blockly.FtcJava.ORDER_NONE);
+  var code = identifier + '.getRoll(' + angleUnit + ')';
   return [code, Blockly.FtcJava.ORDER_FUNCTION_CALL];
 };

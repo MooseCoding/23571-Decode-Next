@@ -1,132 +1,170 @@
 package org.firstinspires.ftc.teamcode.next.subsystems.outtake
 
-import com.acmerobotics.dashboard.FtcDashboard
 import com.acmerobotics.dashboard.config.Config
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry
+import com.bylazar.configurables.annotations.Configurable
+import com.bylazar.panels.Panels
+import com.bylazar.telemetry.PanelsTelemetry
+import com.pedropathing.util.Timer
 import com.qualcomm.robotcore.hardware.AnalogInput
-import com.qualcomm.robotcore.hardware.Servo
+import com.qualcomm.robotcore.hardware.DcMotor
 import dev.nextftc.control.ControlSystem
 import dev.nextftc.control.KineticState
 import dev.nextftc.control.builder.controlSystem
+import dev.nextftc.control.feedback.AngleType
 import dev.nextftc.control.feedback.PIDCoefficients
+import dev.nextftc.control.feedforward.BasicFeedforwardParameters
+import dev.nextftc.control2.model.MotionState
+import dev.nextftc.control2.profiles.TrapezoidProfile
+import dev.nextftc.control2.profiles.TrapezoidProfileConstraints
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.Subsystem
+import dev.nextftc.core.units.Angle
 import dev.nextftc.core.units.deg
 import dev.nextftc.core.units.rad
+import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.CRServoEx
 import dev.nextftc.hardware.impl.MotorEx
 import dev.nextftc.hardware.impl.ServoEx
-import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.currentHeading
-import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.currentX
-import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.currentY
+import dev.nextftc.units.unittypes.AngleUnit
+import dev.nextftc.units.unittypes.Degrees
+import dev.nextftc.units.unittypes.degreesPerSecond
+import dev.nextftc.units.unittypes.degreesPerSecondSquared
+import org.firstinspires.ftc.robotcore.internal.hardware.android.GpioPin
+import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.dist
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.goalX
 import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.goalY
-
+import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.turretGoalX
+import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.turretGoalY
+import org.firstinspires.ftc.teamcode.next.subsystems.helpers.ShotTime
 import kotlin.math.PI
 import kotlin.math.absoluteValue
 import kotlin.math.atan2
+import kotlin.math.pow
+import kotlin.math.sign
+import kotlin.math.sqrt
+import kotlin.time.TimeMark
+import kotlin.time.TimeSource
 
 @Config
+@Configurable
 object Turret: Subsystem {
     private lateinit var tele: MultipleTelemetry
 
-    private val leftServo: CRServoEx = CRServoEx("dS2")
-    private val rightServo: CRServoEx = CRServoEx("dS1") // Check direction
-    private lateinit var encoder: AnalogInput
+    private val leftServo: ServoEx = ServoEx("dS2", 0.001)
+    private val rightServo: ServoEx = ServoEx("dS1", 0.001) // Check direction
+    val absEncoder: AnalogInput by lazy { ActiveOpMode.hardwareMap.analogInput.get("aS") }
 
-    @JvmField var autoTurret = false
+    val encoder: MotorEx = MotorEx("fR")  // Figure out motor name
 
-    @JvmField var turretPID = PIDCoefficients(0.2,0.0,0.0)
+    @JvmField var autoTurret = true
 
-    var controller = controlSystem {
-        posPid(turretPID)
-    }
-
-    override fun initialize() {
-        tele = MultipleTelemetry(FtcDashboard.getInstance().telemetry, ActiveOpMode.telemetry)
-        encoder = ActiveOpMode.hardwareMap.analogInput.get("aS")
-    }
-
-    private var lastValue = 0.0
-
-    private var pow: Double = 0.0
-
-    @JvmField var coeffs: PIDCoefficients = PIDCoefficients(0.0,0.0,0.0)
-
-    private val offset = 3.0578
     private var currentAngle = 0.0
 
     @JvmField var maxAngle = 90.0
+    @JvmField var minPower = 0.071
+
+    // Shoot while moving variables
+    var velocityX: Double = 0.0
+    var velocityY: Double = 0.0
+    var velocityH: Double = 0.0
+
+    @JvmField var t1: Double = 0.04e-20
+    @JvmField var t2: Double = 0.04e-20
+
+    @JvmField var target:Double = 0.0
+
+    var currentX: Double = 0.0
+    var currentY = 0.0
+    var currentHeading = 0.0
+
+    override fun initialize() {
+
+    }
+
+    var distance = 0.0
 
     override fun periodic() {
-        updateAngle()
+        currentX = PedroComponent.follower.pose.x
+        currentY = PedroComponent.follower.pose.y
+        currentHeading = PedroComponent.follower.heading
+
+        distance = sqrt((goalX - currentX).pow(2) + (goalY - currentY).pow(2))
 
         if(autoTurret) {
-            autoAim()
+            // swm()
+            track()
         }
 
-        if(!autoTurret && pow.absoluteValue != 1.0) {
-            pow = 0.0
+        if(!ActiveOpMode.opModeInInit) {
+          goToYaw(target)
         }
-
-        leftServo.power = pow
-        rightServo.power = pow
-
-        tele.run {
-            addData("pos", getYaw())
-            addData("current angle", currentAngle)
-            addData("pos in deg", 180/PI*getYaw())
-            addData("servo pow", pow)
-            update()
+        else {
+            goToYaw(0.0)
         }
     }
 
-    private fun autoAim() {
-        val mu = atan2(goalY - currentY, goalX - currentX)
-        // val mu = atan2(goalY - 16.0, goalX - 60.0)
-        val deltaHeading = (mu - currentHeading).rad.normalized.inRad.coerceIn((-maxAngle/180)*PI, (maxAngle/180)*PI) // Coerce Properly
-        controller.goal = KineticState(deltaHeading)
-        pow = controller.calculate(KineticState(currentAngle))
+    private fun swm() {
+        val p = PedroComponent.follower.velocity
+        val a = PedroComponent.follower.acceleration
+        velocityX = p.xComponent
+        velocityY = p.yComponent
+        velocityH = p.theta
+
+        val shotTime = ShotTime.get(distance)
+
+        val mu = atan2(goalY - currentY - velocityY * shotTime , turretGoalX - currentX - velocityX * shotTime )
+        val deltaHeading = (mu - currentHeading - velocityH * shotTime).rad.normalized.inRad.coerceIn((-maxAngle/180)*PI, (maxAngle/180)*PI) // Coerce Properly
+        target = -deltaHeading * 180/PI
     }
 
-    private fun updateAngle() {
-        val pos = encoder.voltage / 3.3 * 2*PI - offset
-        var delta = pos - lastValue
+    private fun track() {
+        val mu = atan2(turretGoalY - currentY, turretGoalX - currentX)
 
-        if(delta > PI) delta -= 2*PI
-        else if(delta < -PI) delta += 2*PI
+        val error = (mu - currentHeading).rad.normalized.inRad
 
-        currentAngle += delta
-        lastValue = pos
+        val clampedError =
+            error.coerceIn(
+                (-maxAngle / 180.0) * PI,
+                ( maxAngle / 180.0) * PI
+            )
+
+        target = -clampedError * 180.0 / PI
+    }
+
+    @JvmField var offset: Double = 1.0
+
+    fun goToYaw(target:Double) {
+        val position: Double = (target+135-offset)/270.0
+
+        currentAngle = target
+        leftServo.servo.position = position
+        rightServo.servo.position = position
     }
 
     /**
-     * @return yaw in radians from servo position
-     */
-    fun getYaw(): Double {
-        return (currentAngle) * 90/22.0 * (319/1628.0)
+     * @return yaw in degrees from servo position
+     */    fun getYaw(): Double {
+        return (currentAngle) * 0.725
     }
 
     /**
      * @return Spins a little left
-     */
-    fun spinLeft(): Command = InstantCommand {
-        pow = -1.0
+     */    fun spinLeft(): Command = InstantCommand {
+        target -= 5
     }
 
     /**
      * @return Spins a little right
-     */
-    fun spinRight(): Command = InstantCommand {
-        pow = 1.0
+     */    fun spinRight(): Command = InstantCommand {
+        target += 5
     }
 
     /**
-     * @return Stops spinning
-     */
-    fun stopSpin(): Command = InstantCommand {
-        pow = 0.0
+     * @return A [Command] to zero the encoder
+     */    fun zero(): Command = InstantCommand {
+        encoder.motor.mode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
     }
 }

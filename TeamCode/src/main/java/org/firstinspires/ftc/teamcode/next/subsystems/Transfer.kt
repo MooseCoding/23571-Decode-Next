@@ -18,6 +18,9 @@ object Transfer: Subsystem {
      * Balls held by the transfer
      */
     var ballsHeld: Array<Artifact?> = arrayOf(null, null, null)
+
+    lateinit var target:Array<Artifact>
+
     var currentBall: Int = 0
 
     override fun periodic() {
@@ -43,20 +46,5 @@ object Transfer: Subsystem {
      */
     fun reverse(): InstantCommand = InstantCommand {
         power = -1.0
-    }
-
-    /**
-     * @return Spins the transfer partially for intaking in 0.2 seconds
-     */
-    fun intakeBall(): Command = SequentialGroupLocal(
-        InstantCommand { power = 0.3 },
-        Delay(0.3.seconds) // Some constant
-    )
-
-    /**
-     * @return Gets the amount of balls in the robot
-     */
-    fun getBalls(): Int {
-        return currentBall
     }
 }

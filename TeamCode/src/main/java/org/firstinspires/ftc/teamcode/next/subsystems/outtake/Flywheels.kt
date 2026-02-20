@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.next.subsystems.outtake
 
 import com.acmerobotics.dashboard.config.Config
 import com.bylazar.configurables.annotations.Configurable
+import com.bylazar.telemetry.PanelsTelemetry
 import dev.nextftc.control.KineticState
 import dev.nextftc.control.builder.controlSystem
 import dev.nextftc.control.feedback.PIDCoefficients
@@ -11,7 +12,9 @@ import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.MotorEx
+import org.firstinspires.ftc.teamcode.next.subsystems.FlywheelLight
 import org.firstinspires.ftc.teamcode.next.subsystems.Light
+import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 import kotlin.math.absoluteValue
 
 @Config
@@ -20,14 +23,14 @@ object Flywheels: Subsystem {
     val f1 = MotorEx("f1")
     val f2 = MotorEx("f2").reversed()
 
-    @JvmField var flywheelPID = PIDCoefficients(0.00003, 0.0, 0.0)
+    @JvmField var flywheelPID = PIDCoefficients(0.0003, 0.0, 0.0)
     @JvmField var flywheelFF = BasicFeedforwardParameters(1/2400.0, 0.0, 0.3)
     private var flywheelController = controlSystem {
         velPid(flywheelPID)
         basicFF(flywheelFF)
     }
 
-    @JvmField var targetVelocity = 1350.0
+    @JvmField var targetVelocity = 0.0 //  Outtake.farVelocity
    
     /**
      * To determine if we are spinning slow or at PID
@@ -36,24 +39,32 @@ object Flywheels: Subsystem {
 
     var motorRpm: Double = 0.0
 
+    var velocity: Double = f1.velocity
+
     override fun periodic() {
-        f1.power = flywheelController.calculate(KineticState(0.0, f1.velocity.absoluteValue))
-        f2.power = f1.power
-        flywheelController.goal = KineticState(0.0, targetVelocity)
-
-        if(f1.velocity.absoluteValue + 200.0 > targetVelocity) {
-            Light.Green().schedule()
+        if(!ActiveOpMode.opModeInInit) {
+            if (!spinSlow) {
+                f1.power = flywheelController.calculate(KineticState(0.0, f1.velocity.absoluteValue))
+                f2.power = f1.power
+                flywheelController.goal = KineticState(0.0, targetVelocity)
+            } else {
+                f1.power = 0.5
+                f2.power = 0.5
+            }
         }
-        else {
-            Light.Blue().schedule()
-        }
-    }
 
-    /**
-     * Update the PID target
-     */
-    fun updatePid(velocity:Double) {
-        //targetVelocity = velocity
+
+        if(ActiveOpMode.opModeIsActive) {
+            if (f1.velocity.absoluteValue + 200.0 > targetVelocity) {
+                FlywheelLight.Green().schedule()
+            } else {
+                FlywheelLight.Blue().schedule()
+            }
+        }
+
+        PanelsTelemetry.telemetry.run {
+            addData("Flywheel Target Velo", targetVelocity)
+        }
     }
 
     /**

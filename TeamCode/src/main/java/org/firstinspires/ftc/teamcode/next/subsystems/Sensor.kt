@@ -17,43 +17,44 @@ import kotlin.time.Duration.Companion.seconds
 
 @Config
 object Sensor: Subsystem {
-    val cS: RevColorSensorV3 = ActiveOpMode.hardwareMap.get(RevColorSensorV3::class.java, "cs")
+    lateinit var cS: RevColorSensorV3
 
     var timer: Timer = Timer()
+    var artitimer: Timer = Timer()
 
-    private const val INTAKE_TIME: Double = 0.2
+    private const val INTAKE_TIME: Double = 0.22
 
     var currentArtifact:Artifact? = null
 
     override fun initialize() {
+        cS = ActiveOpMode.hardwareMap.get(RevColorSensorV3::class.java, "cS")
         cS.enableLed(true)
         cS.gain = 8.0f
     }
 
+    var ballPresent = false
+
     override fun periodic() {
         val ds = cS.getDistance(DistanceUnit.MM)
 
-        if(ds > 40.0) {
-            currentArtifact = null
-        }
-
-        if(timer.elapsedTime > INTAKE_TIME && ds<25.0 && currentArtifact == null && Transfer.currentBall != 3) {
-            currentArtifact = getColor()
-            Transfer.ballsHeld[Transfer.currentBall] = currentArtifact
-            Transfer.currentBall++
-
-            if(Transfer.currentBall == 1) {
-                Transfer.intakeBall().schedule()
-            }
-
-            if(Transfer.currentBall == 3) {
-                Light.Green().schedule()
-                ActiveOpMode.gamepad1.rumble(1.0, 1.0, 10)
-            }
-
-            currentArtifact = null
+        if(ds > 45.0) {
+            Light.Azure().schedule()
             timer.resetTimer()
         }
+
+        if(timer.elapsedTime > 62 && ds<40.00) {
+            Light.Green().schedule()
+        }
+
+        val art = getColor()
+        val currentlySeeingBall = art != null
+
+        if (currentlySeeingBall && !ballPresent && Transfer.currentBall <= 2) {
+            Transfer.ballsHeld[Transfer.currentBall] = art
+            Transfer.currentBall++
+        }
+
+        ballPresent = currentlySeeingBall
     }
 
     /**
