@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
-import com.acmerobotics.dashboard.config.Config
 import com.bylazar.panels.Panels
 import com.bylazar.telemetry.PanelsTelemetry
 import com.pedropathing.follower.Follower
@@ -23,7 +22,6 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Drawing
 import org.firstinspires.ftc.teamcode.pedroPathing.Tuning
 import kotlin.math.PI
 
-@Config
 object Limelight : Subsystem {
 
     lateinit var ll: Limelight3A

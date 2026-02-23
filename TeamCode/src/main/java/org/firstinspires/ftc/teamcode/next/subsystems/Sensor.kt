@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
 import androidx.annotation.IntegerRes
-import com.acmerobotics.dashboard.config.Config
 import com.pedropathing.util.Timer
 import com.qualcomm.hardware.rev.RevColorSensorV3
 import com.qualcomm.robotcore.hardware.ColorSensor
@@ -15,7 +14,6 @@ import kotlin.math.max
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
-@Config
 object Sensor: Subsystem {
     lateinit var cS: RevColorSensorV3
 

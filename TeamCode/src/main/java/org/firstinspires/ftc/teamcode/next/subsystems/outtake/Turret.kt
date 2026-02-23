@@ -1,63 +1,27 @@
 package org.firstinspires.ftc.teamcode.next.subsystems.outtake
 
-import com.acmerobotics.dashboard.config.Config
-import com.acmerobotics.dashboard.telemetry.MultipleTelemetry
-import com.bylazar.configurables.annotations.Configurable
-import com.bylazar.panels.Panels
-import com.bylazar.telemetry.PanelsTelemetry
-import com.pedropathing.util.Timer
-import com.qualcomm.robotcore.hardware.AnalogInput
-import com.qualcomm.robotcore.hardware.DcMotor
-import dev.nextftc.control.ControlSystem
-import dev.nextftc.control.KineticState
-import dev.nextftc.control.builder.controlSystem
-import dev.nextftc.control.feedback.AngleType
-import dev.nextftc.control.feedback.PIDCoefficients
-import dev.nextftc.control.feedforward.BasicFeedforwardParameters
-import dev.nextftc.control2.model.MotionState
-import dev.nextftc.control2.profiles.TrapezoidProfile
-import dev.nextftc.control2.profiles.TrapezoidProfileConstraints
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.Subsystem
-import dev.nextftc.core.units.Angle
-import dev.nextftc.core.units.deg
 import dev.nextftc.core.units.rad
 import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.ftc.ActiveOpMode
-import dev.nextftc.hardware.impl.CRServoEx
-import dev.nextftc.hardware.impl.MotorEx
 import dev.nextftc.hardware.impl.ServoEx
-import dev.nextftc.units.unittypes.AngleUnit
-import dev.nextftc.units.unittypes.Degrees
-import dev.nextftc.units.unittypes.degreesPerSecond
-import dev.nextftc.units.unittypes.degreesPerSecondSquared
-import org.firstinspires.ftc.robotcore.internal.hardware.android.GpioPin
-import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.dist
-import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.goalX
-import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.goalY
-import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.turretGoalX
-import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.turretGoalY
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.ShotTime
 import kotlin.math.PI
-import kotlin.math.absoluteValue
 import kotlin.math.atan2
 import kotlin.math.pow
-import kotlin.math.sign
 import kotlin.math.sqrt
-import kotlin.time.TimeMark
-import kotlin.time.TimeSource
 
-@Config
-@Configurable
 object Turret: Subsystem {
-    private lateinit var tele: MultipleTelemetry
-
     private val leftServo: ServoEx = ServoEx("dS2", 0.001)
     private val rightServo: ServoEx = ServoEx("dS1", 0.001) // Check direction
-    val absEncoder: AnalogInput by lazy { ActiveOpMode.hardwareMap.analogInput.get("aS") }
 
-    val encoder: MotorEx = MotorEx("fR")  // Figure out motor name
+    //val absEncoder: AnalogInput by lazy { ActiveOpMode.hardwareMap.analogInput.get("aS") }
+
+    private val gear_ratio = 75.0 / 99.0; // 75 turns servo to 99 turns turret
+
+    // val encoder: MotorEx = MotorEx("fR")  // Figure out motor name
 
     @JvmField var autoTurret = true
 
@@ -86,11 +50,15 @@ object Turret: Subsystem {
 
     var distance = 0.0
 
+    val goalX = 144.0;
+    val goalY = 144.0;
+    val turretGoalY = 144.0;
+    val turretGoalX = 144.0;
+
     override fun periodic() {
         currentX = PedroComponent.follower.pose.x
         currentY = PedroComponent.follower.pose.y
         currentHeading = PedroComponent.follower.heading
-
         distance = sqrt((goalX - currentX).pow(2) + (goalY - currentY).pow(2))
 
         if(autoTurret) {
@@ -103,6 +71,13 @@ object Turret: Subsystem {
         }
         else {
             goToYaw(0.0)
+        }
+
+        ActiveOpMode.telemetry.run {
+            addData("current Pos", PedroComponent.follower.pose)
+            addData("current target", target)
+            addData("yaw", getYaw())
+            update()
         }
     }
 
@@ -137,7 +112,7 @@ object Turret: Subsystem {
     @JvmField var offset: Double = 1.0
 
     fun goToYaw(target:Double) {
-        val position: Double = (target+135-offset)/270.0
+        val position: Double = (gear_ratio * target+135)/270.0
 
         currentAngle = target
         leftServo.servo.position = position
@@ -147,7 +122,7 @@ object Turret: Subsystem {
     /**
      * @return yaw in degrees from servo position
      */    fun getYaw(): Double {
-        return (currentAngle) * 0.725
+        return (currentAngle)
     }
 
     /**
@@ -165,6 +140,5 @@ object Turret: Subsystem {
     /**
      * @return A [Command] to zero the encoder
      */    fun zero(): Command = InstantCommand {
-        encoder.motor.mode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
     }
 }

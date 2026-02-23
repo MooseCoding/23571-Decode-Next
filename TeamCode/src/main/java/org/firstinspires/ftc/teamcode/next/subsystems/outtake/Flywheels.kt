@@ -1,8 +1,9 @@
 package org.firstinspires.ftc.teamcode.next.subsystems.outtake
 
-import com.acmerobotics.dashboard.config.Config
+
 import com.bylazar.configurables.annotations.Configurable
 import com.bylazar.telemetry.PanelsTelemetry
+import com.qualcomm.robotcore.hardware.VoltageSensor
 import dev.nextftc.control.KineticState
 import dev.nextftc.control.builder.controlSystem
 import dev.nextftc.control.feedback.PIDCoefficients
@@ -13,18 +14,15 @@ import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.MotorEx
 import org.firstinspires.ftc.teamcode.next.subsystems.FlywheelLight
-import org.firstinspires.ftc.teamcode.next.subsystems.Light
-import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 import kotlin.math.absoluteValue
 
-@Config
 @Configurable
 object Flywheels: Subsystem {
     val f1 = MotorEx("f1")
     val f2 = MotorEx("f2").reversed()
 
-    @JvmField var flywheelPID = PIDCoefficients(0.0003, 0.0, 0.0)
-    @JvmField var flywheelFF = BasicFeedforwardParameters(1/2400.0, 0.0, 0.3)
+    @JvmField var flywheelPID = PIDCoefficients(0.0000, 0.0, 0.0)
+    @JvmField var flywheelFF = BasicFeedforwardParameters(0.00038, 0.0, 0.09)
     private var flywheelController = controlSystem {
         velPid(flywheelPID)
         basicFF(flywheelFF)
@@ -39,12 +37,15 @@ object Flywheels: Subsystem {
 
     var motorRpm: Double = 0.0
 
-    var velocity: Double = f1.velocity
+    @JvmField var velocity: Double = 0.0
+
+    val voltage: VoltageSensor by lazy { ActiveOpMode.hardwareMap.voltageSensor.get("Control Hub")  }
 
     override fun periodic() {
         if(!ActiveOpMode.opModeInInit) {
             if (!spinSlow) {
-                f1.power = flywheelController.calculate(KineticState(0.0, f1.velocity.absoluteValue))
+                f1.power =
+                    flywheelController.calculate(KineticState(0.0, f1.velocity.absoluteValue / voltage.voltage))
                 f2.power = f1.power
                 flywheelController.goal = KineticState(0.0, targetVelocity)
             } else {
@@ -62,8 +63,10 @@ object Flywheels: Subsystem {
             }
         }
 
+
         PanelsTelemetry.telemetry.run {
             addData("Flywheel Target Velo", targetVelocity)
+            addData("Flywheel velocity", f1.velocity.absoluteValue)
         }
     }
 

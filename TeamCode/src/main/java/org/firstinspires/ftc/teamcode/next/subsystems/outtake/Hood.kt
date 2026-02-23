@@ -1,21 +1,16 @@
 package org.firstinspires.ftc.teamcode.next.subsystems.outtake
 
-import com.acmerobotics.dashboard.config.Config
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.hardware.impl.ServoEx
-import com.bylazar.configurables.annotations.Configurable
 import com.bylazar.telemetry.PanelsTelemetry
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.ftc.ActiveOpMode
-import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 
-@Config
-@Configurable
 object Hood: Subsystem {
     val hoodServo = ServoEx("hood")
     var restoreTo = 0.0
 
-    @JvmField var hoodPosition = Outtake.farHood
+    @JvmField var hoodPosition = 0.25
     /* min is 0.75 max is 0.25*/
 
     override fun periodic() {

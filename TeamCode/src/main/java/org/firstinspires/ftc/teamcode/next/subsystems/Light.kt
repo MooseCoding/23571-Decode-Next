@@ -1,15 +1,11 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
-import android.bluetooth.BluetoothGatt
-import com.acmerobotics.dashboard.config.Config
-import com.bylazar.telemetry.PanelsTelemetry
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.ServoEx
 
-@Config
 object Light: Subsystem{
     val light: ServoEx = ServoEx("pwm")
 
@@ -17,9 +13,9 @@ object Light: Subsystem{
 
     override fun periodic() {
         light.position = color
-        PanelsTelemetry.telemetry.run {
+        /*PanelsTelemetry.telemetry.run {
             addData("pos", color)
-        }
+        }*/
     }
 
     override fun initialize() {

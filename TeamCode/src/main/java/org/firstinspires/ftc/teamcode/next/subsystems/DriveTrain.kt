@@ -1,9 +1,6 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
-import com.bylazar.configurables.annotations.Configurable
-import com.bylazar.opmodecontrol.ActiveOpMode
-import com.pedropathing.geometry.Pose
-import dev.nextftc.core.commands.Command
+
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.ftc.Gamepads
@@ -11,7 +8,6 @@ import dev.nextftc.hardware.driving.MecanumDriverControlled
 import dev.nextftc.hardware.impl.MotorEx
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 
-@Configurable
 object DriveTrain: Subsystem {
     val fL = MotorEx("fL")
     val fR = MotorEx("fR")

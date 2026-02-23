@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.next.tuning
 
-import com.acmerobotics.dashboard.config.Config
 import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.commands.utility.InstantCommand
@@ -15,7 +14,6 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 
 @TeleOp
-@Config
 @Disabled
 class ShootingTesting: NextFTCOpMode() {
     init {

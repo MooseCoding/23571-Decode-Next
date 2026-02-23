@@ -5,30 +5,28 @@ INJECTED from /home/moosecoding/projects/23571-Decode-Next/TeamCode/src/main/And
 INJECTED from /home/moosecoding/projects/23571-Decode-Next/TeamCode/src/main/AndroidManifest.xml:8:1-11:12
 INJECTED from /home/moosecoding/projects/23571-Decode-Next/TeamCode/src/main/AndroidManifest.xml:8:1-11:12
 MERGED from [:FtcRobotController] /home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-78:12
-MERGED from [com.acmerobotics.slothboard:dashboard:0.2.4+0.5.1] /home/moosecoding/.gradle/caches/8.9/transforms/e72741af8f72cb16794cc0055c382c39/transformed/dashboard-0.2.4+0.5.1/AndroidManifest.xml:2:1-7:12
-MERGED from [com.bylazar.sloth:fullpanels:0.2.4+1.0.12] /home/moosecoding/.gradle/caches/8.9/transforms/4fdaeed0fe2214daba73e0f81d7d98ea/transformed/fullpanels-0.2.4+1.0.12/AndroidManifest.xml:2:1-7:12
+MERGED from [com.bylazar:fullpanels:1.0.12] /home/moosecoding/.gradle/caches/8.9/transforms/d6b714653381df13eaf5e45d41b81a3d/transformed/fullpanels-1.0.12/AndroidManifest.xml:2:1-7:12
 MERGED from [dev.nextftc.extensions:pedro:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/ad67d2612f6319f8ea534a7724360bb1/transformed/pedro-1.0.0/AndroidManifest.xml:2:1-7:12
 MERGED from [com.pedropathing:ftc:2.0.6] /home/moosecoding/.gradle/caches/8.9/transforms/ce266208fa82b49fb525ff3049b943d2/transformed/ftc-2.0.6/AndroidManifest.xml:2:1-7:12
-MERGED from [com.bylazar.sloth:opmodecontrol:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/e2249e61e96476c59d468b0b1ba06f93/transformed/opmodecontrol-0.2.4+1.0.3/AndroidManifest.xml:2:1-7:12
-MERGED from [com.bylazar.sloth:configurables:0.2.4+1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/4d592e2cce0321afbf3d64e34e6afb0b/transformed/configurables-0.2.4+1.0.5/AndroidManifest.xml:2:1-7:12
-MERGED from [dev.frozenmilk.sinister:Sloth:0.2.4] /home/moosecoding/.gradle/caches/8.9/transforms/507cce40b2ddfa60da14e830cb27440d/transformed/Sloth-0.2.4/AndroidManifest.xml:2:1-7:12
 MERGED from [dev.nextftc:hardware:1.0.1] /home/moosecoding/.gradle/caches/8.9/transforms/23c277daccf386013fe7678d25204f51/transformed/hardware-1.0.1/AndroidManifest.xml:2:1-7:12
 MERGED from [dev.nextftc:ftc:1.0.1] /home/moosecoding/.gradle/caches/8.9/transforms/233a53d9d466f7303e4211f726de09e8/transformed/ftc-1.0.1/AndroidManifest.xml:2:1-7:12
-MERGED from [com.bylazar.sloth:panels:0.2.4+1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/aed6558ac61c846c408829096ba18c38/transformed/panels-0.2.4+1.0.5/AndroidManifest.xml:2:1-7:12
-MERGED from [com.bylazar.sloth:telemetry:0.2.4+1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/38a2d905dd4654caa2ffe7a768ef8dbf/transformed/telemetry-0.2.4+1.0.5/AndroidManifest.xml:2:1-7:12
-MERGED from [com.bylazar.sloth:themes:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/897887e450394abe9b147365c325dd75/transformed/themes-0.2.4+1.0.3/AndroidManifest.xml:2:1-7:12
-MERGED from [com.bylazar.sloth:capture:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/ef14b953bc5b34ab3302ffff495c45fa/transformed/capture-0.2.4+1.0.3/AndroidManifest.xml:2:1-7:12
-MERGED from [com.bylazar.sloth:limelightproxy:0.2.4+1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/758d8ec856ccc35cb3ee9f7dc8888a25/transformed/limelightproxy-0.2.4+1.0.4/AndroidManifest.xml:2:1-7:12
-MERGED from [com.bylazar.sloth:gamepad:0.2.4+1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/d88355b056b453278b4363a7256a9e5e/transformed/gamepad-0.2.4+1.0.4/AndroidManifest.xml:2:1-7:12
-MERGED from [com.bylazar.sloth:field:0.2.4+1.0.6] /home/moosecoding/.gradle/caches/8.9/transforms/09caea6ba5dede02cab66340f9f8ae56/transformed/field-0.2.4+1.0.6/AndroidManifest.xml:2:1-7:12
-MERGED from [com.bylazar.sloth:docs:0.2.4+1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/d60820952778f1af5833491d1e58bd69/transformed/docs-0.2.4+1.0.5/AndroidManifest.xml:2:1-7:12
-MERGED from [com.bylazar.sloth:battery:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/f122225f40a0224ff6724af7347ff6e6/transformed/battery-0.2.4+1.0.3/AndroidManifest.xml:2:1-7:12
-MERGED from [com.bylazar.sloth:utils:0.2.4+1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/fde3341506f6dea9e64c8eb547141fe3/transformed/utils-0.2.4+1.0.4/AndroidManifest.xml:2:1-7:12
-MERGED from [com.bylazar.sloth:pinger:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/63b9951f7ce2442bfacd41e2047932fb/transformed/pinger-0.2.4+1.0.3/AndroidManifest.xml:2:1-7:12
-MERGED from [com.bylazar.sloth:graph:0.2.4+1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/8a5b05b65733ddad8893b8a1944b6182/transformed/graph-0.2.4+1.0.4/AndroidManifest.xml:2:1-7:12
-MERGED from [com.bylazar.sloth:lights:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/c228407b2e75926679113e5a71567cea/transformed/lights-0.2.4+1.0.3/AndroidManifest.xml:2:1-7:12
-MERGED from [com.bylazar.sloth:camerastream:0.2.4+1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/a4f4027030204b67761543c2c0892d81/transformed/camerastream-0.2.4+1.0.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.core:core-ktx:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/751d6bd8524c30a95f2d102b890f741b/transformed/core-ktx-1.3.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.bylazar:panels:1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/6b8522d7e3abedccc0093f8a535553fb/transformed/panels-1.0.5/AndroidManifest.xml:2:1-7:12
+MERGED from [com.bylazar:opmodecontrol:1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/d6149f78c5344f595eb498fdcfc386dd/transformed/opmodecontrol-1.0.3/AndroidManifest.xml:2:1-7:12
+MERGED from [com.bylazar:telemetry:1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/a7d909651668df5a306051c5d2f38414/transformed/telemetry-1.0.5/AndroidManifest.xml:2:1-7:12
+MERGED from [com.bylazar:configurables:1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/cb3fcdcf6618dc94a80573c5315fb49d/transformed/configurables-1.0.5/AndroidManifest.xml:2:1-7:12
+MERGED from [com.bylazar:themes:1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/0763cda4ed108ecb4635d2c69ae1359a/transformed/themes-1.0.3/AndroidManifest.xml:2:1-7:12
+MERGED from [com.bylazar:capture:1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/bb6fe016fecf20acb6eb0793e4697086/transformed/capture-1.0.3/AndroidManifest.xml:2:1-7:12
+MERGED from [com.bylazar:limelightproxy:1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/5b6920255eb7d4f0b2577ac24a784c27/transformed/limelightproxy-1.0.4/AndroidManifest.xml:2:1-7:12
+MERGED from [com.bylazar:gamepad:1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/28ae4a733b1e0a58ad106d97de02ff8b/transformed/gamepad-1.0.4/AndroidManifest.xml:2:1-7:12
+MERGED from [com.bylazar:field:1.0.6] /home/moosecoding/.gradle/caches/8.9/transforms/e9cb992d98fcf2f7dfcf40d114c6489d/transformed/field-1.0.6/AndroidManifest.xml:2:1-7:12
+MERGED from [com.bylazar:docs:1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/31372936ae6fb0a08941e0c9f9c28dd6/transformed/docs-1.0.5/AndroidManifest.xml:2:1-7:12
+MERGED from [com.bylazar:battery:1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/2bff635a50e0ee56e81f1718f40b0583/transformed/battery-1.0.3/AndroidManifest.xml:2:1-7:12
+MERGED from [com.bylazar:utils:1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/e0c645b2922fe644bc298dfd378f2de8/transformed/utils-1.0.4/AndroidManifest.xml:2:1-7:12
+MERGED from [com.bylazar:pinger:1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/5de97403aef7d3e0e6f8722246198d44/transformed/pinger-1.0.3/AndroidManifest.xml:2:1-7:12
+MERGED from [com.bylazar:graph:1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/a371900a2b2bec494a86f9a9456e7416/transformed/graph-1.0.4/AndroidManifest.xml:2:1-7:12
+MERGED from [com.bylazar:lights:1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/1e7bf5ec1687f8155422dcfb16c094b5/transformed/lights-1.0.3/AndroidManifest.xml:2:1-7:12
+MERGED from [com.bylazar:camerastream:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/a3c3d40d1d28180694de703568bb3ffc/transformed/camerastream-1.0.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.material:material:1.12.0] /home/moosecoding/.gradle/caches/8.9/transforms/42569e66e8297b5a580bab72487f9b22/transformed/material-1.12.0/AndroidManifest.xml:17:1-24:12
 MERGED from [org.firstinspires.ftc:OnBotJava:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/90c3d61b01bde55cfef6ffc7645389d0/transformed/OnBotJava-11.1.0/AndroidManifest.xml:34:1-41:12
 MERGED from [org.firstinspires.ftc:Blocks:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/998425a69f27fee7216ef5816cd72436/transformed/Blocks-11.1.0/AndroidManifest.xml:2:1-24:12
 MERGED from [org.firstinspires.ftc:FtcCommon:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/4b48f4c7d4375c9e8dc2668f0a408811/transformed/FtcCommon-11.1.0/AndroidManifest.xml:3:1-178:12
@@ -37,29 +35,49 @@ MERGED from [org.firstinspires.ftc:RobotServer:11.1.0] /home/moosecoding/.gradle
 MERGED from [org.firstinspires.ftc:Hardware:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/880b501b37c085502e955c48cc31eea2/transformed/Hardware-11.1.0/AndroidManifest.xml:2:1-9:12
 MERGED from [org.firstinspires.ftc:Vision:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/5acd86d468e88d9d8ae780d2543a48eb/transformed/Vision-11.1.0/AndroidManifest.xml:2:1-7:12
 MERGED from [org.firstinspires.ftc:RobotCore:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/b81f0e7de1c614ebf6b53dbf99681d3f/transformed/RobotCore-11.1.0/AndroidManifest.xml:2:1-129:12
-MERGED from [androidx.appcompat:appcompat:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/9d4f9528fee8f9e836ad3f495ff1cf6e/transformed/appcompat-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /home/moosecoding/.gradle/caches/8.9/transforms/2f97bcd3579fef934c5f103db3ba4f9c/transformed/constraintlayout-2.0.1/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat:1.6.1] /home/moosecoding/.gradle/caches/8.9/transforms/68c8eb9abfd90fa504ad4472cee2399a/transformed/appcompat-1.6.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /home/moosecoding/.gradle/caches/8.9/transforms/01df3030c2004c8fefd2ea0d5ad9ad72/transformed/appcompat-resources-1.6.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/8c3efb46a1a6f333da31f18b44f76722/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/af53dc221b3c173ee80f46f66de8e31d/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/41d70f2de1ff10926998ae26558bc5b0/transformed/viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment:1.3.6] /home/moosecoding/.gradle/caches/8.9/transforms/2ea8486fdc08d52bcfaf4ddceb05f15a/transformed/fragment-1.3.6/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity:1.8.0] /home/moosecoding/.gradle/caches/8.9/transforms/e30fd7ad82ec2f38845c8f07c15fa3a6/transformed/activity-1.8.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/a7e317926d0f72aacd0d2c4ac794756c/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/moosecoding/.gradle/caches/8.9/transforms/bf4f09c1c59c219aa1dd9ce27fdabaf9/transformed/drawerlayout-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.5.0] /home/moosecoding/.gradle/caches/8.9/transforms/e38ea2f02b330d07dd9d16b82ea66301/transformed/transition-1.5.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/45a43e61da683dd0fc6f27a40779a068/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/2febf369419605f809b3e422edb68c5c/transformed/emoji2-views-helper-1.2.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/95418c606d9f942809010a53ae6f7cfd/transformed/emoji2-1.2.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/2099e3bb04676f65debc380ab42af610/transformed/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/40e7c033388370dd5737a7ca398179fe/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/b528025457db0e4f118abe23f0f4ad17/transformed/customview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/bf437c929510852ba14df08251c77c29/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/85c09b6b1cb85a89af3a6375ed2962ec/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/moosecoding/.gradle/caches/8.9/transforms/ca81c5fb8531a2d8b9492c2f348cde00/transformed/savedstate-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/f50c5d3320b4b24cccf2de5e8ec75a18/transformed/lifecycle-livedata-2.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/67441a2a2e69f8b8c04b28d639a30b57/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/d11bb6b73cb0f410f8a17d38ba91072d/transformed/lifecycle-livedata-core-2.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/4f6b2dc84559a47b657c01de2a7d8c7b/transformed/lifecycle-viewmodel-2.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/770f34a81a1d30d19429ee1f2e8d7f08/transformed/lifecycle-runtime-2.6.2/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/e8293b48c182276676d807eb141109b4/transformed/lifecycle-viewmodel-savedstate-2.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core-ktx:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b2c17fb47f7be2a435e8a6973d8dd746/transformed/core-ktx-1.13.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /home/moosecoding/.gradle/caches/8.9/transforms/919637450c7224542b8b4936465fdbfd/transformed/annotation-experimental-1.4.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/moosecoding/.gradle/caches/8.9/transforms/f72864701ceb2aacbfbcc950a0f3410d/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.cardview:cardview:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/27e787ed222df551afe484ea6daa0016/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/bc1f33dcdabfb0ffbab8cbbf97d90f9c/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/moosecoding/.gradle/caches/8.9/transforms/72f9ee034cfbb146ede004f8364e805b/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/cf9bd48ca3973ffa2bc54306a9feb5a6/transformed/tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/601ee4fa5f58af2c3125bcafbde728e5/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/385bea48b8c6a088e2b4451cfec6d336/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/a208fcae9d047dc0fd81cff9793618fd/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/76e85104871695f2d3f061a8c66da324/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/8e6bd84de173cced962a8293e9bc708c/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.pedropathing:telemetry:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/1a203d8c7165627b3922e1e64b05ff0a/transformed/telemetry-1.0.0/AndroidManifest.xml:2:1-7:12
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:17:1-56:12
 MERGED from [com.jakewharton.threetenabp:threetenabp:1.3.1] /home/moosecoding/.gradle/caches/8.9/transforms/0852f3d12e24532f5c26201d252e527d/transformed/threetenabp-1.3.1/AndroidManifest.xml:2:1-9:12
-MERGED from [androidx.fragment:fragment:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/d98984802b934cb9e74d6d640085d508/transformed/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.appcompat:appcompat-resources:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/3165216df809137f0457571153447829/transformed/appcompat-resources-1.2.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/e7841d61c271645c85ee6dc4a8c601f9/transformed/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.viewpager:viewpager:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/40e7c033388370dd5737a7ca398179fe/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.loader:loader:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/85c09b6b1cb85a89af3a6375ed2962ec/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.activity:activity:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/07c8665042aecc531a405805810b1b00/transformed/activity-1.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/8c3efb46a1a6f333da31f18b44f76722/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/af53dc221b3c173ee80f46f66de8e31d/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.customview:customview:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/bd719e625878624658ef678c91b20487/transformed/customview-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.core:core:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/803f2e28cdd86e435613ef4302f8c075/transformed/core-1.3.0/AndroidManifest.xml:17:1-26:12
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/601ee4fa5f58af2c3125bcafbde728e5/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/a766dc3bc7a1745ad3ff724bc42d3282/transformed/versionedparcelable-1.1.0/AndroidManifest.xml:17:1-27:12
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/a0fa2974d00842144721a0d053577c7b/transformed/lifecycle-runtime-2.1.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/a44ef33208657c5edd2906a9d597cca4/transformed/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.savedstate:savedstate:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/15d7f668ace74faa3efc2a73b39541dc/transformed/savedstate-1.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.interpolator:interpolator:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/bc1f33dcdabfb0ffbab8cbbf97d90f9c/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/d5202399a88510bbf5bcd7f0b59a479c/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/5bbbfc904d394c7c0a1c722e9552c10c/transformed/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/b70765e17d819c1b14d3a6af3a536b61/transformed/core-runtime-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [org.openftc:easyopencv:1.7.3] /home/moosecoding/.gradle/caches/8.9/transforms/0fb16a9416c3b356da311f6a58ecb209/transformed/easyopencv-1.7.3/AndroidManifest.xml:2:1-9:12
 MERGED from [org.openftc:apriltag:2.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/5f6bfde336c7c2589c79f4ad8e5ecaca/transformed/apriltag-2.1.0/AndroidManifest.xml:2:1-9:12
 MERGED from [org.openftc:opencv-repackaged-bundled-dylibs:4.10.0-A] /home/moosecoding/.gradle/caches/8.9/transforms/fa6f4ff6e904990679986a033300fa0f/transformed/opencv-repackaged-bundled-dylibs-4.10.0-A/AndroidManifest.xml:2:1-9:12
@@ -76,6 +94,8 @@ ADDED from /home/moosecoding/projects/23571-Decode-Next/TeamCode/src/main/Androi
 INJECTED from /home/moosecoding/projects/23571-Decode-Next/TeamCode/src/main/AndroidManifest.xml:10:5-19
 MERGED from [:FtcRobotController] /home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:12:5-76:19
 MERGED from [:FtcRobotController] /home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:12:5-76:19
+MERGED from [com.google.android.material:material:1.12.0] /home/moosecoding/.gradle/caches/8.9/transforms/42569e66e8297b5a580bab72487f9b22/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.12.0] /home/moosecoding/.gradle/caches/8.9/transforms/42569e66e8297b5a580bab72487f9b22/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
 MERGED from [org.firstinspires.ftc:Blocks:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/998425a69f27fee7216ef5816cd72436/transformed/Blocks-11.1.0/AndroidManifest.xml:16:5-22:19
 MERGED from [org.firstinspires.ftc:Blocks:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/998425a69f27fee7216ef5816cd72436/transformed/Blocks-11.1.0/AndroidManifest.xml:16:5-22:19
 MERGED from [org.firstinspires.ftc:FtcCommon:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/4b48f4c7d4375c9e8dc2668f0a408811/transformed/FtcCommon-11.1.0/AndroidManifest.xml:21:5-176:19
@@ -84,18 +104,28 @@ MERGED from [org.firstinspires.ftc:Inspection:11.1.0] /home/moosecoding/.gradle/
 MERGED from [org.firstinspires.ftc:Inspection:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/673d7eb0a859c3ea3fd546d3aae9b8d1/transformed/Inspection-11.1.0/AndroidManifest.xml:17:5-28:19
 MERGED from [org.firstinspires.ftc:RobotCore:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/b81f0e7de1c614ebf6b53dbf99681d3f/transformed/RobotCore-11.1.0/AndroidManifest.xml:85:5-127:19
 MERGED from [org.firstinspires.ftc:RobotCore:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/b81f0e7de1c614ebf6b53dbf99681d3f/transformed/RobotCore-11.1.0/AndroidManifest.xml:85:5-127:19
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /home/moosecoding/.gradle/caches/8.9/transforms/2f97bcd3579fef934c5f103db3ba4f9c/transformed/constraintlayout-2.0.1/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /home/moosecoding/.gradle/caches/8.9/transforms/2f97bcd3579fef934c5f103db3ba4f9c/transformed/constraintlayout-2.0.1/AndroidManifest.xml:9:5-20
+MERGED from [androidx.emoji2:emoji2:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/95418c606d9f942809010a53ae6f7cfd/transformed/emoji2-1.2.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/95418c606d9f942809010a53ae6f7cfd/transformed/emoji2-1.2.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/67441a2a2e69f8b8c04b28d639a30b57/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/67441a2a2e69f8b8c04b28d639a30b57/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/moosecoding/.gradle/caches/8.9/transforms/f72864701ceb2aacbfbcc950a0f3410d/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/moosecoding/.gradle/caches/8.9/transforms/f72864701ceb2aacbfbcc950a0f3410d/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/moosecoding/.gradle/caches/8.9/transforms/72f9ee034cfbb146ede004f8364e805b/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/moosecoding/.gradle/caches/8.9/transforms/72f9ee034cfbb146ede004f8364e805b/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:46:5-54:19
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:46:5-54:19
 MERGED from [com.jakewharton.threetenabp:threetenabp:1.3.1] /home/moosecoding/.gradle/caches/8.9/transforms/0852f3d12e24532f5c26201d252e527d/transformed/threetenabp-1.3.1/AndroidManifest.xml:7:5-20
 MERGED from [com.jakewharton.threetenabp:threetenabp:1.3.1] /home/moosecoding/.gradle/caches/8.9/transforms/0852f3d12e24532f5c26201d252e527d/transformed/threetenabp-1.3.1/AndroidManifest.xml:7:5-20
-MERGED from [androidx.core:core:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/803f2e28cdd86e435613ef4302f8c075/transformed/core-1.3.0/AndroidManifest.xml:24:5-89
-MERGED from [androidx.core:core:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/803f2e28cdd86e435613ef4302f8c075/transformed/core-1.3.0/AndroidManifest.xml:24:5-89
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/a766dc3bc7a1745ad3ff724bc42d3282/transformed/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/a766dc3bc7a1745ad3ff724bc42d3282/transformed/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
 	android:extractNativeLibs
 		INJECTED from /home/moosecoding/projects/23571-Decode-Next/TeamCode/src/main/AndroidManifest.xml
 	android:appComponentFactory
-		ADDED from [androidx.core:core:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/803f2e28cdd86e435613ef4302f8c075/transformed/core-1.3.0/AndroidManifest.xml:24:18-86
+		ADDED from [androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
 	android:label
 		ADDED from [:FtcRobotController] /home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:15:9-41
 	android:largeHeap
@@ -116,54 +146,50 @@ INJECTED from /home/moosecoding/projects/23571-Decode-Next/TeamCode/src/main/And
 INJECTED from /home/moosecoding/projects/23571-Decode-Next/TeamCode/src/main/AndroidManifest.xml
 MERGED from [:FtcRobotController] /home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:5-44
 MERGED from [:FtcRobotController] /home/moosecoding/projects/23571-Decode-Next/FtcRobotController/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:5-44
-MERGED from [com.acmerobotics.slothboard:dashboard:0.2.4+0.5.1] /home/moosecoding/.gradle/caches/8.9/transforms/e72741af8f72cb16794cc0055c382c39/transformed/dashboard-0.2.4+0.5.1/AndroidManifest.xml:5:5-44
-MERGED from [com.acmerobotics.slothboard:dashboard:0.2.4+0.5.1] /home/moosecoding/.gradle/caches/8.9/transforms/e72741af8f72cb16794cc0055c382c39/transformed/dashboard-0.2.4+0.5.1/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:fullpanels:0.2.4+1.0.12] /home/moosecoding/.gradle/caches/8.9/transforms/4fdaeed0fe2214daba73e0f81d7d98ea/transformed/fullpanels-0.2.4+1.0.12/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:fullpanels:0.2.4+1.0.12] /home/moosecoding/.gradle/caches/8.9/transforms/4fdaeed0fe2214daba73e0f81d7d98ea/transformed/fullpanels-0.2.4+1.0.12/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:fullpanels:1.0.12] /home/moosecoding/.gradle/caches/8.9/transforms/d6b714653381df13eaf5e45d41b81a3d/transformed/fullpanels-1.0.12/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:fullpanels:1.0.12] /home/moosecoding/.gradle/caches/8.9/transforms/d6b714653381df13eaf5e45d41b81a3d/transformed/fullpanels-1.0.12/AndroidManifest.xml:5:5-44
 MERGED from [dev.nextftc.extensions:pedro:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/ad67d2612f6319f8ea534a7724360bb1/transformed/pedro-1.0.0/AndroidManifest.xml:5:5-44
 MERGED from [dev.nextftc.extensions:pedro:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/ad67d2612f6319f8ea534a7724360bb1/transformed/pedro-1.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.pedropathing:ftc:2.0.6] /home/moosecoding/.gradle/caches/8.9/transforms/ce266208fa82b49fb525ff3049b943d2/transformed/ftc-2.0.6/AndroidManifest.xml:5:5-44
 MERGED from [com.pedropathing:ftc:2.0.6] /home/moosecoding/.gradle/caches/8.9/transforms/ce266208fa82b49fb525ff3049b943d2/transformed/ftc-2.0.6/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:opmodecontrol:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/e2249e61e96476c59d468b0b1ba06f93/transformed/opmodecontrol-0.2.4+1.0.3/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:opmodecontrol:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/e2249e61e96476c59d468b0b1ba06f93/transformed/opmodecontrol-0.2.4+1.0.3/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:configurables:0.2.4+1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/4d592e2cce0321afbf3d64e34e6afb0b/transformed/configurables-0.2.4+1.0.5/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:configurables:0.2.4+1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/4d592e2cce0321afbf3d64e34e6afb0b/transformed/configurables-0.2.4+1.0.5/AndroidManifest.xml:5:5-44
-MERGED from [dev.frozenmilk.sinister:Sloth:0.2.4] /home/moosecoding/.gradle/caches/8.9/transforms/507cce40b2ddfa60da14e830cb27440d/transformed/Sloth-0.2.4/AndroidManifest.xml:5:5-44
-MERGED from [dev.frozenmilk.sinister:Sloth:0.2.4] /home/moosecoding/.gradle/caches/8.9/transforms/507cce40b2ddfa60da14e830cb27440d/transformed/Sloth-0.2.4/AndroidManifest.xml:5:5-44
 MERGED from [dev.nextftc:hardware:1.0.1] /home/moosecoding/.gradle/caches/8.9/transforms/23c277daccf386013fe7678d25204f51/transformed/hardware-1.0.1/AndroidManifest.xml:5:5-44
 MERGED from [dev.nextftc:hardware:1.0.1] /home/moosecoding/.gradle/caches/8.9/transforms/23c277daccf386013fe7678d25204f51/transformed/hardware-1.0.1/AndroidManifest.xml:5:5-44
 MERGED from [dev.nextftc:ftc:1.0.1] /home/moosecoding/.gradle/caches/8.9/transforms/233a53d9d466f7303e4211f726de09e8/transformed/ftc-1.0.1/AndroidManifest.xml:5:5-44
 MERGED from [dev.nextftc:ftc:1.0.1] /home/moosecoding/.gradle/caches/8.9/transforms/233a53d9d466f7303e4211f726de09e8/transformed/ftc-1.0.1/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:panels:0.2.4+1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/aed6558ac61c846c408829096ba18c38/transformed/panels-0.2.4+1.0.5/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:panels:0.2.4+1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/aed6558ac61c846c408829096ba18c38/transformed/panels-0.2.4+1.0.5/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:telemetry:0.2.4+1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/38a2d905dd4654caa2ffe7a768ef8dbf/transformed/telemetry-0.2.4+1.0.5/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:telemetry:0.2.4+1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/38a2d905dd4654caa2ffe7a768ef8dbf/transformed/telemetry-0.2.4+1.0.5/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:themes:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/897887e450394abe9b147365c325dd75/transformed/themes-0.2.4+1.0.3/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:themes:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/897887e450394abe9b147365c325dd75/transformed/themes-0.2.4+1.0.3/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:capture:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/ef14b953bc5b34ab3302ffff495c45fa/transformed/capture-0.2.4+1.0.3/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:capture:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/ef14b953bc5b34ab3302ffff495c45fa/transformed/capture-0.2.4+1.0.3/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:limelightproxy:0.2.4+1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/758d8ec856ccc35cb3ee9f7dc8888a25/transformed/limelightproxy-0.2.4+1.0.4/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:limelightproxy:0.2.4+1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/758d8ec856ccc35cb3ee9f7dc8888a25/transformed/limelightproxy-0.2.4+1.0.4/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:gamepad:0.2.4+1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/d88355b056b453278b4363a7256a9e5e/transformed/gamepad-0.2.4+1.0.4/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:gamepad:0.2.4+1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/d88355b056b453278b4363a7256a9e5e/transformed/gamepad-0.2.4+1.0.4/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:field:0.2.4+1.0.6] /home/moosecoding/.gradle/caches/8.9/transforms/09caea6ba5dede02cab66340f9f8ae56/transformed/field-0.2.4+1.0.6/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:field:0.2.4+1.0.6] /home/moosecoding/.gradle/caches/8.9/transforms/09caea6ba5dede02cab66340f9f8ae56/transformed/field-0.2.4+1.0.6/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:docs:0.2.4+1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/d60820952778f1af5833491d1e58bd69/transformed/docs-0.2.4+1.0.5/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:docs:0.2.4+1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/d60820952778f1af5833491d1e58bd69/transformed/docs-0.2.4+1.0.5/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:battery:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/f122225f40a0224ff6724af7347ff6e6/transformed/battery-0.2.4+1.0.3/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:battery:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/f122225f40a0224ff6724af7347ff6e6/transformed/battery-0.2.4+1.0.3/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:utils:0.2.4+1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/fde3341506f6dea9e64c8eb547141fe3/transformed/utils-0.2.4+1.0.4/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:utils:0.2.4+1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/fde3341506f6dea9e64c8eb547141fe3/transformed/utils-0.2.4+1.0.4/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:pinger:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/63b9951f7ce2442bfacd41e2047932fb/transformed/pinger-0.2.4+1.0.3/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:pinger:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/63b9951f7ce2442bfacd41e2047932fb/transformed/pinger-0.2.4+1.0.3/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:graph:0.2.4+1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/8a5b05b65733ddad8893b8a1944b6182/transformed/graph-0.2.4+1.0.4/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:graph:0.2.4+1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/8a5b05b65733ddad8893b8a1944b6182/transformed/graph-0.2.4+1.0.4/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:lights:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/c228407b2e75926679113e5a71567cea/transformed/lights-0.2.4+1.0.3/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:lights:0.2.4+1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/c228407b2e75926679113e5a71567cea/transformed/lights-0.2.4+1.0.3/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:camerastream:0.2.4+1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/a4f4027030204b67761543c2c0892d81/transformed/camerastream-0.2.4+1.0.0/AndroidManifest.xml:5:5-44
-MERGED from [com.bylazar.sloth:camerastream:0.2.4+1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/a4f4027030204b67761543c2c0892d81/transformed/camerastream-0.2.4+1.0.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.core:core-ktx:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/751d6bd8524c30a95f2d102b890f741b/transformed/core-ktx-1.3.0/AndroidManifest.xml:5:5-7:41
-MERGED from [androidx.core:core-ktx:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/751d6bd8524c30a95f2d102b890f741b/transformed/core-ktx-1.3.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.bylazar:panels:1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/6b8522d7e3abedccc0093f8a535553fb/transformed/panels-1.0.5/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:panels:1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/6b8522d7e3abedccc0093f8a535553fb/transformed/panels-1.0.5/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:opmodecontrol:1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/d6149f78c5344f595eb498fdcfc386dd/transformed/opmodecontrol-1.0.3/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:opmodecontrol:1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/d6149f78c5344f595eb498fdcfc386dd/transformed/opmodecontrol-1.0.3/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:telemetry:1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/a7d909651668df5a306051c5d2f38414/transformed/telemetry-1.0.5/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:telemetry:1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/a7d909651668df5a306051c5d2f38414/transformed/telemetry-1.0.5/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:configurables:1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/cb3fcdcf6618dc94a80573c5315fb49d/transformed/configurables-1.0.5/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:configurables:1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/cb3fcdcf6618dc94a80573c5315fb49d/transformed/configurables-1.0.5/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:themes:1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/0763cda4ed108ecb4635d2c69ae1359a/transformed/themes-1.0.3/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:themes:1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/0763cda4ed108ecb4635d2c69ae1359a/transformed/themes-1.0.3/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:capture:1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/bb6fe016fecf20acb6eb0793e4697086/transformed/capture-1.0.3/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:capture:1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/bb6fe016fecf20acb6eb0793e4697086/transformed/capture-1.0.3/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:limelightproxy:1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/5b6920255eb7d4f0b2577ac24a784c27/transformed/limelightproxy-1.0.4/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:limelightproxy:1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/5b6920255eb7d4f0b2577ac24a784c27/transformed/limelightproxy-1.0.4/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:gamepad:1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/28ae4a733b1e0a58ad106d97de02ff8b/transformed/gamepad-1.0.4/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:gamepad:1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/28ae4a733b1e0a58ad106d97de02ff8b/transformed/gamepad-1.0.4/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:field:1.0.6] /home/moosecoding/.gradle/caches/8.9/transforms/e9cb992d98fcf2f7dfcf40d114c6489d/transformed/field-1.0.6/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:field:1.0.6] /home/moosecoding/.gradle/caches/8.9/transforms/e9cb992d98fcf2f7dfcf40d114c6489d/transformed/field-1.0.6/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:docs:1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/31372936ae6fb0a08941e0c9f9c28dd6/transformed/docs-1.0.5/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:docs:1.0.5] /home/moosecoding/.gradle/caches/8.9/transforms/31372936ae6fb0a08941e0c9f9c28dd6/transformed/docs-1.0.5/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:battery:1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/2bff635a50e0ee56e81f1718f40b0583/transformed/battery-1.0.3/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:battery:1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/2bff635a50e0ee56e81f1718f40b0583/transformed/battery-1.0.3/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:utils:1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/e0c645b2922fe644bc298dfd378f2de8/transformed/utils-1.0.4/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:utils:1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/e0c645b2922fe644bc298dfd378f2de8/transformed/utils-1.0.4/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:pinger:1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/5de97403aef7d3e0e6f8722246198d44/transformed/pinger-1.0.3/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:pinger:1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/5de97403aef7d3e0e6f8722246198d44/transformed/pinger-1.0.3/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:graph:1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/a371900a2b2bec494a86f9a9456e7416/transformed/graph-1.0.4/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:graph:1.0.4] /home/moosecoding/.gradle/caches/8.9/transforms/a371900a2b2bec494a86f9a9456e7416/transformed/graph-1.0.4/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:lights:1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/1e7bf5ec1687f8155422dcfb16c094b5/transformed/lights-1.0.3/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:lights:1.0.3] /home/moosecoding/.gradle/caches/8.9/transforms/1e7bf5ec1687f8155422dcfb16c094b5/transformed/lights-1.0.3/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:camerastream:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/a3c3d40d1d28180694de703568bb3ffc/transformed/camerastream-1.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.bylazar:camerastream:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/a3c3d40d1d28180694de703568bb3ffc/transformed/camerastream-1.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.material:material:1.12.0] /home/moosecoding/.gradle/caches/8.9/transforms/42569e66e8297b5a580bab72487f9b22/transformed/material-1.12.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.12.0] /home/moosecoding/.gradle/caches/8.9/transforms/42569e66e8297b5a580bab72487f9b22/transformed/material-1.12.0/AndroidManifest.xml:20:5-44
 MERGED from [org.firstinspires.ftc:OnBotJava:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/90c3d61b01bde55cfef6ffc7645389d0/transformed/OnBotJava-11.1.0/AndroidManifest.xml:39:5-44
 MERGED from [org.firstinspires.ftc:OnBotJava:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/90c3d61b01bde55cfef6ffc7645389d0/transformed/OnBotJava-11.1.0/AndroidManifest.xml:39:5-44
 MERGED from [org.firstinspires.ftc:Blocks:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/998425a69f27fee7216ef5816cd72436/transformed/Blocks-11.1.0/AndroidManifest.xml:7:5-44
@@ -180,52 +206,92 @@ MERGED from [org.firstinspires.ftc:Vision:11.1.0] /home/moosecoding/.gradle/cach
 MERGED from [org.firstinspires.ftc:Vision:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/5acd86d468e88d9d8ae780d2543a48eb/transformed/Vision-11.1.0/AndroidManifest.xml:5:5-44
 MERGED from [org.firstinspires.ftc:RobotCore:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/b81f0e7de1c614ebf6b53dbf99681d3f/transformed/RobotCore-11.1.0/AndroidManifest.xml:7:5-44
 MERGED from [org.firstinspires.ftc:RobotCore:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/b81f0e7de1c614ebf6b53dbf99681d3f/transformed/RobotCore-11.1.0/AndroidManifest.xml:7:5-44
-MERGED from [androidx.appcompat:appcompat:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/9d4f9528fee8f9e836ad3f495ff1cf6e/transformed/appcompat-1.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.appcompat:appcompat:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/9d4f9528fee8f9e836ad3f495ff1cf6e/transformed/appcompat-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /home/moosecoding/.gradle/caches/8.9/transforms/2f97bcd3579fef934c5f103db3ba4f9c/transformed/constraintlayout-2.0.1/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /home/moosecoding/.gradle/caches/8.9/transforms/2f97bcd3579fef934c5f103db3ba4f9c/transformed/constraintlayout-2.0.1/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat:1.6.1] /home/moosecoding/.gradle/caches/8.9/transforms/68c8eb9abfd90fa504ad4472cee2399a/transformed/appcompat-1.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.6.1] /home/moosecoding/.gradle/caches/8.9/transforms/68c8eb9abfd90fa504ad4472cee2399a/transformed/appcompat-1.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /home/moosecoding/.gradle/caches/8.9/transforms/01df3030c2004c8fefd2ea0d5ad9ad72/transformed/appcompat-resources-1.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /home/moosecoding/.gradle/caches/8.9/transforms/01df3030c2004c8fefd2ea0d5ad9ad72/transformed/appcompat-resources-1.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/8c3efb46a1a6f333da31f18b44f76722/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/8c3efb46a1a6f333da31f18b44f76722/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/af53dc221b3c173ee80f46f66de8e31d/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/af53dc221b3c173ee80f46f66de8e31d/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/41d70f2de1ff10926998ae26558bc5b0/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/41d70f2de1ff10926998ae26558bc5b0/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.6] /home/moosecoding/.gradle/caches/8.9/transforms/2ea8486fdc08d52bcfaf4ddceb05f15a/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.6] /home/moosecoding/.gradle/caches/8.9/transforms/2ea8486fdc08d52bcfaf4ddceb05f15a/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.8.0] /home/moosecoding/.gradle/caches/8.9/transforms/e30fd7ad82ec2f38845c8f07c15fa3a6/transformed/activity-1.8.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.8.0] /home/moosecoding/.gradle/caches/8.9/transforms/e30fd7ad82ec2f38845c8f07c15fa3a6/transformed/activity-1.8.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/a7e317926d0f72aacd0d2c4ac794756c/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/a7e317926d0f72aacd0d2c4ac794756c/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/moosecoding/.gradle/caches/8.9/transforms/bf4f09c1c59c219aa1dd9ce27fdabaf9/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/moosecoding/.gradle/caches/8.9/transforms/bf4f09c1c59c219aa1dd9ce27fdabaf9/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.5.0] /home/moosecoding/.gradle/caches/8.9/transforms/e38ea2f02b330d07dd9d16b82ea66301/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.transition:transition:1.5.0] /home/moosecoding/.gradle/caches/8.9/transforms/e38ea2f02b330d07dd9d16b82ea66301/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/45a43e61da683dd0fc6f27a40779a068/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/45a43e61da683dd0fc6f27a40779a068/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/2febf369419605f809b3e422edb68c5c/transformed/emoji2-views-helper-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/2febf369419605f809b3e422edb68c5c/transformed/emoji2-views-helper-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/95418c606d9f942809010a53ae6f7cfd/transformed/emoji2-1.2.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/95418c606d9f942809010a53ae6f7cfd/transformed/emoji2-1.2.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/2099e3bb04676f65debc380ab42af610/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/2099e3bb04676f65debc380ab42af610/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/40e7c033388370dd5737a7ca398179fe/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/40e7c033388370dd5737a7ca398179fe/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/b528025457db0e4f118abe23f0f4ad17/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/b528025457db0e4f118abe23f0f4ad17/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/bf437c929510852ba14df08251c77c29/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/bf437c929510852ba14df08251c77c29/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/85c09b6b1cb85a89af3a6375ed2962ec/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/85c09b6b1cb85a89af3a6375ed2962ec/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/moosecoding/.gradle/caches/8.9/transforms/ca81c5fb8531a2d8b9492c2f348cde00/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/moosecoding/.gradle/caches/8.9/transforms/ca81c5fb8531a2d8b9492c2f348cde00/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/f50c5d3320b4b24cccf2de5e8ec75a18/transformed/lifecycle-livedata-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/f50c5d3320b4b24cccf2de5e8ec75a18/transformed/lifecycle-livedata-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/67441a2a2e69f8b8c04b28d639a30b57/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/67441a2a2e69f8b8c04b28d639a30b57/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/d11bb6b73cb0f410f8a17d38ba91072d/transformed/lifecycle-livedata-core-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/d11bb6b73cb0f410f8a17d38ba91072d/transformed/lifecycle-livedata-core-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/4f6b2dc84559a47b657c01de2a7d8c7b/transformed/lifecycle-viewmodel-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/4f6b2dc84559a47b657c01de2a7d8c7b/transformed/lifecycle-viewmodel-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/770f34a81a1d30d19429ee1f2e8d7f08/transformed/lifecycle-runtime-2.6.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/770f34a81a1d30d19429ee1f2e8d7f08/transformed/lifecycle-runtime-2.6.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/e8293b48c182276676d807eb141109b4/transformed/lifecycle-viewmodel-savedstate-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/e8293b48c182276676d807eb141109b4/transformed/lifecycle-viewmodel-savedstate-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b2c17fb47f7be2a435e8a6973d8dd746/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b2c17fb47f7be2a435e8a6973d8dd746/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /home/moosecoding/.gradle/caches/8.9/transforms/919637450c7224542b8b4936465fdbfd/transformed/annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /home/moosecoding/.gradle/caches/8.9/transforms/919637450c7224542b8b4936465fdbfd/transformed/annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/moosecoding/.gradle/caches/8.9/transforms/f72864701ceb2aacbfbcc950a0f3410d/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/moosecoding/.gradle/caches/8.9/transforms/f72864701ceb2aacbfbcc950a0f3410d/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cardview:cardview:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/27e787ed222df551afe484ea6daa0016/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/27e787ed222df551afe484ea6daa0016/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/bc1f33dcdabfb0ffbab8cbbf97d90f9c/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/bc1f33dcdabfb0ffbab8cbbf97d90f9c/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/moosecoding/.gradle/caches/8.9/transforms/72f9ee034cfbb146ede004f8364e805b/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/moosecoding/.gradle/caches/8.9/transforms/72f9ee034cfbb146ede004f8364e805b/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/cf9bd48ca3973ffa2bc54306a9feb5a6/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/cf9bd48ca3973ffa2bc54306a9feb5a6/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/601ee4fa5f58af2c3125bcafbde728e5/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/601ee4fa5f58af2c3125bcafbde728e5/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/385bea48b8c6a088e2b4451cfec6d336/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/385bea48b8c6a088e2b4451cfec6d336/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/a208fcae9d047dc0fd81cff9793618fd/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/a208fcae9d047dc0fd81cff9793618fd/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/76e85104871695f2d3f061a8c66da324/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/76e85104871695f2d3f061a8c66da324/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/8e6bd84de173cced962a8293e9bc708c/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/8e6bd84de173cced962a8293e9bc708c/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.pedropathing:telemetry:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/1a203d8c7165627b3922e1e64b05ff0a/transformed/telemetry-1.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.pedropathing:telemetry:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/1a203d8c7165627b3922e1e64b05ff0a/transformed/telemetry-1.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:20:5-44
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:20:5-44
 MERGED from [com.jakewharton.threetenabp:threetenabp:1.3.1] /home/moosecoding/.gradle/caches/8.9/transforms/0852f3d12e24532f5c26201d252e527d/transformed/threetenabp-1.3.1/AndroidManifest.xml:5:5-44
 MERGED from [com.jakewharton.threetenabp:threetenabp:1.3.1] /home/moosecoding/.gradle/caches/8.9/transforms/0852f3d12e24532f5c26201d252e527d/transformed/threetenabp-1.3.1/AndroidManifest.xml:5:5-44
-MERGED from [androidx.fragment:fragment:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/d98984802b934cb9e74d6d640085d508/transformed/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.fragment:fragment:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/d98984802b934cb9e74d6d640085d508/transformed/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.appcompat:appcompat-resources:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/3165216df809137f0457571153447829/transformed/appcompat-resources-1.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.appcompat:appcompat-resources:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/3165216df809137f0457571153447829/transformed/appcompat-resources-1.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/e7841d61c271645c85ee6dc4a8c601f9/transformed/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/e7841d61c271645c85ee6dc4a8c601f9/transformed/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/40e7c033388370dd5737a7ca398179fe/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/40e7c033388370dd5737a7ca398179fe/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/85c09b6b1cb85a89af3a6375ed2962ec/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/85c09b6b1cb85a89af3a6375ed2962ec/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.activity:activity:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/07c8665042aecc531a405805810b1b00/transformed/activity-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.activity:activity:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/07c8665042aecc531a405805810b1b00/transformed/activity-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/8c3efb46a1a6f333da31f18b44f76722/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/8c3efb46a1a6f333da31f18b44f76722/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/af53dc221b3c173ee80f46f66de8e31d/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/af53dc221b3c173ee80f46f66de8e31d/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.customview:customview:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/bd719e625878624658ef678c91b20487/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/bd719e625878624658ef678c91b20487/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.core:core:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/803f2e28cdd86e435613ef4302f8c075/transformed/core-1.3.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.core:core:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/803f2e28cdd86e435613ef4302f8c075/transformed/core-1.3.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/601ee4fa5f58af2c3125bcafbde728e5/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/601ee4fa5f58af2c3125bcafbde728e5/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/a766dc3bc7a1745ad3ff724bc42d3282/transformed/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/a766dc3bc7a1745ad3ff724bc42d3282/transformed/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/a0fa2974d00842144721a0d053577c7b/transformed/lifecycle-runtime-2.1.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/a0fa2974d00842144721a0d053577c7b/transformed/lifecycle-runtime-2.1.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/a44ef33208657c5edd2906a9d597cca4/transformed/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/a44ef33208657c5edd2906a9d597cca4/transformed/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/15d7f668ace74faa3efc2a73b39541dc/transformed/savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.savedstate:savedstate:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/15d7f668ace74faa3efc2a73b39541dc/transformed/savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.interpolator:interpolator:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/bc1f33dcdabfb0ffbab8cbbf97d90f9c/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/bc1f33dcdabfb0ffbab8cbbf97d90f9c/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/d5202399a88510bbf5bcd7f0b59a479c/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/d5202399a88510bbf5bcd7f0b59a479c/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/5bbbfc904d394c7c0a1c722e9552c10c/transformed/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/5bbbfc904d394c7c0a1c722e9552c10c/transformed/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/b70765e17d819c1b14d3a6af3a536b61/transformed/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/b70765e17d819c1b14d3a6af3a536b61/transformed/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
 MERGED from [org.openftc:easyopencv:1.7.3] /home/moosecoding/.gradle/caches/8.9/transforms/0fb16a9416c3b356da311f6a58ecb209/transformed/easyopencv-1.7.3/AndroidManifest.xml:5:5-7:41
 MERGED from [org.openftc:easyopencv:1.7.3] /home/moosecoding/.gradle/caches/8.9/transforms/0fb16a9416c3b356da311f6a58ecb209/transformed/easyopencv-1.7.3/AndroidManifest.xml:5:5-7:41
 MERGED from [org.openftc:apriltag:2.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/5f6bfde336c7c2589c79f4ad8e5ecaca/transformed/apriltag-2.1.0/AndroidManifest.xml:5:5-7:41
@@ -792,6 +858,96 @@ action#com.revrobotics.controlhubupdater.broadcast.RESULT_BROADCAST
 ADDED from [org.firstinspires.ftc:RobotCore:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/b81f0e7de1c614ebf6b53dbf99681d3f/transformed/RobotCore-11.1.0/AndroidManifest.xml:124:17-103
 	android:name
 		ADDED from [org.firstinspires.ftc:RobotCore:11.1.0] /home/moosecoding/.gradle/caches/8.9/transforms/b81f0e7de1c614ebf6b53dbf99681d3f/transformed/RobotCore-11.1.0/AndroidManifest.xml:124:25-100
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.emoji2:emoji2:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/95418c606d9f942809010a53ae6f7cfd/transformed/emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/67441a2a2e69f8b8c04b28d639a30b57/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/67441a2a2e69f8b8c04b28d639a30b57/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/moosecoding/.gradle/caches/8.9/transforms/72f9ee034cfbb146ede004f8364e805b/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/moosecoding/.gradle/caches/8.9/transforms/72f9ee034cfbb146ede004f8364e805b/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.emoji2:emoji2:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/95418c606d9f942809010a53ae6f7cfd/transformed/emoji2-1.2.0/AndroidManifest.xml:28:13-31
+	android:authorities
+		ADDED from [androidx.emoji2:emoji2:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/95418c606d9f942809010a53ae6f7cfd/transformed/emoji2-1.2.0/AndroidManifest.xml:26:13-68
+	android:exported
+		ADDED from [androidx.emoji2:emoji2:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/95418c606d9f942809010a53ae6f7cfd/transformed/emoji2-1.2.0/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/95418c606d9f942809010a53ae6f7cfd/transformed/emoji2-1.2.0/AndroidManifest.xml:25:13-67
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [androidx.emoji2:emoji2:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/95418c606d9f942809010a53ae6f7cfd/transformed/emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.emoji2:emoji2:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/95418c606d9f942809010a53ae6f7cfd/transformed/emoji2-1.2.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.2.0] /home/moosecoding/.gradle/caches/8.9/transforms/95418c606d9f942809010a53ae6f7cfd/transformed/emoji2-1.2.0/AndroidManifest.xml:30:17-75
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+permission#com.qualcomm.ftcrobotcontroller.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+uses-permission#com.qualcomm.ftcrobotcontroller.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /home/moosecoding/.gradle/caches/8.9/transforms/b7f494b1c2fdd76998b0fbc70beb171f/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/67441a2a2e69f8b8c04b28d639a30b57/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.lifecycle:lifecycle-process:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/67441a2a2e69f8b8c04b28d639a30b57/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.6.2] /home/moosecoding/.gradle/caches/8.9/transforms/67441a2a2e69f8b8c04b28d639a30b57/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:30:17-78
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b2e47e2d637602f4035309578ea1ccfb/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
 uses-feature#android.hardware.camera.front
 ADDED from [com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:28:5-30:36
 	android:required

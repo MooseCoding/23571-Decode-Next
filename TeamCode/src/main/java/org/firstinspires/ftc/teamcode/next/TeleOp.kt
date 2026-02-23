@@ -1,13 +1,14 @@
 package org.firstinspires.ftc.teamcode.next
 
-import com.bylazar.telemetry.JoinedTelemetry
-import com.bylazar.telemetry.PanelsTelemetry
+import com.pedropathing.geometry.BezierLine
+import com.pedropathing.geometry.BezierPoint
 import com.pedropathing.geometry.Pose
 import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
+import dev.nextftc.extensions.pedro.FollowPath
 import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.extensions.pedro.PedroDriverControlled
 import dev.nextftc.ftc.Gamepads
@@ -43,8 +44,6 @@ import kotlin.math.atan2
 
 @TeleOp
 class TeleOp: NextFTCOpMode() {
-    var tele = JoinedTelemetry(PanelsTelemetry.ftcTelemetry, telemetry)
-
     init {
         addComponents(
             PedroComponent(Constants::createFollower),
@@ -148,34 +147,54 @@ class TeleOp: NextFTCOpMode() {
         }
 
 
-        Gamepads.gamepad1.rightStickButton.whenBecomesTrue { sens=0.3 } whenBecomesFalse { sens=1.0 }
+        // Gate Intake
+        Gamepads.gamepad1.dpadUp whenTrue FollowPath(
+            PedroComponent.follower.pathBuilder().addPath(
+                BezierLine(
+                    PedroComponent.follower.pose,
+                    gatePose
+                )
+            ).build()
+        )
 
-        Gamepads.gamepad1.dpadUp whenBecomesTrue {
-            // LL Relocalization
-
-        }
+        Gamepads.gamepad1.leftStickButton.whenBecomesTrue { sens=0.3 } whenBecomesFalse { sens=1.0 }
     }
 
-    var headingLock:Boolean = false
+    val gatePose: Pose = Pose(0.0,0.0,0.0)
+
+    var holdPose: Pose = Pose(0.0,0.0, 0.0)
+
+    var isHoldingPose: Boolean = false
 
     override fun onUpdate() {
-        if(!headingLock) {
-            val y = -gamepad1.left_stick_y * sens
-            val x = gamepad1.left_stick_x * sens
-            val t = gamepad1.right_stick_x * sens
+        if(gamepad1.rightStickButtonWasPressed()) {
+            isHoldingPose = !isHoldingPose
 
-            val d = max((abs(y) + abs(x) + abs(t)).toDouble(), 1.0)
-            fl.power = (y + x + t) / d
-            fr.power = (y - x - t) / d
-            bl.power = (y - x + t) / d
-            br.power = (y + x - t) / d
+            if(isHoldingPose){
+                holdPose = PedroComponent.follower.pose
+            }
         }
-        /*
+
+        if(isHoldingPose) {
+            PedroComponent.follower.holdPoint(holdPose)
+        }
         else {
-            PedroComponent.follower.holdPoint(Pose(PedroComponent.follower.pose.x, PedroComponent.follower.pose.y,
-                atan2(Outtake.turretGoalY- PedroComponent.follower.pose.y, Outtake.turretGoalX- PedroComponent.follower.pose.x) - PedroComponent.c
-                ))
-        }*/
+//            val y = -gamepad1.left_stick_y * sens
+//            val x = gamepad1.left_stick_x * sens
+//            val t = gamepad1.right_stick_x * sens
+//
+//            val d = max((abs(y) + abs(x) + abs(t)).toDouble(), 1.0)
+//            fl.power = (y + x + t) / d
+//            fr.power = (y - x - t) / d
+//            bl.power = (y - x + t) / d
+//            br.power = (y + x - t) / d
+            PedroDriverControlled(
+                { gamepad1.left_stick_y.toDouble() },
+                { gamepad1.left_stick_x.toDouble() },
+                { gamepad1.right_stick_x.toDouble() },
+                false
+            )
+        }
 
         telemetry.addData("Velocity = ",Flywheels.targetVelocity)
         telemetry.addData("Hood Position = ", Hood.hoodPosition)
