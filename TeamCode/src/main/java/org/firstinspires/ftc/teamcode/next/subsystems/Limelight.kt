@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
-import com.bylazar.panels.Panels
 import com.bylazar.telemetry.PanelsTelemetry
 import com.pedropathing.follower.Follower
 import com.pedropathing.ftc.FollowerBuilder
@@ -12,14 +11,10 @@ import com.qualcomm.hardware.limelightvision.Limelight3A
 import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.ftc.ActiveOpMode
-import org.firstinspires.ftc.robotcore.internal.hardware.android.GpioPin
 import org.firstinspires.ftc.teamcode.helpers.controllers.FusionLocalizer
 import org.firstinspires.ftc.teamcode.next.filters.Kalman
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Motif
-import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
-import org.firstinspires.ftc.teamcode.pedroPathing.Drawing
-import org.firstinspires.ftc.teamcode.pedroPathing.Tuning
 import kotlin.math.PI
 
 object Limelight : Subsystem {
@@ -82,9 +77,6 @@ object Limelight : Subsystem {
             addData("Fusion Y", follower.pose.y)
             addData("Fusion H", follower.heading / PI * 180.0)
         }
-
-        Drawing.drawRobot(follower.pose)
-        Drawing.drawRobot(PedroComponent.follower.pose)
 
         PanelsTelemetry.telemetry.run {
             addData("Limelight X: ", visionPose.x)

@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
-import com.bylazar.field.Drawable
 import com.bylazar.telemetry.PanelsTelemetry
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.delays.Delay
@@ -18,7 +17,6 @@ import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Dist
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
-import org.firstinspires.ftc.teamcode.pedroPathing.Drawing
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -52,7 +50,6 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
             addData("goalX", turretGoalX)
         }
 
-        Drawing.drawRobot(follower.pose)
 
         if (!fullManual) {
            Turret.autoTurret = true
