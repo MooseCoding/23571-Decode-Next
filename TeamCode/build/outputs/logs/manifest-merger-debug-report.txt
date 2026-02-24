@@ -76,6 +76,7 @@ MERGED from [androidx.documentfile:documentfile:1.0.0] /home/moosecoding/.gradle
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/76e85104871695f2d3f061a8c66da324/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/8e6bd84de173cced962a8293e9bc708c/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.pedropathing:telemetry:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/1a203d8c7165627b3922e1e64b05ff0a/transformed/telemetry-1.0.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.skeletonarmyftc.marrow:core:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/010556fe9e34f2bec9df309fca764323/transformed/core-1.0.0/AndroidManifest.xml:2:1-7:12
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:17:1-56:12
 MERGED from [com.jakewharton.threetenabp:threetenabp:1.3.1] /home/moosecoding/.gradle/caches/8.9/transforms/0852f3d12e24532f5c26201d252e527d/transformed/threetenabp-1.3.1/AndroidManifest.xml:2:1-9:12
 MERGED from [org.openftc:easyopencv:1.7.3] /home/moosecoding/.gradle/caches/8.9/transforms/0fb16a9416c3b356da311f6a58ecb209/transformed/easyopencv-1.7.3/AndroidManifest.xml:2:1-9:12
@@ -288,6 +289,8 @@ MERGED from [androidx.print:print:1.0.0] /home/moosecoding/.gradle/caches/8.9/tr
 MERGED from [androidx.print:print:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/8e6bd84de173cced962a8293e9bc708c/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.pedropathing:telemetry:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/1a203d8c7165627b3922e1e64b05ff0a/transformed/telemetry-1.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.pedropathing:telemetry:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/1a203d8c7165627b3922e1e64b05ff0a/transformed/telemetry-1.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.skeletonarmyftc.marrow:core:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/010556fe9e34f2bec9df309fca764323/transformed/core-1.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.skeletonarmyftc.marrow:core:1.0.0] /home/moosecoding/.gradle/caches/8.9/transforms/010556fe9e34f2bec9df309fca764323/transformed/core-1.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:20:5-44
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] /home/moosecoding/.gradle/caches/8.9/transforms/b906a03a0c71f718a5934b9562515949/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:20:5-44
 MERGED from [com.jakewharton.threetenabp:threetenabp:1.3.1] /home/moosecoding/.gradle/caches/8.9/transforms/0852f3d12e24532f5c26201d252e527d/transformed/threetenabp-1.3.1/AndroidManifest.xml:5:5-44

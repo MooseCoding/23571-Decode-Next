@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.pedroPathing;
 
 import com.pedropathing.control.FilteredPIDFCoefficients;
 import com.pedropathing.control.PIDFCoefficients;
+import com.pedropathing.control.PredictiveBrakingCoefficients;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.follower.FollowerConstants;
 import com.pedropathing.ftc.FollowerBuilder;
@@ -30,7 +31,7 @@ public class Constants {
             .xVelocity(67.76)
             .yVelocity(49);
     public static FollowerConstants followerConstants = new FollowerConstants()
-            .mass(11.43)
+            .mass(12.29)
             .forwardZeroPowerAcceleration(-34.089)
             .lateralZeroPowerAcceleration(-74.2867)
             .secondaryHeadingPIDFCoefficients(new PIDFCoefficients(3,0,0.04, 0))
@@ -38,7 +39,8 @@ public class Constants {
             .headingPIDFCoefficients(new PIDFCoefficients(1, 0.0, 0.01, 0.0))
             .useSecondaryTranslationalPIDF(true)
             .useSecondaryDrivePIDF(true)
-            .useSecondaryHeadingPIDF(true);
+            .useSecondaryHeadingPIDF(true)
+            .predictiveBrakingCoefficients(new PredictiveBrakingCoefficients(0.1, 0.044677792115235176,0.002249232044246721));
 
     public static PinpointConstants localizerConstants = new PinpointConstants()
             .forwardPodY(-15)
@@ -46,8 +48,8 @@ public class Constants {
             .distanceUnit(DistanceUnit.CM)
             .hardwareMapName("pp")
             .encoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD)
-            .forwardEncoderDirection(GoBildaPinpointDriver.EncoderDirection.REVERSED)
-            .strafeEncoderDirection(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+            .forwardEncoderDirection(GoBildaPinpointDriver.EncoderDirection.FORWARD)
+            .strafeEncoderDirection(GoBildaPinpointDriver.EncoderDirection.REVERSED);
     public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 1, 1);
 
     public static Follower createFollower(HardwareMap hardwareMap) {
