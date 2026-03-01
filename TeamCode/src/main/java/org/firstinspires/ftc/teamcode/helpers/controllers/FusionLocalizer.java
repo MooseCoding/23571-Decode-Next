@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.helpers.controllers;
 
 import com.pedropathing.geometry.Pose;
-import com.pedropathing.localization.Localizer;
 import com.pedropathing.math.MathFunctions;
 import com.pedropathing.math.Matrix;
 import com.pedropathing.math.Vector;
@@ -24,18 +23,18 @@ public class FusionLocalizer implements Localizer {
 
     public FusionLocalizer(
             Localizer deadReckoning,
-            double[] P,
-            double[] processVariance,
-            double[] measurementVariance,
+            Pose initialCovariance,
+            Pose processVariance,
+            Pose measurementVariance,
             int bufferSize
     ) {
         this.deadReckoning = deadReckoning;
         this.currentPosition = new Pose();
 
         //Standard Deviations for Kalman Filter
-        this.P = MatrixUtil.diag(P[0], P[1], P[2]);
-        this.Q = MatrixUtil.diag(processVariance[0], processVariance[1], processVariance[2]);
-        this.R = MatrixUtil.diag(measurementVariance[0], measurementVariance[1], measurementVariance[2]);
+        this.P = Matrix.diag(initialCovariance.getX(), initialCovariance.getY(), initialCovariance.getHeading());
+        this.Q = Matrix.diag(processVariance.getX(), processVariance.getY(), processVariance.getHeading());
+        this.R = Matrix.diag(measurementVariance.getX(), measurementVariance.getY(), measurementVariance.getHeading());
         this.bufferSize = bufferSize;
         twistHistory.put(0L, new Pose());
     }
@@ -90,17 +89,32 @@ public class FusionLocalizer implements Localizer {
      * @param dt the time step Δt in seconds
      */
     private void updateCovariance(double dt) {
-        Matrix G = MatrixUtil.createRotation(getPose().getHeading()).multiply(dt);
+        Matrix G = Matrix.createRotation(getPose().getHeading()).multiply(dt);
         P = P.plus(G.multiply(Q.multiply(G.transposed())));
     }
 
     /**
-     * Adds a vision measurement
+     * Adds a vision measurement using the default measurement variance
      * @param measuredPose the measured position by the camera, enter NaN to a specific axis if the camera couldn't measure that axis
      * @param timestamp the timestamp of the measurement
      */
     public void addMeasurement(Pose measuredPose, long timestamp) {
-        if (!poseHistory.containsKey(timestamp)) return;
+        addMeasurement(measuredPose, timestamp, null);
+    }
+
+    /**
+     * Adds a vision measurement with a custom variance for this specific measurement
+     * @param measuredPose the measured position by the camera, enter NaN to a specific axis if the camera couldn't measure that axis
+     * @param timestamp the timestamp of the measurement
+     * @param measurementVariance the variance for this specific measurement (x, y, heading), or null to use the default
+     */
+    public void addMeasurement(Pose measuredPose, long timestamp, Pose measurementVariance) {
+        Matrix measurementR = measurementVariance == null
+                ? R
+                : Matrix.diag(measurementVariance.getX(), measurementVariance.getY(), measurementVariance.getHeading());
+        // Reject if timestamp is outside our poseHistory time window
+        if (poseHistory.isEmpty() || timestamp < poseHistory.firstKey() || timestamp > poseHistory.lastKey())
+            return;
 
         Pose pastPose = interpolate(timestamp, poseHistory);
         if (pastPose == null)
@@ -114,12 +128,11 @@ public class FusionLocalizer implements Localizer {
         Matrix y = new Matrix(new double[][]{
                 {measX ? measuredPose.getX() - pastPose.getX() : 0},
                 {measY ? measuredPose.getY() - pastPose.getY() : 0},
-                {measH ? MathFunctions.normalizeAngle(
-                        measuredPose.getHeading() - pastPose.getHeading()) : 0}
+                {measH ? MathFunctions.normalizeAngleSigned(measuredPose.getHeading() - pastPose.getHeading()) : 0}
         });
 
         // Measurement mask M
-        Matrix M = MatrixUtil.diag(
+        Matrix M = Matrix.diag(
                 measX ? 1 : 0,
                 measY ? 1 : 0,
                 measH ? 1 : 0
@@ -129,9 +142,10 @@ public class FusionLocalizer implements Localizer {
         Matrix Pm = covarianceHistory.floorEntry(timestamp).getValue();
 
         // Innovation covariance S = P + R
-        Matrix S = Pm.plus(R);
+        Matrix S = Pm.plus(measurementR);
 
-        Matrix K = Pm.multiply(invert(S));
+        // Apply gain K = P * (P + R)^(-1)
+        Matrix K = Pm.multiply(S.inverse());
 
         // Apply mask
         K = M.multiply(K);
@@ -147,11 +161,11 @@ public class FusionLocalizer implements Localizer {
         poseHistory.put(timestamp, updatedPast);
 
         // Joseph-form covariance update
-        Matrix I = MatrixUtil.identity(3);
+        Matrix I = Matrix.identity(3);
         Matrix IK = I.minus(K);
         Matrix updatedCovariance =
                 IK.multiply(Pm).multiply(IK.transposed())
-                        .plus(K.multiply(R).multiply(K.transposed()));
+                        .plus(K.multiply(measurementR).multiply(K.transposed()));
 
         covarianceHistory.put(timestamp, updatedCovariance);
 
@@ -174,7 +188,7 @@ public class FusionLocalizer implements Localizer {
             poseHistory.put(t, nextPose);
 
             // Covariance propagation: P ← P + Q dt²
-            Matrix G = MatrixUtil.createRotation(prevPose.getHeading()).multiply(dt);
+            Matrix G = Matrix.createRotation(prevPose.getHeading()).multiply(dt);
             prevCov = prevCov.plus(G.multiply(Q.multiply(G.transposed())));
             covarianceHistory.put(t, prevCov);
 
@@ -184,18 +198,6 @@ public class FusionLocalizer implements Localizer {
 
         currentPosition = poseHistory.lastEntry().getValue().copy();
         P = covarianceHistory.lastEntry().getValue().copy();
-    }
-
-    //Inverts a matrix
-    private Matrix invert(Matrix m) {
-        if (m.getRows() != m.getColumns())
-            throw new IllegalStateException("Matrix must be square");
-
-        Matrix I = MatrixUtil.identity(m.getRows());
-        Matrix[] r = Matrix.rref(m, I);
-
-        if (!r[1].equals(I)) throw new IllegalArgumentException("matrix not invertible");
-        return r[1];
     }
 
     //Performs linear interpolation inside the history map for the value at a given timestamp
@@ -247,6 +249,7 @@ public class FusionLocalizer implements Localizer {
     public void setStartPose(Pose setStart) {
         deadReckoning.setStartPose(setStart);
         poseHistory.put(0L, setStart.copy());
+        covarianceHistory.put(0L, P.copy());
         currentPosition = setStart.copy();
     }
 
