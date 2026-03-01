@@ -25,6 +25,7 @@ import static org.firstinspires.ftc.teamcode.pedroPathing.MathFunc.quadraticFit;
 
 import android.annotation.SuppressLint;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -40,6 +41,7 @@ import java.util.List;
  */
 @Configurable
 @TeleOp(name = "BlackIce", group = "Pedro Pathing")
+@Disabled
 public class BlackIce extends SelectableOpMode {
     public static Follower follower;
 

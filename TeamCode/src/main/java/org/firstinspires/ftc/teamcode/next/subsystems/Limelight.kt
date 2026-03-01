@@ -40,6 +40,7 @@ object Limelight : Subsystem {
         ll.pipelineSwitch(0)
         ll.start()
 
+        /*
         fusionLocalizer = FusionLocalizer(
             PinpointLocalizer(ActiveOpMode.hardwareMap, Constants.localizerConstants),
             doubleArrayOf(5.0, 5.0, 5.0),
@@ -56,6 +57,8 @@ object Limelight : Subsystem {
         // follower.setStartingPose(Pose(88.0, 117.0, 117/180.0*PI))
          // PedroComponent.follower.setStartingPose(Pose(88.0, 117.0, 117/180.0*PI))
         follower.setStartingPose(PedroComponent.follower.pose)
+
+         */
     }
 
     fun kalman() {
@@ -95,13 +98,19 @@ object Limelight : Subsystem {
     }
 
     override fun periodic() {
-        val d = getTx()
+        val m = megatag2()
 
-        if(d != null) {
+        if(m != null) {
             ActiveOpMode.telemetry.run {
-                addData("TARGET FROM LL", d)
+                addData("POSE FROM LL", m)
             }
         }
+    }
+
+    fun justRelocalize() {
+        val vP: Pose = megatag2() ?: return
+
+        PedroComponent.follower.pose = vP
     }
 
     fun motif(): Motif {
@@ -128,11 +137,17 @@ object Limelight : Subsystem {
         return if (lR != null && lR.isValid) lR else null
     }
 
+    fun relocalize(p: Pose) {
+        if (!p.roughlyEquals(PedroComponent.follower.pose, 5.0)) {
+            PedroComponent.follower.setPose(p)
+        }
+    }
+
     fun megatag2(): Pose? {
         val lR = grabResultData() ?: return null
         if (lR.fiducialResults.isEmpty()) return null
 
-        ll.updateRobotOrientation(PedroComponent.follower.heading)
+        ll.updateRobotOrientation(lR.botpose.orientation.yaw)
 
         ActiveOpMode.telemetry.addData("LL Heading", lR.botpose_MT2.orientation.yaw)
 

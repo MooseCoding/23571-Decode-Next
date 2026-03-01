@@ -4,11 +4,11 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
+import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import org.firstinspires.ftc.teamcode.next.subsystems.Limelight
 @TeleOp
-@Disabled
 class LLTune:NextFTCOpMode() {
     init {
         addComponents(
@@ -20,15 +20,13 @@ class LLTune:NextFTCOpMode() {
 
     override fun onUpdate() {
         val r = Limelight.grabResultData()
+
         if (r!=null) {
             telemetry.addData("r.x", r.tx)
             telemetry.addData("r.y", r.ty)
             telemetry.addData("r.a", r.ta)
             telemetry.addData("fiducial", r.fiducialResults[0].fiducialId)
         }
-
-        val m = Limelight.motif()
-        telemetry.addData("motif", m)
 
         telemetry.update()
     }

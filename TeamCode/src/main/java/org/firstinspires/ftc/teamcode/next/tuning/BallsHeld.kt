@@ -43,8 +43,6 @@ class BallsHeld: NextFTCOpMode() {
                 Transfer.ballsHeld[i] = null
             }
         }
-
-        Gamepads.gamepad1.triangle whenBecomesTrue Outtake.sortShoot()
     }
 
     override fun onUpdate() {

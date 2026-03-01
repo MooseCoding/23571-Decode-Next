@@ -43,8 +43,8 @@ public class Constants {
             .predictiveBrakingCoefficients(new PredictiveBrakingCoefficients(0.1, 0.044677792115235176,0.002249232044246721));
 
     public static PinpointConstants localizerConstants = new PinpointConstants()
-            .forwardPodY(-15)
-            .strafePodX(-2)
+            .forwardPodY(16)
+            .strafePodX(-2.5)
             .distanceUnit(DistanceUnit.CM)
             .hardwareMapName("pp")
             .encoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD)

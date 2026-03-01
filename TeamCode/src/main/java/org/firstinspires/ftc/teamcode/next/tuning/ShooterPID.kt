@@ -35,7 +35,9 @@ class ShooterPID: NextFTCOpMode() {
         Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake() whenBecomesFalse Intake.stopIntake()
         Gamepads.gamepad1.leftBumper whenBecomesTrue Transfer.start()
         Gamepads.gamepad1.rightBumper whenBecomesTrue Transfer.stop()
-        Gamepads.gamepad1.dpadUp whenBecomesTrue { Transfer.transferMotor.power=0.3 } whenBecomesFalse InstantCommand{ Transfer.transferMotor.power=0.0 }
+        Gamepads.gamepad1.a whenBecomesTrue { Hood.hoodPosition = 0.0 }
+        Gamepads.gamepad1.dpadUp whenBecomesTrue { Hood.hoodPosition += 0.1 }
+        Gamepads.gamepad1.dpadDown whenBecomesTrue { Hood.hoodPosition -= 0.1 }
     }
 
     override fun onUpdate() {
