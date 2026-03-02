@@ -44,8 +44,7 @@ object Flywheels: Subsystem {
     override fun periodic() {
         if(!ActiveOpMode.opModeInInit) {
             if (!spinSlow) {
-                f1.power =
-                    flywheelController.calculate(KineticState(0.0, f1.velocity.absoluteValue / voltage.voltage))
+                f1.power = flywheelController.calculate(KineticState(0.0, f1.velocity.absoluteValue / voltage.voltage))
                 f2.power = f1.power
                 flywheelController.goal = KineticState(0.0, targetVelocity)
             } else {
@@ -63,11 +62,12 @@ object Flywheels: Subsystem {
             }
         }
 
-
+        /*
         PanelsTelemetry.telemetry.run {
             addData("Flywheel Target Velo", targetVelocity)
             addData("Flywheel velocity", f1.velocity.absoluteValue)
         }
+         */
     }
 
     /**

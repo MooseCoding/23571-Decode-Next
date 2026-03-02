@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
+import android.provider.Settings
+import com.bylazar.configurables.annotations.Configurable
 import com.bylazar.telemetry.PanelsTelemetry
 import com.pedropathing.follower.Follower
 import com.pedropathing.ftc.FollowerBuilder
@@ -12,11 +14,13 @@ import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.ftc.ActiveOpMode
 import org.firstinspires.ftc.teamcode.helpers.controllers.FusionLocalizer
+import org.firstinspires.ftc.teamcode.helpers.controllers.LowPassFilter
 import org.firstinspires.ftc.teamcode.next.filters.Kalman
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Motif
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 import kotlin.math.PI
 
+@Configurable
 object Limelight : Subsystem {
 
     lateinit var ll: Limelight3A
@@ -97,19 +101,17 @@ object Limelight : Subsystem {
 //        )
     }
 
-    override fun periodic() {
-        val m = megatag2()
+    @JvmField var a = 0.02f
+    val lpf: LowPassFilter = LowPassFilter(a)
 
-        if(m != null) {
-            ActiveOpMode.telemetry.run {
-                addData("POSE FROM LL", m)
-            }
-        }
+    override fun periodic() {
+        lpf.alpha = a
+        val m = megatag2() ?: return
+
+        justRelocalize(m)
     }
 
-    fun justRelocalize() {
-        val vP: Pose = megatag2() ?: return
-
+    fun justRelocalize(vP: Pose) {
         PedroComponent.follower.pose = vP
     }
 
@@ -117,6 +119,7 @@ object Limelight : Subsystem {
         val fR = grabResultData()
         if (fR != null) {
             for (f: FiducialResult in fR.fiducialResults) {
+                f.targetXDegrees
                 when (f.fiducialId) {
                     21 -> return Motif.GPP
                     22 -> return Motif.PGP
@@ -152,10 +155,18 @@ object Limelight : Subsystem {
         ActiveOpMode.telemetry.addData("LL Heading", lR.botpose_MT2.orientation.yaw)
 
         val botpose = lR.botpose_MT2 ?: return null
+        val yaw = lpf.filter((PI/180.0*botpose.orientation.yaw - PI/2).toFloat())
+
+        /*PanelsTelemetry.telemetry.run {
+            addData("Yaw", yaw)
+            update()
+        }*/
+
 
         return Pose(
             botpose.position.y * 39.37 + 72,
             -(botpose.position.x * 39.37) + 72,
+            yaw.toDouble()
         )
     }
 }

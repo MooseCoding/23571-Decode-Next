@@ -10,10 +10,12 @@ import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.extensions.pedro.FollowPath
 import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.extensions.pedro.PedroDriverControlled
+import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import dev.nextftc.hardware.impl.MotorEx
+import org.firstinspires.ftc.teamcode.helpers.TelemetryImplUpstreamSubmission
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Light
@@ -28,6 +30,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 import kotlin.math.PI
 import kotlin.math.abs
+import kotlin.math.atan2
 import kotlin.math.max
 import kotlin.math.min
 
@@ -38,7 +41,7 @@ class TeleOp: NextFTCOpMode() {
             PedroComponent(Constants::createFollower),
             BindingsComponent,
             BulkReadComponent,
-            SubsystemComponent( DriveTrain, Intake, Outtake, Light, Sensor, Transfer, Limelight)
+            SubsystemComponent( DriveTrain, Intake, Outtake, Light, Sensor, Transfer)
         )
     }
 
@@ -87,6 +90,11 @@ class TeleOp: NextFTCOpMode() {
 
         Gamepads.gamepad2.circle whenBecomesTrue {
             Outtake.fullManual = !Outtake.fullManual
+        }
+
+        Gamepads.gamepad1.circle whenBecomesTrue {
+            Turret.autoTurret = false
+            Outtake.fullManual = true
         }
 
         Gamepads.gamepad2.rightTrigger.greaterThan(0.3) whenBecomesTrue {
@@ -178,36 +186,17 @@ class TeleOp: NextFTCOpMode() {
         br.power = (y + x - t) / d
     }
 
+    val telemetry: TelemetryImplUpstreamSubmission by lazy { TelemetryImplUpstreamSubmission(this) }
+
     override fun onUpdate() {
-        if(gamepad1.rightStickButtonWasPressed()) {
-            isHoldingPose = !isHoldingPose
-
-            if(isHoldingPose){
-                holdPose = PedroComponent.follower.pose
-            }
-        }
-
-        if(isHoldingPose) {
-            PedroComponent.follower.holdPoint(holdPose)
-        }
-        else {
-            val y = -gamepad1.left_stick_y * sens
-            val x = gamepad1.left_stick_x * sens
-            val t = gamepad1.right_stick_x * sens
-
-            val d = max((abs(y) + abs(x) + abs(t)), 1.0)
-            fl.power = (y + x + t) / d
-            fr.power = (y - x - t) / d
-            bl.power = (y - x + t) / d
-            br.power = (y + x - t) / d
-//            PedroDriverControlled(
-//                { gamepad1.left_stick_y.toDouble() },
-//                { gamepad1.left_stick_x.toDouble() },
-//                { gamepad1.right_stick_x.toDouble() },
-//                false
-//            ).schedule()
-        }
-
+        val y: Double = -gamepad1.left_stick_y.toDouble() * sens
+        val x: Double = gamepad1.left_stick_x.toDouble() * sens
+        val t: Double = gamepad1.right_stick_x.toDouble() * sens
+        val d = max((abs(y) + abs(x) + abs(t)), 1.0)
+        fl.power = (y + x + t) / d
+        fr.power = (y - x - t) / d
+        bl.power = (y - x + t) / d
+        br.power = (y + x - t) / d
 
 
         telemetry.addData("Velocity = ",Flywheels.targetVelocity)

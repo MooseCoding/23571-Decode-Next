@@ -20,10 +20,10 @@ object Hood: Subsystem {
             hoodServo.servo.position = hoodPosition
         }
 
-        PanelsTelemetry.telemetry.run {
+        /*PanelsTelemetry.telemetry.run {
             addData("Hood position", hoodServo.position)
             addData("restoreTo", restoreTo)
-        }
+        }*/
     }
 
 

@@ -10,6 +10,7 @@ import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import org.firstinspires.ftc.teamcode.helpers.SequentialGroupLocal
+import org.firstinspires.ftc.teamcode.helpers.TelemetryImplUpstreamSubmission
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.FlywheelLight
@@ -38,6 +39,8 @@ class CloseAuto: NextFTCOpMode() {
     override fun onInit() {
         Turret.autoTurret = true
     }
+
+    val telemetry: TelemetryImplUpstreamSubmission by lazy { TelemetryImplUpstreamSubmission(this) }
 
     override fun onWaitForStart() {
         if (gamepad1.triangle) { alliance = Alliance.RED }

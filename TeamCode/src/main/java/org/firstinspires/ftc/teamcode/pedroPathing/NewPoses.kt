@@ -18,9 +18,9 @@ class NewPoses {
     var turn: Pose = Pose(12.5, 60.0, 3*PI/2)
 
     var closeShoot: Pose = Pose(56.5, 80.0) // Tangential
-    var gateIntake: Pose = Pose(28.0, 72.5, 192.0)
-    var gateIntakeSweep: Pose = Pose(12.65, 58.0,110.0)
-    var gateControlPoint: Pose = Pose(20.2, 46.1)
+    var gateIntake: Pose = Pose(27.3, 72.5, 192.0)
+    var gateIntakeSweep: Pose = Pose(12.65, 52.0,110.0)
+    var gateControlPoint: Pose = Pose(20.2, 43.1)
 
     var intakeRow1: Pose = Pose(18.0, 84.0, PI)
     var intakeControl: Pose = Pose(55.1, 86.1)
@@ -33,9 +33,9 @@ class NewPoses {
     var controlPointRow3: Pose = Pose(61.2, 38.8)
 
     var farShotPose: Pose = Pose(50.0,12.0) // Tangential
-    var humanPlayerIntake: Pose = Pose(10.0, 9.65) // Tangential
+    var humanPlayerIntake: Pose = Pose(11.0, 9.65) // Tangential
 
-    var farGateIntake: Pose = Pose(12.0, 33.5)
+    var farGateIntake: Pose = Pose(13.0, 33.5)
     var farGateControlPoint: Pose = Pose(17.2, 8.3)
 
     fun flipPose() {
@@ -106,7 +106,7 @@ class NewPoses {
                     gateIntakeSweep,
                     closeShoot
                 )
-            ).setLinearHeadingInterpolation(110.0/180.0 * PI,192.0/180.0 * PI)
+            ).setTangentHeadingInterpolation()
             .build()
         intake1 = follower.pathBuilder()
             .addPath(

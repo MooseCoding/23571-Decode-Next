@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
 import com.bylazar.telemetry.PanelsTelemetry
+import com.pedropathing.geometry.Pose
+import com.pedropathing.math.Vector
 import dev.nextftc.core.commands.Command
 import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.groups.ParallelDeadlineGroup
@@ -13,9 +15,14 @@ import org.firstinspires.ftc.teamcode.helpers.SequentialGroupLocal
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Aimbot
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Dist
+import org.firstinspires.ftc.teamcode.next.subsystems.helpers.ShotTime
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
+import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret.turretGoalX
+import java.util.Arrays
+import java.util.LinkedList
+import java.util.Queue
 import kotlin.math.pow
 import kotlin.math.sqrt
 import kotlin.time.Duration.Companion.seconds
@@ -32,9 +39,16 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
 
     override fun periodic() {
         goalX = if (DriveTrain.alliance == Alliance.RED) {
-            144.0-3.0
+            144.0
         } else {
-            0.0-3.0
+            0.0
+        }
+
+        Turret.turretGoalX = if(DriveTrain.alliance == Alliance.RED) {
+            144-3.0
+        }
+        else {
+            -3.0
         }
 
         if (!fullManual) {
@@ -58,21 +72,30 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
      */
     var dist:Double = 0.0
     fun auto() {
-        dist = sqrt((goalX - PedroComponent.follower.pose.x).pow(2) + (goalY - PedroComponent.follower.pose.y).pow(2))
+        updateFilteredVelocities()
+        targetPose = if(isMoving()) {
+            getExpectedPose()
+        } else {
+            Pose(turretGoalX, 144.0)
+        }
+        dist = sqrt((targetPose.x - PedroComponent.follower.pose.x).pow(2) + (targetPose.y - PedroComponent.follower.pose.y).pow(2))
         val values: DoubleArray = Aimbot.get(dist)
-
+        flyTime = ShotTime.get(dist)
+        /*
         PanelsTelemetry.telemetry.addData("dist", dist)
         PanelsTelemetry.telemetry.addData("isShooting", isShooting)
         PanelsTelemetry.telemetry.addData("restore", restore)
-
+        */
 
         if(!isShooting) {
-            Flywheels.targetVelocity = values[1] + 200
+            Flywheels.targetVelocity = values[1] + 160
             Hood.hoodPosition = values[0] + 0.06
         }
 
+        /*
         PanelsTelemetry.telemetry.addData("hood[0]", values[0])
         PanelsTelemetry.telemetry.addData("flywheel[1]", values[1])
+         */
     }
     fun setBack(): InstantCommand = InstantCommand{
         Flywheels.targetVelocity = restore
@@ -98,6 +121,76 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
             Intake.stopIntake()
         )
     }
+
+    var targetPose:Pose = Pose()
+    const val MEDIAN_FILTER_SIZE: Int = 10
+    private val velXBuffer: Queue<Double> = LinkedList<Double>()
+    private val velYBuffer: Queue<Double> = LinkedList<Double>()
+    private val headingVelBuffer: Queue<Double> = LinkedList<Double>()
+    private val velXArray = DoubleArray(MEDIAN_FILTER_SIZE)
+    private val velYArray = DoubleArray(MEDIAN_FILTER_SIZE)
+    private val headingVelArray = DoubleArray(MEDIAN_FILTER_SIZE)
+
+    var epsilonStopXY: Double = 30.0
+    var epsilonStopH: Double = 10.0
+    private var filteredVelX = 0.0
+    private var filteredVelY = 0.0
+    private var filteredHeadingVel = 0.0
+    private fun applyMedianFilter(
+        buffer: Queue<Double>,
+        newValue: Double,
+        array: DoubleArray
+    ): Double {
+        buffer.poll()
+        buffer.add(newValue)
+
+        var index = 0
+        for (value in buffer) {
+            array[index++] = value
+        }
+
+        Arrays.sort(array)
+
+        return array[MEDIAN_FILTER_SIZE / 2]
+    }
+
+    private fun updateFilteredVelocities() {
+        val vel: Vector = PedroComponent.follower.velocity
+        val rawVelX = vel.getXComponent()
+        val rawVelY = vel.getYComponent()
+        val rawHeadingVel: Double = PedroComponent.follower.angularVelocity
+
+        filteredVelX = applyMedianFilter(velXBuffer, rawVelX, velXArray)
+        filteredVelY = applyMedianFilter(velYBuffer, rawVelY, velYArray)
+        filteredHeadingVel = applyMedianFilter(headingVelBuffer, rawHeadingVel, headingVelArray)
+    }
+
+    public fun isMoving(): Boolean {
+        return PedroComponent.follower.velocity.magnitude > epsilonStopH
+    }
+
+    fun getExpectedPose(): Pose {
+        var velX: Double = filteredVelX
+        var velY: Double = filteredVelY
+        var velH: Double = filteredHeadingVel
+
+        if (!isMoving()) {
+            velX = 0.0
+            velY = 0.0
+        }
+
+        val g: Pose = Pose(turretGoalX, 144.0)
+        val p =  Pose(
+            g.x - velX * flyTime,
+            g.y - velY * flyTime,
+            g.heading - velH * flyTime
+        )
+
+        return p
+    }
+
+    var flyTime:Double = 0.60
+
 
     fun shootFar(): Command {
         // isShooting = true
@@ -142,44 +235,4 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
             }
         }
     }
-
-    /*fun sortShoot(): Command {
-        return SequentialGroupLocal(
-            InstantCommand {isShooting = true},
-            ParallelDeadlineGroup(
-                SequentialGroupLocal(
-                    ParallelGroup (
-                        Intake.runIntake(),
-                        Transfer.start(),
-                    ),
-                    Delay(0.12),
-                    InstantCommand {
-                        Transfer.currentBall--
-                        Transfer.ballsHeld[0] = Transfer.ballsHeld[1]
-                        Transfer.ballsHeld[1] = Transfer.ballsHeld[2]
-                        Transfer.ballsHeld[2] = null
-                    },
-                    Delay(0.12),
-                    InstantCommand {
-                        Transfer.currentBall--
-                        Transfer.ballsHeld[0] = Transfer.ballsHeld[1]
-                        Transfer.ballsHeld[1] = null
-                    },
-                    Delay(0.12),
-                    InstantCommand {
-                        Transfer.currentBall--
-                        Transfer.ballsHeld[0] = null
-                    },
-                    InstantCommand {
-                        isShooting = false
-                    },
-                    Intake.stopIntake(),
-                    Transfer.stop()//ball shoots every 0.2 second
-                ),
-                InstantCommand {
-                    getHoodForSort(Aimbot.getHood(dist, 1500.0))
-                }
-            )
-        )
-    }*/
 }

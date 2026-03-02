@@ -10,6 +10,8 @@ import dev.nextftc.core.units.rad
 import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.ServoEx
+import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
+import org.firstinspires.ftc.teamcode.next.subsystems.Outtake.isMoving
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.ShotTime
 import java.util.Arrays
 import java.util.LinkedList
@@ -58,98 +60,14 @@ object Turret: Subsystem {
 
     var distance = 0.0
 
-    val goalX = 0.0;
-    val goalY = 144.0;
     val turretGoalY = 144.0;
-    val turretGoalX = 0.0;
-
-    var targetPose:Pose = Pose()
-    const val MEDIAN_FILTER_SIZE: Int = 10
-    private val velXBuffer: Queue<Double> = LinkedList<Double>()
-    private val velYBuffer: Queue<Double> = LinkedList<Double>()
-    private val headingVelBuffer: Queue<Double> = LinkedList<Double>()
-    private val velXArray = DoubleArray(MEDIAN_FILTER_SIZE)
-    private val velYArray = DoubleArray(MEDIAN_FILTER_SIZE)
-    private val headingVelArray = DoubleArray(MEDIAN_FILTER_SIZE)
-
-    var epsilonStopXY: Double = 30.0
-    var epsilonStopH: Double = 10.0
-    private var filteredVelX = 0.0
-    private var filteredVelY = 0.0
-    private var filteredHeadingVel = 0.0
-
-    private fun initializeFilterBuffers() {
-        for (i in 0..<MEDIAN_FILTER_SIZE) {
-            velXBuffer.add(0.0)
-            velYBuffer.add(0.0)
-            headingVelBuffer.add(0.0)
-        }
-    }
-
-    private fun applyMedianFilter(
-        buffer: Queue<Double>,
-        newValue: Double,
-        array: DoubleArray
-    ): Double {
-        buffer.poll()
-        buffer.add(newValue)
-
-        var index = 0
-        for (value in buffer) {
-            array[index++] = value
-        }
-
-        Arrays.sort(array)
-
-        return array[MEDIAN_FILTER_SIZE / 2]
-    }
-
-    private fun updateFilteredVelocities() {
-        val vel: Vector = PedroComponent.follower.velocity
-        val rawVelX = vel.getXComponent()
-        val rawVelY = vel.getYComponent()
-        val rawHeadingVel: Double = PedroComponent.follower.angularVelocity
-
-        filteredVelX = applyMedianFilter(velXBuffer, rawVelX, velXArray)
-        filteredVelY = applyMedianFilter(velYBuffer, rawVelY, velYArray)
-        filteredHeadingVel = applyMedianFilter(headingVelBuffer, rawHeadingVel, headingVelArray)
-    }
-
-    public fun isMoving(): Boolean {
-        return PedroComponent.follower.velocity.magnitude > epsilonStopH
-    }
-
-    fun getExpectedPose(): Pose {
-        var velX: Double = filteredVelX
-        var velY: Double = filteredVelY
-        if (!isMoving()) {
-            velX = 0.0
-            velY = 0.0
-        }
-
-        val g: Pose = Pose(turretGoalX, goalY)
-        val p =  Pose(
-            g.x - velX * flyTime,
-            g.y - velY * flyTime,
-            g.heading
-        )
-
-        ActiveOpMode.telemetry.run {
-            addData("New pos", p)
-        }
-
-        return p
-    }
-
-    var flyTime:Double = 0.60
-
+    var turretGoalX = 0.0;
 
     override fun periodic() {
         currentX = PedroComponent.follower.pose.x
         currentY = PedroComponent.follower.pose.y
         currentHeading = PedroComponent.follower.heading
-        distance = sqrt((goalX - currentX).pow(2) + (goalY - currentY).pow(2))
-        flyTime = ShotTime.get(distance)
+        distance = sqrt((turretGoalX - currentX).pow(2) + (144.0 - currentY).pow(2))
 
         if(autoTurret) {
             swm()
@@ -159,6 +77,7 @@ object Turret: Subsystem {
 
         goToYaw(target)
 
+        /*
         ActiveOpMode.telemetry.run {
             addData("current Pos", PedroComponent.follower.pose)
             addData("current target", target)
@@ -166,10 +85,12 @@ object Turret: Subsystem {
             addData("velocity", PedroComponent.follower.velocity.magnitude)
             update()
         }
+         */
     }
 
     @JvmField var test:Double = 0.0
 
+    /*
     private fun swm30099(): Pose {
         val botPose = PedroComponent.follower.pose
         val velocity = PedroComponent.follower.velocity
@@ -184,19 +105,15 @@ object Turret: Subsystem {
             corrected = r.plus(velocity.times(t))
         }
         return corrected.toPose
-    }
+    }*/
 
     val Vector.toPose: Pose
         get() = Pose(this.xComponent, this.yComponent)
 
     private fun swm() {
         if(isMoving()) {
-            updateFilteredVelocities()
-
-            val pT: Pose = getExpectedPose()
-
-            val gY: Double = pT.y
-            val gX:Double = pT.x
+            val gY: Double = Outtake.targetPose.y
+            val gX:Double = Outtake.targetPose.x
 
             val mu = atan2(gY - currentY, gX - currentX)
 
@@ -211,17 +128,12 @@ object Turret: Subsystem {
             target = -clampedError * 180.0 / PI
         }
         else {
-            trackStatic()
             track()
         }
     }
 
-    private fun trackStatic() {
-        targetPose = Pose(turretGoalX, turretGoalY)
-    }
-
     private fun track() {
-        val mu = atan2(targetPose.y - currentY, targetPose.x - currentX)
+        val mu = atan2(Outtake.targetPose.y - currentY, Outtake.targetPose.x - currentX)
 
         val error = (mu - currentHeading).rad.normalized.inRad
 

@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.helpers.controllers
 
-class LowPassFilter(private val alpha: Float) {
+class LowPassFilter(var alpha: Float) {
     private var outputDeg: Float? = null  // null until first value
 
     /**
