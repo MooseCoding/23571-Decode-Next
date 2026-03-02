@@ -129,9 +129,9 @@ object Turret: Subsystem {
 
         val g: Pose = Pose(turretGoalX, goalY)
         val p =  Pose(
-            g.getX() - velX * flyTime,
-            g.getY() - velY * flyTime,
-            g.getHeading()
+            g.x - velX * flyTime,
+            g.y - velY * flyTime,
+            g.heading
         )
 
         ActiveOpMode.telemetry.run {
@@ -183,14 +183,6 @@ object Turret: Subsystem {
             val t = ShotTime.get(r.magnitude) // Distance vector magnitude is distance
             corrected = r.plus(velocity.times(t))
         }
-        /*ActiveOpMode.telemetry.addData("targetPose.x", targetPose.x)
-        ActiveOpMode.telemetry.addData("targetPose.y",targetPose.y)
-        ActiveOpMode.telemetry.addData("botPose.x",botPose.x)
-        ActiveOpMode.telemetry.addData("botPose.y",botPose.y)
-        ActiveOpMode.telemetry.addData("correct.x",corrected.xComponent)
-        ActiveOpMode.telemetry.addData("correct.y", corrected.yComponent)
-        ActiveOpMode.telemetry.addData("velocity.x", velocity.xComponent)
-        ActiveOpMode.telemetry.addData("velocity.y", velocity.yComponent)*/
         return corrected.toPose
     }
 
@@ -198,27 +190,6 @@ object Turret: Subsystem {
         get() = Pose(this.xComponent, this.yComponent)
 
     private fun swm() {
-        /*
-        val p = PedroComponent.follower.velocity
-        val a = PedroComponent.follower.acceleration
-        if(p.magnitude > 50.0) {
-            velocityX = p.xComponent
-            velocityY = p.yComponent
-            velocityH = p.theta
-        }
-        else {
-            velocityX = 0.0
-            velocityY = 0.0
-            velocityH = 0.0
-        }
-
-        val shotTime = ShotTime.get(distance)
-
-        val mu = atan2(goalY - currentY - velocityY * shotTime / test, turretGoalX - currentX - velocityX * shotTime/ test)
-        val deltaHeading = (mu - currentHeading - velocityH * shotTime/ test).rad.normalized.inRad.coerceIn((-maxAngle/180)*PI, (maxAngle/180)*PI) // Coerce Properly
-        target = -deltaHeading * 180/PI
-         */
-
         if(isMoving()) {
             updateFilteredVelocities()
 

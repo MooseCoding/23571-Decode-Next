@@ -24,36 +24,22 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
     var fullManual = false
     var distance: Dist = Dist.CLOSE
 
-    var goalX = 6.0
+    var goalX = 0.0
     const val goalY = 144
-
-    var turretGoalX = 0.0
-    const val turretGoalY = 144.0
-
     var restore = 0.0
 
     var isShooting: Boolean = false
 
     override fun periodic() {
         goalX = if (DriveTrain.alliance == Alliance.RED) {
-            144 - 6.0
+            144.0-3.0
         } else {
-            6.0
+            0.0-3.0
         }
-        turretGoalX = if (DriveTrain.alliance == Alliance.RED) {
-            144.0
-        } else {
-            0.0
-        }
-
-        ActiveOpMode.telemetry.run {
-            addData("goalX", turretGoalX)
-        }
-
 
         if (!fullManual) {
-           Turret.autoTurret = true
-             auto()
+            Turret.autoTurret = true
+            auto()
         } else {
             Turret.autoTurret = false
         }
@@ -81,8 +67,8 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
 
 
         if(!isShooting) {
-            Flywheels.targetVelocity = values[1] + 150
-            Hood.hoodPosition = values[0] + 0.04
+            Flywheels.targetVelocity = values[1] + 200
+            Hood.hoodPosition = values[0] + 0.06
         }
 
         PanelsTelemetry.telemetry.addData("hood[0]", values[0])
@@ -102,11 +88,9 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
         // isShooting = true
         return SequentialGroupLocal(
             InstantCommand {isShooting = true},
-            ParallelGroup (
-                    Intake.runIntake(),
-                    Transfer.start(),
-                ),
-                Delay(0.35),
+            Intake.runIntake(),
+            Transfer.start(),
+            Delay(0.48),
             InstantCommand {
                 isShooting = false
             },
@@ -125,7 +109,7 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
                 Hood.setRestore(),
                 setSetBack()
             ),
-            Delay(0.22.seconds),
+            Delay(0.28.seconds),
             Hood.sequence(0.2),
             Delay(0.1.seconds),
 

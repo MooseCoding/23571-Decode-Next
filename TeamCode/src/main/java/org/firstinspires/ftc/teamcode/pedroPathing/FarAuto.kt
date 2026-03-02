@@ -87,29 +87,29 @@ class FarAuto: NextFTCOpMode() {
 
         SequentialGroupLocal(
             Flywheels.spin(),
-            Delay(2.2.seconds),
+            Delay(1.5.seconds),
             Outtake.shoot(),
             FollowPath(poses.farIntake),
             Delay(0.3.seconds),
             Outtake.shootFar(),
             FollowPath(poses.humanPlayer),
-            Delay(0.5.seconds),
+            Delay(0.4.seconds),
             FollowPath(poses.humanPlayerShoot),
             Outtake.shootFar(), // 9 ball
             FollowPath(poses.rampIntake),
-            Delay(0.5.seconds),
+            Delay(0.4.seconds),
             FollowPath(poses.rampShoot),
             Outtake.shootFar(), // 12 ball
             FollowPath(poses.rampIntake),
-            Delay(0.5.seconds),
+            Delay(0.4.seconds),
             FollowPath(poses.rampShoot),
             Outtake.shootFar(), // 15 ball
             FollowPath(poses.rampIntake),
-            Delay(0.5.seconds),
+            Delay(0.4.seconds),
             FollowPath(poses.rampShoot),
             Outtake.shootFar(), // 18 ball
             FollowPath(poses.rampIntake),
-            Delay(0.5.seconds),
+            Delay(0.4.seconds),
             FollowPath(poses.rampShoot),
             Outtake.shootFar(), // 21 ball
             FollowPath(poses.humanPlayer), // Park

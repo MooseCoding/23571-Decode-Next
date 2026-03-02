@@ -60,7 +60,7 @@ class TeleOp: NextFTCOpMode() {
 
     override fun onStartButtonPressed() {
         Flywheels.spin().schedule()
-        //PedroComponent.follower.pose = Pose(DriveTrain.currentX, DriveTrain.currentY, DriveTrain.currentHeading)
+        // PedroComponent.follower.pose = Pose(DriveTrain.currentX, DriveTrain.currentY, DriveTrain.currentHeading)
         PedroComponent.follower.pose = Pose(72.0, 72.0, PI/2)
 
         Gamepads.gamepad1.rightBumper whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()
@@ -213,6 +213,7 @@ class TeleOp: NextFTCOpMode() {
         telemetry.addData("Velocity = ",Flywheels.targetVelocity)
         telemetry.addData("Hood Position = ", Hood.hoodPosition)
         telemetry.addData("Is Holding pose", isHoldingPose)
+        telemetry.addData("Pose", PedroComponent.follower.pose)
         telemetry.update()
     }
 }

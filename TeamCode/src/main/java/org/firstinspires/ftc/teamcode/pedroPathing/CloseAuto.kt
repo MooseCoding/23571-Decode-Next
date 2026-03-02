@@ -72,38 +72,32 @@ class CloseAuto: NextFTCOpMode() {
         SequentialGroupLocal(
                 Flywheels.spin(),
                 Delay(1.5.seconds),
-                //Outtake.shoot(),
-                //Intake.runIntake(),
+                Outtake.shoot(),
+                Intake.runIntake(),
                 // Intake from row 2
 
                 FollowPath(poses.intake2),
-
-                Delay(0.4.seconds),
-                //Outtake.shoot(),
+                Outtake.shoot(),
 
                 FollowPath(poses.gateIntakeChain),
                 Delay(0.6.seconds),
                 FollowPath(poses.gateIntakeToShoot),
-                Delay(0.4.seconds),
 
-                //Outtake.shoot(),
+                Outtake.shoot(),
                 FollowPath(poses.gateIntakeChain),
                 Delay(0.6.seconds),
 
                 FollowPath(poses.gateIntakeToShoot),
 
-                Delay(0.4.seconds),
-                //Outtake.shoot(), // 9 ball
+                Outtake.shoot(), // 9 ball
                 FollowPath(poses.gateIntakeChain),
                 Delay(0.6.seconds),
 
                 FollowPath(poses.gateIntakeToShoot),
 
-                Delay(0.4.seconds),
-
-                //Outtake.shoot(), // 15 balls
+                Outtake.shoot(), // 15 balls
                 FollowPath(poses.intake1),
-                //Outtake.shoot()
+                Outtake.shoot()
             ).schedule()
         }
     }

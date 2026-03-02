@@ -29,13 +29,13 @@ class NewPoses {
 
     // Far Poses
     var farStart: Pose = Pose(56.0, 8.0, PI/2)
-    var intakeRow3: Pose = Pose(8.3, 35.64) // Tangential
+    var intakeRow3: Pose = Pose(14.0, 35.64) // Tangential
     var controlPointRow3: Pose = Pose(61.2, 38.8)
 
     var farShotPose: Pose = Pose(50.0,12.0) // Tangential
-    var humanPlayerIntake: Pose = Pose(9.1, 9.65) // Tangential
+    var humanPlayerIntake: Pose = Pose(10.0, 9.65) // Tangential
 
-    var farGateIntake: Pose = Pose(7.8, 33.5)
+    var farGateIntake: Pose = Pose(12.0, 33.5)
     var farGateControlPoint: Pose = Pose(17.2, 8.3)
 
     fun flipPose() {
