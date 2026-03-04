@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.next.tuning
 
 import com.bylazar.telemetry.JoinedTelemetry
 import com.bylazar.telemetry.PanelsTelemetry
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.components.BindingsComponent
@@ -15,6 +16,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 
 
 @TeleOp
+@Disabled
 class ShooterPID: NextFTCOpMode() {
     init {
         addComponents(

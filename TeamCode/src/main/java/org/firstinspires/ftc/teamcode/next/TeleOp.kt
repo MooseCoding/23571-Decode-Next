@@ -15,6 +15,7 @@ import dev.nextftc.ftc.Gamepads
 import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import dev.nextftc.hardware.impl.MotorEx
+import dev.nextftc.units.unittypes.TemperatureUnit
 import org.firstinspires.ftc.teamcode.helpers.TelemetryImplUpstreamSubmission
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
@@ -63,8 +64,8 @@ class TeleOp: NextFTCOpMode() {
 
     override fun onStartButtonPressed() {
         Flywheels.spin().schedule()
-        // PedroComponent.follower.pose = Pose(DriveTrain.currentX, DriveTrain.currentY, DriveTrain.currentHeading)
-        PedroComponent.follower.pose = Pose(72.0, 72.0, PI/2)
+        PedroComponent.follower.pose = Pose(DriveTrain.currentX, DriveTrain.currentY, DriveTrain.currentHeading)
+        // PedroComponent.follower.pose = Pose(72.0, 72.0, PI/2)
 
         Gamepads.gamepad1.rightBumper whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()
         Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake() whenBecomesFalse Intake.stopIntake()
@@ -88,39 +89,28 @@ class TeleOp: NextFTCOpMode() {
             }
         }
 
-        Gamepads.gamepad2.circle whenBecomesTrue {
-            Outtake.fullManual = !Outtake.fullManual
-        }
-
         Gamepads.gamepad1.circle whenBecomesTrue {
-            Turret.autoTurret = false
-            Outtake.fullManual = true
-        }
-
-        Gamepads.gamepad2.rightTrigger.greaterThan(0.3) whenBecomesTrue {
-            Hood.hoodPosition = Outtake.farHood
-            Flywheels.targetVelocity = Outtake.farVelocity
-        }
-        Gamepads.gamepad2.leftTrigger.greaterThan(0.3) whenBecomesTrue {
-            Hood.hoodPosition = Outtake.closeHood
-            Flywheels.targetVelocity = Outtake.closeVelocity
+            Turret.autoTurret = !Turret.autoTurret
+            if(!Turret.autoTurret) {
+                Turret.goToYaw(0.0)
+            }
         }
 
         Gamepads.gamepad2.leftBumper whenBecomesTrue Turret.spinLeft()
         Gamepads.gamepad2.rightBumper whenBecomesTrue Turret.spinRight()
 
         Gamepads.gamepad2.dpadUp whenBecomesTrue {
-            Hood.hoodPosition -= 0.1
+            Outtake.hH -= 0.1
         }
         Gamepads.gamepad2.dpadDown whenBecomesTrue {
-            Hood.hoodPosition += 0.1
+            Outtake.hH += 0.1
         }
 
         Gamepads.gamepad2.dpadLeft whenBecomesTrue {
-            Flywheels.targetVelocity -= 50
+            Outtake.fH -= 50
         }
         Gamepads.gamepad2.dpadRight whenBecomesTrue {
-            Flywheels.targetVelocity += 50
+            Outtake.fH += 50
         }
 
         Gamepads.gamepad1.options whenBecomesTrue InstantCommand {
@@ -146,15 +136,26 @@ class TeleOp: NextFTCOpMode() {
         }
 
 
-        // Gate Intake
-        Gamepads.gamepad1.dpadUp whenTrue FollowPath(
-            PedroComponent.follower.pathBuilder().addPath(
-                BezierLine(
-                    PedroComponent.follower.pose,
-                    gatePose
-                )
-            ).build()
-        )
+        // Set Close
+        Gamepads.gamepad1.dpadUp.whenBecomesTrue {
+            if(!Outtake.fullManual) {
+                Outtake.fullManual = true
+                Hood.hoodPosition = Outtake.closeHood + Outtake.hH
+                Flywheels.targetVelocity = Outtake.closeVelocity + Outtake.fH
+            }
+        }
+
+        Gamepads.gamepad1.dpadDown.whenBecomesTrue {
+            if(!Outtake.fullManual) {
+                Outtake.fullManual = true
+                Hood.hoodPosition = Outtake.farHood + Outtake.hH
+                Flywheels.targetVelocity = Outtake.farVelocity + Outtake.fH
+            }
+        }
+
+        Gamepads.gamepad1.square.whenBecomesTrue {
+            Outtake.fullManual = false
+        }
 
         Gamepads.gamepad1.leftStickButton.whenBecomesTrue { sens=0.3 } whenBecomesFalse { sens=1.0 }
     }
@@ -203,6 +204,7 @@ class TeleOp: NextFTCOpMode() {
         telemetry.addData("Hood Position = ", Hood.hoodPosition)
         telemetry.addData("Is Holding pose", isHoldingPose)
         telemetry.addData("Pose", PedroComponent.follower.pose)
+        telemetry.addData("Target", Outtake.targetPose)
         telemetry.update()
     }
 }

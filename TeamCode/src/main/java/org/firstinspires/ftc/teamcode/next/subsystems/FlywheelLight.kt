@@ -16,9 +16,9 @@ object FlywheelLight: Subsystem{
 
     override fun periodic() {
         light.position = color
-        PanelsTelemetry.telemetry.run {
+        /*PanelsTelemetry.telemetry.run {
             addData("pos", color)
-        }
+        }*/
     }
 
     override fun initialize() {

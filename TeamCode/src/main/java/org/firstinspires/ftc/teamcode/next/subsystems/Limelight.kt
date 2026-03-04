@@ -108,7 +108,7 @@ object Limelight : Subsystem {
         lpf.alpha = a
         val m = megatag2() ?: return
 
-        justRelocalize(m)
+        // justRelocalize(m)
     }
 
     fun justRelocalize(vP: Pose) {

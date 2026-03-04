@@ -13,6 +13,7 @@ import dev.nextftc.hardware.impl.ServoEx
 import java.time.Instant
 
 @TeleOp
+@Disabled
 class MotorLocator: NextFTCOpMode() {
     init {
         addComponents(

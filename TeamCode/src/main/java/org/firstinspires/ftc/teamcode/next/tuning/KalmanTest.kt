@@ -11,6 +11,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Limelight
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 
 @TeleOp
+@Disabled
 class KalmanTest: NextFTCOpMode() {
     init {
         addComponents(

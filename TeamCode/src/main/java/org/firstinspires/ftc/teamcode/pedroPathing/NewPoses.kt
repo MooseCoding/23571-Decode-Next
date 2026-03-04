@@ -5,6 +5,7 @@ import com.pedropathing.geometry.BezierCurve
 import com.pedropathing.geometry.BezierLine
 import com.pedropathing.geometry.BezierPoint
 import com.pedropathing.geometry.Pose
+import com.pedropathing.paths.Path
 import com.pedropathing.paths.PathChain
 import dev.nextftc.core.units.rad
 import kotlin.math.PI
@@ -18,11 +19,11 @@ class NewPoses {
     var turn: Pose = Pose(12.5, 60.0, 3*PI/2)
 
     var closeShoot: Pose = Pose(56.5, 80.0) // Tangential
-    var gateIntake: Pose = Pose(27.3, 72.5, 192.0)
+    var gateIntake: Pose = Pose(27.0, 72.5, 192.0)
     var gateIntakeSweep: Pose = Pose(12.65, 52.0,110.0)
     var gateControlPoint: Pose = Pose(20.2, 43.1)
 
-    var intakeRow1: Pose = Pose(18.0, 84.0, PI)
+    var intakeRow1: Pose = Pose(23.0, 84.0, PI)
     var intakeControl: Pose = Pose(55.1, 86.1)
 
     var finalShoot: Pose = Pose(50.59, 115.68) // Tangential
@@ -33,7 +34,11 @@ class NewPoses {
     var controlPointRow3: Pose = Pose(61.2, 38.8)
 
     var farShotPose: Pose = Pose(50.0,12.0) // Tangential
-    var humanPlayerIntake: Pose = Pose(11.0, 9.65) // Tangential
+    var humanPlayerIntake: Pose = Pose(11.0, 12.65) // Tangential
+
+    var partialHuman = Pose(20.0, 15.0)
+
+    var lastHuman = Pose(11.0, 9.65)
 
     var farGateIntake: Pose = Pose(13.0, 33.5)
     var farGateControlPoint: Pose = Pose(17.2, 8.3)
@@ -77,7 +82,7 @@ class NewPoses {
                 BezierPoint(
                     row2Intake
                 )
-            ).setLinearHeadingInterpolation(PI, -PI/2)
+            ).setLinearHeadingInterpolation(closeStart.heading, row2Intake.heading)
             .addPath(
                 BezierLine(
                     turn,
@@ -91,14 +96,14 @@ class NewPoses {
                     closeShoot,
                     gateIntake
                 )
-            ).setConstantHeadingInterpolation((192.0)/180.0 * PI)
+            ).setConstantHeadingInterpolation(gateIntake.heading)
             .addPath(
                 BezierCurve(
                     gateIntake,
                     gateControlPoint,
                     gateIntakeSweep
                 )
-            ).setLinearHeadingInterpolation(192.0/180.0 * PI, 110.0/180.0 * PI)
+            ).setLinearHeadingInterpolation(gateIntake.heading, gateIntakeSweep.heading)
             .build()
         gateIntakeToShoot = follower.pathBuilder()
             .addPath(
@@ -128,9 +133,9 @@ class NewPoses {
     lateinit var farIntake: PathChain
     lateinit var humanPlayer: PathChain
     lateinit var humanPlayerShoot: PathChain
+    lateinit var cycleHP: PathChain
     lateinit var rampIntake: PathChain
     lateinit var rampShoot: PathChain
-    lateinit var park: PathChain
 
     fun setupFar(follower: Follower) {
         farIntake = follower.pathBuilder()
@@ -156,13 +161,27 @@ class NewPoses {
                 )
             )
             .build()
-        humanPlayerShoot = follower.pathBuilder()
+        cycleHP = follower.pathBuilder()
             .addPath(
                 BezierLine(
                     humanPlayerIntake,
-                    farShotPose
+                    partialHuman
                 )
             )
+            .addPath(
+                BezierLine(
+                    partialHuman,
+                    lastHuman
+                )
+            )
+            .build()
+        humanPlayerShoot = follower.pathBuilder()
+            .addPath(
+                BezierLine(
+                    lastHuman,
+                    farShotPose
+                )
+            ).setReversed()
             .build()
         rampIntake = follower.pathBuilder()
             .addPath(
@@ -173,13 +192,13 @@ class NewPoses {
                 )
             )
             .build()
-        rampIntake = follower.pathBuilder()
+        rampShoot = follower.pathBuilder()
             .addPath(
                 BezierLine(
                     farGateIntake,
                     farShotPose
                 )
-            )
+            ).setReversed()
             .build()
     }
 }

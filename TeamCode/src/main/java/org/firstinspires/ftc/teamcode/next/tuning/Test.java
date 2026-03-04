@@ -1,9 +1,12 @@
 package org.firstinspires.ftc.teamcode.next.tuning;
 
+import androidx.core.util.TypedValueCompat;
+
 import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
 import com.pedropathing.paths.PathChain;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.RobotLog;
 
@@ -18,7 +21,8 @@ import dev.nextftc.ftc.NextFTCOpMode;
 
 
 @Autonomous(name = "Path Skip Debug", group = "Debug")
-public class Test extends NextFTCOpMode {
+@Disabled
+class Test extends NextFTCOpMode {
 
     private static final double START_X = 72;
     private static final double START_Y = 24;

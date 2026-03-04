@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.next.tuning
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.control.interpolators.ConstantInterpolator
 import dev.nextftc.core.components.BindingsComponent
@@ -17,6 +18,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 
 @TeleOp
+@Disabled
 class BallsHeld: NextFTCOpMode() {
     init {
         addComponents(

@@ -9,12 +9,7 @@ import dev.nextftc.hardware.impl.MotorEx
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 
 object DriveTrain: Subsystem {
-    val fL = MotorEx("fL")
-    val fR = MotorEx("fR")
-    val bL = MotorEx("bL")
-    val bR = MotorEx("bR")
-
-    @JvmField var alliance:Alliance = Alliance.BLUE
+    @JvmField var alliance:Alliance = Alliance.RED
     @JvmField var sensitivity = 0.8
     var currentX = 0.0
     var currentY = 0.0
@@ -26,21 +21,8 @@ object DriveTrain: Subsystem {
     var inZone: Boolean = false
     var parked: Boolean = false
 
-    /*override val defaultCommand: Command
-        get() = MecanumDriverControlled(
-            fL,
-            fR,
-            bL,
-            bR,
-            -Gamepads.gamepad1.leftStickY.map {it * sensitivity},
-            Gamepads.gamepad1.leftStickX.map {it * sensitivity},
-            Gamepads.gamepad1.rightStickX.map {it * sensitivity}
-        )*/
-
     override fun periodic() {
-        currentX = PedroComponent.follower.pose.x
-        currentY = PedroComponent.follower.pose.y
-        currentHeading = PedroComponent.follower.pose.heading
+
     }
 
     override fun initialize() {

@@ -60,7 +60,6 @@ object Turret: Subsystem {
 
     var distance = 0.0
 
-    val turretGoalY = 144.0;
     var turretGoalX = 0.0;
 
     override fun periodic() {

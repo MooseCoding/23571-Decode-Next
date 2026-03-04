@@ -8,7 +8,7 @@ import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.hardware.impl.ServoEx
 
 @TeleOp
-
+@Disabled
 class Install: NextFTCOpMode() {
     init {
         addComponents(

@@ -32,7 +32,6 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
     var distance: Dist = Dist.CLOSE
 
     var goalX = 0.0
-    const val goalY = 144
     var restore = 0.0
 
     var isShooting: Boolean = false
@@ -44,7 +43,7 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
             0.0
         }
 
-        Turret.turretGoalX = if(DriveTrain.alliance == Alliance.RED) {
+        turretGoalX = if(DriveTrain.alliance == Alliance.RED) {
             144-3.0
         }
         else {
@@ -52,25 +51,25 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
         }
 
         if (!fullManual) {
-            Turret.autoTurret = true
             auto()
-        } else {
-            Turret.autoTurret = false
         }
     }
 
     /**
     * Manual Aim From Hardcoded Values
      */
-    @JvmField var farHood: Double = 0.35
-    @JvmField var farVelocity: Double = 1550.0
-    @JvmField var closeHood: Double = 0.48
-    @JvmField var closeVelocity:Double = 1350.0
+    @JvmField var farHood: Double = 0.415
+    @JvmField var farVelocity: Double = 1820.0
+    @JvmField var closeHood: Double = 0.67
+    @JvmField var closeVelocity:Double = 1220.0
 
     /**
      * Auto flywheel and auto hood positioning
      */
     var dist:Double = 0.0
+
+    var fH: Double = 0.0
+    var hH:Double = 0.0
     fun auto() {
         updateFilteredVelocities()
         targetPose = if(isMoving()) {
@@ -88,8 +87,8 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
         */
 
         if(!isShooting) {
-            Flywheels.targetVelocity = values[1] + 160
-            Hood.hoodPosition = values[0] + 0.06
+            Flywheels.targetVelocity = values[1] + 160 + fH
+            Hood.hoodPosition = values[0] + 0.08 + hH
         }
 
         /*
@@ -179,7 +178,15 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
             velY = 0.0
         }
 
-        val g: Pose = Pose(turretGoalX, 144.0)
+        val pedro: Pose = PedroComponent.follower.pose
+
+        val tar = if(pedro.y <= 50.0) {
+            Pose(turretGoalX+3.0, 150.0)
+        } else {
+            Pose(turretGoalX,144.0)
+        }
+
+        val g: Pose = Pose(tar.x, tar.y)
         val p =  Pose(
             g.x - velX * flyTime,
             g.y - velY * flyTime,
@@ -203,7 +210,7 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
                 setSetBack()
             ),
             Delay(0.28.seconds),
-            Hood.sequence(0.2),
+            Hood.sequence(-0.2),
             Delay(0.1.seconds),
 
             ParallelGroup(

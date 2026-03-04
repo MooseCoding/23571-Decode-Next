@@ -12,6 +12,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.Limelight
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
 
 @TeleOp
+@Disabled
 class LLTune:NextFTCOpMode() {
     init {
         addComponents(
