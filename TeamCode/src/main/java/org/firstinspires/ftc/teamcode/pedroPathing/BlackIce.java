@@ -41,7 +41,6 @@ import java.util.List;
  */
 @Configurable
 @TeleOp(name = "BlackIce", group = "Pedro Pathing")
-@Disabled
 public class BlackIce extends SelectableOpMode {
     public static Follower follower;
 

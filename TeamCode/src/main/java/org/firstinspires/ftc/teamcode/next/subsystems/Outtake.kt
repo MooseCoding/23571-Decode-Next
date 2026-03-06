@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.next.subsystems
 
+import android.os.strictmode.DiskReadViolation
 import com.bylazar.telemetry.PanelsTelemetry
 import com.pedropathing.geometry.Pose
 import com.pedropathing.math.Vector
@@ -11,6 +12,7 @@ import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.subsystems.SubsystemGroup
 import dev.nextftc.extensions.pedro.PedroComponent
 import dev.nextftc.ftc.ActiveOpMode
+import org.firstinspires.ftc.robotcore.internal.hardware.android.GpioPin
 import org.firstinspires.ftc.teamcode.helpers.SequentialGroupLocal
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Aimbot
 import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
@@ -20,6 +22,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret.turretGoalX
+import java.time.Instant
 import java.util.Arrays
 import java.util.LinkedList
 import java.util.Queue
@@ -47,21 +50,47 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
             144-3.0
         }
         else {
-            -3.0
+            4.0
         }
 
+        val currentPose: Pose = PedroComponent.follower.pose
+
+
+        turretGoalX = if(currentPose.y < 52.0 && DriveTrain.alliance == Alliance.RED) {
+            turretGoalX - 11
+        } else {
+            turretGoalX - 3
+        }
+
+        turretGoalX = if(currentPose.y < 52.0 && DriveTrain.alliance == Alliance.BLUE) {
+            turretGoalX + 3
+        } else {
+            turretGoalX
+        }
+
+        updateFilteredVelocities()
+        targetPose = if(isMoving()) {
+            getVirtualPose()
+        } else {
+            Pose(turretGoalX, 144.0)
+        }
+        dist = sqrt((targetPose.x - currentPose.x).pow(2) + (targetPose.y - currentPose.y).pow(2))
+        val values: DoubleArray = Aimbot.get(dist)
+        flyTime = ShotTime.get(dist)
+
         if (!fullManual) {
-            auto()
+            Flywheels.targetVelocity = values[1] + 160 + fH
+            Hood.hoodPosition = values[0] + 0.08 + hH
         }
     }
 
     /**
     * Manual Aim From Hardcoded Values
      */
-    @JvmField var farHood: Double = 0.415
-    @JvmField var farVelocity: Double = 1820.0
-    @JvmField var closeHood: Double = 0.67
-    @JvmField var closeVelocity:Double = 1220.0
+    @JvmField var farHood: Double = 0.45
+    @JvmField var farVelocity: Double = 1900.0
+    @JvmField var closeHood: Double = 0.72
+    @JvmField var closeVelocity:Double = 1320.0
 
     /**
      * Auto flywheel and auto hood positioning
@@ -70,16 +99,11 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
 
     var fH: Double = 0.0
     var hH:Double = 0.0
+
+    var tooMuch: Boolean = false
+
     fun auto() {
-        updateFilteredVelocities()
-        targetPose = if(isMoving()) {
-            getExpectedPose()
-        } else {
-            Pose(turretGoalX, 144.0)
-        }
-        dist = sqrt((targetPose.x - PedroComponent.follower.pose.x).pow(2) + (targetPose.y - PedroComponent.follower.pose.y).pow(2))
-        val values: DoubleArray = Aimbot.get(dist)
-        flyTime = ShotTime.get(dist)
+
         /*
         PanelsTelemetry.telemetry.addData("dist", dist)
         PanelsTelemetry.telemetry.addData("isShooting", isShooting)
@@ -87,8 +111,7 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
         */
 
         if(!isShooting) {
-            Flywheels.targetVelocity = values[1] + 160 + fH
-            Hood.hoodPosition = values[0] + 0.08 + hH
+
         }
 
         /*
@@ -109,15 +132,22 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
     fun shoot(): Command {
         // isShooting = true
         return SequentialGroupLocal(
-            InstantCommand {isShooting = true},
-            Intake.runIntake(),
-            Transfer.start(),
-            Delay(0.48),
-            InstantCommand {
-                isShooting = false
-            },
-            Transfer.stop(),
-            Intake.stopIntake()
+            ParallelGroup(
+                Intake.runIntake(),
+                Transfer.start(),
+                Hood.setRestore(),
+                setSetBack()
+            ),
+            Delay(0.24.seconds),
+            Hood.sequence(-0.1),
+            Delay(0.16.seconds),
+
+            ParallelGroup(
+                Hood.restore(),
+                Intake.stopIntake(),
+                Transfer.stop(),
+                setBack()
+            ),
         )
     }
 
@@ -155,8 +185,8 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
 
     private fun updateFilteredVelocities() {
         val vel: Vector = PedroComponent.follower.velocity
-        val rawVelX = vel.getXComponent()
-        val rawVelY = vel.getYComponent()
+        val rawVelX = vel.xComponent
+        val rawVelY = vel.yComponent
         val rawHeadingVel: Double = PedroComponent.follower.angularVelocity
 
         filteredVelX = applyMedianFilter(velXBuffer, rawVelX, velXArray)
@@ -181,9 +211,9 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
         val pedro: Pose = PedroComponent.follower.pose
 
         val tar = if(pedro.y <= 50.0) {
-            Pose(turretGoalX+3.0, 150.0)
+            Pose(turretGoalX - 3.0,144.0)
         } else {
-            Pose(turretGoalX,144.0)
+            Pose(if(DriveTrain.alliance == Alliance.RED) 144.0 else  0.0,144.0)
         }
 
         val g: Pose = Pose(tar.x, tar.y)
@@ -194,6 +224,30 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
         )
 
         return p
+    }
+
+    fun getVirtualPose(): Pose {
+        var velX: Double = filteredVelX
+        var velY: Double = filteredVelY
+        var velH: Double = filteredHeadingVel
+
+        if (!isMoving()) {
+            velX = 0.0
+            velY = 0.0
+        }
+
+        val velo = sqrt(velX.pow(2) + velY.pow(2))
+        val bD = flyTime * velo
+
+        val future:Vector = Vector(
+            bD,
+            velH
+        )
+
+        return Pose(
+            future.xComponent + turretGoalX,
+            future.yComponent + 144.0
+        )
     }
 
     var flyTime:Double = 0.60
@@ -211,7 +265,7 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
             ),
             Delay(0.28.seconds),
             Hood.sequence(-0.2),
-            Delay(0.1.seconds),
+            Delay(0.22.seconds),
 
             ParallelGroup(
                 Hood.restore(),

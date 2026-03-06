@@ -27,7 +27,7 @@ import kotlin.time.Duration.Companion.seconds
 
 @Autonomous(preselectTeleOp = "TeleOp")
 @Configurable
-class FarAuto: NextFTCOpMode() {
+class NewFar: NextFTCOpMode() {
     init {
         addComponents(
             PedroComponent(Constants::createFollower),
@@ -87,7 +87,7 @@ class FarAuto: NextFTCOpMode() {
 
         SequentialGroupLocal(
             Flywheels.spin(),
-            Delay(3.5.seconds),
+            Delay(4.0.seconds),
             Intake.runIntake(),
             Outtake.shootFar(),
             Intake.runIntake(),
@@ -101,9 +101,38 @@ class FarAuto: NextFTCOpMode() {
             FollowPath(poses.cycleHP),
             Delay(0.2.seconds),
             FollowPath(poses.humanPlayerShoot),
-            Outtake.shootFar(), // 9 ball
+            Outtake.shootFar(),
             Intake.runIntake(),
 
+            FollowPath(poses.humanPlayer),
+            Delay(0.25.seconds),
+            FollowPath(poses.humanPlayerDirect),
+            Outtake.shootFar(),
+            Intake.runIntake(),
+            // 12
+
+            FollowPath(poses.humanPlayer),
+            Delay(0.25.seconds),
+            FollowPath(poses.humanPlayerDirect),
+            Outtake.shootFar(),
+            Intake.runIntake(),
+            // 15
+
+            FollowPath(poses.humanPlayer),
+            Delay(0.25.seconds),
+            FollowPath(poses.humanPlayerDirect),
+            Outtake.shootFar(),
+            Intake.runIntake(),
+            // 18
+
+            FollowPath(poses.humanPlayer),
+            Delay(0.25.seconds),
+            FollowPath(poses.humanPlayerDirect),
+            Outtake.shootFar(),
+            Intake.runIntake(),
+            // 21
+
+            /*
             FollowPath(poses.rampIntake),
             Delay(0.6.seconds),
             FollowPath(poses.rampShoot),
@@ -126,7 +155,8 @@ class FarAuto: NextFTCOpMode() {
             Delay(0.6.seconds),
             FollowPath(poses.rampShoot),
             Outtake.shootFar(), // 21 ball
-            Intake.runIntake(),
+            Intake.runIntake()
+             */
 
             FollowPath(poses.humanPlayer), // Park
         ).schedule()

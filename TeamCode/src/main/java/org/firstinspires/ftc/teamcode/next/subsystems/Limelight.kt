@@ -63,9 +63,10 @@ object Limelight : Subsystem {
         follower.setStartingPose(PedroComponent.follower.pose)
 
          */
+
     }
 
-    fun kalman() {
+    fun relocalize() {
         follower.update()
 
         if (!limelightOn) return

@@ -13,14 +13,17 @@ import kotlin.math.PI
 class NewPoses {
     // Close Poses
     var closeStart: Pose = Pose(32.0, 135.0, -PI/2)
-    var row2Intake: Pose =Pose(14.5, 60.0, PI)
+
+    var newStart = Pose(32.0, 135.0, PI/2)
+
+    var row2Intake: Pose =Pose(16.0, 60.0, PI)
     var controlPointRow2: Pose = Pose(82.9, 53.6)
 
     var turn: Pose = Pose(12.5, 60.0, 3*PI/2)
 
-    var closeShoot: Pose = Pose(56.5, 80.0) // Tangential
-    var gateIntake: Pose = Pose(27.0, 72.5, 192.0)
-    var gateIntakeSweep: Pose = Pose(12.65, 52.0,110.0)
+    var closeShoot: Pose = Pose(50.5, 90.0, 150.0*PI/180 ) // Tangential
+    var gateIntake: Pose = Pose(27.5, 74.5, 192.0 * PI/180)
+    var gateIntakeSweep: Pose = Pose(13.65, 52.0,110.0 * PI/180)
     var gateControlPoint: Pose = Pose(20.2, 43.1)
 
     var intakeRow1: Pose = Pose(23.0, 84.0, PI)
@@ -30,41 +33,46 @@ class NewPoses {
 
     // Far Poses
     var farStart: Pose = Pose(56.0, 8.0, PI/2)
-    var intakeRow3: Pose = Pose(14.0, 35.64) // Tangential
+    var intakeRow3: Pose = Pose(15.0, 31.84) // Tangential
     var controlPointRow3: Pose = Pose(61.2, 38.8)
 
     var farShotPose: Pose = Pose(50.0,12.0) // Tangential
-    var humanPlayerIntake: Pose = Pose(11.0, 12.65) // Tangential
+    var humanPlayerIntake: Pose = Pose(12.0, 12.65) // Tangential
 
     var partialHuman = Pose(20.0, 15.0)
 
-    var lastHuman = Pose(11.0, 9.65)
+    var lastHuman = Pose(14.0, 13.65)
 
-    var farGateIntake: Pose = Pose(13.0, 33.5)
+    var farGateIntake: Pose = Pose(12.0, 33.5)
     var farGateControlPoint: Pose = Pose(17.2, 8.3)
 
     fun flipPose() {
-        closeStart = closeStart.mirror()
-        row2Intake = row2Intake.mirror()
-        controlPointRow2 = controlPointRow2.mirror()
-        turn = turn.mirror()
-        closeShoot = closeShoot.mirror()
-        gateIntake = gateIntake.mirror()
-        gateIntakeSweep = gateIntakeSweep.mirror()
-        gateControlPoint = gateControlPoint.mirror()
-        intakeRow1 = intakeRow1.mirror()
-        intakeControl = intakeControl.mirror()
-        finalShoot = finalShoot.mirror()
-        farStart = farStart.mirror()
-        intakeRow3 = intakeRow3.mirror()
-        controlPointRow3 = controlPointRow3.mirror()
-        farShotPose = farShotPose.mirror()
-        humanPlayerIntake = humanPlayerIntake.mirror()
-        farGateIntake = farGateIntake.mirror()
-        farGateControlPoint = farGateControlPoint.mirror()
+        closeStart = closeStart.mirror(141.5)
+        newStart = newStart.mirror(141.5)
+        row2Intake = row2Intake.mirror(141.5)
+        controlPointRow2 = controlPointRow2.mirror(141.5)
+        turn = turn.mirror(141.5)
+        closeShoot = closeShoot.mirror(141.5)
+        gateIntake = gateIntake.mirror(141.5)
+        gateIntakeSweep = gateIntakeSweep.mirror(141.5)
+        gateControlPoint = gateControlPoint.mirror(141.5)
+        intakeRow1 = intakeRow1.mirror(141.5)
+        intakeControl = intakeControl.mirror(141.5)
+        finalShoot = finalShoot.mirror(141.5)
+        farStart = farStart.mirror(141.5)
+        intakeRow3 = intakeRow3.mirror(141.5)
+        controlPointRow3 = controlPointRow3.mirror(141.5)
+        farShotPose = farShotPose.mirror(141.5)
+        humanPlayerIntake = humanPlayerIntake.mirror(141.5)
+        farGateIntake = farGateIntake.mirror(141.5)
+        farGateControlPoint = farGateControlPoint.mirror(141.5)
+        partialHuman = partialHuman.mirror(141.5)
+        lastHuman = lastHuman.mirror(141.5)
     }
 
     lateinit var intake2: PathChain
+    lateinit var shootStart: PathChain
+    lateinit var shootIntake: PathChain
     lateinit var gateIntakeChain: PathChain
     lateinit var gateIntakeToShoot: PathChain
     lateinit var intake1: PathChain
@@ -90,13 +98,37 @@ class NewPoses {
                 )
             ).setReversed()
             .build()
+        shootStart = follower.pathBuilder()
+            .addPath(
+                BezierLine(
+                    newStart,
+                    closeShoot
+                )
+            )
+            .setLinearHeadingInterpolation(newStart.heading, closeShoot.heading)
+            .build()
+        shootIntake = follower.pathBuilder()
+            .addPath(
+                BezierCurve(
+                    closeShoot,
+                    controlPointRow2,
+                    row2Intake
+                )
+            ).setTangentHeadingInterpolation()
+            .addPath(
+                BezierLine(
+                    row2Intake,
+                    closeShoot
+                )
+            ).setReversed()
+            .build()
         gateIntakeChain = follower.pathBuilder()
             .addPath(
                 BezierLine(
                     closeShoot,
                     gateIntake
                 )
-            ).setConstantHeadingInterpolation(gateIntake.heading)
+            )
             .addPath(
                 BezierCurve(
                     gateIntake,
@@ -136,6 +168,7 @@ class NewPoses {
     lateinit var cycleHP: PathChain
     lateinit var rampIntake: PathChain
     lateinit var rampShoot: PathChain
+    lateinit var humanPlayerDirect: PathChain
 
     fun setupFar(follower: Follower) {
         farIntake = follower.pathBuilder()
@@ -167,7 +200,7 @@ class NewPoses {
                     humanPlayerIntake,
                     partialHuman
                 )
-            )
+            ).setReversed()
             .addPath(
                 BezierLine(
                     partialHuman,
@@ -179,6 +212,14 @@ class NewPoses {
             .addPath(
                 BezierLine(
                     lastHuman,
+                    farShotPose
+                )
+            ).setReversed()
+            .build()
+        humanPlayerDirect = follower.pathBuilder()
+            .addPath(
+                BezierLine(
+                    humanPlayerIntake,
                     farShotPose
                 )
             ).setReversed()

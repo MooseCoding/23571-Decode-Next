@@ -22,7 +22,7 @@ import dev.nextftc.ftc.NextFTCOpMode;
 
 @Autonomous(name = "Path Skip Debug", group = "Debug")
 @Disabled
-class Test extends NextFTCOpMode {
+public class Test extends NextFTCOpMode {
 
     private static final double START_X = 72;
     private static final double START_Y = 24;

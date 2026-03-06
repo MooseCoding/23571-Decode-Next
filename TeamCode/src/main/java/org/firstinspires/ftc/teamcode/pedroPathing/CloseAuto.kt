@@ -24,6 +24,8 @@ import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
+import org.firstinspires.ftc.teamcode.wayfinder.Pose
+import kotlin.math.PI
 import kotlin.math.nextUp
 import kotlin.time.Duration.Companion.seconds
 
@@ -63,9 +65,11 @@ class CloseAuto: NextFTCOpMode() {
         when(alliance) {
             Alliance.RED -> {
                 FlywheelLight.Red().schedule()
+                Outtake.targetPose = com.pedropathing.geometry.Pose(142.0, 144.0)
             }
             Alliance.BLUE -> {
                 FlywheelLight.Blue().schedule()
+                Outtake.targetPose = com.pedropathing.geometry.Pose(-3.0, 144.0)
             }
         }
     }
@@ -79,7 +83,7 @@ class CloseAuto: NextFTCOpMode() {
         follower.setStartingPose(poses.closeStart)
 
         Outtake.fullManual = true
-        Flywheels.targetVelocity = 1100.0
+        Flywheels.targetVelocity = 1280.0
         Hood.hoodPosition = 0.7
 
         SequentialGroupLocal(
@@ -89,6 +93,10 @@ class CloseAuto: NextFTCOpMode() {
                     Intake.runIntake(),
 
                     SequentialGroupLocal(
+                        InstantCommand {
+                            Flywheels.targetVelocity = 1340.0
+                            Hood.hoodPosition = 0.65
+                        },
                         Delay(1.0.seconds),
                         Outtake.shoot()
                     ),
@@ -97,8 +105,8 @@ class CloseAuto: NextFTCOpMode() {
                     FollowPath(poses.intake2),
                 ),
                 InstantCommand {
-                    Flywheels.targetVelocity = 1250.0
-                    Hood.hoodPosition = 0.68
+                    Flywheels.targetVelocity = 1340.0
+                    Hood.hoodPosition = 0.65
                 } ,
                 Outtake.shoot(),
                 FollowPath(poses.gateIntakeChain),
@@ -119,8 +127,8 @@ class CloseAuto: NextFTCOpMode() {
 
                 Outtake.shoot(), // 15 balls
                 InstantCommand {
-                    Flywheels.targetVelocity = 1050.0
-                    Hood.hoodPosition = 0.78
+                    Flywheels.targetVelocity = 1200.0
+                    Hood.hoodPosition = 0.75
                 },
                 FollowPath(poses.intake1),
                 Outtake.shoot() // 18 balls
@@ -132,5 +140,12 @@ class CloseAuto: NextFTCOpMode() {
         DriveTrain.currentX = p.x
         DriveTrain.currentY = p.y
         DriveTrain.currentHeading = p.heading
+    }
+
+    override fun onUpdate() {
+        telemetry.run {
+            addData("bleh", poses.gateIntakeSweep.heading * 180/ PI)
+            update()
+        }
     }
 }

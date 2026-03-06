@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.next.tuning
 
 import com.pedropathing.geometry.Pose
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
@@ -14,6 +15,7 @@ import kotlin.math.abs
 import kotlin.math.max
 
 @TeleOp
+@Disabled
 class Tracking: NextFTCOpMode() {
     init {
         addComponents(

@@ -9,6 +9,7 @@ import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.extensions.pedro.FollowPath
 import dev.nextftc.extensions.pedro.PedroComponent
+import dev.nextftc.extensions.pedro.PedroComponent.Companion.follower
 import dev.nextftc.extensions.pedro.PedroDriverControlled
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.ftc.Gamepads
@@ -18,6 +19,7 @@ import dev.nextftc.hardware.impl.MotorEx
 import dev.nextftc.units.unittypes.TemperatureUnit
 import org.firstinspires.ftc.teamcode.helpers.TelemetryImplUpstreamSubmission
 import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain
+import org.firstinspires.ftc.teamcode.next.subsystems.DriveTrain.alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.Intake
 import org.firstinspires.ftc.teamcode.next.subsystems.Light
 import org.firstinspires.ftc.teamcode.next.subsystems.Limelight
@@ -29,6 +31,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants
+import org.firstinspires.ftc.teamcode.pedroPathing.NewPoses
 import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.atan2
@@ -62,10 +65,16 @@ class TeleOp: NextFTCOpMode() {
 
     var sens: Double = 1.0
 
+    val poses = NewPoses()
+
     override fun onStartButtonPressed() {
+        Outtake.tooMuch = false
+        if(alliance == Alliance.RED) {
+            poses.flipPose()
+        }
         Flywheels.spin().schedule()
         PedroComponent.follower.pose = Pose(DriveTrain.currentX, DriveTrain.currentY, DriveTrain.currentHeading)
-        // PedroComponent.follower.pose = Pose(72.0, 72.0, PI/2)
+        // PedroComponent.follower.pose = poses.farStart
 
         Gamepads.gamepad1.rightBumper whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()
         Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake() whenBecomesFalse Intake.stopIntake()
@@ -138,19 +147,15 @@ class TeleOp: NextFTCOpMode() {
 
         // Set Close
         Gamepads.gamepad1.dpadUp.whenBecomesTrue {
-            if(!Outtake.fullManual) {
-                Outtake.fullManual = true
-                Hood.hoodPosition = Outtake.closeHood + Outtake.hH
-                Flywheels.targetVelocity = Outtake.closeVelocity + Outtake.fH
-            }
+            Outtake.fullManual = true
+            Hood.hoodPosition = Outtake.closeHood + Outtake.hH
+            Flywheels.targetVelocity = Outtake.closeVelocity + Outtake.fH
         }
 
         Gamepads.gamepad1.dpadDown.whenBecomesTrue {
-            if(!Outtake.fullManual) {
-                Outtake.fullManual = true
-                Hood.hoodPosition = Outtake.farHood + Outtake.hH
-                Flywheels.targetVelocity = Outtake.farVelocity + Outtake.fH
-            }
+            Outtake.fullManual = true
+            Hood.hoodPosition = Outtake.farHood + Outtake.hH
+            Flywheels.targetVelocity = Outtake.farVelocity + Outtake.fH
         }
 
         Gamepads.gamepad1.square.whenBecomesTrue {
@@ -159,10 +164,6 @@ class TeleOp: NextFTCOpMode() {
 
         Gamepads.gamepad1.leftStickButton.whenBecomesTrue { sens=0.3 } whenBecomesFalse { sens=1.0 }
     }
-
-    val gatePose: Pose = Pose(0.0,0.0,0.0)
-
-    var holdPose: Pose = Pose(0.0,0.0, 0.0)
 
     var isHoldingPose: Boolean = false
 

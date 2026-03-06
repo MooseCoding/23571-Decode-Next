@@ -1,8 +1,9 @@
 package org.firstinspires.ftc.teamcode.pedroPathing
 
-import com.bylazar.configurables.annotations.Configurable
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import dev.nextftc.core.commands.delays.Delay
+import dev.nextftc.core.commands.groups.ParallelGroup
+import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.components.BindingsComponent
 import dev.nextftc.core.components.SubsystemComponent
 import dev.nextftc.extensions.pedro.FollowPath
@@ -23,11 +24,13 @@ import org.firstinspires.ftc.teamcode.next.subsystems.helpers.Alliance
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
+import org.firstinspires.ftc.teamcode.wayfinder.Pose
+import kotlin.math.PI
+import kotlin.math.nextUp
 import kotlin.time.Duration.Companion.seconds
 
 @Autonomous(preselectTeleOp = "TeleOp")
-@Configurable
-class FarAuto: NextFTCOpMode() {
+class NewClose: NextFTCOpMode() {
     init {
         addComponents(
             PedroComponent(Constants::createFollower),
@@ -62,11 +65,11 @@ class FarAuto: NextFTCOpMode() {
         when(alliance) {
             Alliance.RED -> {
                 FlywheelLight.Red().schedule()
-                Outtake.targetPose = com.pedropathing.geometry.Pose(144.0-11.0, 144.0)
+                Outtake.targetPose = com.pedropathing.geometry.Pose(142.0, 144.0)
             }
             Alliance.BLUE -> {
                 FlywheelLight.Blue().schedule()
-                Outtake.targetPose = com.pedropathing.geometry.Pose(-11.0, 144.0)
+                Outtake.targetPose = com.pedropathing.geometry.Pose(-3.0, 144.0)
             }
         }
     }
@@ -75,69 +78,70 @@ class FarAuto: NextFTCOpMode() {
         if(alliance == Alliance.RED) {
             poses.flipPose()
         }
-        poses.setupFar(follower)
+        poses.setupClose(follower) 
 
-        follower.setStartingPose(poses.farStart)
-        Outtake.tooMuch = false
+        follower.setStartingPose(poses.newStart)
 
         Outtake.fullManual = true
-        Turret.autoTurret = true
-        Flywheels.targetVelocity = 1910.0
-        Hood.hoodPosition = 0.45
+        Flywheels.targetVelocity = 1400.0
+        Hood.hoodPosition = 0.65
 
         SequentialGroupLocal(
+            InstantCommand {
+                Flywheels.targetVelocity = 1400.0
+                Hood.hoodPosition = 0.68
+            } ,
             Flywheels.spin(),
-            Delay(3.5.seconds),
+            FollowPath(poses.shootStart),
+            Delay(3.0.seconds),
+            Outtake.shoot(),
             Intake.runIntake(),
-            Outtake.shootFar(),
+            InstantCommand {
+                Flywheels.targetVelocity = 1400.0
+                Hood.hoodPosition = 0.68
+            } ,
+            FollowPath(poses.shootIntake),
             Intake.runIntake(),
-
-            FollowPath(poses.farIntake),
-            Outtake.shootFar(),
-            Intake.runIntake(),
-
-            FollowPath(poses.humanPlayer),
-            Delay(0.2.seconds),
-            FollowPath(poses.cycleHP),
-            Delay(0.2.seconds),
-            FollowPath(poses.humanPlayerShoot),
-            Outtake.shootFar(), // 9 ball
+            Outtake.shoot(),
             Intake.runIntake(),
 
-            FollowPath(poses.rampIntake),
+            InstantCommand {
+                Flywheels.targetVelocity = 1400.0
+                Hood.hoodPosition = 0.68
+            } ,
+
+            FollowPath(poses.gateIntakeChain),
+            Intake.runIntake(),
+
             Delay(0.6.seconds),
-            FollowPath(poses.rampShoot),
-            Outtake.shootFar(), // 12 ball
+            FollowPath(poses.gateIntakeToShoot),
+
+            Outtake.shoot(),
+            FollowPath(poses.gateIntakeChain),
             Intake.runIntake(),
 
-            FollowPath(poses.rampIntake),
             Delay(0.6.seconds),
-            FollowPath(poses.rampShoot),
-            Outtake.shootFar(), // 15 ball
+
+            FollowPath(poses.gateIntakeToShoot),
+
+            Outtake.shoot(), // 9 ball
+//            FollowPath(poses.gateIntakeChain),
+//            Intake.runIntake(),
+//
+//            Delay(0.6.seconds),
+//
+//            FollowPath(poses.gateIntakeToShoot),
+//
+//            Outtake.shoot(), // 15 balls
             Intake.runIntake(),
 
-            FollowPath(poses.rampIntake),
-            Delay(0.6.seconds),
-            FollowPath(poses.rampShoot),
-            Outtake.shootFar(), // 18 ball
-            Intake.runIntake(),
-
-            FollowPath(poses.rampIntake),
-            Delay(0.6.seconds),
-            FollowPath(poses.rampShoot),
-            Outtake.shootFar(), // 21 ball
-            Intake.runIntake(),
-
-            FollowPath(poses.humanPlayer), // Park
+            InstantCommand {
+                Flywheels.targetVelocity = 1320.0
+                Hood.hoodPosition = 0.75
+            },
+            FollowPath(poses.intake1),
+            Outtake.shoot() // 15 balls
         ).schedule()
-
-    }
-
-    override fun onUpdate() {
-        telemetry.run  {
-            addData("Target", Outtake.targetPose)
-            update()
-        }
     }
 
     override fun onStop() {
@@ -145,5 +149,12 @@ class FarAuto: NextFTCOpMode() {
         DriveTrain.currentX = p.x
         DriveTrain.currentY = p.y
         DriveTrain.currentHeading = p.heading
+    }
+
+    override fun onUpdate() {
+        telemetry.run {
+            addData("bleh", poses.gateIntakeSweep.heading * 180/ PI)
+            update()
+        }
     }
 }
