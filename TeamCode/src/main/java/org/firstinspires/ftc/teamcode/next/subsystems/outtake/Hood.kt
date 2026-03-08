@@ -6,6 +6,7 @@ import dev.nextftc.hardware.impl.ServoEx
 import com.bylazar.telemetry.PanelsTelemetry
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.ftc.ActiveOpMode
+import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 
 @Configurable
 object Hood: Subsystem {
@@ -17,7 +18,7 @@ object Hood: Subsystem {
 
     override fun periodic() {
         if(!ActiveOpMode.opModeInInit) {
-            hoodServo.servo.position = hoodPosition
+            hoodServo.servo.position = hoodPosition + Outtake.hH
         }
 
         /*PanelsTelemetry.telemetry.run {

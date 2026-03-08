@@ -16,7 +16,6 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 
 
 @TeleOp
-@Disabled
 class ShooterPID: NextFTCOpMode() {
     init {
         addComponents(

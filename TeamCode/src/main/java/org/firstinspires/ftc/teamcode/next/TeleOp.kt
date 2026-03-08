@@ -69,20 +69,21 @@ class TeleOp: NextFTCOpMode() {
 
     override fun onStartButtonPressed() {
         Outtake.tooMuch = false
+        Outtake.fullManual = true
         if(alliance == Alliance.RED) {
             poses.flipPose()
         }
         Flywheels.spin().schedule()
-        PedroComponent.follower.pose = Pose(DriveTrain.currentX, DriveTrain.currentY, DriveTrain.currentHeading)
+        // PedroComponent.follower.pose = Pose(DriveTrain.currentX, DriveTrain.currentY, DriveTrain.currentHeading)
+        PedroComponent.follower.pose = Pose(8.0, 144-8.0, 0.0)
         // PedroComponent.follower.pose = poses.farStart
 
-        Gamepads.gamepad1.rightBumper whenBecomesTrue Transfer.start() whenBecomesFalse Transfer.stop()
         Gamepads.gamepad1.rightTrigger.greaterThan(0.3) whenBecomesTrue Intake.runIntake() whenBecomesFalse Intake.stopIntake()
         Gamepads.gamepad1.leftTrigger.greaterThan(0.3) whenBecomesTrue Intake.reverseIntake() whenBecomesFalse Intake.stopIntake()
 
         // Shoot
         Gamepads.gamepad1.triangle whenBecomesTrue  {
-            if(PedroComponent.follower.pose.y < 54.0) {
+            if(Flywheels.targetVelocity == Outtake.farVelocity) {
                 Outtake.shootFar().schedule()
             }
             else {
@@ -108,6 +109,9 @@ class TeleOp: NextFTCOpMode() {
         Gamepads.gamepad2.leftBumper whenBecomesTrue Turret.spinLeft()
         Gamepads.gamepad2.rightBumper whenBecomesTrue Turret.spinRight()
 
+        Gamepads.gamepad1.leftBumper whenBecomesTrue Turret.spinLeft()
+        Gamepads.gamepad1.rightBumper whenBecomesTrue Turret.spinRight()
+
         Gamepads.gamepad2.dpadUp whenBecomesTrue {
             Outtake.hH -= 0.1
         }
@@ -125,10 +129,10 @@ class TeleOp: NextFTCOpMode() {
         Gamepads.gamepad1.options whenBecomesTrue InstantCommand {
             when(DriveTrain.alliance) {
                 Alliance.BLUE -> {
-                    PedroComponent.follower.pose = Pose(8.0, 8.0, PI/2)
+                    PedroComponent.follower.pose = Pose(144.0-8.0, 8.0, PI/2)
                 }
                 Alliance.RED -> {
-                    PedroComponent.follower.pose = Pose(144-8.0, 8.0, PI/2)
+                    PedroComponent.follower.pose = Pose(8.0, 8.0, PI/2)
                 }
             }
         }
@@ -206,6 +210,10 @@ class TeleOp: NextFTCOpMode() {
         telemetry.addData("Is Holding pose", isHoldingPose)
         telemetry.addData("Pose", PedroComponent.follower.pose)
         telemetry.addData("Target", Outtake.targetPose)
+        telemetry.run {
+            addData("hH", Outtake.hH)
+            addData("fH", Outtake.fH)
+        }
         telemetry.update()
     }
 }

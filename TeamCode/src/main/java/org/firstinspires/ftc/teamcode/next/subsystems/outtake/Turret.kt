@@ -148,7 +148,7 @@ object Turret: Subsystem {
     @JvmField var offset: Double = 0.0
 
     fun goToYaw(target:Double) {
-        val position: Double = (gear_ratio * target+135 - offset)/270.0
+        val position: Double = ((gear_ratio * target+135 - offset)/270.0).coerceIn(gear_ratio*-maxAngle/270.0 + 135/270.0, gear_ratio*maxAngle/270.0 + 135/270.0,)
 
         currentAngle = target
         leftServo.servo.position = position
@@ -164,13 +164,13 @@ object Turret: Subsystem {
     /**
      * @return Spins a little left
      */    fun spinLeft(): Command = InstantCommand {
-        target -= 5
+        offset += 3
     }
 
     /**
      * @return Spins a little right
      */    fun spinRight(): Command = InstantCommand {
-        target += 5
+        offset -= 3
     }
 
     /**

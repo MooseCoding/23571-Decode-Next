@@ -21,9 +21,9 @@ class NewPoses {
 
     var turn: Pose = Pose(12.5, 60.0, 3*PI/2)
 
-    var closeShoot: Pose = Pose(50.5, 90.0, 150.0*PI/180 ) // Tangential
-    var gateIntake: Pose = Pose(27.5, 74.5, 192.0 * PI/180)
-    var gateIntakeSweep: Pose = Pose(13.65, 52.0,110.0 * PI/180)
+    var closeShoot: Pose = Pose(55.5, 78.0, 150.0*PI/180 ) // Tangential
+    var gateIntake: Pose = Pose(25.0, 72.5, 192.0 * PI/180)
+    var gateIntakeSweep: Pose = Pose(12.65, 50.0,110.0 * PI/180)
     var gateControlPoint: Pose = Pose(20.2, 43.1)
 
     var intakeRow1: Pose = Pose(23.0, 84.0, PI)

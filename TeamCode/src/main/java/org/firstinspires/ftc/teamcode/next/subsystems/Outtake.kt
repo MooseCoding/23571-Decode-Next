@@ -22,6 +22,7 @@ import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Flywheels
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Hood
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret
 import org.firstinspires.ftc.teamcode.next.subsystems.outtake.Turret.turretGoalX
+import org.firstinspires.ftc.teamcode.next.tuning.Drive
 import java.time.Instant
 import java.util.Arrays
 import java.util.LinkedList
@@ -47,26 +48,23 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
         }
 
         turretGoalX = if(DriveTrain.alliance == Alliance.RED) {
-            144-3.0
+            144.0
         }
         else {
-            4.0
+            2.0
         }
 
         val currentPose: Pose = PedroComponent.follower.pose
 
-
         turretGoalX = if(currentPose.y < 52.0 && DriveTrain.alliance == Alliance.RED) {
             turretGoalX - 11
-        } else {
-            turretGoalX - 3
+        } else if(DriveTrain.alliance == Alliance.BLUE) {
+            turretGoalX + 8
+        }
+        else {
+            turretGoalX + 6
         }
 
-        turretGoalX = if(currentPose.y < 52.0 && DriveTrain.alliance == Alliance.BLUE) {
-            turretGoalX + 3
-        } else {
-            turretGoalX
-        }
 
         updateFilteredVelocities()
         targetPose = if(isMoving()) {
@@ -79,15 +77,15 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
         flyTime = ShotTime.get(dist)
 
         if (!fullManual) {
-            Flywheels.targetVelocity = values[1] + 160 + fH
-            Hood.hoodPosition = values[0] + 0.08 + hH
+            Flywheels.targetVelocity = values[1] + 160
+            Hood.hoodPosition = values[0] + 0.08
         }
     }
 
     /**
     * Manual Aim From Hardcoded Values
      */
-    @JvmField var farHood: Double = 0.45
+    @JvmField var farHood: Double = 0.47
     @JvmField var farVelocity: Double = 1900.0
     @JvmField var closeHood: Double = 0.72
     @JvmField var closeVelocity:Double = 1320.0
@@ -199,14 +197,9 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
     }
 
     fun getExpectedPose(): Pose {
-        var velX: Double = filteredVelX
-        var velY: Double = filteredVelY
-        var velH: Double = filteredHeadingVel
-
-        if (!isMoving()) {
-            velX = 0.0
-            velY = 0.0
-        }
+        var velX: Double = 0.0
+        var velY: Double = 0.0
+        var velH: Double = 0.0
 
         val pedro: Pose = PedroComponent.follower.pose
 
@@ -264,7 +257,11 @@ object Outtake: SubsystemGroup(Flywheels, Hood, Light, Turret) {
                 setSetBack()
             ),
             Delay(0.28.seconds),
-            Hood.sequence(-0.2),
+            Hood.sequence(-0.22),
+            setSetBack(),
+            InstantCommand {
+                Flywheels.targetVelocity += 150
+            },
             Delay(0.22.seconds),
 
             ParallelGroup(

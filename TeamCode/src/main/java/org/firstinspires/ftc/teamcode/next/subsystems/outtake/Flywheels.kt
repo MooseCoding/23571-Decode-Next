@@ -14,6 +14,7 @@ import dev.nextftc.core.subsystems.Subsystem
 import dev.nextftc.ftc.ActiveOpMode
 import dev.nextftc.hardware.impl.MotorEx
 import org.firstinspires.ftc.teamcode.next.subsystems.FlywheelLight
+import org.firstinspires.ftc.teamcode.next.subsystems.Outtake
 import kotlin.math.absoluteValue
 
 @Configurable
@@ -23,6 +24,8 @@ object Flywheels: Subsystem {
 
     @JvmField var flywheelPID = PIDCoefficients(0.0000, 0.0, 0.0)
     @JvmField var flywheelFF = BasicFeedforwardParameters(0.00038, 0.0, 0.09)
+
+    // power = kP * error + kV * targetVelocity + kS
     private var flywheelController = controlSystem {
         velPid(flywheelPID)
         basicFF(flywheelFF)
@@ -46,7 +49,7 @@ object Flywheels: Subsystem {
             if (!spinSlow) {
                 f1.power = flywheelController.calculate(KineticState(0.0, f1.velocity.absoluteValue / voltage.voltage))
                 f2.power = f1.power
-                flywheelController.goal = KineticState(0.0, targetVelocity)
+                flywheelController.goal = KineticState(0.0, targetVelocity + Outtake.fH)
             } else {
                 f1.power = 0.5
                 f2.power = 0.5
@@ -55,7 +58,7 @@ object Flywheels: Subsystem {
 
 
         if(ActiveOpMode.opModeIsActive) {
-            if (f1.velocity.absoluteValue + 200.0 > targetVelocity) {
+            if (f1.velocity.absoluteValue - 50.0 > targetVelocity + Outtake.fH) {
                 FlywheelLight.Green().schedule()
             } else {
                 FlywheelLight.Blue().schedule()
